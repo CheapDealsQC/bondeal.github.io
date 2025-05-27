@@ -1,1 +1,1 @@
-# bondeal.github.io
+# spotideals.github.io
