@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>CheapDealsQC – Spotify Premium</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; line-height: 1.6; max-width: 800px; margin: auto; }
+    nav ul { list-style: none; padding: 0; display: flex; gap: 20px; }
+    nav a { text-decoration: none; color: #0070f3; }
+    .pricing .card { border: 1px solid #ccc; padding: 20px; border-radius: 8px; background: #f9f9f9; text-align: center; }
+    .btn { display: inline-block; background: #0070f3; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; }
+    form label { display: block; margin-bottom: 10px; }
+    input, select, textarea { width: 100%; padding: 8px; margin-top: 5px; }
+  </style>
+</head>
+<body>
+
+  <h1>CheapDealsQC</h1>
+
+  <nav>
+    <ul>
+      <li><a href="#service">Service</a></li>
+      <li><a href="#pricing">Tarif</a></li>
+      <li><a href="#conditions">Conditions</a></li>
+      <li><a href="#confidentialite">Confidentialité</a></li>
+    </ul>
+  </nav>
+
+  <!-- Section Service -->
+  <section id="service">
+    <h2>Abonnement Spotify Premium – 1 an</h2>
+    <p>Profitez de votre musique préférée sans publicité, en mode hors-ligne et avec la meilleure qualité audio.</p>
+  </section>
+
+  <!-- Section Tarification -->
+  <section id="pricing">
+    <h2>Prix exceptionnel</h2>
+    <div class="pricing">
+      <div class="card">
+        <h3>Offre Année</h3>
+        <p><strong>80 $</strong> CAD TTC<br><del>152 $ + taxes (175 $ TTC)</del></p>
+        <a href="#commande" class="btn">Commander maintenant</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section Commande -->
+  <section id="commande">
+    <h2>Passer commande</h2>
+    <p>Remplissez le formulaire suivant :</p>
+    <form action="https://formspree.io/f/xanorewp" method="POST">
+      <label>Plan :
+        <select name="plan">
+          <option value="1_an">1 an – 80 $ CAD</option>
+        </select>
+      </label>
+      <label>Courriel :
+        <input type="email" name="email" required>
+      </label>
+      <label>Message ou instructions :
+        <textarea name="message" rows="4" placeholder="Votre nom d'utilisateur Spotify ou instructions"></textarea>
+      </label>
+      <button type="submit" class="btn">Envoyer</button>
+    </form>
+  </section>
+
+  <!-- Section Conditions -->
+  <section id="conditions">
+    <h2>Conditions</h2>
+    <p>L’abonnement est valide pour 1 an. Aucune reconduction automatique. Aucun remboursement après activation.</p>
+  </section>
+
+  <!-- Section Confidentialité -->
+  <section id="confidentialite">
+    <h2>Confidentialité</h2>
+    <p>Vos informations sont utilisées uniquement pour compléter votre commande. Aucune revente de données.</p>
+  </section>
+
+</body>
+</html>
