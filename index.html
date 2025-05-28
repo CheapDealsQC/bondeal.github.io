@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>SpotIdeals – Spotify Premium</title>
+  <title>SpotIdeals – Pack Activation Spotify Premium 12 mois</title>
   <style>
     body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #fafafa; color: #333; margin: 0; padding: 0; }
     .container { max-width: 900px; margin: auto; padding: 20px; }
@@ -11,11 +11,9 @@
     nav a { text-decoration: none; color: #0070f3; font-weight: 600; }
     section { margin: 20px 0; background: #fff; padding: 40px 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
     section:nth-child(even) { background: #f9f9f9; }
-    .pricing { display: flex; justify-content: center; }
-    .pricing .card { max-width: 350px; width: 100%; padding: 20px; border-radius: 8px; background: #fff; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-    .pricing .card h3 { margin-top: 0; }
-    .pricing .card p { font-size: 1.2em; margin: 10px 0; }
-    .note { font-size: 0.9em; color: #666; margin-bottom: 15px; }
+    .card { max-width: 400px; margin: auto; text-align: center; }
+    .card p { font-size: 1.2em; margin: 15px 0; }
+    .note { font-size: 0.9em; color: #666; margin: 15px 0; }
     .btn, .paypal-btn, .stripe-btn { display: inline-block; font-weight: 600; padding: 12px 24px; border-radius: 5px; text-decoration: none; margin: 10px 5px 0; transition: background 0.3s; }
     .btn { background: #0070f3; color: #fff; }
     .btn:hover { background: #005bb5; }
@@ -23,8 +21,9 @@
     .paypal-btn:hover { background: #e0a800; }
     .stripe-btn { background: #6772E5; color: #fff; }
     .stripe-btn:hover { background: #5469d4; }
-    form label { display: block; margin-bottom: 15px; }
-    input, select, textarea { width: 100%; padding: 10px; margin-top: 5px; border-radius: 4px; border: 1px solid #ccc; box-sizing: border-box; }
+    form label { display: block; margin-bottom: 15px; text-align: left; }
+    input, textarea { width: 100%; padding: 10px; margin-top: 5px; border-radius: 4px; border: 1px solid #ccc; box-sizing: border-box; }
+    .conditions ul { list-style: disc inside; }
   </style>
 </head>
 <body>
@@ -34,69 +33,76 @@
       <ul>
         <li><a href="#service">Service</a></li>
         <li><a href="#pricing">Tarif</a></li>
-        <li><a href="#payment-options">Paiement</a></li>
+        <li><a href="#payment">Paiement</a></li>
         <li><a href="#commande">Commande</a></li>
         <li><a href="#conditions">Conditions</a></li>
         <li><a href="#confidentialite">Confidentialité</a></li>
       </ul>
     </nav><!-- Section Service -->
 <section id="service">
-  <h2>Abonnement Spotify Premium – 1 an</h2>
-  <p>Profitez de votre musique préférée sans publicité, en mode hors-ligne et avec la meilleure qualité audio grâce à SpotIdeals.</p>
+  <h2>Pack Activation Spotify Premium – 12 mois</h2>
+  <p>Achat et activation d’un abonnement Spotify Premium de 12 mois directement sur votre compte.</p>
+  <p>Support technique inclus pendant 7 jours après activation.</p>
 </section>
 
-<!-- Section Tarification -->
+<!-- Section Tarif -->
 <section id="pricing">
   <h2>Tarif</h2>
-  <div class="pricing">
-    <div class="card">
-      <h3>Offre Annuelle</h3>
-      <p><strong>80 $ CAD</strong></p>
-      <p class="note">Les frais de transaction sont à la charge du client.</p>
-      <a href="#payment-options" class="btn">Choisir Paiement</a>
-    </div>
+  <div class="card">
+    <h3>80 $ CAD</h3>
+    <p class="note">Pack tout compris : prestation de service et tutoriel.</p>
+    <a href="#payment" class="btn">Procéder au paiement</a>
   </div>
 </section>
 
-<!-- Section Méthodes de Paiement -->
-<section id="payment-options">
+<!-- Section Paiement -->
+<section id="payment">
   <h2>Méthodes de paiement</h2>
-  <div style="text-align: center;">
-    <h3>PayPal</h3>
-    <p>80 $ + 3 % de frais = <strong>82,40 $ CAD</strong></p>
-    <a href="https://www.paypal.me/spotideals/82.40" class="paypal-btn">PayPal – 82,40 $ CAD</a>
-
+  <div class="card">
+    <p>Paiement sécurisé via :</p>
+    <a href="https://www.paypal.me/spotideals/80" class="paypal-btn">PayPal – 80 $ CAD</a>
     <p style="margin: 20px 0; font-weight: 600;">ou</p>
-
-    <h3>Carte de crédit (Stripe)</h3>
-    <p>80 $ + 2,9 % + 0,30 $ = <strong>82,73 $ CAD</strong></p>
-    <a href="https://buy.stripe.com/3cIaEXajAgvDe6QaYQ5ZC00" class="stripe-btn">Payer 82,73 $ CAD</a>
+    <a href="https://buy.stripe.com/3cIaEXajAgvDe6QaYQ5ZC00" class="stripe-btn">Carte – 80 $ CAD</a>
   </div>
 </section>
 
 <!-- Section Commande -->
 <section id="commande">
   <h2>Passer commande</h2>
-  <p>Une fois le paiement effectué, remplissez ce formulaire :</p>
+  <p>Après le paiement, remplissez ce formulaire pour recevoir votre code et le tutoriel :</p>
   <form action="https://formspree.io/f/xanorewp" method="POST">
     <label for="email">Courriel :</label>
     <input type="email" id="email" name="email" placeholder="votre@email.com" required>
-    <label for="message">Message ou instructions :</label>
-    <textarea id="message" name="message" rows="4" placeholder="Votre nom d'utilisateur Spotify ou instructions"></textarea>
+    <label for="username">Nom d’utilisateur Spotify :</label>
+    <input type="text" id="username" name="username" placeholder="Votre nom d'utilisateur" required>
+    <label for="message">Message (optionnel) :</label>
+    <textarea id="message" name="message" rows="3" placeholder="Vos remarques ou questions"></textarea>
     <button type="submit" class="btn">Envoyer ma commande</button>
   </form>
 </section>
 
 <!-- Section Conditions -->
 <section id="conditions">
-  <h2>Conditions</h2>
-  <p>L’abonnement est valide pour 1 an. Aucune reconduction automatique. Aucun remboursement après activation.</p>
+  <h2>Conditions & Protection</h2>
+  <div class="conditions">
+    <ul>
+      <li>Prestation de service : achat et activation d’un bon-cadeau Spotify Premium 12 mois.</li>
+      <li>Le paiement doit être reçu avant toute prestation.</li>
+      <li>Le client doit avoir un compte Spotify existant.</li>
+      <li>Le code cadeau est transmis puis activé selon vos indications.</li>
+      <li>Support gratuit pendant 7 jours après activation.</li>
+      <li>Pas de reconduction automatique ; la prestation couvre 12 mois uniquement.</li>
+      <li>Aucun remboursement après activation effective.</li>
+      <li>En cas de problème d’activation lié à Spotify, un échange de code ou un remboursement partiel (équivalent au prix du code) pourra être proposé.</li>
+      <li>Le prestataire n’est pas responsable des modifications ultérieures des Conditions Spotify.</li>
+    </ul>
+  </div>
 </section>
 
 <!-- Section Confidentialité -->
 <section id="confidentialite">
   <h2>Confidentialité</h2>
-  <p>Vos informations sont utilisées uniquement pour compléter votre commande. Aucune revente de données.</p>
+  <p>Vos informations (courriel, nom d’utilisateur) sont utilisées uniquement pour l’envoi du code et le support. Aucune revente de données.</p>
 </section>
 
   </div>
