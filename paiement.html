@@ -3,51 +3,57 @@
 <head>
   <meta charset="UTF-8">
   <title>💳 SpotiDeals – Paiement</title>
+  <meta name="description" content="Réglez votre Pack Activation Spotify Premium 12 mois en 1 clic via PayPal.">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="stylesheet" href="css/style.css">
+
   <!-- PayPal SDK -->
   <script src="https://www.paypal.com/sdk/js?client-id=AW-bLBrtEPaB0FTD-Oa4rQ1gbQBNLkkqSsAtGh968nfbb-HA_iZh-Cptg_1UzbE9GYagkCPtHFEUosfm&currency=CAD"></script>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>💳 Paiement SpotiDeals</h1>
-    </header>
+  <header class="sticky-header">
+    <div class="container">
+      <div class="logo">SpotiDeals</div>
+      <nav>
+        <ul>
+          <li><a href="index.html">🏠 Accueil</a></li>
+          <li><a href="terms.html">📄 CGV</a></li>
+          <li><a href="privacy.html">🔒 Confidentialité</a></li>
+          <li><a href="contact.html">✉️ Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
+  <main class="container">
     <section class="card">
       <h2>▶️ Paiement via PayPal</h2>
-      <p>💰 Montant total : <strong>82,62 $ CAD</strong></p>
+      <p>💰 Montant : <strong>82,62 $ CAD</strong></p>
       <div id="paypal-button-container" style="margin-bottom:20px;"></div>
-      <a href="index.html" class="btn">🏠 Retour à l’accueil</a>
     </section>
+  </main>
 
-    <footer>✨ © 2025 SpotiDeals</footer>
-  </div>
+  <footer class="container">
+    © 2025 SpotiDeals
+  </footer>
 
   <script>
     paypal.Buttons({
-      style: { shape:'pill', color:'blue', label:'pay', layout:'vertical' },
-      createOrder: (data, actions) => actions.order.create({
-        purchase_units: [{
-          amount: { value:'82.62' },
-          invoice_id: 'SD-'+Date.now()
-        }]
-      }),
+      style: { shape:'pill', color:'blue', label:'pay' },
+      createOrder: (data, actions) =>
+        actions.order.create({
+          purchase_units:[{ amount:{ value:'82.62' }, invoice_id:'SD-'+Date.now() }]
+        }),
       onApprove: (data, actions) =>
         actions.order.capture().then(details => {
-          const spotifyEmail    = sessionStorage.getItem('spotifyEmail');
-          const spotifyPassword = sessionStorage.getItem('spotifyPassword');
-          const orderID         = details.id;
+          const email    = sessionStorage.getItem('spotifyEmail');
+          const user     = sessionStorage.getItem('spotifyUsername');
+          const orderID  = details.id;
           // Envoi à Formspree
           fetch('https://formspree.io/f/xanorewp', {
-            method: 'POST',
-            headers: { 'Content-Type':'application/json' },
-            body: JSON.stringify({
-              spotifyEmail,
-              spotifyPassword,
-              orderID,
-              method: 'PayPal'
-            })
+            method:'POST',
+            headers:{'Content-Type':'application/json'},
+            body: JSON.stringify({ email, user, orderID, method:'PayPal' })
           });
           alert('✅ Paiement reçu ! Numéro de commande : ' + orderID);
           window.location.href = 'index.html';
