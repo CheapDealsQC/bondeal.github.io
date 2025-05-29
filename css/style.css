@@ -364,3 +364,30 @@ body {
     grid-template-columns:1fr;
   }
 }
+
+/* --- Mode clair à partir de Pourquoi SpotiDeals --- */
+.features,
+.pricing,
+.how,
+.faq {
+  background: #f5f5f5;    /* gris très clair */
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+.feature-card,
+.pricing-card,
+.how-step,
+.faq-item {
+  background: #ffffff;    /* blanc pur */
+  color: #121212;         /* texte sombre */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Ajuste la couleur des titres dans ces sections */
+.features h2,
+.pricing h2,
+.how h2,
+.faq h2 {
+  color: var(--accent1);
+}
