@@ -204,17 +204,52 @@ body {
   }
   .nav a { margin:8px; }
 }
-/* Détaillist dans “Détails du service” */
-.detail-list {
-  list-style: none;
-  padding-left: 0;
-  margin-top: 20px;
+/* Détails du service – grille de cards */
+.details {
+  padding: 60px 0;
 }
-.detail-list li {
-  position: relative;
-  padding-left: 28px;
-  margin-bottom: 12px;
+.details h2 {
+  font-size: 2rem;
+  font-weight: 900;
+  margin-bottom: 30px;
+  text-align: center;
+  color: var(--accent1);
 }
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+.detail-item {
+  background: var(--card-bg);
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  align-items: flex-start;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.detail-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+}
+.detail-icon {
+  font-size: 2.5rem;
+  margin-right: 16px;
+  color: var(--accent2);
+  flex-shrink: 0;
+}
+.detail-text h3 {
+  margin: 0 0 8px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--fg);
+}
+.detail-text p {
+  margin: 0;
+  color: #ccc;
+  line-height: 1.4;
+}
+
 /* Accordéon FAQ */
 .faq-item.open p { display: block; }
 .faq-item.open h4::after {
