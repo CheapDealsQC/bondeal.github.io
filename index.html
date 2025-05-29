@@ -2,65 +2,45 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>🎶 SpotiDeals – Pack Activation Spotify Premium 12 mois INDIVIDUEL 🎶</title>
+  <title>SpotiDeals – Spotify Premium 12 mois à tarif réduit</title>
+  <meta name="description" content="SpotiDeals vous propose l'activation de Spotify Premium 12 mois à tarif réduit. Service mondial, sécurisé et rapide.">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="stylesheet" href="css/style.css">
-  <style>
-    /* Émoji feu pour chaque ligne de la feature-list */
-    ul.feature-list {
-      list-style: none;
-      margin-top: 20px;
-      padding-left: 0;
-    }
-    ul.feature-list li {
-      position: relative;
-      padding-left: 30px;
-      margin-bottom: 12px;
-    }
-    ul.feature-list li::before {
-      content: "🔥";
-      position: absolute;
-      left: 0;
-      top: 0;
-    }
-    /* Emoji centré pour le service */
-    .emoji {
-      font-size: 80px;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-  </style>
 </head>
 <body>
-  <div class="container">
 
-    <!-- Header & nav -->
-    <header>
-      <h1>🎉 SpotiDeals 🎉</h1>
+  <!-- Sticky Header -->
+  <header class="sticky-header">
+    <div class="container">
+      <div class="logo">SpotiDeals</div>
       <nav>
         <ul>
-          <li><a href="#service">🎵 Service</a></li>
-          <li><a href="#comparatif">📊 Comparatif</a></li>
-          <li><a href="#commande">🛒 Commander</a></li>
+          <li><a href="#service">Service</a></li>
+          <li><a href="#comparatif">Comparatif</a></li>
+          <li><a href="#commande">Commander</a></li>
+          <li><a href="#testimonials">Témoignages</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="terms.html">CGV</a></li>
+          <li><a href="privacy.html">Confidentialité</a></li>
         </ul>
       </nav>
-    </header>
+    </div>
+  </header>
 
+  <main class="container">
     <!-- Avertissement -->
     <section class="card">
       <h2 class="warning">⚠️ IMPORTANT</h2>
-      <p>🔒 Vous devez impérativement changer votre mot de passe Spotify <strong>avant et après</strong> la commande.</p>
-      <p>❗ SpotiDeals décline toute responsabilité en cas de fuite ou de perte de vos données si vous n’utilisez pas un mot de passe provisoire.</p>
-      <p>❗ <strong>IMPORTANT :</strong> l’abonnement ne doit pas être actif au moment de l’achat.</p>
+      <p>🔒 Vous devez changer votre mot de passe Spotify <strong>avant et après</strong> la commande.  
+      SpotiDeals décline toute responsabilité en cas de fuite de vos données.</p>
+      <p>❗ L’abonnement ne doit pas être actif au moment de l’achat.</p>
     </section>
 
     <!-- Service -->
     <section id="service" class="card">
       <div class="emoji">🎵</div>
       <h2>Pack Activation Spotify Premium – 12 mois INDIVIDUEL</h2>
-      <p>🕒 Une fois le paiement effectué, votre commande sera traitée sous <strong>24 à 72 heures ouvrables</strong>.  
-      Après traitement, l’activation peut prendre jusqu’à <strong>24 heures</strong>.</p>
-
+      <p>🕒 Après paiement, traitement sous <strong>24–72 h ouvrables</strong>, activation sous <strong>24 h</strong>.</p>
       <ul class="feature-list">
         <li>FONCTIONNE DANS LE MONDE ENTIER</li>
         <li>Prépayé pour 12 mois sur VOTRE PROPRE compte Spotify individuel</li>
@@ -79,41 +59,51 @@
       </table>
     </section>
 
-    <!-- Formulaire de commande -->
+    <!-- Commander -->
     <section id="commande" class="card">
       <h2>🛒 Commander maintenant</h2>
-      <p>📋 Entrez vos identifiants Spotify (e-mail & mot de passe) :</p>
-      <label for="email">📧 Courriel / Nom d’utilisateur</label>
-      <input type="text" id="email" placeholder="exemple@mail.com">
-      <label for="password">🔑 Mot de passe</label>
-      <input type="password" id="password" placeholder="Votre mot de passe">
-      <button id="order-btn" class="btn" disabled>🔒 Commander</button>
-
-      <ul class="faq-list">
-        <li>❓ Puis-je prolonger cet abonnement ? Oui, renouvellement possible.</li>
-        <li>❓ Puis-je acheter si j’avais déjà un abonnement ? Oui, mais il ne doit pas être actif à l’achat.</li>
-        <li>❓ Compte bloqué pour paiement ? Nous pouvons toujours activer votre abonnement.</li>
-        <li>❓ VPN/Proxy nécessaire ? Non, service officiel Spotify sans VPN.</li>
-      </ul>
+      <p>📋 Entrez :</p>
+      <label for="email">📧 Votre e-mail</label>
+      <input type="email" id="email" placeholder="exemple@mail.com">
+      <label for="username">👤 Nom d’utilisateur Spotify</label>
+      <input type="text" id="username" placeholder="votre_username">
+      <p>🔒 Vous fournirez votre mot de passe Spotify en toute sécurité par e-mail après paiement.</p>
+      <button id="order-btn" class="btn" disabled>▶️ Payer via PayPal</button>
     </section>
 
-    <footer>✨ © 2025 SpotiDeals – Tous droits réservés ✨</footer>
-  </div>
+    <!-- Témoignages -->
+    <section id="testimonials" class="card">
+      <h2>⭐️ Témoignages</h2>
+      <div class="testimonial">
+        <p>« Super service, activation rapide et sans souci ! »</p>
+        <div class="author">— Alice, Montréal</div>
+      </div>
+      <div class="testimonial">
+        <p>« Économisé plus de 50%, merci SpotiDeals ! »</p>
+        <div class="author">— Marc, Paris</div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container">
+    © 2025 SpotiDeals – Tous droits réservés
+  </footer>
 
   <script>
+    // Activation du bouton de paiement
     const email    = document.getElementById('email'),
-          password = document.getElementById('password'),
+          username = document.getElementById('username'),
           btn      = document.getElementById('order-btn');
 
-    function checkInputs() {
-      btn.disabled = !(email.value.trim() && password.value.trim());
+    function check() {
+      btn.disabled = !(email.value.trim() && username.value.trim());
     }
-    email.addEventListener('input', checkInputs);
-    password.addEventListener('input', checkInputs);
+    email.addEventListener('input', check);
+    username.addEventListener('input', check);
 
     btn.addEventListener('click', () => {
       sessionStorage.setItem('spotifyEmail', email.value);
-      sessionStorage.setItem('spotifyPassword', password.value);
+      sessionStorage.setItem('spotifyUsername', username.value);
       window.location.href = 'paiement.html';
     });
   </script>
