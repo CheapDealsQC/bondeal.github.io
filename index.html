@@ -8,6 +8,8 @@
 </head>
 <body>
   <div class="container">
+
+    <!-- Header & nav -->
     <header>
       <h1>SpotiDeals</h1>
       <nav>
@@ -19,40 +21,61 @@
       </nav>
     </header>
 
-    <!-- AVERTISSEMENT IMPORTANT -->
+    <!-- Avertissement -->
     <section class="card">
-      <h2 style="color:#f44336;">⚠️ Sécurité de votre compte</h2>
-      <p>
-        <strong>Vous devez impérativement changer votre mot de passe Spotify avant <em>et</em> après la commande.</strong><br>
-        SpotiDeals décline toute responsabilité en cas de fuite ou de perte de vos données si vous n’utilisez pas un mot de passe temporaire ou bidon.
-      </p>
+      <h2 class="warning">⚠️ IMPORTANT</h2>
+      <p>Vous devez impérativement changer votre mot de passe Spotify <strong>avant et après</strong> la commande.  
+      SpotiDeals décline toute responsabilité en cas de fuite ou de perte de vos données si vous n’utilisez pas un mot de passe provisoire.</p>
+      <p><strong>IMPORTANT :</strong> l’abonnement ne doit pas être actif au moment de l’achat.</p>
     </section>
 
     <!-- Service -->
     <section id="service" class="card">
       <img src="img/spotify-card.png" alt="Spotify Premium 12 mois" class="product-img">
       <h2>Pack Activation Spotify Premium – 12 mois INDIVIDUEL</h2>
-      <p>Une fois le paiement effectué, votre commande sera traitée sous <strong>24 à 72 heures ouvrables</strong>. Après traitement, l’activation peut prendre jusqu’à <strong>24 heures</strong>.</p>
+      <p>Une fois le paiement effectué, votre commande sera traitée sous <strong>24 à 72 heures ouvrables</strong>.  
+      Après traitement, l’activation peut prendre jusqu’à <strong>24 heures</strong>.</p>
+
+      <ul class="feature-list">
+        <li>🔥 FONCTIONNE DANS LE MONDE ENTIER</li>
+        <li>✅ Prépayé pour 12 mois sur VOTRE PROPRE compte Spotify individuel</li>
+        <li>✅ Pas de proxy ou VPN requis</li>
+        <li>✅ Réception immédiate de votre reçu par e-mail</li>
+        <li>✅ Garantie de 6 mois à compter de la date d’achat</li>
+      </ul>
     </section>
 
     <!-- Comparatif -->
     <section id="comparatif" class="card">
       <h2>Comparatif : SpotiDeals VS Prix standard Québec</h2>
       <table>
-        <tr><th>SpotiDeals</th><th>Prix standard Québec</th></tr>
-        <tr><td>82,62 $ CAD</td><td>175,00 $ CAD</td></tr>
+        <tr>
+          <th>SpotiDeals</th>
+          <th>Prix standard Québec</th>
+        </tr>
+        <tr>
+          <td>82,62 $ CAD</td>
+          <td>175,00 $ CAD</td>
+        </tr>
       </table>
     </section>
 
     <!-- Formulaire de commande -->
     <section id="commande" class="card">
       <h2>Commander maintenant</h2>
-      <p>Entrez vos identifiants Spotify :</p>
+      <p>Entrez vos identifiants Spotify&nbsp;(e-mail & mot de passe)&nbsp;:</p>
       <label for="email">Courriel / Nom d’utilisateur</label>
       <input type="text" id="email" placeholder="exemple@mail.com">
       <label for="password">Mot de passe</label>
-      <input type="password" id="password" placeholder="Votre mot de passe temporaire">
+      <input type="password" id="password" placeholder="Votre mot de passe">
       <button id="order-btn" class="btn" disabled>Commander</button>
+
+      <ul class="faq-list">
+        <li>Puis-je acheter si j’avais déjà un abonnement ? Oui, mais il ne doit pas être actif à l’achat.</li>
+        <li>Puis-je prolonger cet abonnement ? Oui, renouvellement possible.</li>
+        <li>Compte bloqué pour paiement ? Nous pouvons toujours activer votre abonnement.</li>
+        <li>VPN/Proxy nécessaire ? Non, service officiel Spotify sans VPN.</li>
+      </ul>
     </section>
 
     <footer>© 2025 SpotiDeals – Tous droits réservés</footer>
@@ -62,11 +85,13 @@
     const email    = document.getElementById('email'),
           password = document.getElementById('password'),
           btn      = document.getElementById('order-btn');
+
     function checkInputs() {
       btn.disabled = !(email.value.trim() && password.value.trim());
     }
     email.addEventListener('input', checkInputs);
     password.addEventListener('input', checkInputs);
+
     btn.addEventListener('click', () => {
       sessionStorage.setItem('spotifyEmail', email.value);
       sessionStorage.setItem('spotifyPassword', password.value);
