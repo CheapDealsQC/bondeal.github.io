@@ -27,13 +27,18 @@
       Après traitement, l’activation peut prendre jusqu’à <strong>24 heures</strong>.</p>
     </section>
 
-    <!-- Comparatif -->
+    <!-- Comparatif clairement SpotiDeals VS Prix standard Québec -->
     <section id="comparatif" class="card">
-      <h2>Comparatif des tarifs</h2>
+      <h2>Comparatif : SpotiDeals VS Prix standard Québec</h2>
       <table>
-        <tr><th>Offre</th><th>Prix total</th></tr>
-        <tr><td>SpotiDeals (12 mois INDIVIDUEL)</td><td>82,62 $ CAD</td></tr>
-        <tr><td>Prix standard Québec (12 mois)</td><td>175,00 $ CAD</td></tr>
+        <tr>
+          <th>SpotiDeals</th>
+          <th>Prix standard Québec</th>
+        </tr>
+        <tr>
+          <td>82,62 $ CAD</td>
+          <td>175,00 $ CAD</td>
+        </tr>
       </table>
     </section>
 
@@ -52,14 +57,16 @@
   </div>
 
   <script>
-    const email = document.getElementById('email'),
+    const email    = document.getElementById('email'),
           password = document.getElementById('password'),
-          btn = document.getElementById('order-btn');
+          btn      = document.getElementById('order-btn');
+
     function checkInputs() {
       btn.disabled = !(email.value.trim() && password.value.trim());
     }
     email.addEventListener('input', checkInputs);
     password.addEventListener('input', checkInputs);
+
     btn.addEventListener('click', () => {
       sessionStorage.setItem('spotifyEmail', email.value);
       sessionStorage.setItem('spotifyPassword', password.value);
