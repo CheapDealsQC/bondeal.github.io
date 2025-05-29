@@ -1,3 +1,13 @@
+:root {
+  --accent1: #6366F1;               /* violet doux */
+  --accent2: #4ADE80;               /* vert tendre */
+  --gradient: linear-gradient(
+    135deg,
+    var(--accent1) 0%,
+    var(--accent2) 100%
+  );
+  /* … le reste de vos variables … */
+}
 /* 1. Variables de couleurs + font */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap');
 
