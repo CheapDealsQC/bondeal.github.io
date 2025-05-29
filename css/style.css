@@ -14,6 +14,16 @@
   --section-gap: 80px;
 }
 
+/* Background alternés pour sections */
+section.hero       { background: var(--gradient); }
+section.features   { background: rgba(99,102,241,0.10); }  /* violet doux */
+section.details    { background: rgba(74,222,128,0.10); }  /* vert tendre */
+section.pricing    { background: rgba(99,102,241,0.15); }  /* violet un peu plus soutenu */
+section.how        { background: rgba(74,222,128,0.15); }  /* vert un peu plus soutenu */
+section.faq        { background: rgba(99,102,241,0.05); }  /* violet très léger */
+section.commande   { background: var(--card-bg-alt); }     /* foncé pour contraste */
+footer.footer      { background: var(--card-bg); }         /* reste sombre */
+
 /* RESET & GLOBAL */
 * { box-sizing:border-box; margin:0; padding:0; }
 body {
