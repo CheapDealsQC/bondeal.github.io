@@ -2,15 +2,35 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>SpotiDeals – Pack Activation Spotify Premium 12 mois INDIVIDUEL</title>
+  <title>🎶 SpotiDeals – Pack Activation Spotify Premium 12 mois INDIVIDUEL 🎶</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="stylesheet" href="css/style.css">
   <style>
-    /* Ajout pour centrer et grossir l'émoticône */
-    .emoji {
-      font-size: 80px;
-      text-align: center;
-      margin-bottom: 20px;
+    /* Émojis sur les puces de la feature-list */
+    ul.feature-list {
+      list-style: none;
+      margin-top: 20px;
+      position: relative;
+      padding-left: 0;
+    }
+    ul.feature-list li {
+      position: relative;
+      padding-left: 32px;
+      margin-bottom: 12px;
+    }
+    /* Première puce : 🔥 */
+    ul.feature-list li:first-child::before {
+      content: "🔥";
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+    /* Les autres : ✅ */
+    ul.feature-list li:not(:first-child)::before {
+      content: "✅";
+      position: absolute;
+      left: 0;
+      top: 0;
     }
   </style>
 </head>
@@ -19,12 +39,12 @@
 
     <!-- Header & nav -->
     <header>
-      <h1>SpotiDeals</h1>
+      <h1>🎉 SpotiDeals 🎉</h1>
       <nav>
         <ul>
-          <li><a href="#service">Service</a></li>
-          <li><a href="#comparatif">Comparatif</a></li>
-          <li><a href="#commande">Commander</a></li>
+          <li><a href="#service">🎵 Service</a></li>
+          <li><a href="#comparatif">📊 Comparatif</a></li>
+          <li><a href="#commande">🛒 Commander</a></li>
         </ul>
       </nav>
     </header>
@@ -32,55 +52,55 @@
     <!-- Avertissement -->
     <section class="card">
       <h2 class="warning">⚠️ IMPORTANT</h2>
-      <p>Vous devez impérativement changer votre mot de passe Spotify <strong>avant et après</strong> la commande.  
-      SpotiDeals décline toute responsabilité en cas de fuite ou de perte de vos données si vous n’utilisez pas un mot de passe provisoire.</p>
-      <p><strong>IMPORTANT :</strong> l’abonnement ne doit pas être actif au moment de l’achat.</p>
+      <p>🔒 Vous devez impérativement changer votre mot de passe Spotify <strong>avant et après</strong> la commande.</p>
+      <p>❗ SpotiDeals décline toute responsabilité en cas de fuite ou de perte de vos données si vous n’utilisez pas un mot de passe provisoire.</p>
+      <p>❗ <strong>IMPORTANT :</strong> l’abonnement ne doit pas être actif au moment de l’achat.</p>
     </section>
 
     <!-- Service -->
     <section id="service" class="card">
       <div class="emoji">🎵</div>
-      <h2>Pack Activation Spotify Premium – 12 mois INDIVIDUEL</h2>
-      <p>Une fois le paiement effectué, votre commande sera traitée sous <strong>24 à 72 heures ouvrables</strong>.  
+      <h2>🔧 Pack Activation Spotify Premium – 12 mois INDIVIDUEL</h2>
+      <p>🕒 Une fois le paiement effectué, votre commande sera traitée sous <strong>24 à 72 heures ouvrables</strong>.  
       Après traitement, l’activation peut prendre jusqu’à <strong>24 heures</strong>.</p>
 
       <ul class="feature-list">
-        <li>🔥 FONCTIONNE DANS LE MONDE ENTIER</li>
-        <li>✅ Prépayé pour 12 mois sur VOTRE PROPRE compte Spotify individuel</li>
-        <li>✅ Aucun proxy ou VPN requis</li>
-        <li>✅ Réception immédiate de votre reçu par e-mail</li>
-        <li>✅ Garantie de 6 mois à compter de la date d’achat</li>
+        <li>FONCTIONNE DANS LE MONDE ENTIER</li>
+        <li>Prépayé pour 12 mois sur VOTRE PROPRE compte Spotify individuel</li>
+        <li>Aucun proxy ou VPN requis</li>
+        <li>Réception immédiate de votre reçu par e-mail</li>
+        <li>Garantie de 6 mois à compter de la date d’achat</li>
       </ul>
     </section>
 
     <!-- Comparatif -->
     <section id="comparatif" class="card">
-      <h2>Comparatif : SpotiDeals VS Prix standard Québec</h2>
+      <h2>📊 Comparatif : SpotiDeals VS Prix standard Québec</h2>
       <table>
-        <tr><th>SpotiDeals</th><th>Prix standard Québec</th></tr>
+        <tr><th>✅ SpotiDeals</th><th>❌ Prix standard Québec</th></tr>
         <tr><td>82,62 $ CAD</td><td>175,00 $ CAD</td></tr>
       </table>
     </section>
 
     <!-- Formulaire de commande -->
     <section id="commande" class="card">
-      <h2>Commander maintenant</h2>
-      <p>Entrez vos identifiants Spotify (e-mail & mot de passe) :</p>
-      <label for="email">Courriel / Nom d’utilisateur</label>
+      <h2>🛒 Commander maintenant</h2>
+      <p>📋 Entrez vos identifiants Spotify (e-mail & mot de passe) :</p>
+      <label for="email">📧 Courriel / Nom d’utilisateur</label>
       <input type="text" id="email" placeholder="exemple@mail.com">
-      <label for="password">Mot de passe</label>
+      <label for="password">🔑 Mot de passe</label>
       <input type="password" id="password" placeholder="Votre mot de passe">
-      <button id="order-btn" class="btn" disabled>Commander</button>
+      <button id="order-btn" class="btn" disabled>🔒 Commander</button>
 
       <ul class="faq-list">
-        <li>Puis-je prolonger cet abonnement ? Oui, renouvellement possible.</li>
-        <li>Puis-je acheter si j’avais déjà un abonnement ? Oui, mais il ne doit pas être actif à l’achat.</li>
-        <li>Compte bloqué pour paiement ? Nous pouvons toujours activer votre abonnement.</li>
-        <li>VPN/Proxy nécessaire ? Non, service officiel Spotify sans VPN.</li>
+        <li>❓ Puis-je prolonger cet abonnement ? Oui, renouvellement possible.</li>
+        <li>❓ Puis-je acheter si j’avais déjà un abonnement ? Oui, mais il ne doit pas être actif à l’achat.</li>
+        <li>❓ Compte bloqué pour paiement ? Nous pouvons toujours activer votre abonnement.</li>
+        <li>❓ VPN/Proxy nécessaire ? Non, service officiel Spotify sans VPN.</li>
       </ul>
     </section>
 
-    <footer>© 2025 SpotiDeals – Tous droits réservés</footer>
+    <footer>✨ © 2025 SpotiDeals – Tous droits réservés ✨</footer>
   </div>
 
   <script>
