@@ -19,26 +19,28 @@
       </nav>
     </header>
 
+    <!-- AVERTISSEMENT IMPORTANT -->
+    <section class="card">
+      <h2 style="color:#f44336;">⚠️ Sécurité de votre compte</h2>
+      <p>
+        <strong>Vous devez impérativement changer votre mot de passe Spotify avant <em>et</em> après la commande.</strong><br>
+        SpotiDeals décline toute responsabilité en cas de fuite ou de perte de vos données si vous n’utilisez pas un mot de passe temporaire ou bidon.
+      </p>
+    </section>
+
     <!-- Service -->
     <section id="service" class="card">
       <img src="img/spotify-card.png" alt="Spotify Premium 12 mois" class="product-img">
       <h2>Pack Activation Spotify Premium – 12 mois INDIVIDUEL</h2>
-      <p>Une fois le paiement effectué, votre commande sera traitée sous <strong>24 à 72 heures ouvrables</strong>.  
-      Après traitement, l’activation peut prendre jusqu’à <strong>24 heures</strong>.</p>
+      <p>Une fois le paiement effectué, votre commande sera traitée sous <strong>24 à 72 heures ouvrables</strong>. Après traitement, l’activation peut prendre jusqu’à <strong>24 heures</strong>.</p>
     </section>
 
-    <!-- Comparatif clairement SpotiDeals VS Prix standard Québec -->
+    <!-- Comparatif -->
     <section id="comparatif" class="card">
       <h2>Comparatif : SpotiDeals VS Prix standard Québec</h2>
       <table>
-        <tr>
-          <th>SpotiDeals</th>
-          <th>Prix standard Québec</th>
-        </tr>
-        <tr>
-          <td>82,62 $ CAD</td>
-          <td>175,00 $ CAD</td>
-        </tr>
+        <tr><th>SpotiDeals</th><th>Prix standard Québec</th></tr>
+        <tr><td>82,62 $ CAD</td><td>175,00 $ CAD</td></tr>
       </table>
     </section>
 
@@ -49,7 +51,7 @@
       <label for="email">Courriel / Nom d’utilisateur</label>
       <input type="text" id="email" placeholder="exemple@mail.com">
       <label for="password">Mot de passe</label>
-      <input type="password" id="password" placeholder="Votre mot de passe">
+      <input type="password" id="password" placeholder="Votre mot de passe temporaire">
       <button id="order-btn" class="btn" disabled>Commander</button>
     </section>
 
@@ -60,13 +62,11 @@
     const email    = document.getElementById('email'),
           password = document.getElementById('password'),
           btn      = document.getElementById('order-btn');
-
     function checkInputs() {
       btn.disabled = !(email.value.trim() && password.value.trim());
     }
     email.addEventListener('input', checkInputs);
     password.addEventListener('input', checkInputs);
-
     btn.addEventListener('click', () => {
       sessionStorage.setItem('spotifyEmail', email.value);
       sessionStorage.setItem('spotifyPassword', password.value);
