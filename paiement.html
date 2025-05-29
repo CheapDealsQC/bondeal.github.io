@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>SpotiDeals – Paiement</title>
+  <title>💳 SpotiDeals – Paiement</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="stylesheet" href="css/style.css">
   <!-- PayPal SDK -->
@@ -11,22 +11,22 @@
 <body>
   <div class="container">
     <header>
-      <h1>Paiement SpotiDeals</h1>
+      <h1>💳 Paiement SpotiDeals</h1>
     </header>
 
     <section class="card">
-      <h2>Paiement via PayPal</h2>
-      <p>Montant total : <strong>82,62 $ CAD</strong></p>
+      <h2>▶️ Paiement via PayPal</h2>
+      <p>💰 Montant total : <strong>82,62 $ CAD</strong></p>
       <div id="paypal-button-container" style="margin-bottom:20px;"></div>
-      <a href="index.html" class="btn">← Retour à l’accueil</a>
+      <a href="index.html" class="btn">🏠 Retour à l’accueil</a>
     </section>
 
-    <footer>© 2025 SpotiDeals</footer>
+    <footer>✨ © 2025 SpotiDeals</footer>
   </div>
 
   <script>
     paypal.Buttons({
-      style: { shape:'pill', color:'blue', label:'pay' },
+      style: { shape:'pill', color:'blue', label:'pay', layout:'vertical' },
       createOrder: (data, actions) => actions.order.create({
         purchase_units: [{
           amount: { value:'82.62' },
