@@ -6,31 +6,28 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="stylesheet" href="css/style.css">
   <style>
-    /* Émojis sur les puces de la feature-list */
+    /* Émoji feu pour chaque ligne de la feature-list */
     ul.feature-list {
       list-style: none;
       margin-top: 20px;
-      position: relative;
       padding-left: 0;
     }
     ul.feature-list li {
       position: relative;
-      padding-left: 32px;
+      padding-left: 30px;
       margin-bottom: 12px;
     }
-    /* Première puce : 🔥 */
-    ul.feature-list li:first-child::before {
+    ul.feature-list li::before {
       content: "🔥";
       position: absolute;
       left: 0;
       top: 0;
     }
-    /* Les autres : ✅ */
-    ul.feature-list li:not(:first-child)::before {
-      content: "✅";
-      position: absolute;
-      left: 0;
-      top: 0;
+    /* Emoji centré pour le service */
+    .emoji {
+      font-size: 80px;
+      text-align: center;
+      margin-bottom: 20px;
     }
   </style>
 </head>
@@ -60,7 +57,7 @@
     <!-- Service -->
     <section id="service" class="card">
       <div class="emoji">🎵</div>
-      <h2>🔧 Pack Activation Spotify Premium – 12 mois INDIVIDUEL</h2>
+      <h2>Pack Activation Spotify Premium – 12 mois INDIVIDUEL</h2>
       <p>🕒 Une fois le paiement effectué, votre commande sera traitée sous <strong>24 à 72 heures ouvrables</strong>.  
       Après traitement, l’activation peut prendre jusqu’à <strong>24 heures</strong>.</p>
 
