@@ -26,67 +26,95 @@
     </div>
   </header>
 
-  <!-- HERO -->
-  <section class="hero" id="hero">
-    <div class="container hero__inner">
-      <div class="hero__copy">
-        <h1>Spotify Premium 12 mois INDIVIDUEL</h1>
-        <p>Activation rapide, sans VPN. Économisez plus de 50 % immédiatement !</p>
-        <a href="#commande" class="btn">Je veux économiser</a>
-      </div>
-      <div class="hero__form">
-        <form id="signup-form">
-          <input type="email" id="hero-email" placeholder="Votre e-mail Spotify" required
-                 pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title="Veuillez entrer une adresse e-mail valide">
-          <input type="password" id="hero-password" placeholder="Votre mot de passe Spotify" required>
-          <button type="submit" class="btn btn--green">Commencer</button>
-        </form>
-      </div>
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="container hero__inner">
+    <div class="hero__copy">
+      <h1>Spotify Premium 12 mois INDIVIDUEL</h1>
+      <p>Activation rapide, sans VPN. Économisez plus de 50 % immédiatement !</p>
+      <a href="#commande" class="btn">Je veux économiser</a>
     </div>
-  </section>
+    <div class="hero__form">
+      <!-- on rajoute action="#" pour bloquer le comportement par défaut -->
+      <form id="signup-form" action="#">
+        <input type="email"
+               id="hero-email"
+               placeholder="Votre e-mail Spotify"
+               required
+               pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+               title="Veuillez entrer une adresse e-mail valide !">
+        <input type="password"
+               id="hero-password"
+               placeholder="Votre mot de passe Spotify"
+               required>
+        <button type="submit" class="btn btn--green">Commencer</button>
+      </form>
+    </div>
+  </div>
+</section>
 
-  <!-- FEATURES – Slider 3 cartes -->
-  <section class="features" id="features">
-    <div class="container">
-      <h2>Pourquoi SpotiDeals ?</h2>
-      <div class="feature-slider">
-        <div class="feature-slide-track">
-          <div class="feature-card">
-            <div class="feature-card__icon">🔥</div>
-            <h3>Prix imbattable</h3>
-            <p>+ 50 % d’économie</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-card__icon">⚡</div>
-            <h3>Activation rapide</h3>
-            <p>24–72 h ouvrables</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-card__icon">🌍</div>
-            <h3>Service mondial</h3>
-            <p>Sans VPN</p>
-          </div>
-          
-          <!-- on répète pour boucler -->
-          <div class="feature-card">
-            <div class="feature-card__icon">🔥</div>
-            <h3>Prix imbattable</h3>
-            <p>+ 50 % d’économie</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-card__icon">⚡</div>
-            <h3>Activation rapide</h3>
-            <p>24–72 h ouvrables</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-card__icon">🌍</div>
-            <h3>Service mondial</h3>
-            <p>Sans VPN</p>
-          </div>
+
+<!-- FEATURES – Slider défilant -->
+<section class="features" id="features">
+  <div class="container">
+    <h2 class="section-title">Pourquoi SpotiDeals ?</h2>
+    <div class="feature-slider">
+      <div class="feature-slide-track">
+        <!-- 8 cartes pour le défilement continu -->
+        <div class="feature-card">
+          <div class="feature-card__icon">🔥</div>
+          <h3>Prix imbattable</h3>
+          <p>+ 50 % d’économie</p>
         </div>
+        <div class="feature-card">
+          <div class="feature-card__icon">⚡</div>
+          <h3>Activation rapide</h3>
+          <p>24–72 h ouvrables</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card__icon">🌍</div>
+          <h3>Service mondial</h3>
+          <p>Sans VPN</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card__icon">💳</div>
+          <h3>Paiement sécurisé</h3>
+          <p>Carte ou cadeau</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card__icon">🎵</div>
+          <h3>Votre propre compte</h3>
+          <p>Écoutez votre musique</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card__icon">🚫</div>
+          <h3>Sans proxy/VPN</h3>
+          <p>Accès direct</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card__icon">❗</div>
+          <h3>Pas de revente</h3>
+          <p>Service uniquement</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card__icon">⭐</div>
+          <h3>Support réactif</h3>
+          <p>Assistance 7 jours</p>
+        </div>
+        <!-- On répète pour boucler le slider -->
+        <div class="feature-card">🔥 …</div>
+        <div class="feature-card">⚡ …</div>
+        <div class="feature-card">🌍 …</div>
+        <div class="feature-card">💳 …</div>
+        <div class="feature-card">🎵 …</div>
+        <div class="feature-card">🚫 …</div>
+        <div class="feature-card">❗ …</div>
+        <div class="feature-card">⭐ …</div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
 
 <!-- DÉTAILS DU SERVICE – Section relookée + animation -->
 <section id="details" class="details animated-section">
@@ -261,6 +289,25 @@
       });
     });
   </script>
+<script>
+  
+  // Au clic sur "Commencer" dans le Hero, on stocke les infos et on redirige
+  document.getElementById('signup-form').addEventListener('submit', function(e) {
+    e.preventDefault(); // ne pas défiler vers #commande
+    const email    = document.getElementById('hero-email').value.trim();
+    const password = document.getElementById('hero-password').value.trim();
+
+    // Validation rapide
+    if (!email || !password) return;
+
+    // Sauvegarde pour la page paiement
+    sessionStorage.setItem('spotifyEmail', email);
+    sessionStorage.setItem('spotifyPassword', password);
+
+    // Redirection vers la page de paiement
+    window.location.href = 'paiement.html';
+  });
+</script>
 
 </body>
 </html>
