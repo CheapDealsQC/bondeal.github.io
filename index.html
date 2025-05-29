@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <title>SpotiDeals – Pack Activation Spotify Premium 12 mois INDIVIDUEL</title>
-  <meta name="description" content="Rejoignez SpotiDeals pour activer un abonnement Spotify Premium 12 mois INDIVIDUEL à petit prix. Activation rapide, garantie 6 mois, sans VPN.">
+  <meta name="description" content="Rejoignez SpotiDeals pour activer un abonnement Spotify Premium 12 mois INDIVIDUEL à petit prix. Activation rapide, sans VPN.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Montserrat + CSS principal -->
+  <!-- Montserrat + CSS -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -17,6 +17,7 @@
       <a href="#" class="logo">SpotiDeals</a>
       <nav class="nav">
         <a href="#features">Fonctionnalités</a>
+        <a href="#details">Détails</a>
         <a href="#pricing">Offre</a>
         <a href="#how">Comment ça marche</a>
         <a href="#faq">FAQ</a>
@@ -30,48 +31,83 @@
     <div class="container hero__inner">
       <div class="hero__copy">
         <h1>Spotify Premium 12 mois INDIVIDUEL</h1>
-        <p>Activation rapide, garantie 6 mois, sans VPN. Économisez plus de 50 % immédiatement !</p>
+        <p>Activation rapide, sans VPN. Économisez plus de 50 % immédiatement !</p>
         <a href="#commande" class="btn">Je veux économiser</a>
       </div>
       <div class="hero__form">
         <form id="signup-form">
-          <input type="email"
-                 id="hero-email"
-                 placeholder="Votre e-mail Spotify"
-                 required
-                 pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
-                 title="Veuillez entrer une adresse e-mail valide !">
-          <input type="password"
-                 id="hero-password"
-                 placeholder="Votre mot de passe Spotify"
-                 required>
+          <input type="email" id="hero-email" placeholder="Votre e-mail Spotify" required
+                 pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title="Veuillez entrer une adresse e-mail valide">
+          <input type="password" id="hero-password" placeholder="Votre mot de passe Spotify" required>
           <button type="submit" class="btn btn--green">Commencer</button>
         </form>
       </div>
     </div>
   </section>
 
-  <!-- FEATURES – Slider défilant -->
+  <!-- FEATURES – Slider 3 cartes -->
   <section class="features" id="features">
     <div class="container">
       <h2>Pourquoi SpotiDeals ?</h2>
       <div class="feature-slider">
         <div class="feature-slide-track">
-          <!-- 4 cartes + répétition pour la boucle -->
-          <div class="feature-card"> <div class="feature-card__icon">🔥</div><h3>Prix imbattable</h3><p>+ 50 % d’économie</p> </div>
-          <div class="feature-card"> <div class="feature-card__icon">⚡</div><h3>Activation rapide</h3><p>24–72 h ouvrables</p> </div>
-          <div class="feature-card"> <div class="feature-card__icon">🌍</div><h3>Service mondial</h3><p>Sans VPN</p> </div>
-          <div class="feature-card"> <div class="feature-card__icon">🛡️</div><h3>Garantie 6 mois</h3><p>Support inclus</p> </div>
-          <div class="feature-card"> <div class="feature-card__icon">🔥</div><h3>Prix imbattable</h3><p>+ 50 % d’économie</p> </div>
-          <div class="feature-card"> <div class="feature-card__icon">⚡</div><h3>Activation rapide</h3><p>24–72 h ouvrables</p> </div>
-          <div class="feature-card"> <div class="feature-card__icon">🌍</div><h3>Service mondial</h3><p>Sans VPN</p> </div>
-          <div class="feature-card"> <div class="feature-card__icon">🛡️</div><h3>Garantie 6 mois</h3><p>Support inclus</p> </div>
+          <div class="feature-card">
+            <div class="feature-card__icon">🔥</div>
+            <h3>Prix imbattable</h3>
+            <p>+ 50 % d’économie</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-card__icon">⚡</div>
+            <h3>Activation rapide</h3>
+            <p>24–72 h ouvrables</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-card__icon">🌍</div>
+            <h3>Service mondial</h3>
+            <p>Sans VPN</p>
+          </div>
+          <!-- on répète pour boucler -->
+          <div class="feature-card">
+            <div class="feature-card__icon">🔥</div>
+            <h3>Prix imbattable</h3>
+            <p>+ 50 % d’économie</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-card__icon">⚡</div>
+            <h3>Activation rapide</h3>
+            <p>24–72 h ouvrables</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-card__icon">🌍</div>
+            <h3>Service mondial</h3>
+            <p>Sans VPN</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- NOTRE OFFRE -->
+  <!-- DÉTAILS DU SERVICE -->
+  <section id="details" class="card">
+    <div class="container">
+      <h2>Détails du service</h2>
+      <ul class="detail-list">
+        <li>🔥 FONCTIONNE DANS LE MONDE ENTIER</li>
+        <li>L'abonnement fonctionnera pour tous les pays.</li>
+        <li>✅ Prépayé pour 12 mois Spotify PREMIUM sur votre propre compte</li>
+        <li>✅ La meilleure façon de profiter de la musique !</li>
+        <li>✅ Écoutez vos chansons préférées depuis VOTRE PROPRE COMPTE !!!</li>
+        <li>🔥 Aucun proxy ou VPN requis pour l'utilisation.</li>
+        <li>🔸 L'inscription se fait en prépayant la prime via carte bancaire/débit ou carte cadeau.</li>
+        <li>🔸 La période payée sera immédiatement affichée dans votre profil et un reçu vous sera envoyé.</li>
+        
+        <li>❗ Aucun remboursement sauf si non livré dans les 7 jours ouvrables.</li>
+        <li>❗ Produit destiné à l’activation de service, non à la revente.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- PRICING -->
   <section class="pricing" id="pricing">
     <div class="container">
       <h2>Notre offre unique</h2>
@@ -82,9 +118,8 @@
             82<span class="pricing-card__cents">,62</span> $ CAD
           </p>
           <ul class="pricing-card__list">
-            <li>Activation Spotify Premium 12 mois</li>
+            <li>Activation manuelle – Spotify Premium 12 mois</li>
             <li>Traitement sous 24–72 h</li>
-            <li>Garantie 6 mois incluse</li>
           </ul>
           <a href="#commande" class="btn">Choisir ce pack</a>
         </div>
@@ -98,29 +133,48 @@
       <h2>Comment ça marche ?</h2>
       <div class="grid grid--3">
         <div class="how-step">
-          <div class="how-step__num">1</div><h4>Inscription</h4><p>Entrez e-mail & mot de passe.</p>
+          <div class="how-step__num">1</div>
+          <h4>Inscription</h4>
+          <p>Entrez votre e-mail & mot de passe Spotify.</p>
         </div>
         <div class="how-step">
-          <div class="how-step__num">2</div><h4>Paiement</h4><p>Payez en un clic via PayPal.</p>
+          <div class="how-step__num">2</div>
+          <h4>Paiement</h4>
+          <p>Payez en un clic via PayPal.</p>
         </div>
         <div class="how-step">
-          <div class="how-step__num">3</div><h4>Activation</h4><p>Activation sous 24–72 h, confirmation.</p>
+          <div class="how-step__num">3</div>
+          <h4>Activation</h4>
+          <p>Activation sous 24–72 h, confirmation par e-mail.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FAQ – Accordéon animé -->
+  <!-- FAQ – Accordéon -->
   <section class="faq" id="faq">
     <div class="container">
-      <h2>Questions fréquentes</h2>
+      <h2>Questions fréquemment posées</h2>
+
       <div class="faq-item">
-        <h4>Comment prolonger mon abonnement ?</h4>
-        <p>Repassez commande via votre espace client.</p>
+        <h4>1) Sera-t-il possible de prolonger cet abonnement ?</h4>
+        <p>Oui, vous pouvez renouveler votre abonnement à tout moment.</p>
       </div>
+
       <div class="faq-item">
-        <h4>Puis-je acheter si j’ai déjà un abonnement ?</h4>
-        <p>Oui, tant qu’il n’est pas actif au moment de l’achat.</p>
+        <h4>2) Puis-je acheter si j’avais déjà un abonnement ?</h4>
+        <p>Oui, l’abonnement ne doit simplement pas être actif au moment de l’achat.</p>
+      </div>
+
+      <div class="faq-item">
+        <h4>3) Puis-je commander si mon compte est bloqué pour paiement ?</h4>
+        <p>Oui, même si votre compte est bloqué, notre service fonctionnera (hors comptes signalés).</p>
+      </div>
+
+      <div class="faq-item">
+        <h4>4) Ai-je besoin d’un proxy ou VPN ?</h4>
+        <p>Non, Spotify Premium fonctionne partout sans VPN/serveur proxy.  
+        (À Donetsk/Lougansk/Crimée, uniquement via proxy.)</p>
       </div>
     </div>
   </section>
@@ -130,17 +184,11 @@
     <div class="container">
       <h2>🛒 Commander maintenant</h2>
       <label for="email">📧 E-mail Spotify</label>
-      <input type="email"
-             id="email"
-             placeholder="exemple@mail.com"
-             required
-             pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
-             title="Adresse e-mail invalide !">
+      <input type="email" id="email" placeholder="exemple@mail.com"
+             required pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+             title="Adresse e-mail invalide">
       <label for="password">🔑 Mot de passe Spotify</label>
-      <input type="password"
-             id="password"
-             placeholder="Votre mot de passe"
-             required>
+      <input type="password" id="password" placeholder="Votre mot de passe" required>
       <button id="order-btn" class="btn" disabled>▶️ Passer au paiement</button>
     </div>
   </section>
@@ -164,16 +212,16 @@
 
   <!-- SCRIPTS -->
   <script>
-    // Commande : active uniquement si e-mail valide + mot de passe
-    const emailEl    = document.getElementById('email'),
-          passEl     = document.getElementById('password'),
-          orderBtn   = document.getElementById('order-btn');
+    // Activation du bouton paiement
+    const emailEl  = document.getElementById('email'),
+          passEl   = document.getElementById('password'),
+          btn      = document.getElementById('order-btn');
     function validateOrder() {
-      orderBtn.disabled = !(emailEl.checkValidity() && passEl.value.trim());
+      btn.disabled = !(emailEl.checkValidity() && passEl.value.trim());
     }
     emailEl.addEventListener('input', validateOrder);
     passEl.addEventListener('input', validateOrder);
-    orderBtn.addEventListener('click', () => {
+    btn.addEventListener('click', () => {
       sessionStorage.setItem('spotifyEmail', emailEl.value);
       sessionStorage.setItem('spotifyPassword', passEl.value);
       window.location.href = 'paiement.html';
@@ -181,12 +229,11 @@
 
     // FAQ accordéon
     document.querySelectorAll('.faq-item').forEach(item => {
-      const h4 = item.querySelector('h4'),
-            p  = item.querySelector('p');
-      h4.addEventListener('click', () => {
+      item.querySelector('h4').addEventListener('click', () => {
         item.classList.toggle('open');
       });
     });
   </script>
+
 </body>
 </html>
