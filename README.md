@@ -1,1 +1,0 @@
-# spotideals.github.io
