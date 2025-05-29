@@ -204,3 +204,19 @@ body {
   }
   .nav a { margin:8px; }
 }
+/* Détaillist dans “Détails du service” */
+.detail-list {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 20px;
+}
+.detail-list li {
+  position: relative;
+  padding-left: 28px;
+  margin-bottom: 12px;
+}
+/* Accordéon FAQ */
+.faq-item.open p { display: block; }
+.faq-item.open h4::after {
+  transform: rotate(180deg);
+}
