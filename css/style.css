@@ -1,4 +1,7 @@
-/* Dark, épuré et pro */
+html {
+  scroll-behavior: smooth;
+}
+
 :root {
   --bg: #121212;
   --fg: #e0e0e0;
