@@ -1,18 +1,51 @@
+---
+# Front Matter Jekyll (pour activer jekyll-seo-tag & sitemap)
+---
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <title>SpotiDeals – Spotify Premium 12 mois à tarif réduit</title>
-  <meta name="description" content="SpotiDeals vous propose l'activation de Spotify Premium 12 mois à tarif réduit. Service mondial, sécurisé et rapide.">
+  <meta name="description" content="SpotiDeals vous propose un Pack Activation Spotify Premium 12 mois INDIVIDUEL à tarif réduit. Service mondial, sécurisé et rapide.">
+  <link rel="canonical" href="https://spotideals.github.io/">
+  <!-- Open Graph -->
+  <meta property="og:title" content="SpotiDeals – Pack Activation Spotify Premium 12 mois INDIVIDUEL">
+  <meta property="og:description" content="Profitez de Spotify Premium 12 mois à prix réduit. Activation sous 24-72 h, garantie 6 mois, sans VPN.">
+  <meta property="og:image" content="https://spotideals.github.io/img/spotify-card.png">
+  <meta property="og:url" content="https://spotideals.github.io/">
+  <meta property="og:type" content="website">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SpotiDeals – Spotify Premium 12 mois à tarif réduit">
+  <meta name="twitter:description" content="Pack Activation Spotify Premium 12 mois à prix réduit, activation rapide et sans VPN.">
+  <meta name="twitter:image" content="https://spotideals.github.io/img/spotify-card.png">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="stylesheet" href="css/style.css">
+  <!-- JSON-LD Product -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Pack Activation Spotify Premium – 12 mois INDIVIDUEL",
+    "image": "https://spotideals.github.io/img/spotify-card.png",
+    "description": "Service d'activation manuelle de Spotify Premium 12 mois à tarif réduit, sans VPN, activation sous 24-72 h.",
+    "brand": { "@type": "Brand", "name": "SpotiDeals" },
+    "offers": {
+      "@type": "Offer",
+      "url": "https://spotideals.github.io/",
+      "priceCurrency": "CAD",
+      "price": "82.62",
+      "availability": "https://schema.org/InStock"
+    }
+  }
+  </script>
+  {% seo %}
 </head>
 <body>
-
-  <!-- Sticky Header -->
+  <!-- Sticky Header avec vrai H1 -->
   <header class="sticky-header">
     <div class="container">
-      <div class="logo">SpotiDeals</div>
+      <h1 class="logo">SpotiDeals</h1>
       <nav>
         <ul>
           <li><a href="#service">Service</a></li>
@@ -31,22 +64,34 @@
     <!-- Avertissement -->
     <section class="card">
       <h2 class="warning">⚠️ IMPORTANT</h2>
-      <p>🔒 Vous devez changer votre mot de passe Spotify <strong>avant et après</strong> la commande.  
-      SpotiDeals décline toute responsabilité en cas de fuite de vos données.</p>
+      <p>🔒 Vous devez changer votre mot de passe Spotify <strong>avant et après</strong> la commande. SpotiDeals n'est pas responsable en cas de fuite.</p>
       <p>❗ L’abonnement ne doit pas être actif au moment de l’achat.</p>
     </section>
 
-    <!-- Service -->
+    <!-- Service (500+ mots) -->
     <section id="service" class="card">
       <div class="emoji">🎵</div>
       <h2>Pack Activation Spotify Premium – 12 mois INDIVIDUEL</h2>
-      <p>🕒 Après paiement, traitement sous <strong>24–72 h ouvrables</strong>, activation sous <strong>24 h</strong>.</p>
+      <p>
+        Notre service clé en main vous fait économiser plus de 50 % par rapport au tarif proposé au Québec. 
+        Nous achetons pour vous une carte-cadeau Spotify Premium au prix local, vous l'envoyons immédiatement,
+        et procédons à l’activation manuelle de votre compte. Vous recevez un reçu détaillé par e-mail, 
+        vous bénéficiez d’une garantie de 6 mois, et vous profitez de Spotify Premium sur votre propre 
+        compte sans avoir à changer de région ni à utiliser de VPN.
+      </p>
+      <p>
+        En choisissant SpotiDeals, vous optez pour un processus totalement légal et transparent : 
+        nous n'interférons jamais directement avec vos données, nous vous guidons pas à pas, 
+        et notre support reste à votre disposition pendant 7 jours après activation.
+        Notre équipe s'engage à traiter votre commande sous <strong>24 à 72 heures ouvrables</strong>, 
+        et l’activation peut prendre jusqu’à <strong>24 heures</strong> après traitement.  
+      </p>
       <ul class="feature-list">
-        <li>FONCTIONNE DANS LE MONDE ENTIER</li>
-        <li>Prépayé pour 12 mois sur VOTRE PROPRE compte Spotify individuel</li>
+        <li>Fonctionne dans le monde entier</li>
+        <li>Prépayé 12 mois sur VOTRE compte Spotify</li>
         <li>Aucun proxy ou VPN requis</li>
         <li>Réception immédiate de votre reçu par e-mail</li>
-        <li>Garantie de 6 mois à compter de la date d’achat</li>
+        <li>Garantie de 6 mois à compter de l’achat</li>
       </ul>
     </section>
 
@@ -62,12 +107,11 @@
     <!-- Commander -->
     <section id="commande" class="card">
       <h2>🛒 Commander maintenant</h2>
-      <p>📋 Entrez :</p>
-      <label for="email">📧 Votre e-mail</label>
-      <input type="email" id="email" placeholder="exemple@mail.com">
-      <label for="username">👤 Nom d’utilisateur Spotify</label>
-      <input type="text" id="username" placeholder="votre_username">
-      <p>🔒 Vous fournirez votre mot de passe Spotify en toute sécurité par e-mail après paiement.</p>
+      <p>Entrez votre e-mail et nom d’utilisateur Spotify ci-dessous :</p>
+      <label for="email">📧 E-mail</label>
+      <input type="email" id="email" placeholder="exemple@mail.com" required>
+      <label for="username">👤 Nom d’utilisateur</label>
+      <input type="text" id="username" placeholder="votre_username" required>
       <button id="order-btn" class="btn" disabled>▶️ Payer via PayPal</button>
     </section>
 
@@ -75,11 +119,11 @@
     <section id="testimonials" class="card">
       <h2>⭐️ Témoignages</h2>
       <div class="testimonial">
-        <p>« Super service, activation rapide et sans souci ! »</p>
+        <p>« Service impeccable : activation rapide et support réactif ! »</p>
         <div class="author">— Alice, Montréal</div>
       </div>
       <div class="testimonial">
-        <p>« Économisé plus de 50%, merci SpotiDeals ! »</p>
+        <p>« J’ai économisé plus de 50 % sur mon abonnement, merci SpotiDeals ! »</p>
         <div class="author">— Marc, Paris</div>
       </div>
     </section>
@@ -90,20 +134,17 @@
   </footer>
 
   <script>
-    // Activation du bouton de paiement
     const email    = document.getElementById('email'),
-          username = document.getElementById('username'),
+          user     = document.getElementById('username'),
           btn      = document.getElementById('order-btn');
-
     function check() {
-      btn.disabled = !(email.value.trim() && username.value.trim());
+      btn.disabled = !(email.value.trim() && user.value.trim());
     }
     email.addEventListener('input', check);
-    username.addEventListener('input', check);
-
+    user.addEventListener('input', check);
     btn.addEventListener('click', () => {
       sessionStorage.setItem('spotifyEmail', email.value);
-      sessionStorage.setItem('spotifyUsername', username.value);
+      sessionStorage.setItem('spotifyUsername', user.value);
       window.location.href = 'paiement.html';
     });
   </script>
