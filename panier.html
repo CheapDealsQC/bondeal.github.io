@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>SpotiDeals – Panier</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/style.css">
   <script type="module">
     import { getCart, clearCart } from './js/cart.js';
@@ -14,11 +14,17 @@
       if (!items.length) {
         list.innerHTML = '<p>Votre panier est vide.</p>';
       } else {
-        items.forEach((it, i) => {
+        items.forEach(it => {
           total += it.price;
-          const el = document.createElement('div');
-          el.textContent = `${it.name} – ${it.price.toFixed(2)} $`;
-          list.appendChild(el);
+          const row = document.createElement('div');
+          row.classList.add('cart-item');
+          row.innerHTML = `
+            <img src="${it.image}" alt="${it.name}">
+            <div>
+              <div>${it.name}</div>
+              <div>${it.price.toFixed(2)} $ CAD</div>
+            </div>`;
+          list.appendChild(row);
         });
         document.getElementById('cart-total').textContent = total.toFixed(2) + ' $ CAD';
         document.getElementById('checkout-btn').style.display = 'inline-block';
@@ -49,8 +55,8 @@
     <div class="card">
       <div id="cart-list"></div>
       <p><strong>Total : <span id="cart-total">0 $</span></strong></p>
-      <button id="clear-cart" class="btn" style="background:#f44336;">Vider le panier</button>
-      <a id="checkout-btn" href="checkout.html" class="btn" style="background:var(--accent); display:none;">Passer à la caisse</a>
+      <button id="clear-cart" class="btn" style="background: #f44336;">Vider le panier</button>
+      <a id="checkout-btn" href="checkout.html" class="btn" style="background: var(--accent); display: none;">Passer à la caisse</a>
     </div>
   </section>
 
