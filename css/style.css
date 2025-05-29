@@ -365,29 +365,24 @@ body {
   }
 }
 
-/* --- Mode clair à partir de Pourquoi SpotiDeals --- */
-.features,
-.pricing,
-.how,
+/* --- Bandes dégradées pour chaque section --- */
+.features {
+  background: linear-gradient(90deg, rgba(99,102,241,0.1), rgba(74,222,128,0.1));
+}
+.pricing {
+  background: linear-gradient(90deg, rgba(74,222,128,0.1), rgba(99,102,241,0.1));
+}
+.how {
+  background: linear-gradient(90deg, rgba(99,102,241,0.1), rgba(74,222,128,0.1));
+}
 .faq {
-  background: #f5f5f5;    /* gris très clair */
-  padding-top: 60px;
-  padding-bottom: 60px;
+  background: linear-gradient(90deg, rgba(74,222,128,0.1), rgba(99,102,241,0.1));
 }
 
+/* Les cartes gardent leur fond sombre pour ressortir */
 .feature-card,
 .pricing-card,
 .how-step,
 .faq-item {
-  background: #ffffff;    /* blanc pur */
-  color: #121212;         /* texte sombre */
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-/* Ajuste la couleur des titres dans ces sections */
-.features h2,
-.pricing h2,
-.how h2,
-.faq h2 {
-  color: var(--accent1);
+  background: var(--card-bg);
 }
