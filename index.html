@@ -2,32 +2,83 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>SpotiDeals – Accueil</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SpotiDeals – Pack Activation Spotify 12 mois</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <header class="container">
-    <nav>
-      <ul>
-        <li><a href="index.html">Accueil</a></li>
-        <li><a href="offre.html">Offre</a></li>
-        <li><a href="panier.html">Panier</a></li>
-        <li><a href="checkout.html">Caisse</a></li>
-        <li><a href="conditions.html">Conditions</a></li>
-        <li><a href="privacy.html">Confidentialité</a></li>
-      </ul>
-    </nav>
-  </header>
+  <div class="container">
+    <header>
+      <h1>SpotiDeals</h1>
+      <nav>
+        <ul>
+          <li><a href="#service">Service</a></li>
+          <li><a href="#comparatif">Comparatif</a></li>
+          <li><a href="#commande">Commander</a></li>
+        </ul>
+      </nav>
+    </header>
 
-  <section class="page-hero container">
-    <h1>Pack Activation Spotify 12 mois</h1>
-    <p>Prestation complète : recherche du meilleur tarif, activation de votre compte Spotify Premium.</p>
-    <a class="btn" href="offre.html">Voir l’offre</a>
-  </section>
+    <!-- Service -->
+    <section id="service" class="card">
+      <img src="img/spotify-card.png" alt="Spotify Premium 12 mois" class="product-img">
+      <h2>Pack Activation Spotify Premium – 12 mois</h2>
+      <p>Je me charge de tout : j’achète pour vous la meilleure carte-cadeau au tarif réduit, puis j’active votre compte Spotify Premium en moins de 5 minutes.</p>
+    </section>
 
-  <footer class="container">
-    <p>© 2025 SpotiDeals – Tous droits réservés</p>
-  </footer>
+    <!-- Comparatif des prix -->
+    <section id="comparatif" class="card">
+      <h2>Comparatif des tarifs</h2>
+      <table>
+        <tr>
+          <th>Offre</th>
+          <th>Prix total</th>
+        </tr>
+        <tr>
+          <td>SpotiDeals (12 mois)</td>
+          <td>82,62 $ CAD</td>
+        </tr>
+        <tr>
+          <td>Prix standard Québec (12 mois TTC)</td>
+          <td>175,00 $ CAD</td>
+        </tr>
+      </table>
+    </section>
+
+    <!-- Formulaire de commande -->
+    <section id="commande" class="card">
+      <h2>Commander maintenant</h2>
+      <p>Remplissez vos identifiants Spotify :</p>
+      <label for="email">Courriel / Nom d’utilisateur :</label>
+      <input type="text" id="email" placeholder="exemple@mail.com">
+      <label for="password">Mot de passe :</label>
+      <input type="password" id="password" placeholder="Votre mot de passe">
+      <button id="order-btn" class="btn" disabled>Commander</button>
+    </section>
+
+    <footer>
+      © 2025 SpotiDeals – Tous droits réservés
+    </footer>
+  </div>
+
+  <script>
+    // Activation du bouton Commander seulement si les 2 champs sont remplis
+    const email = document.getElementById('email');
+    const password = document.getElementById('password');
+    const btn = document.getElementById('order-btn');
+
+    function checkInputs() {
+      btn.disabled = !(email.value.trim() && password.value.trim());
+    }
+    email.addEventListener('input', checkInputs);
+    password.addEventListener('input', checkInputs);
+
+    // Redirection vers la page de paiement en transmettant en sessionStorage
+    btn.addEventListener('click', () => {
+      sessionStorage.setItem('spotifyEmail', email.value);
+      sessionStorage.setItem('spotifyPassword', password.value);
+      window.location.href = 'paiement.html';
+    });
+  </script>
 </body>
 </html>
