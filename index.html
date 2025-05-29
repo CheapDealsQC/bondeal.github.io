@@ -5,6 +5,39 @@
   <title>SpotiDeals – Pack Activation Spotify Premium 12 mois INDIVIDUEL</title>
   <meta name="description" content="Rejoignez SpotiDeals pour activer un abonnement Spotify Premium 12 mois INDIVIDUEL à petit prix. Activation rapide, sans VPN.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+  <link rel="manifest" href="favicon/site.webmanifest">
+  
+  <!-- SEO Meta Tags -->
+  <meta name="keywords" content="Spotify Premium, abonnement Spotify, Spotify 12 mois, activation Spotify, économie Spotify">
+  <meta name="author" content="SpotiDeals">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph / Social Media -->
+  <meta property="og:title" content="SpotiDeals – Spotify Premium 12 mois INDIVIDUEL">
+  <meta property="og:description" content="Économisez plus de 50% sur votre abonnement Spotify Premium. Activation rapide, sans VPN.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://spotideals.com">
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Spotify Premium 12 mois INDIVIDUEL",
+    "description": "Pack Activation Spotify Premium 12 mois INDIVIDUEL",
+    "offers": {
+      "@type": "Offer",
+      "price": "82.62",
+      "priceCurrency": "CAD"
+    }
+  }
+  </script>
+  
   <!-- Montserrat + CSS -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
@@ -15,6 +48,11 @@
   <header class="header">
     <div class="container header__inner">
       <a href="index.html" class="logo">SpotiDeals</a>
+      <button class="mobile-menu-btn" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
       <nav class="nav">
         <a href="#features">Fonctionnalités</a>
         <a href="#details">Détails</a>
@@ -25,6 +63,59 @@
       <a href="#commande" class="btn btn--sm">Commander</a>
     </div>
   </header>
+
+  <!-- Cookie Consent Banner -->
+  <div id="cookie-consent" class="cookie-consent">
+    <div class="cookie-content">
+      <p>Nous utilisons des cookies pour améliorer votre expérience. En continuant à utiliser ce site, vous acceptez notre utilisation des cookies.</p>
+      <div class="cookie-buttons">
+        <button id="accept-cookies" class="btn btn--sm">Accepter</button>
+        <button id="reject-cookies" class="btn btn--sm btn--outline">Refuser</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading Overlay -->
+  <div id="loading-overlay" class="loading-overlay">
+    <div class="spinner"></div>
+    <p>Chargement en cours...</p>
+  </div>
+
+  <!-- Progress Bar -->
+  <div id="activation-progress" class="activation-progress">
+    <div class="progress-steps">
+      <div class="step active" data-step="1">
+        <span class="step-number">1</span>
+        <span class="step-text">Commande</span>
+      </div>
+      <div class="step" data-step="2">
+        <span class="step-number">2</span>
+        <span class="step-text">Paiement</span>
+      </div>
+      <div class="step" data-step="3">
+        <span class="step-number">3</span>
+        <span class="step-text">Activation</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chat Support Widget -->
+  <div id="chat-widget" class="chat-widget">
+    <button class="chat-toggle" aria-label="Ouvrir le chat">
+      <span class="chat-icon">💬</span>
+    </button>
+    <div class="chat-container">
+      <div class="chat-header">
+        <h3>Support Client</h3>
+        <button class="chat-close" aria-label="Fermer le chat">×</button>
+      </div>
+      <div class="chat-messages"></div>
+      <form class="chat-form">
+        <input type="text" placeholder="Votre message..." required>
+        <button type="submit">Envoyer</button>
+      </form>
+    </div>
+  </div>
 
   <!-- HERO -->
   <section class="hero" id="hero">
@@ -197,10 +288,10 @@
     </div>
   </section>
 
-  <!-- BACK TO TOP -->
-  <div class="back-to-top">
-    <a href="#hero" aria-label="Retour en haut">↑ Retour en haut</a>
-  </div>
+  <!-- Back to Top Button -->
+  <button id="back-to-top" class="back-to-top" aria-label="Retour en haut">
+    ↑
+  </button>
 
   <!-- FOOTER -->
   <footer class="footer">
@@ -241,6 +332,80 @@
     // FAQ accordéon
     document.querySelectorAll('.faq-item').forEach(i=>{
       i.querySelector('h4').addEventListener('click',()=>i.classList.toggle('open'));
+    });
+
+    // Cookie Consent
+    const cookieConsent = document.getElementById('cookie-consent');
+    const acceptCookies = document.getElementById('accept-cookies');
+    const rejectCookies = document.getElementById('reject-cookies');
+
+    if (!localStorage.getItem('cookieConsent')) {
+      cookieConsent.style.display = 'block';
+    }
+
+    acceptCookies.addEventListener('click', () => {
+      localStorage.setItem('cookieConsent', 'accepted');
+      cookieConsent.style.display = 'none';
+    });
+
+    rejectCookies.addEventListener('click', () => {
+      localStorage.setItem('cookieConsent', 'rejected');
+      cookieConsent.style.display = 'none';
+    });
+
+    // Mobile Menu
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const nav = document.querySelector('.nav');
+
+    mobileMenuBtn.addEventListener('click', () => {
+      nav.classList.toggle('active');
+      mobileMenuBtn.classList.toggle('active');
+    });
+
+    // Back to Top Button
+    const backToTop = document.getElementById('back-to-top');
+
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        backToTop.style.display = 'block';
+      } else {
+        backToTop.style.display = 'none';
+      }
+    });
+
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Form Validation
+    const forms = document.querySelectorAll('form');
+    forms.forEach(form => {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (form.checkValidity()) {
+          const loadingOverlay = document.getElementById('loading-overlay');
+          loadingOverlay.style.display = 'flex';
+          
+          // Simulate form submission
+          setTimeout(() => {
+            loadingOverlay.style.display = 'none';
+            // Handle successful submission
+          }, 2000);
+        }
+      });
+    });
+
+    // Chat Widget
+    const chatWidget = document.getElementById('chat-widget');
+    const chatToggle = document.querySelector('.chat-toggle');
+    const chatClose = document.querySelector('.chat-close');
+
+    chatToggle.addEventListener('click', () => {
+      chatWidget.classList.add('active');
+    });
+
+    chatClose.addEventListener('click', () => {
+      chatWidget.classList.remove('active');
     });
   </script>
 </body>
