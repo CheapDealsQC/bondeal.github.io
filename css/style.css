@@ -116,18 +116,38 @@ body {
 .grid--3 { grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); }
 .grid--1 { grid-template-columns: 1fr; }
 
-/* FEATURES */
-.feature-card {
-  background: var(--card-bg);
-  padding:24px;
-  border-radius:8px;
-  text-align:center;
+/* Slider défilant pour les feature-cards */
+.feature-slider {
+  overflow: hidden;
+  position: relative;
+  margin-top: 20px;
 }
-.feature-card__icon { font-size:2rem; margin-bottom:12px; }
-.feature-card h3 {
-  font-family: 'Montserrat', sans-serif;
-  font-weight:700;
-  margin-bottom:8px;
+.feature-slide-track {
+  display: flex;
+  width: calc(8 * 220px); /* 8 cartes x 220px de large (200px + marge) */
+  animation: scroll 20s linear infinite;
+}
+.feature-card {
+  flex: 0 0 200px;
+  margin-right: 20px;
+  background: #1f1f29;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+.feature-card:hover {
+  transform: translateY(-5px);
+}
+.feature-card__icon {
+  font-size: 2rem;
+  margin-bottom: 12px;
+}
+
+/* Animation du slider */
+@keyframes scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 /* PRICING */
@@ -242,4 +262,24 @@ body {
 @media(max-width:768px){
   .hero__inner, .header__inner { flex-direction:column; text-align:center; }
   .nav a { margin:8px; }
+}
+.pricing-card--highlight {
+  background: var(--gradient);
+  color: #fff;
+}
+.pricing-card--highlight .pricing-card h3,
+.pricing-card--highlight .pricing-card__list li {
+  color: #fff;
+}
+.back-to-top {
+  text-align: center;
+  margin: 30px 0;
+}
+.back-to-top a {
+  color: var(--accent2);
+  font-weight: bold;
+  text-decoration: none;
+}
+.back-to-top a:hover {
+  text-decoration: underline;
 }
