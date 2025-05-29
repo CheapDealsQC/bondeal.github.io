@@ -2,10 +2,13 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>SpotiDeals – Paiement par Carte</title>
+  <title>SpotiDeals – Paiement</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="stylesheet" href="css/style.css">
-  <!-- Stripe Buy Button script -->
+
+  <!-- PayPal SDK -->
+  <script src="https://www.paypal.com/sdk/js?client-id=AW-bLBrtEPaB0FTD-Oa4rQ1gbQBNLkkqSsAtGh968nfbb-HA_iZh-Cptg_1UzbE9GYagkCPtHFEUosfm&currency=CAD"></script>
+  <!-- Stripe Buy Button SDK -->
   <script async src="https://js.stripe.com/v3/buy-button.js"></script>
 </head>
 <body>
@@ -13,23 +16,50 @@
     <header><h1>Paiement SpotiDeals</h1></header>
 
     <section class="card">
-      <h2>Payer votre Pack Activation Spotify Premium</h2>
-      <p><strong>Service :</strong> Activation manuelle de votre compte Spotify Premium pour 12 mois (INDIVIDUEL).</p>
-      <p><strong>Délais :</strong> Traitement en 24–72 h ouvrables, puis activation sous 24 h.</p>
-      <p><strong>Montant total :</strong> 82,62 $ CAD (2,9 % + 0,30 $ compris)</p>
+      <h2>Choisissez votre moyen de paiement</h2>
+      <p>Montant total : <strong>82,62 $ CAD</strong></p>
+
+      <!-- PayPal Button -->
+      <div id="paypal-button-container" style="margin-bottom: 20px;"></div>
+
+      <p style="text-align:center; color:#999; margin: 10px 0;">— ou —</p>
 
       <!-- Stripe Buy Button -->
-      <stripe-buy-button
-        buy-button-id="buy_btn_1RTw9lATQVKJIRPOwkarvaV9"
-        publishable-key="pk_live_51RTbNaATQVKJIRPObZmmXXYWSD6geESHBf4DyeSY2rcZzecnc3iRFjBlTcUNrI7sEpU4hkqpT4RskHLhDY3zdywG009wFLeiPb">
-      </stripe-buy-button>
-
-      <p class="note" style="margin-top:20px; font-size:0.9em; color:#aaa;">
-        Paiement sécurisé via Stripe. Après confirmation, vous recevrez un numéro de commande par e-mail.
-      </p>
+      <div style="text-align:center;">
+        <stripe-buy-button
+          buy-button-id="buy_btn_1RTw9lATQVKJIRPOwkarvaV9"
+          publishable-key="pk_live_51RTbNaATQVKJIRPObZmmXXYWSD6geESHBf4DyeSY2rcZzecnc3iRFjBlTcUNrI7sEpU4hkqpT4RskHLhDY3zdywG009wFLeiPb">
+        </stripe-buy-button>
+      </div>
     </section>
 
     <footer>© 2025 SpotiDeals</footer>
   </div>
+
+  <script>
+    // Initialisation du bouton PayPal
+    paypal.Buttons({
+      style: {
+        shape: 'pill',
+        color: 'blue',
+        label: 'pay',
+        layout: 'vertical'
+      },
+      createOrder: function(data, actions) {
+        return actions.order.create({
+          purchase_units: [{
+            amount: { value: '82.62' },
+            invoice_id: 'SD-' + Date.now()
+          }]
+        });
+      },
+      onApprove: function(data, actions) {
+        return actions.order.capture().then(function(details) {
+          alert('✅ Paiement PayPal reçu !\nNuméro de commande : ' + details.id);
+          window.location.href = 'index.html';
+        });
+      }
+    }).render('#paypal-button-container');
+  </script>
 </body>
 </html>
