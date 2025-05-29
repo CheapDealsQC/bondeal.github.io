@@ -14,17 +14,17 @@
   --section-gap: 80px;
 }
 
-/* Background alternés pour sections */
-section.hero       { background: var(--gradient); }
-section.features   { background: rgba(99,102,241,0.10); }  /* violet doux */
-section.details    { background: rgba(74,222,128,0.10); }  /* vert tendre */
-section.pricing    { background: rgba(99,102,241,0.15); }  /* violet un peu plus soutenu */
-section.how        { background: rgba(74,222,128,0.15); }  /* vert un peu plus soutenu */
-section.faq        { background: rgba(99,102,241,0.05); }  /* violet très léger */
-section.commande   { background: var(--card-bg-alt); }     /* foncé pour contraste */
-footer.footer      { background: var(--card-bg); }         /* reste sombre */
+/* Background alternés */
+section.hero   { background: var(--gradient); }
+section.features { background: rgba(99,102,241,0.10); }
+section.details  { background: rgba(74,222,128,0.10); }
+section.pricing  { background: rgba(99,102,241,0.15); }
+section.how      { background: rgba(74,222,128,0.15); }
+section.faq      { background: rgba(99,102,241,0.05); }
+section.commande { background: var(--card-bg-alt); }
+footer.footer   { background: var(--card-bg); }
 
-/* RESET & GLOBAL */
+/* Reset & global */
 * { box-sizing:border-box; margin:0; padding:0; }
 body {
   background: var(--bg);
@@ -37,23 +37,36 @@ body {
   padding:20px;
 }
 
-/* SECTION TITLES */
+/* Slanted divider */
+.divider {
+  height:60px; overflow:hidden; position:relative;
+}
+.divider--slant {
+  background: var(--card-bg);
+}
+.divider--slant::before {
+  content:'';
+  display:block;
+  position:absolute;
+  top:-20px; left:0;
+  width:100%; height:100%;
+  background:inherit;
+  transform:skewY(-3deg);
+  transform-origin:0;
+}
+
+/* Section titles */
 .section-title {
-  position: relative;
-  font-size:2.8rem;
-  font-weight:900;
-  text-align:center;
-  margin-bottom:40px;
+  position:relative;
+  font-size:2.8rem; font-weight:900;
+  text-align:center; margin-bottom:40px;
   color:var(--accent1);
 }
 .section-title::after {
   content:'';
-  width:80px;
-  height:4px;
+  width:80px; height:4px;
   background:var(--gradient);
-  position:absolute;
-  bottom:-12px;
-  left:50%;
+  position:absolute; bottom:-12px; left:50%;
   transform:translateX(-50%);
   border-radius:2px;
 }
@@ -103,12 +116,10 @@ body {
 
 /* HERO */
 .hero {
-  background:var(--gradient); color:#fff;
-  padding:80px 0;
+  color:#fff; padding:80px 0;
 }
 .hero__inner {
-  display:flex; flex-wrap:wrap;
-  align-items:center; gap:40px;
+  display:flex; flex-wrap:wrap; align-items:center; gap:40px;
 }
 .hero__copy h1 {
   font-size:3rem; font-weight:900; margin-bottom:24px;
@@ -117,9 +128,8 @@ body {
   font-size:1.2rem; margin-bottom:32px;
 }
 .hero__form form input {
-  width:100%; padding:14px;
-  margin-bottom:16px; border:none;
-  border-radius:8px;
+  width:100%; padding:14px; margin-bottom:16px;
+  border:none; border-radius:8px;
 }
 
 /* SLIDER – FEATURES */
@@ -153,8 +163,7 @@ body {
 /* ANIMATIONS COMMUNES */
 .animated-section [class$="-item"],
 .animated-section .pricing-card {
-  opacity:0;
-  transform:translateY(30px);
+  opacity:0; transform:translateY(30px);
   animation: fadeInUp 0.6s ease forwards var(--delay);
 }
 @keyframes fadeInUp {
@@ -163,7 +172,6 @@ body {
 
 /* DÉTAILS DU SERVICE */
 .details {
-  background:rgba(99,102,241,0.05);
   padding:var(--section-gap) 0;
 }
 .details-grid {
@@ -243,7 +251,6 @@ body {
 
 /* HOW IT WORKS */
 .how {
-  background:rgba(74,222,128,0.05);
   padding:var(--section-gap) 0;
 }
 .how-step {
@@ -261,7 +268,6 @@ body {
 
 /* FAQ – Accordéon animé */
 .faq {
-  background:rgba(99,102,241,0.03);
   padding:var(--section-gap) 0;
 }
 .faq-item {
@@ -284,7 +290,7 @@ body {
 }
 .faq-item p {
   max-height:0; opacity:0; padding:0 20px; margin:0;
-  transition:max-height 0.4s ease,opacity 0.4s ease,padding 0.4s ease;
+  transition: max-height 0.4s ease, opacity 0.4s ease, padding 0.4s ease;
 }
 .faq-item.open p {
   max-height:200px; opacity:1; padding:16px 20px 24px;
@@ -292,7 +298,7 @@ body {
 
 /* COMMANDE */
 .commande {
-  background:var(--card-bg); padding:var(--section-gap) 0;
+  padding:var(--section-gap) 0; background:var(--card-bg-alt);
 }
 .commande h2 {
   font-weight:900; text-align:center; margin-bottom:24px;
@@ -302,11 +308,10 @@ body {
 }
 .commande input {
   width:100%; padding:12px; border:none; border-radius:8px;
-  background:#2a2a36; color:var(--fg); margin-bottom:16px;
+  background: #2a2a36; color:var(--fg); margin-bottom:16px;
 }
 #order-btn {
-  width:100%;
-  display:block;
+  width:100%; display:block;
 }
 
 /* BACK TO TOP */
@@ -334,17 +339,27 @@ body {
 .footer a:hover { color:#fff; }
 
 /* GRID UTILITIES */
-.grid { display:grid; gap:20px; }
-.grid--1 { grid-template-columns:1fr; }
-.grid--3 { grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); }
-.grid--4 { grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); }
+.grid {
+  display:grid; gap:20px;
+}
+.grid--1 {
+  grid-template-columns:1fr;
+}
+.grid--3 {
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+}
+.grid--4 {
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+}
 
 /* RESPONSIVE */
 @media(max-width:768px) {
   .header__inner, .hero__inner {
     flex-direction:column; text-align:center;
   }
-  .nav a { margin:8px; }
+  .nav a {
+    margin:8px;
+  }
   .details-grid, .grid--1, .grid--3 {
     grid-template-columns:1fr;
   }
