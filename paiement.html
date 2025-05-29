@@ -2,41 +2,49 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>💳 SpotiDeals – Paiement</title>
-  <meta name="description" content="Réglez votre Pack Activation Spotify Premium 12 mois en 1 clic via PayPal.">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SpotiDeals – Paiement Spotify Premium 12 mois</title>
+  <meta name="description" content="Réglez en un clic votre Pack Activation Spotify Premium 12 mois en toute sécurité via PayPal. Traitement rapide et garantie incluse.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/style.css">
-
-  <!-- PayPal SDK -->
-  <script src="https://www.paypal.com/sdk/js?client-id=AW-bLBrtEPaB0FTD-Oa4rQ1gbQBNLkkqSsAtGh968nfbb-HA_iZh-Cptg_1UzbE9GYagkCPtHFEUosfm&currency=CAD"></script>
 </head>
 <body>
-  <header class="sticky-header">
-    <div class="container">
-      <div class="logo">SpotiDeals</div>
-      <nav>
-        <ul>
-          <li><a href="index.html">🏠 Accueil</a></li>
-          <li><a href="terms.html">📄 CGV</a></li>
-          <li><a href="privacy.html">🔒 Confidentialité</a></li>
-          <li><a href="contact.html">✉️ Contact</a></li>
-        </ul>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container header__inner">
+      <a href="index.html" class="logo">SpotiDeals</a>
+      <nav class="nav">
+        <a href="index.html#features">Fonctionnalités</a>
+        <a href="index.html#pricing">Tarifs</a>
+        <a href="index.html#how">Comment ça marche</a>
+        <a href="index.html#faq">FAQ</a>
       </nav>
+      <a href="index.html#commande" class="btn btn--sm">Commander</a>
     </div>
   </header>
 
+  <!-- MAIN CONTENT -->
   <main class="container">
-    <section class="card">
-      <h2>▶️ Paiement via PayPal</h2>
-      <p>💰 Montant : <strong>82,62 $ CAD</strong></p>
-      <div id="paypal-button-container" style="margin-bottom:20px;"></div>
-    </section>
+    <h1>Paiement</h1>
+    <p>Montant total : <strong>82,62 $ CAD</strong></p>
+    <div id="paypal-button-container" style="margin:20px 0;"></div>
+    <a href="index.html" class="btn">← Retour à l’accueil</a>
   </main>
 
-  <footer class="container">
-    © 2025 SpotiDeals
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div>© 2025 SpotiDeals</div>
+      <nav>
+        <a href="terms.html">CGV</a>
+        <a href="privacy.html">Confidentialité</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
   </footer>
 
+  <!-- PAYPAL SDK & BUTTON -->
+  <script src="https://www.paypal.com/sdk/js?client-id=AW-bLBrtEPaB0FTD-Oa4rQ1gbQBNLkkqSsAtGh968nfbb-HA_iZh-Cptg_1UzbE9GYagkCPtHFEUosfm&currency=CAD"></script>
   <script>
     paypal.Buttons({
       style: { shape:'pill', color:'blue', label:'pay' },
@@ -46,16 +54,15 @@
         }),
       onApprove: (data, actions) =>
         actions.order.capture().then(details => {
-          const email    = sessionStorage.getItem('spotifyEmail');
-          const user     = sessionStorage.getItem('spotifyUsername');
-          const orderID  = details.id;
-          // Envoi à Formspree
+          const email = sessionStorage.getItem('spotifyEmail');
+          const user  = sessionStorage.getItem('spotifyUsername');
+          const id    = details.id;
           fetch('https://formspree.io/f/xanorewp', {
             method:'POST',
             headers:{'Content-Type':'application/json'},
-            body: JSON.stringify({ email, user, orderID, method:'PayPal' })
+            body: JSON.stringify({ email, user, orderID:id, method:'PayPal' })
           });
-          alert('✅ Paiement reçu ! Numéro de commande : ' + orderID);
+          alert('✅ Paiement reçu ! Numéro de commande : ' + id);
           window.location.href = 'index.html';
         })
     }).render('#paypal-button-container');
