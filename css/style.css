@@ -115,8 +115,9 @@ body {
   margin-top:20px; margin-bottom:var(--section-gap);
 }
 .feature-slide-track {
-  display:flex; width:calc(6*220px);
-  animation: scroll 20s linear infinite; 
+  display: flex;
+  width: calc(16 * 220px); /* 16 cartes × 220px largeur (200px + marge) */
+  animation: scroll 30s linear infinite; /* on rallonge la durée si besoin */
 }
 @keyframes scroll {
   to { transform: translateX(-50%); }
