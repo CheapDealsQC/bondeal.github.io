@@ -70,7 +70,7 @@
     </div>
   </section>
 
-  <!-- PRICING (Un seul pack) -->
+  <!-- PRICING -->
   <section class="pricing" id="pricing">
     <div class="container">
       <h2>Notre offre unique</h2>
@@ -128,11 +128,16 @@
     </div>
   </section>
 
-  <!-- COMMANDE -->
-  <section class="commande" id="commande">
+  <!-- COMMANDE (collecte d’info avant paiement) -->
+  <section class="commande card" id="commande">
     <div class="container">
-      <h2>Prêt à économiser ?</h2>
-      <a href="paiement.html" class="btn">Passer au paiement</a>
+      <h2>🛒 Commander maintenant</h2>
+      <p>📋 Entrez vos identifiants Spotify :</p>
+      <label for="email">📧 E-mail</label>
+      <input type="email" id="email" placeholder="exemple@mail.com" required>
+      <label for="username">👤 Nom d’utilisateur</label>
+      <input type="text" id="username" placeholder="votre_username" required>
+      <button id="order-btn" class="btn" disabled>▶️ Passer au paiement</button>
     </div>
   </section>
 
@@ -148,5 +153,23 @@
     </div>
   </footer>
 
+  <!-- SCRIPT de validation et redirection -->
+  <script>
+    const emailEl = document.getElementById('email'),
+          userEl  = document.getElementById('username'),
+          btn     = document.getElementById('order-btn');
+
+    function check() {
+      btn.disabled = !(emailEl.value.trim() && userEl.value.trim());
+    }
+    emailEl.addEventListener('input', check);
+    userEl.addEventListener('input', check);
+
+    btn.addEventListener('click', () => {
+      sessionStorage.setItem('spotifyEmail', emailEl.value);
+      sessionStorage.setItem('spotifyUsername', userEl.value);
+      window.location.href = 'paiement.html';
+    });
+  </script>
 </body>
 </html>
