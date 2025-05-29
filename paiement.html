@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>SpotiDeals – Paiement</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="css/style.css">
+  <!-- SDK PayPal avec ton Client ID -->
+  <script src="https://www.paypal.com/sdk/js?client-id=AW-bLBrtEPaB0FTD-Oa4rQ1gbQBNLkkqSsAtGh968nfbb-HA_iZh-Cptg_1UzbE9GYagkCPtHFEUosfm&currency=CAD"></script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Paiement SpotiDeals</h1>
+    </header>
+
+    <section class="card">
+      <h2>Confirmez votre paiement</h2>
+      <p>Montant total : <strong>82,62 $ CAD</strong></p>
+
+      <!-- PayPal -->
+      <div id="paypal-button-container"></div>
+
+      <hr style="margin: 30px 0; border-color: #333;">
+
+      <!-- Stripe via Payment Link -->
+      <a href="https://buy.stripe.com/3cIaEXajAgvDe6QaYQ5ZC00" class="btn" style="background: #635bff; color: #fff;">
+        Payer 82,62 $ CAD avec carte
+      </a>
+    </section>
+
+    <footer>
+      © 2025 SpotiDeals
+    </footer>
+  </div>
+
+  <script>
+    // Initialisation du bouton PayPal
+    paypal.Buttons({
+      style: { shape: 'pill', color: 'blue', label: 'pay' },
+      createOrder: (data, actions) => {
+        return actions.order.create({
+          purchase_units: [{ amount: { value: '82.62' } }]
+        });
+      },
+      onApprove: (data, actions) => {
+        return actions.order.capture().then(() => {
+          alert('Paiement réussi ! Merci pour votre commande.');
+          window.location.href = 'index.html';
+        });
+      }
+    }).render('#paypal-button-container');
+  </script>
+</body>
+</html>
