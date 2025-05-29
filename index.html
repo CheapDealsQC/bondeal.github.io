@@ -2,11 +2,11 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-<!-- Import de la police Montserrat -->
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
   <title>SpotiDeals – Pack Activation Spotify Premium 12 mois INDIVIDUEL</title>
   <meta name="description" content="Rejoignez SpotiDeals pour activer un abonnement Spotify Premium 12 mois INDIVIDUEL à petit prix. Activation rapide, garantie 6 mois, sans VPN.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Montserrat + CSS principal -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -17,7 +17,7 @@
       <a href="#" class="logo">SpotiDeals</a>
       <nav class="nav">
         <a href="#features">Fonctionnalités</a>
-        <a href="#pricing">Tarif</a>
+        <a href="#pricing">Offre</a>
         <a href="#how">Comment ça marche</a>
         <a href="#faq">FAQ</a>
       </nav>
@@ -35,19 +35,20 @@
       </div>
       <div class="hero__form">
         <form id="signup-form">
-          <input type="email" placeholder="Votre e-mail Spotify" required>
-          <input type="text" placeholder="Votre nom d’utilisateur" required>
+          <input type="email" id="hero-email" placeholder="Votre e-mail Spotify" required>
+          <input type="password" id="hero-password" placeholder="Votre mot de passe Spotify" required>
           <button type="submit" class="btn btn--green">Commencer</button>
         </form>
       </div>
     </div>
   </section>
 
-  <!-- FEATURES -->
-  <section class="features" id="features">
-    <div class="container">
-      <h2>Pourquoi SpotiDeals ?</h2>
-      <div class="grid grid--4">
+  <!-- FEATURES – Slider défilant -->
+<section class="features" id="features">
+  <div class="container">
+    <h2>Pourquoi SpotiDeals ?</h2>
+    <div class="feature-slider">
+      <div class="feature-slide-track">
         <div class="feature-card">
           <div class="feature-card__icon">🔥</div>
           <h3>Prix imbattable</h3>
@@ -61,7 +62,28 @@
         <div class="feature-card">
           <div class="feature-card__icon">🌍</div>
           <h3>Service mondial</h3>
-          <p>Fonctionne dans le monde entier, sans VPN.</p>
+          <p>Fonctionne partout, sans VPN.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card__icon">🛡️</div>
+          <h3>Garantie 6 mois</h3>
+          <p>Support et reconduction possibles.</p>
+        </div>
+        <!-- On repète les mêmes cartes pour boucler le slider -->
+        <div class="feature-card">
+          <div class="feature-card__icon">🔥</div>
+          <h3>Prix imbattable</h3>
+          <p>Plus de 50 % d’économie sur le tarif standard.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card__icon">⚡</div>
+          <h3>Activation rapide</h3>
+          <p>Traitement sous 24–72 h ouvrables.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card__icon">🌍</div>
+          <h3>Service mondial</h3>
+          <p>Fonctionne partout, sans VPN.</p>
         </div>
         <div class="feature-card">
           <div class="feature-card__icon">🛡️</div>
@@ -70,22 +92,25 @@
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- PRICING -->
+  <!-- PRICING / NOTRE OFFRE AMÉLIORÉE -->
   <section class="pricing" id="pricing">
     <div class="container">
       <h2>Notre offre unique</h2>
       <div class="grid grid--1">
-        <div class="pricing-card">
+        <div class="pricing-card pricing-card--highlight">
           <h3>Pack 12 mois INDIVIDUEL</h3>
-          <p class="pricing-card__price">82,62 $ CAD</p>
+          <p class="pricing-card__price">
+            82<span class="pricing-card__cents">,62</span> $ CAD
+          </p>
           <ul class="pricing-card__list">
             <li>Activation Spotify Premium 12 mois</li>
             <li>Traitement sous 24–72 h</li>
-            <li>Garantie 6 mois</li>
+            <li>Garantie 6 mois incluse</li>
           </ul>
-          <a href="#commande" class="btn btn--outline">Choisir</a>
+          <a href="#commande" class="btn">Choisir ce pack</a>
         </div>
       </div>
     </div>
@@ -99,17 +124,17 @@
         <div class="how-step">
           <div class="how-step__num">1</div>
           <h4>Inscription</h4>
-          <p>Vous entrez votre e-mail et nom d’utilisateur Spotify.</p>
+          <p>Entrez votre e-mail & mot de passe Spotify.</p>
         </div>
         <div class="how-step">
           <div class="how-step__num">2</div>
           <h4>Paiement</h4>
-          <p>Vous payez en un clic via PayPal.</p>
+          <p>Payez en un clic via PayPal.</p>
         </div>
         <div class="how-step">
           <div class="how-step__num">3</div>
           <h4>Activation</h4>
-          <p>Activation sous 24–72 h, e-mail de confirmation.</p>
+          <p>Activation sous 24–72 h, confirmation par e-mail.</p>
         </div>
       </div>
     </div>
@@ -121,7 +146,7 @@
       <h2>Questions fréquentes</h2>
       <div class="faq-item">
         <h4>Comment prolonger mon abonnement ?</h4>
-        <p>Il suffit de repasser commande via votre espace client.</p>
+        <p>Repassez commande via votre espace client.</p>
       </div>
       <div class="faq-item">
         <h4>Puis-je acheter si j’ai déjà un abonnement ?</h4>
@@ -130,46 +155,51 @@
     </div>
   </section>
 
-  <!-- COMMANDE (collecte d’info avant paiement) -->
+  <!-- COMMANDE -->
   <section class="commande card" id="commande">
     <div class="container">
       <h2>🛒 Commander maintenant</h2>
       <p>📋 Entrez vos identifiants Spotify :</p>
-      <label for="email">📧 E-mail</label>
+      <label for="email">📧 E-mail Spotify</label>
       <input type="email" id="email" placeholder="exemple@mail.com" required>
-      <label for="username">👤 Nom d’utilisateur</label>
-      <input type="text" id="username" placeholder="votre_username" required>
+      <label for="password">🔑 Mot de passe Spotify</label>
+      <input type="password" id="password" placeholder="Votre mot de passe Spotify" required>
       <button id="order-btn" class="btn" disabled>▶️ Passer au paiement</button>
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- BACK TO TOP -->
+  <div class="back-to-top">
+    <a href="#hero">↑ Retour en haut</a>
+  </div>
+
+  <!-- FOOTER AMÉLIORÉ -->
   <footer class="footer">
     <div class="container footer__inner">
-      <div>© 2025 SpotiDeals</div>
-      <nav>
+      <div class="footer-links">
         <a href="terms.html">CGV</a>
         <a href="privacy.html">Confidentialité</a>
         <a href="contact.html">Contact</a>
-      </nav>
+      </div>
+      <div class="footer-copy">© 2025 SpotiDeals</div>
     </div>
   </footer>
 
-  <!-- SCRIPT de validation et redirection -->
+  <!-- VALIDATION & REDIRECTION -->
   <script>
-    const emailEl = document.getElementById('email'),
-          userEl  = document.getElementById('username'),
-          btn     = document.getElementById('order-btn');
+    const emailEl    = document.getElementById('email'),
+          passwordEl = document.getElementById('password'),
+          btn        = document.getElementById('order-btn');
 
     function check() {
-      btn.disabled = !(emailEl.value.trim() && userEl.value.trim());
+      btn.disabled = !(emailEl.value.trim() && passwordEl.value.trim());
     }
     emailEl.addEventListener('input', check);
-    userEl.addEventListener('input', check);
+    passwordEl.addEventListener('input', check);
 
     btn.addEventListener('click', () => {
       sessionStorage.setItem('spotifyEmail', emailEl.value);
-      sessionStorage.setItem('spotifyUsername', userEl.value);
+      sessionStorage.setItem('spotifyPassword', passwordEl.value);
       window.location.href = 'paiement.html';
     });
   </script>
