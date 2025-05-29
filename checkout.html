@@ -3,21 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <title>SpotiDeals – Caisse</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/style.css">
   <script type="module">
     import { getCart, clearCart } from './js/cart.js';
+    window.clearCart = clearCart;
     document.addEventListener('DOMContentLoaded', () => {
-      const items = getCart();
-      let total = 0;
-      items.forEach(it => total += it.price);
-      document.getElementById('summary').textContent = total.toFixed(2) + ' $ CAD';
-      // Après paiement, vider le panier
-      window.paypalCallback = () => clearCart();
+      const total = getCart().reduce((sum, it) => sum + it.price, 0).toFixed(2);
+      document.getElementById('summary').textContent = total + ' $ CAD';
+      document.getElementById('stripe-btn').textContent = 'Payer ' + total + ' $ CAD';
     });
   </script>
-  <!-- PayPal SDK pour Smart Buttons -->
-  <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=CAD" data-sdk-integration-source="button-factory"></script>
+  <!-- PayPal SDK Smart Buttons -->
+  <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=CAD"></script>
 </head>
 <body>
   <header class="container">
@@ -36,8 +34,9 @@
   <section class="container">
     <h1>Passer à la caisse</h1>
     <div class="card">
-      <h3>Résumé de votre commande :</h3>
+      <h3>Résumé de la commande :</h3>
       <p id="summary">0 $ CAD</p>
+
       <form id="customer-form">
         <label>
           Prénom & Nom :
@@ -57,39 +56,36 @@
       <div id="paypal-button-container"></div>
 
       <h3>Ou carte bancaire (Stripe)</h3>
-      <a href="https://buy.stripe.com/3cIaEXajAgvDe6QaYQ5ZC00" class="btn" style="background:#635bff;">Payer <span id="stripe-summary">0 $</span></a>
+      <a id="stripe-btn" href="https://buy.stripe.com/3cIaEXajAgvDe6QaYQ5ZC00" class="btn" style="background: #635bff;"></a>
     </div>
   </section>
 
-  <footer class="container">
-    <p>© 2025 SpotiDeals</p>
-  </footer>
-
   <script>
-    // Récupération du total pour Stripe
-    import { getCart } from './js/cart.js';
-    const total = getCart().reduce((a,b)=>a+b.price,0).toFixed(2);
-    document.getElementById('stripe-summary').textContent = total + ' CAD';
-
-    // Initialisation PayPal Buttons
+    // Initialisation PayPal
     paypal.Buttons({
-      style: { color:'blue', shape:'pill', label:'pay' },
+      style: { color: 'blue', shape: 'pill', label: 'pay' },
       createOrder: (data, actions) => {
+        const total = document.getElementById('summary').textContent.replace(' $ CAD','');
+        const username = document.getElementById('customer-username').value;
         return actions.order.create({
           purchase_units: [{
             amount: { value: total },
-            custom_id: document.getElementById('customer-username').value
+            custom_id: username
           }]
         });
       },
       onApprove: (data, actions) => {
         return actions.order.capture().then(details => {
-          alert('Paiement effectué ! Merci, ' + details.payer.name.given_name);
-          window.paypalCallback();
+          alert('Paiement reçu, merci ' + details.payer.name.given_name + ' !');
           clearCart();
+          window.location.href = 'index.html';
         });
       }
     }).render('#paypal-button-container');
   </script>
+
+  <footer class="container">
+    <p>© 2025 SpotiDeals</p>
+  </footer>
 </body>
 </html>
