@@ -1,12 +1,8 @@
-// cart.js
+// js/cart.js
 const CART_KEY = 'spotideals_cart';
 
 export function getCart() {
-  try {
-    return JSON.parse(localStorage.getItem(CART_KEY)) || [];
-  } catch {
-    return [];
-  }
+  return JSON.parse(localStorage.getItem(CART_KEY)) || [];
 }
 
 export function saveCart(items) {
