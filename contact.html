@@ -2,26 +2,30 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Contact – SpotiDeals</title>
-  <meta name="description" content="Contactez SpotiDeals pour toute question.">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SpotiDeals – Contactez-nous</title>
+  <meta name="description" content="Contactez l’équipe SpotiDeals pour toute question ou assistance concernant l’activation de votre abonnement Spotify Premium.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <header class="sticky-header">
-    <div class="container">
-      <div class="logo">SpotiDeals</div>
-      <nav>
-        <ul>
-          <li><a href="index.html">🏠 Accueil</a></li>
-          <li><a href="terms.html">📄 CGV</a></li>
-          <li><a href="privacy.html">🔒 Confidentialité</a></li>
-        </ul>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container header__inner">
+      <a href="index.html" class="logo">SpotiDeals</a>
+      <nav class="nav">
+        <a href="index.html#features">Fonctionnalités</a>
+        <a href="index.html#pricing">Tarifs</a>
+        <a href="index.html#how">Comment ça marche</a>
+        <a href="index.html#faq">FAQ</a>
       </nav>
+      <a href="index.html#commande" class="btn btn--sm">Commander</a>
     </div>
   </header>
+
+  <!-- MAIN CONTENT -->
   <main class="container card">
-    <h1>✉️ Contactez-nous</h1>
+    <h1>Contactez-nous</h1>
     <form action="https://formspree.io/f/xanorewp" method="POST">
       <label for="name">Votre nom</label>
       <input type="text" id="name" name="name" required>
@@ -32,6 +36,18 @@
       <button type="submit" class="btn">Envoyer</button>
     </form>
   </main>
-  <footer class="container">© 2025 SpotiDeals</footer>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div>© 2025 SpotiDeals</div>
+      <nav>
+        <a href="terms.html">CGV</a>
+        <a href="privacy.html">Confidentialité</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
 </body>
 </html>
