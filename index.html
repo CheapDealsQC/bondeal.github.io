@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>SpotiDeals – Pack Activation Spotify 12 mois</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -23,11 +23,10 @@
     <section id="service" class="card">
       <img src="img/spotify-card.png" alt="Spotify Premium 12 mois" class="product-img">
       <h2>Pack Activation Spotify Premium – 12 mois</h2>
-      <p>Une fois le paiement effectué, votre commande sera traitée sous <strong>24 à 72 heures ouvrables</strong>.  
-      Après traitement, l’activation de votre compte peut prendre jusqu’à <strong>24 heures</strong>.</p>
+      <p>Une fois le paiement effectué, votre commande sera traitée sous <strong>24 à 72 heures ouvrables</strong>. Après traitement, l’activation peut prendre jusqu’à <strong>24 heures</strong>.</p>
     </section>
 
-    <!-- Comparatif des prix -->
+    <!-- Comparatif -->
     <section id="comparatif" class="card">
       <h2>Comparatif des tarifs</h2>
       <table>
@@ -46,35 +45,29 @@
       </table>
     </section>
 
-    <!-- Formulaire de commande -->
+    <!-- Formulaire -->
     <section id="commande" class="card">
       <h2>Commander maintenant</h2>
       <p>Entrez vos identifiants Spotify :</p>
-      <label for="email">Courriel / Nom d’utilisateur :</label>
+      <label for="email">Courriel / Nom d’utilisateur</label>
       <input type="text" id="email" placeholder="exemple@mail.com">
-      <label for="password">Mot de passe :</label>
+      <label for="password">Mot de passe</label>
       <input type="password" id="password" placeholder="Votre mot de passe">
       <button id="order-btn" class="btn" disabled>Commander</button>
     </section>
 
-    <footer>
-      © 2025 SpotiDeals – Tous droits réservés
-    </footer>
+    <footer>© 2025 SpotiDeals – Tous droits réservés</footer>
   </div>
 
   <script>
-    // Activation du bouton Commander seulement si les 2 champs sont remplis
     const email = document.getElementById('email');
     const password = document.getElementById('password');
     const btn = document.getElementById('order-btn');
-
     function checkInputs() {
       btn.disabled = !(email.value.trim() && password.value.trim());
     }
     email.addEventListener('input', checkInputs);
     password.addEventListener('input', checkInputs);
-
-    // Redirection vers la page de paiement
     btn.addEventListener('click', () => {
       sessionStorage.setItem('spotifyEmail', email.value);
       sessionStorage.setItem('spotifyPassword', password.value);
