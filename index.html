@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>SpotiDeals – Pack Activation Spotify 12 mois</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -23,7 +23,8 @@
     <section id="service" class="card">
       <img src="img/spotify-card.png" alt="Spotify Premium 12 mois" class="product-img">
       <h2>Pack Activation Spotify Premium – 12 mois</h2>
-      <p>Je me charge de tout : j’achète pour vous la meilleure carte-cadeau au tarif réduit, puis j’active votre compte Spotify Premium en moins de 5 minutes.</p>
+      <p>Une fois le paiement effectué, votre commande sera traitée sous <strong>24 à 72 heures ouvrables</strong>.  
+      Après traitement, l’activation de votre compte peut prendre jusqu’à <strong>24 heures</strong>.</p>
     </section>
 
     <!-- Comparatif des prix -->
@@ -39,7 +40,7 @@
           <td>82,62 $ CAD</td>
         </tr>
         <tr>
-          <td>Prix standard Québec (12 mois TTC)</td>
+          <td>Prix standard Québec (12 mois)</td>
           <td>175,00 $ CAD</td>
         </tr>
       </table>
@@ -48,7 +49,7 @@
     <!-- Formulaire de commande -->
     <section id="commande" class="card">
       <h2>Commander maintenant</h2>
-      <p>Remplissez vos identifiants Spotify :</p>
+      <p>Entrez vos identifiants Spotify :</p>
       <label for="email">Courriel / Nom d’utilisateur :</label>
       <input type="text" id="email" placeholder="exemple@mail.com">
       <label for="password">Mot de passe :</label>
@@ -73,7 +74,7 @@
     email.addEventListener('input', checkInputs);
     password.addEventListener('input', checkInputs);
 
-    // Redirection vers la page de paiement en transmettant en sessionStorage
+    // Redirection vers la page de paiement
     btn.addEventListener('click', () => {
       sessionStorage.setItem('spotifyEmail', email.value);
       sessionStorage.setItem('spotifyPassword', password.value);
