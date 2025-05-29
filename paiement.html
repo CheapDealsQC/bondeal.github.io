@@ -5,7 +5,7 @@
   <title>SpotiDeals – Paiement</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="stylesheet" href="css/style.css">
-  <!-- SDK PayPal -->
+  <!-- PayPal SDK, votre Client ID -->
   <script src="https://www.paypal.com/sdk/js?client-id=AW-bLBrtEPaB0FTD-Oa4rQ1gbQBNLkkqSsAtGh968nfbb-HA_iZh-Cptg_1UzbE9GYagkCPtHFEUosfm&currency=CAD"></script>
 </head>
 <body>
@@ -13,33 +13,42 @@
     <header><h1>Paiement SpotiDeals</h1></header>
 
     <section class="card">
-      <h2>Montant total : 82,62 $ CAD</h2>
+      <h2>PayPal OU Stripe</h2>
+      <p>Montant total : <strong>82,62 $ CAD</strong></p>
 
-      <!-- PayPal -->
+      <!-- PayPal Button -->
       <div id="paypal-button-container" style="margin-bottom:30px;"></div>
 
-      <!-- Stripe -->
-      <a href="https://buy.stripe.com/3cIaEXajAgvDe6QaYQ5ZC00" class="btn" style="background:#635bff;">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Stripe_logo%2C_revised_2016.svg" alt="Stripe">  
-        Payer par carte (Stripe)
-      </a>
+      <!-- Stripe Button centré -->
+      <div style="text-align:center;">
+        <a href="https://buy.stripe.com/3cIaEXajAgvDe6QaYQ5ZC00" class="btn" 
+           style="background:#635bff; color:#fff; display:inline-flex; align-items:center;">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Stripe_logo%2C_revised_2016.svg" 
+               alt="Stripe logo" style="height:24px; margin-right:10px;">
+          Payer par carte (Stripe)
+        </a>
+      </div>
     </section>
 
     <footer>© 2025 SpotiDeals</footer>
   </div>
 
   <script>
+    // Génération et affichage de l’orderID PayPal
     paypal.Buttons({
       style: { shape:'pill', color:'blue', label:'pay' },
-      createOrder: (data, actions) => {
-        return actions.order.create({ purchase_units:[{ amount:{ value:'82.62' } }] });
-      },
-      onApprove: (data, actions) => {
-        return actions.order.capture().then(() => {
-          alert('Paiement réussi !');
+      createOrder: (data, actions) => actions.order.create({
+        purchase_units: [{
+          amount: { value:'82.62' },
+          invoice_id: 'SD-'+Date.now()   // génère un invoice_id unique
+        }]
+      }),
+      onApprove: (data, actions) =>
+        actions.order.capture().then(details => {
+          const orderID = details.id;
+          alert('✅ Paiement reçu !\nVotre numéro de commande : ' + orderID);
           window.location.href = 'index.html';
-        });
-      }
+        })
     }).render('#paypal-button-container');
   </script>
 </body>
