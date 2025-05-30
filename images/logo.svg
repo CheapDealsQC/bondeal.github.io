@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cercle de fond -->
+  <circle cx="100" cy="100" r="90" fill="#1DB954"/>
+  
+  <!-- Note de musique stylisée -->
+  <path d="M70 50 L70 130 C70 140 80 145 90 140 L130 120 C140 115 145 125 140 135 L100 155 C90 160 80 155 80 145 L80 50" 
+        fill="white"/>
+  
+  <!-- Texte "SD" -->
+  <text x="100" y="180" 
+        font-family="Montserrat, sans-serif" 
+        font-size="40" 
+        font-weight="bold" 
+        fill="white" 
+        text-anchor="middle">SD</text>
+</svg> 

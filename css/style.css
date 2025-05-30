@@ -2,10 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap');
 
 :root {
-  --bg: #0e0f12;
+  --bg: #0a0b0e;
   --fg: #e5e5e5;
-  --card-bg: #1f1f29;
-  --card-bg-alt: #202231;
+  --card-bg: #1a1b23;
+  --card-bg-alt: #1e1f2d;
   --accent1: #6366F1;
   --accent2: #4ADE80;
   --gradient: linear-gradient(135deg, var(--accent1) 0%, var(--accent2) 100%);
@@ -16,11 +16,11 @@
 
 /* Background alternés */
 section.hero   { background: var(--gradient); }
-section.features { background: rgba(99,102,241,0.10); }
-section.details  { background: rgba(74,222,128,0.10); }
-section.pricing  { background: rgba(99,102,241,0.15); }
-section.how      { background: rgba(74,222,128,0.15); }
-section.faq      { background: rgba(99,102,241,0.05); }
+section.features { background: rgba(99,102,241,0.05); }
+section.details  { background: rgba(74,222,128,0.05); }
+section.pricing  { background: rgba(99,102,241,0.08); }
+section.how      { background: rgba(74,222,128,0.08); }
+section.faq      { background: rgba(99,102,241,0.03); }
 section.commande { background: var(--card-bg-alt); }
 footer.footer   { background: var(--card-bg); }
 
@@ -83,8 +83,18 @@ body {
   padding:12px 0;
 }
 .logo {
-  font-weight:900; font-size:1.8rem;
-  color:var(--accent2); text-decoration:none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 900;
+  font-size: 1.8rem;
+  color: var(--accent2);
+  text-decoration: none;
+}
+.logo-img {
+  height: 40px;
+  width: auto;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
 }
 .nav a {
   margin-left:16px; color:var(--fg);
@@ -210,11 +220,9 @@ body {
   padding:var(--section-gap) 0;
 }
 .pricing-card--highlight {
-  position:relative; background:var(--gradient);
-  color:#fff; border-radius:16px;
-  padding:32px; margin:0 auto;
-  overflow:hidden; text-align:center;
-  transition:transform var(--transition),box-shadow var(--transition);
+  background: var(--card-bg);
+  border: 2px solid var(--accent1);
+  box-shadow: 0 8px 32px rgba(99,102,241,0.2);
 }
 .pricing-card--highlight:hover {
   transform:scale(1.03);
@@ -231,10 +239,10 @@ body {
   50% { transform:scale(1.05); }
 }
 .pricing-card--highlight h3 {
-  font-size:2rem; font-weight:900; margin-bottom:16px;
+  color: var(--accent1);
 }
 .pricing-card__price {
-  font-size:2.8rem; font-weight:900; margin:16px 0 24px;
+  color: var(--accent2);
 }
 .pricing-card__cents {
   font-size:1.2rem; vertical-align:super;
@@ -244,6 +252,8 @@ body {
 }
 .pricing-card__list li {
   margin-bottom:12px; padding-left:24px; position:relative;
+  color: var(--fg);
+  opacity: 0.9;
 }
 .pricing-card__list li::before {
   content:'✓'; position:absolute; left:0; color:#fff; font-weight:900; font-size:1rem;
@@ -468,11 +478,10 @@ body {
 }
 
 .step {
-  position: relative;
-  z-index: 2;
-  background: white;
-  padding: 0 1rem;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }
 
 .step-number {
@@ -489,6 +498,22 @@ body {
 .step.active .step-number {
   background: #3498db;
   color: white;
+}
+
+.step-image {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  margin-top: 10px;
+  opacity: 0.7;
+  transition: all var(--transition);
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+.step.active .step-image {
+  opacity: 1;
+  transform: scale(1.1);
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
 }
 
 /* Mobile Menu */
