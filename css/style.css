@@ -262,15 +262,7 @@ body::before {
   background: rgba(30, 31, 45, 0.98);
 }
 .pricing-card--highlight::before {
-  content:''; position:absolute;
-  width:340px; height:340px;
-  background:radial-gradient(circle at 70% 0%, var(--accent2), transparent 70%);
-  top:-120px; right:-80px; opacity:0.18;
-  animation:pulse 6s ease-in-out infinite;
-  z-index:0;
-}
-@keyframes pulse {
-  50% { transform:scale(1.05); }
+  content: none !important;
 }
 .pricing-card--highlight h3 {
   color: var(--accent1);
