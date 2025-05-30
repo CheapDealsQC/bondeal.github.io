@@ -709,3 +709,37 @@ section:hover, .feature-card:hover, .how-step:hover, .faq-item:hover {
   box-shadow: 0 4px 24px #1db95422;
   background: rgba(40, 44, 60, 0.98);
 }
+
+.important {
+  background: rgba(30, 31, 45, 0.98);
+  border-radius: 24px;
+  margin: 40px auto;
+  padding: 40px 20px;
+  box-shadow: 0 8px 32px #1db95422;
+}
+.important-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.important-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  margin-bottom: 24px;
+  font-size: 1.1rem;
+  color: #e5e5e5;
+  background: rgba(40, 44, 60, 0.98);
+  border-radius: 12px;
+  padding: 18px 20px;
+  box-shadow: 0 2px 8px #1db95411;
+}
+.important-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+  color: #1db954;
+  margin-top: 2px;
+}
+.important-list strong {
+  color: #1db954;
+}
