@@ -86,6 +86,8 @@
 
   <!-- Progress Bar -->
   <div id="activation-progress" class="activation-progress">
+    <div class="progress-bar-bg"></div>
+    <div class="progress-bar-fill" id="progress-bar-fill"></div>
     <div class="progress-steps">
       <div class="step active" data-step="1">
         <span class="step-number">1</span>
@@ -427,6 +429,18 @@
     chatClose.addEventListener('click', () => {
       chatWidget.classList.remove('active');
     });
+
+    // Progress bar animation
+    function updateProgressBar(step) {
+      const fill = document.getElementById('progress-bar-fill');
+      let percent = 0;
+      if (step === 1) percent = 33;
+      if (step === 2) percent = 66;
+      if (step === 3) percent = 100;
+      fill.style.width = percent + '%';
+    }
+    // Par défaut, étape 1
+    updateProgressBar(1);
   </script>
 </body>
 </html>

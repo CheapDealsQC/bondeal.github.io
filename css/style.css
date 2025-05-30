@@ -27,10 +27,23 @@ footer.footer   { background: var(--card-bg); }
 /* Reset & global */
 * { box-sizing:border-box; margin:0; padding:0; }
 body {
-  background: var(--bg);
+  background: linear-gradient(135deg, #181c24 0%, #232a34 100%);
   color: var(--fg);
   font-family: 'Montserrat', sans-serif;
+  min-height: 100vh;
 }
+
+/* Effet halo sur le fond */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 70% 20%, #1db95433 0%, transparent 60%),
+              radial-gradient(circle at 20% 80%, #6366f133 0%, transparent 70%);
+  z-index: 0;
+}
+
 .container {
   max-width:960px;
   margin:0 auto;
@@ -110,11 +123,12 @@ body {
   padding:14px 28px; border:none;
   border-radius:var(--btn-radius);
   text-decoration:none; font-weight:700;
-  transition:transform var(--transition),box-shadow var(--transition);
+  transition:transform 0.2s, box-shadow 0.2s, background 0.2s;
 }
 .btn:hover, .btn--green:hover {
-  transform:translateY(-3px);
-  box-shadow:0 8px 16px rgba(0,0,0,0.4);
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 8px 24px #1db95433;
+  background: linear-gradient(90deg, #1db954 0%, #6366f1 100%);
 }
 .btn--outline {
   background:transparent; color:var(--accent2);
@@ -220,13 +234,18 @@ body {
   padding:var(--section-gap) 0;
 }
 .pricing-card--highlight {
-  background: var(--card-bg);
-  border: 2px solid var(--accent1);
-  box-shadow: 0 8px 32px rgba(99,102,241,0.2);
+  background: rgba(30, 31, 45, 0.98);
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(99,102,241,0.15), 0 1.5px 8px #1db95422;
+  padding: 40px 32px;
+  margin: 0 auto;
+  overflow: hidden;
+  text-align: center;
+  transition: box-shadow 0.3s;
 }
 .pricing-card--highlight:hover {
-  transform:scale(1.03);
-  box-shadow:0 12px 24px rgba(0,0,0,0.5);
+  box-shadow: 0 16px 48px rgba(99,102,241,0.25), 0 2px 16px #1db95433;
 }
 .pricing-card--highlight::before {
   content:''; position:absolute;
@@ -453,67 +472,40 @@ body {
   100% { transform: rotate(360deg); }
 }
 
-/* Progress Bar */
+/* Progress Bar améliorée */
 .activation-progress {
   max-width: 800px;
   margin: 2rem auto;
   padding: 1rem;
+  position: relative;
 }
-
 .progress-steps {
   display: flex;
   justify-content: space-between;
   position: relative;
+  z-index: 1;
 }
-
-.progress-steps::before {
-  content: '';
+.progress-bar-bg {
   position: absolute;
   top: 50%;
   left: 0;
   right: 0;
-  height: 2px;
-  background: #ddd;
+  height: 8px;
+  background: #232a34;
+  border-radius: 4px;
+  z-index: 0;
+  transform: translateY(-50%);
+}
+.progress-bar-fill {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 8px;
+  background: linear-gradient(90deg, #1db954 0%, #6366f1 100%);
+  border-radius: 4px;
   z-index: 1;
-}
-
-.step {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-
-.step-number {
-  width: 30px;
-  height: 30px;
-  background: #ddd;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 0.5rem;
-}
-
-.step.active .step-number {
-  background: #3498db;
-  color: white;
-}
-
-.step-image {
-  width: 60px;
-  height: 60px;
-  object-fit: contain;
-  margin-top: 10px;
-  opacity: 0.7;
-  transition: all var(--transition);
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
-}
-
-.step.active .step-image {
-  opacity: 1;
-  transform: scale(1.1);
-  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+  transform: translateY(-50%);
+  transition: width 0.5s cubic-bezier(.4,2,.6,1);
 }
 
 /* Mobile Menu */
@@ -699,4 +691,13 @@ textarea:invalid {
 [data-tooltip]:hover:before {
   opacity: 1;
   visibility: visible;
+}
+
+/* Effet de survol sur les sections */
+section, .pricing-card--highlight, .feature-card, .how-step, .faq-item {
+  transition: box-shadow 0.3s, background 0.3s;
+}
+section:hover, .pricing-card--highlight:hover, .feature-card:hover, .how-step:hover, .faq-item:hover {
+  box-shadow: 0 4px 24px #1db95422;
+  background: rgba(40, 44, 60, 0.98);
 }
