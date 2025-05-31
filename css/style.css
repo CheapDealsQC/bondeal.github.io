@@ -71,7 +71,6 @@
 /* Background alternés */
 section.hero   { background: var(--gradient); }
 section.features { background: rgba(99,102,241,0.05); }
-section.details  { background: rgba(74,222,128,0.05); }
 section.pricing  { background: rgba(99,102,241,0.08); }
 section.how      { background: rgba(74,222,128,0.08); }
 section.faq      { background: rgba(99,102,241,0.03); }
@@ -258,42 +257,6 @@ body::before {
 }
 @keyframes fadeInUp {
   to { opacity:1; transform:translateY(0); }
-}
-
-/* DÉTAILS DU SERVICE */
-.details {
-  padding:var(--section-gap) 0;
-}
-.details-grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:24px;
-}
-.detail-item {
-  position:relative; background:var(--card-bg);
-  border-radius:16px; padding:24px;
-  display:flex; align-items:flex-start;
-  overflow:hidden; transition:transform var(--transition),box-shadow var(--transition);
-  border: 1px solid var(--border-color);
-}
-.detail-item:hover {
-  transform:translateY(-8px);
-  box-shadow:0 12px 24px rgba(0,0,0,0.5);
-}
-.detail-item::before {
-  content:''; position:absolute;
-  width:140px; height:140px;
-  background:radial-gradient(circle at 30% 30%, var(--accent1), transparent 70%);
-  top:-40px; left:-40px; opacity:0.2; border-radius:50%;
-}
-.detail-icon {
-  font-size:2.5rem; margin-right:16px; color:var(--accent2);
-}
-.detail-text h3 {
-  margin:0 0 8px; font-size:1.3rem; font-weight:700;
-}
-.detail-text p {
-  margin:0; color:#ccc; line-height:1.5;
 }
 
 /* NOTRE OFFRE UNIQUE */
@@ -1833,4 +1796,20 @@ input, textarea, select {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--accent2);
+}
+
+.comparison-card--standard {
+  opacity: 0.7;
+  filter: grayscale(0.5);
+}
+
+.comparison-card--standard .comparison-header,
+.comparison-card--standard .comparison-features {
+  color: #666;
+}
+
+.comparison-card--standard .price-amount,
+.comparison-card--standard .price-currency,
+.comparison-card--standard .comparison-period {
+  color: #666;
 }
