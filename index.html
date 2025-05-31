@@ -276,9 +276,89 @@
     <div class="container">
       <h2 class="section-title">Comment ça marche ?</h2>
       <div class="grid grid--3">
-        <div class="how-step"><div class="how-step__num">1</div><h4>Inscription</h4><p>Entrez e-mail & mot de passe.</p></div>
-        <div class="how-step"><div class="how-step__num">2</div><h4>Paiement</h4><p>Payez en un clic via PayPal.</p></div>
-        <div class="how-step"><div class="how-step__num">3</div><h4>Activation</h4><p>Activation sous 24–72 h, confirmation.</p></div>
+        <div class="how-step">
+          <div class="how-step__num">1</div>
+          <h4>Préparation</h4>
+          <p>Changez votre mot de passe Spotify avant de commencer. Cela garantit la sécurité de votre compte.</p>
+        </div>
+        <div class="how-step">
+          <div class="how-step__num">2</div>
+          <h4>Commande</h4>
+          <p>Entrez votre email et mot de passe Spotify. Nous utilisons ces informations uniquement pour l'activation.</p>
+        </div>
+        <div class="how-step">
+          <div class="how-step__num">3</div>
+          <h4>Paiement</h4>
+          <p>Payez 82,62$ CAD via PayPal. Le paiement est sécurisé et instantané.</p>
+        </div>
+        <div class="how-step">
+          <div class="how-step__num">4</div>
+          <h4>Activation</h4>
+          <p>Nous nous connectons à votre compte pour effectuer l'achat officiel de 12 mois.</p>
+        </div>
+        <div class="how-step">
+          <div class="how-step__num">5</div>
+          <h4>Confirmation</h4>
+          <p>Vous recevez une confirmation par email une fois l'activation terminée.</p>
+        </div>
+        <div class="how-step">
+          <div class="how-step__num">6</div>
+          <h4>Finalisation</h4>
+          <p>Nous supprimons toutes vos informations. Vous pouvez changer votre mot de passe.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider divider--slant"></div>
+
+  <!-- LÉGALITÉ ET RESPONSABILITÉ -->
+  <section class="legal" id="legal">
+    <div class="container">
+      <h2 class="section-title">Légalité et Responsabilité</h2>
+      <div class="legal-grid">
+        <div class="legal-item">
+          <div class="legal-icon">⚖️</div>
+          <div class="legal-text">
+            <h3>Service Légal</h3>
+            <p>Notre service consiste uniquement à effectuer un achat officiel de Spotify Premium dans un pays où les prix sont plus avantageux. Il s'agit d'un achat légitime via les canaux officiels de Spotify.</p>
+          </div>
+        </div>
+        <div class="legal-item">
+          <div class="legal-icon">🌍</div>
+          <div class="legal-text">
+            <h3>Différence de Prix</h3>
+            <p>Nous utilisons simplement la différence de prix entre les pays, comme le font de nombreux services de voyage et d'achat international. C'est une pratique commerciale courante et légale.</p>
+          </div>
+        </div>
+        <div class="legal-item">
+          <div class="legal-icon">📜</div>
+          <div class="legal-text">
+            <h3>Conformité Spotify</h3>
+            <p>L'achat est effectué selon les conditions d'utilisation de Spotify. Nous n'utilisons aucun moyen de contournement ou de modification du service.</p>
+          </div>
+        </div>
+        <div class="legal-item">
+          <div class="legal-icon">⚠️</div>
+          <div class="legal-text">
+            <h3>Clause de Non-Responsabilité</h3>
+            <p>Nous ne sommes pas responsables des décisions de Spotify concernant votre compte. Nous vendons uniquement notre service d'activation et n'avons aucun contrôle sur les politiques ou décisions de Spotify.</p>
+          </div>
+        </div>
+        <div class="legal-item">
+          <div class="legal-icon">🛡️</div>
+          <div class="legal-text">
+            <h3>Protection du Service</h3>
+            <p>En utilisant notre service, vous acceptez que nous ne pouvons être tenus responsables de toute action de Spotify, y compris mais sans s'y limiter : suspension de compte, bannissement, ou modification des conditions d'utilisation.</p>
+          </div>
+        </div>
+        <div class="legal-item">
+          <div class="legal-icon">📝</div>
+          <div class="legal-text">
+            <h3>Acceptation des Risques</h3>
+            <p>En commandant, vous reconnaissez être conscient des risques potentiels liés à l'utilisation de notre service et acceptez que nous ne pouvons être tenus responsables des décisions de Spotify.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -316,7 +396,7 @@
           Activation effective sur votre compte dans les 24 heures qui suivent le traitement.
         </li>
         <li>
-          <span class="important-icon">��</span>
+          <span class="important-icon">🌍</span>
           <strong>Compatibilité mondiale</strong><br>
           Votre abonnement fonctionne dans le monde entier, sans proxy ni VPN.
         </li>
@@ -353,11 +433,61 @@
   <section class="commande card" id="commande">
     <div class="container">
       <h2 class="section-title">🛒 Commander maintenant</h2>
-      <label for="cmd-email">📧 E-mail Spotify</label>
-      <input type="email" id="cmd-email" placeholder="exemple@mail.com" required pattern="[^@\s]+@[^@\s]+\.[^@\s]+">
-      <label for="cmd-password">🔑 Mot de passe Spotify</label>
-      <input type="password" id="cmd-password" placeholder="Votre mot de passe" required>
-      <button id="order-btn" class="btn" disabled>▶️ Passer au paiement</button>
+      
+      <!-- Informations de Sécurité -->
+      <div class="security-notice">
+        <h3>⚠️ Important - Sécurité du Compte</h3>
+        <p>Pour garantir la sécurité de votre compte, veuillez suivre ces étapes :</p>
+        <ol>
+          <li>Changez votre mot de passe Spotify <strong>avant</strong> de commencer la commande</li>
+          <li>Utilisez un mot de passe temporaire que vous pourrez changer après l'activation</li>
+          <li>Ne partagez jamais votre mot de passe habituel</li>
+        </ol>
+      </div>
+
+      <!-- Formulaire de Commande -->
+      <form id="order-form" class="order-form">
+        <div class="form-group">
+          <label for="cmd-email">📧 E-mail Spotify</label>
+          <input type="email" id="cmd-email" placeholder="exemple@mail.com" required pattern="[^@\s]+@[^@\s]+\.[^@\s]+">
+        </div>
+
+        <div class="form-group">
+          <label for="cmd-password">🔑 Mot de passe Spotify</label>
+          <input type="password" id="cmd-password" placeholder="Votre mot de passe temporaire" required>
+          <small class="form-hint">Utilisez un mot de passe temporaire que vous pourrez changer après l'activation</small>
+        </div>
+
+        <!-- Cases à cocher de consentement -->
+        <div class="consent-checks">
+          <div class="checkbox-group">
+            <input type="checkbox" id="consent-password" required>
+            <label for="consent-password">J'ai changé mon mot de passe Spotify avant de commencer</label>
+          </div>
+
+          <div class="checkbox-group">
+            <input type="checkbox" id="consent-process" required>
+            <label for="consent-process">Je comprends que vous vous connecterez temporairement à mon compte pour l'activation</label>
+          </div>
+
+          <div class="checkbox-group">
+            <input type="checkbox" id="consent-delete" required>
+            <label for="consent-delete">Je comprends que toutes mes informations seront supprimées après l'activation</label>
+          </div>
+
+          <div class="checkbox-group">
+            <input type="checkbox" id="consent-change-password" required>
+            <label for="consent-change-password">Je m'engage à changer mon mot de passe après l'activation</label>
+          </div>
+
+          <div class="checkbox-group">
+            <input type="checkbox" id="consent-responsibility" required>
+            <label for="consent-responsibility">Je comprends que vous n'êtes pas responsable des décisions de Spotify concernant mon compte</label>
+          </div>
+        </div>
+
+        <button id="order-btn" class="btn" disabled>▶️ Passer au paiement</button>
+      </form>
     </div>
   </section>
 
