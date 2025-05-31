@@ -24,11 +24,10 @@
   </header>
 
   <!-- MAIN CONTENT -->
-  <main class="container">
-    <h1>Paiement</h1>
-    <p>Montant total : <strong>82,62 $ CAD</strong></p>
-    <div id="paypal-button-container" style="margin:20px 0;"></div>
-    <a href="index.html" class="btn">← Retour à l’accueil</a>
+  <main class="container card">
+    <h1>Paiement sécurisé</h1>
+    <div id="paypal-button-container"></div>
+    <a href="index.html" class="btn">← Retour à l'accueil</a>
   </main>
 
   <!-- FOOTER -->
@@ -43,28 +42,120 @@
     </div>
   </footer>
 
-  <!-- PAYPAL SDK & BUTTON -->
+  <!-- PayPal SDK -->
   <script src="https://www.paypal.com/sdk/js?client-id=AW-bLBrtEPaB0FTD-Oa4rQ1gbQBNLkkqSsAtGh968nfbb-HA_iZh-Cptg_1UzbE9GYagkCPtHFEUosfm&currency=CAD"></script>
+  
+  <!-- Script de paiement -->
   <script>
+    // Générer un numéro de commande unique
+    function generateOrderID() {
+      const timestamp = Date.now().toString();
+      const random = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+      return `SPD-${timestamp}-${random}`;
+    }
+
+    // Envoyer l'email de confirmation
+    async function sendConfirmationEmail(email, orderID) {
+      try {
+        const response = await fetch('https://formspree.io/f/xanorewp', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: email,
+            orderID: orderID,
+            subject: 'Confirmation de votre commande SpotiDeals',
+            _template: 'table',
+            _subject: 'Nouvelle commande SpotiDeals - ' + orderID,
+            _format: 'html',
+            _autoresponse: `
+              <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+                <div style="text-align: center; margin-bottom: 30px;">
+                  <img src="https://spotideals.com/images/logo.png" alt="SpotiDeals Logo" style="max-width: 200px;">
+                </div>
+                
+                <h1 style="color: #1DB954; text-align: center; margin-bottom: 30px;">Confirmation de votre commande</h1>
+                
+                <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 30px;">
+                  <p style="margin: 0; font-size: 16px;">Bonjour,</p>
+                  <p style="margin: 10px 0; font-size: 16px;">Nous avons bien reçu votre commande pour l'activation de Spotify Premium.</p>
+                  
+                  <div style="margin: 20px 0; padding: 15px; background-color: white; border-radius: 5px;">
+                    <p style="margin: 0; font-weight: bold;">Numéro de commande : <span style="color: #1DB954;">${orderID}</span></p>
+                  </div>
+                  
+                  <p style="margin: 10px 0; font-size: 16px;">Votre commande sera traitée sous 3 à 5 jours ouvrables.</p>
+                </div>
+                
+                <div style="margin-bottom: 30px;">
+                  <h2 style="color: #333; font-size: 18px;">Prochaines étapes :</h2>
+                  <ol style="color: #666; line-height: 1.6;">
+                    <li>Nous vérifions vos informations</li>
+                    <li>Nous procédons à l'activation de votre compte</li>
+                    <li>Vous recevrez un email de confirmation une fois l'activation terminée</li>
+                  </ol>
+                </div>
+                
+                <div style="margin-bottom: 30px;">
+                  <h2 style="color: #333; font-size: 18px;">Suivi de commande :</h2>
+                  <p style="color: #666;">Vous pouvez suivre l'état de votre commande en utilisant votre numéro de commande sur notre page de suivi :</p>
+                  <a href="https://spotideals.com/tracking.html" style="display: inline-block; background-color: #1DB954; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; margin-top: 10px;">Suivre ma commande</a>
+                </div>
+                
+                <div style="text-align: center; color: #666; font-size: 14px; margin-top: 40px;">
+                  <p>Si vous avez des questions, n'hésitez pas à nous contacter :</p>
+                  <p>Email : contact@spotideals.com</p>
+                </div>
+                
+                <div style="text-align: center; color: #999; font-size: 12px; margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee;">
+                  <p>© 2025 SpotiDeals. Tous droits réservés.</p>
+                </div>
+              </div>
+            `
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error('Erreur lors de l\'envoi de l\'email');
+        }
+
+        return true;
+      } catch (error) {
+        console.error('Erreur:', error);
+        return false;
+      }
+    }
+
+    // Configuration PayPal
     paypal.Buttons({
-      style: { shape:'pill', color:'blue', label:'pay' },
-      createOrder: (data, actions) =>
-        actions.order.create({
-          purchase_units:[{ amount:{ value:'82.62' }, invoice_id:'SD-'+Date.now() }]
-        }),
-      onApprove: (data, actions) =>
-        actions.order.capture().then(details => {
-          const email = sessionStorage.getItem('spotifyEmail');
-          const user  = sessionStorage.getItem('spotifyUsername');
-          const id    = details.id;
-          fetch('https://formspree.io/f/xanorewp', {
-            method:'POST',
-            headers:{'Content-Type':'application/json'},
-            body: JSON.stringify({ email, user, orderID:id, method:'PayPal' })
-          });
-          alert('✅ Paiement reçu ! Numéro de commande : ' + id);
-          window.location.href = 'index.html';
-        })
+      createOrder: function(data, actions) {
+        return actions.order.create({
+          purchase_units: [{
+            amount: {
+              value: '82.62'
+            }
+          }]
+        });
+      },
+      onApprove: async function(data, actions) {
+        const order = await actions.order.capture();
+        const email = sessionStorage.getItem('spotifyEmail');
+        const id = generateOrderID();
+        
+        // Envoyer l'email de confirmation
+        const emailSent = await sendConfirmationEmail(email, id);
+        
+        if (emailSent) {
+          // Afficher le message de succès
+          alert('✅ Paiement reçu ! Un email de confirmation avec votre numéro de commande a été envoyé à ' + email);
+          
+          // Rediriger vers la page de suivi
+          window.location.href = 'index.html#order-tracking';
+        } else {
+          alert('⚠️ Paiement reçu mais erreur lors de l\'envoi de l\'email. Veuillez contacter le support.');
+        }
+      }
     }).render('#paypal-button-container');
   </script>
 </body>
