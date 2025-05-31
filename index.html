@@ -117,14 +117,8 @@
       <div class="step" data-step="5">
         <span class="step-number">5</span>
         <span class="step-text">Confirmation</span>
-        <span class="step-details">Email de confirmation</span>
+        <span class="step-details">Email envoyé et données supprimées</span>
         <span class="step-image">✉️</span>
-      </div>
-      <div class="step" data-step="6">
-        <span class="step-number">6</span>
-        <span class="step-text">Finalisation</span>
-        <span class="step-details">Suppression des données</span>
-        <span class="step-image">✅</span>
       </div>
     </div>
   </div>
@@ -437,6 +431,20 @@
             <span class="savings-badge">53% d'économie</span>
           </div>
         </div>
+        <div class="savings-features">
+          <div class="savings-feature">
+            <span class="feature-icon">💰</span>
+            <span>Économisez plus de 90$ par an</span>
+          </div>
+          <div class="savings-feature">
+            <span class="feature-icon">⚡</span>
+            <span>Activation rapide sous 24-72h</span>
+          </div>
+          <div class="savings-feature">
+            <span class="feature-icon">🛡️</span>
+            <span>Paiement sécurisé via PayPal</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -471,12 +479,7 @@
         <div class="how-step">
           <div class="how-step__num">5</div>
           <h4>Confirmation</h4>
-          <p>Vous recevez une confirmation par email une fois l'activation terminée.</p>
-        </div>
-        <div class="how-step">
-          <div class="how-step__num">6</div>
-          <h4>Finalisation</h4>
-          <p>Nous supprimons toutes vos informations. Vous pouvez changer votre mot de passe.</p>
+          <p>Vous recevez une confirmation par email et vos données sont supprimées.</p>
         </div>
       </div>
     </div>
@@ -990,7 +993,6 @@
       else if (step === 3) percent = 40;
       else if (step === 4) percent = 60;
       else if (step === 5) percent = 80;
-      else if (step === 6) percent = 100;
       
       fill.style.width = percent + '%';
       
