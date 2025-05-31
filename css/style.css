@@ -1306,121 +1306,13 @@ section:hover, .feature-card:hover, .how-step:hover, .faq-item:hover {
   font-size: 0.95rem;
 }
 
-/* Statistiques */
-.trust-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  margin-bottom: 48px;
-}
-
-.trust-stat {
-  background: var(--card-bg);
-  border-radius: 16px;
-  padding: 24px;
-  text-align: center;
-  transition: transform var(--transition);
-}
-
-.trust-stat:hover {
-  transform: translateY(-4px);
-}
-
-.trust-stat__number {
-  display: block;
-  font-size: 2.5rem;
-  font-weight: 900;
-  color: var(--accent1);
-  margin-bottom: 8px;
-  text-shadow: 0 2px 8px rgba(99,102,241,0.3);
-}
-
-.trust-stat__label {
-  color: #ccc;
-  font-size: 1rem;
-}
-
-/* Témoignages */
-.testimonials {
-  margin-top: 48px;
-}
-
-.testimonials-title {
-  text-align: center;
-  font-size: 1.8rem;
-  color: var(--accent2);
-  margin-bottom: 32px;
-}
-
-.testimonials-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-
-.testimonial-card {
-  background: var(--card-bg);
-  border-radius: 16px;
-  padding: 24px;
-  transition: transform var(--transition);
-}
-
-.testimonial-card:hover {
-  transform: translateY(-6px);
-}
-
-.testimonial-header {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 16px;
-}
-
-.testimonial-avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.testimonial-info h4 {
-  color: var(--accent2);
-  margin: 0 0 4px;
-  font-size: 1.1rem;
-}
-
-.testimonial-rating {
-  color: #ffd700;
-  font-size: 0.9rem;
-}
-
-.testimonial-text {
-  color: #e5e5e5;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  margin-bottom: 16px;
-}
-
-.testimonial-date {
-  color: #888;
-  font-size: 0.85rem;
-}
-
 @media (max-width: 768px) {
-  .trust-badges,
-  .trust-stats,
-  .testimonials-grid {
+  .trust-badges {
     grid-template-columns: 1fr;
   }
   
-  .trust-badge,
-  .trust-stat,
-  .testimonial-card {
+  .trust-badge {
     padding: 20px;
-  }
-  
-  .trust-stat__number {
-    font-size: 2rem;
   }
 }
 
