@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('result-email').textContent = 'exemple@email.com';
             document.getElementById('result-amount').textContent = '82,62$ CAD';
             document.getElementById('result-payment-method').textContent = 'PayPal';
-            document.getElementById('result-estimated-time').textContent = '24-72 heures';
+            document.getElementById('result-estimated-time').textContent = '3 à 5 jours ouvrables';
 
             // Simuler les dates de la timeline
             const now = new Date();
