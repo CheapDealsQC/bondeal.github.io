@@ -175,78 +175,81 @@
   <script src="js/config.js"></script>
   <script src="js/sheets-service.js"></script>
   <script>
-    const sheetsService = new SheetsService();
+    const API_URL = 'https://script.google.com/macros/s/AKfycbzF0-lgRXtXwiS5_K84xprt4FMea-yC85llnxHQGsbEuKEV-ir9ORjEMR55DZru_2rO/exec';
 
     async function checkOrder(event) {
       event.preventDefault();
-      
       const orderNumber = document.getElementById('orderNumber').value;
       const resultDiv = document.getElementById('trackingResult');
       const statusBadge = document.getElementById('statusBadge');
       const orderDetails = document.getElementById('orderDetails');
       const timeline = document.getElementById('orderTimeline');
-      
+
       try {
-        const orders = await sheetsService.getOrders();
-        const order = orders.find(row => row[0] === orderNumber);
-        
-        if (order) {
-          const [orderID, email, date, status, notes] = order;
-          
-          // Afficher les détails de la commande
-          resultDiv.classList.add('active');
-          
-          // Déterminer le statut
-          let statusText = 'En attente de traitement';
-          let statusClass = 'status-pending';
-          
-          if (status === 'processing') {
-            statusText = 'En cours de traitement';
-            statusClass = 'status-processing';
-          } else if (status === 'completed') {
-            statusText = 'Commande complétée';
-            statusClass = 'status-completed';
-          }
-          
-          statusBadge.textContent = statusText;
-          statusBadge.className = `status-badge ${statusClass}`;
-          
-          // Afficher les détails
-          orderDetails.innerHTML = `
-            <p><strong>Numéro de commande:</strong> ${orderID}</p>
-            <p><strong>Date de commande:</strong> ${new Date(date).toLocaleDateString()}</p>
-            <p><strong>Email:</strong> ${email}</p>
-            ${notes ? `<p><strong>Notes:</strong> ${notes}</p>` : ''}
-          `;
-          
-          // Créer la timeline
-          const orderDate = new Date(date);
-          timeline.innerHTML = `
-            <li class="timeline-item completed">
-              <div class="timeline-date">${orderDate.toLocaleDateString()}</div>
-              <div class="timeline-title">Commande reçue</div>
-              <div class="timeline-description">Votre commande a été enregistrée avec succès</div>
-            </li>
-            <li class="timeline-item ${status !== 'pending' ? 'completed' : 'pending'}">
-              <div class="timeline-date">${new Date(orderDate.getTime() + 3 * 24 * 60 * 60 * 1000).toLocaleDateString()}</div>
-              <div class="timeline-title">Vérification des informations</div>
-              <div class="timeline-description">Nous vérifions vos informations de compte</div>
-            </li>
-            <li class="timeline-item ${status === 'completed' ? 'completed' : 'future'}">
-              <div class="timeline-date">${new Date(orderDate.getTime() + 5 * 24 * 60 * 60 * 1000).toLocaleDateString()}</div>
-              <div class="timeline-title">Activation du compte</div>
-              <div class="timeline-description">Votre compte Spotify Premium est activé</div>
-            </li>
-          `;
-        } else {
-          alert('Commande non trouvée. Veuillez vérifier votre numéro de commande.');
+        const res = await fetch(`${API_URL}?orderID=${orderNumber}`);
+        const data = await res.json();
+
+        if (data.error) {
+          alert("Commande introuvable");
+          return false;
         }
+
+        // Affichage des infos comme avant, mais avec data.orderID, data.email, etc.
+        // ... (reprenez votre logique d'affichage ici)
+        // Exemple :
+        resultDiv.classList.add('active');
+        let statusText = 'En attente de traitement';
+        let statusClass = 'status-pending';
+        if (data.status === 'processing') {
+          statusText = 'En cours de traitement';
+          statusClass = 'status-processing';
+        } else if (data.status === 'completed') {
+          statusText = 'Commande complétée';
+          statusClass = 'status-completed';
+        }
+        statusBadge.textContent = statusText;
+        statusBadge.className = `status-badge ${statusClass}`;
+        orderDetails.innerHTML = `
+          <p><strong>Numéro de commande:</strong> ${data.orderID}</p>
+          <p><strong>Date de commande:</strong> ${new Date(data.date).toLocaleDateString()}</p>
+          <p><strong>Email:</strong> ${data.email}</p>
+          ${data.notes ? `<p><strong>Notes:</strong> ${data.notes}</p>` : ''}
+        `;
+        // Timeline (reprenez votre logique existante)
+        const orderDate = new Date(data.date);
+        timeline.innerHTML = `
+          <li class="timeline-item completed">
+            <div class="timeline-date">${orderDate.toLocaleDateString()}</div>
+            <div class="timeline-title">Commande reçue</div>
+            <div class="timeline-description">Votre commande a été enregistrée avec succès</div>
+          </li>
+          <li class="timeline-item ${data.status !== 'pending' ? 'completed' : 'pending'}">
+            <div class="timeline-date">${new Date(orderDate.getTime() + 3 * 24 * 60 * 60 * 1000).toLocaleDateString()}</div>
+            <div class="timeline-title">Vérification des informations</div>
+            <div class="timeline-description">Nous vérifions vos informations de compte</div>
+          </li>
+          <li class="timeline-item ${data.status === 'completed' ? 'completed' : 'future'}">
+            <div class="timeline-date">${new Date(orderDate.getTime() + 5 * 24 * 60 * 60 * 1000).toLocaleDateString()}</div>
+            <div class="timeline-title">Activation du compte</div>
+            <div class="timeline-description">Votre compte Spotify Premium est activé</div>
+          </li>
+        `;
       } catch (error) {
-        console.error('Erreur:', error);
-        alert('Une erreur est survenue lors de la vérification de votre commande.');
+        alert("Erreur lors de la vérification de la commande.");
       }
-      
       return false;
+    }
+
+    async function createCommande(commande) {
+      const res = await fetch(API_URL, {
+        method: "POST",
+        body: JSON.stringify(commande),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+      const data = await res.json();
+      return data;
     }
   </script>
 </body>
