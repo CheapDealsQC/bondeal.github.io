@@ -172,7 +172,11 @@
     </div>
   </footer>
 
+  <script src="js/config.js"></script>
+  <script src="js/sheets-service.js"></script>
   <script>
+    const sheetsService = new SheetsService();
+
     async function checkOrder(event) {
       event.preventDefault();
       
@@ -183,65 +187,59 @@
       const timeline = document.getElementById('orderTimeline');
       
       try {
-        // Récupérer les données de Google Sheets
-        const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/Commandes!A2:E?key=${API_KEY}`);
-        const data = await response.json();
+        const orders = await sheetsService.getOrders();
+        const order = orders.find(row => row[0] === orderNumber);
         
-        if (data.values) {
-          // Chercher la commande
-          const order = data.values.find(row => row[0] === orderNumber);
+        if (order) {
+          const [orderID, email, date, status, notes] = order;
           
-          if (order) {
-            const [orderID, email, date, status, notes] = order;
-            
-            // Afficher les détails de la commande
-            resultDiv.classList.add('active');
-            
-            // Déterminer le statut
-            let statusText = 'En attente de traitement';
-            let statusClass = 'status-pending';
-            
-            if (status === 'processing') {
-              statusText = 'En cours de traitement';
-              statusClass = 'status-processing';
-            } else if (status === 'completed') {
-              statusText = 'Commande complétée';
-              statusClass = 'status-completed';
-            }
-            
-            statusBadge.textContent = statusText;
-            statusBadge.className = `status-badge ${statusClass}`;
-            
-            // Afficher les détails
-            orderDetails.innerHTML = `
-              <p><strong>Numéro de commande:</strong> ${orderID}</p>
-              <p><strong>Date de commande:</strong> ${new Date(date).toLocaleDateString()}</p>
-              <p><strong>Email:</strong> ${email}</p>
-              ${notes ? `<p><strong>Notes:</strong> ${notes}</p>` : ''}
-            `;
-            
-            // Créer la timeline
-            const orderDate = new Date(date);
-            timeline.innerHTML = `
-              <li class="timeline-item completed">
-                <div class="timeline-date">${orderDate.toLocaleDateString()}</div>
-                <div class="timeline-title">Commande reçue</div>
-                <div class="timeline-description">Votre commande a été enregistrée avec succès</div>
-              </li>
-              <li class="timeline-item ${status !== 'pending' ? 'completed' : 'pending'}">
-                <div class="timeline-date">${new Date(orderDate.getTime() + 3 * 24 * 60 * 60 * 1000).toLocaleDateString()}</div>
-                <div class="timeline-title">Vérification des informations</div>
-                <div class="timeline-description">Nous vérifions vos informations de compte</div>
-              </li>
-              <li class="timeline-item ${status === 'completed' ? 'completed' : 'future'}">
-                <div class="timeline-date">${new Date(orderDate.getTime() + 5 * 24 * 60 * 60 * 1000).toLocaleDateString()}</div>
-                <div class="timeline-title">Activation du compte</div>
-                <div class="timeline-description">Votre compte Spotify Premium est activé</div>
-              </li>
-            `;
-          } else {
-            alert('Commande non trouvée. Veuillez vérifier votre numéro de commande.');
+          // Afficher les détails de la commande
+          resultDiv.classList.add('active');
+          
+          // Déterminer le statut
+          let statusText = 'En attente de traitement';
+          let statusClass = 'status-pending';
+          
+          if (status === 'processing') {
+            statusText = 'En cours de traitement';
+            statusClass = 'status-processing';
+          } else if (status === 'completed') {
+            statusText = 'Commande complétée';
+            statusClass = 'status-completed';
           }
+          
+          statusBadge.textContent = statusText;
+          statusBadge.className = `status-badge ${statusClass}`;
+          
+          // Afficher les détails
+          orderDetails.innerHTML = `
+            <p><strong>Numéro de commande:</strong> ${orderID}</p>
+            <p><strong>Date de commande:</strong> ${new Date(date).toLocaleDateString()}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            ${notes ? `<p><strong>Notes:</strong> ${notes}</p>` : ''}
+          `;
+          
+          // Créer la timeline
+          const orderDate = new Date(date);
+          timeline.innerHTML = `
+            <li class="timeline-item completed">
+              <div class="timeline-date">${orderDate.toLocaleDateString()}</div>
+              <div class="timeline-title">Commande reçue</div>
+              <div class="timeline-description">Votre commande a été enregistrée avec succès</div>
+            </li>
+            <li class="timeline-item ${status !== 'pending' ? 'completed' : 'pending'}">
+              <div class="timeline-date">${new Date(orderDate.getTime() + 3 * 24 * 60 * 60 * 1000).toLocaleDateString()}</div>
+              <div class="timeline-title">Vérification des informations</div>
+              <div class="timeline-description">Nous vérifions vos informations de compte</div>
+            </li>
+            <li class="timeline-item ${status === 'completed' ? 'completed' : 'future'}">
+              <div class="timeline-date">${new Date(orderDate.getTime() + 5 * 24 * 60 * 60 * 1000).toLocaleDateString()}</div>
+              <div class="timeline-title">Activation du compte</div>
+              <div class="timeline-description">Votre compte Spotify Premium est activé</div>
+            </li>
+          `;
+        } else {
+          alert('Commande non trouvée. Veuillez vérifier votre numéro de commande.');
         }
       } catch (error) {
         console.error('Erreur:', error);
