@@ -89,95 +89,41 @@
   <script src="js/config.js"></script>
   <script src="js/sheets-service.js"></script>
   <script>
-    const sheetsService = new SheetsService();
+    const API_URL = 'https://script.google.com/macros/s/AKfycbzF0-lgRXtXwiS5_K84xprt4FMea-yC85llnxHQGsbEuKEV-ir9ORjEMR55DZru_2rO/exec';
 
-    // Charger les commandes
     async function loadOrders() {
-      try {
-        const orders = await sheetsService.getOrders();
-        displayOrders(orders);
-      } catch (error) {
-        console.error('Erreur:', error);
-        alert('Erreur lors du chargement des commandes');
-      }
+      const res = await fetch(API_URL);
+      const orders = await res.json();
+      displayOrders(orders);
     }
 
-    // Afficher les commandes
     function displayOrders(orders) {
-      const orderList = document.getElementById('orderList');
-      orderList.innerHTML = '';
-
-      orders.forEach((order, index) => {
-        const [orderID, email, date, status, notes] = order;
-        
-        const orderElement = document.createElement('div');
-        orderElement.className = 'order-item';
-        orderElement.innerHTML = `
-          <div class="order-header">
-            <div>
-              <h3>Commande ${orderID}</h3>
-              <p>Email: ${email}</p>
-              <p>Date: ${new Date(date).toLocaleDateString()}</p>
-            </div>
-            <div>
-              <select class="status-select" data-order="${orderID}" data-index="${index}">
-                <option value="pending" ${status === 'pending' ? 'selected' : ''}>En attente</option>
-                <option value="processing" ${status === 'processing' ? 'selected' : ''}>En cours</option>
-                <option value="completed" ${status === 'completed' ? 'selected' : ''}>Complétée</option>
-              </select>
-              <button class="save-btn" onclick="updateOrderStatus('${orderID}', ${index})">Sauvegarder</button>
-            </div>
-          </div>
-          <div>
-            <textarea placeholder="Notes..." data-order="${orderID}" data-index="${index}">${notes || ''}</textarea>
-          </div>
+      const container = document.getElementById('orderList');
+      container.innerHTML = '';
+      orders.forEach(order => {
+        const div = document.createElement('div');
+        div.className = 'order-item';
+        div.innerHTML = `
+          <strong>${order.orderID}</strong> - ${order.email} - ${order.date} - <span>${order.status}</span>
+          <br>Notes : ${order.notes || ''}
         `;
-        
-        orderList.appendChild(orderElement);
+        container.appendChild(div);
       });
     }
 
-    // Mettre à jour le statut d'une commande
-    async function updateOrderStatus(orderID, index) {
-      const statusSelect = document.querySelector(`.status-select[data-order="${orderID}"]`);
-      const notesTextarea = document.querySelector(`textarea[data-order="${orderID}"]`);
-      
-      try {
-        const orders = await sheetsService.getOrders();
-        const order = orders[index];
-        
-        if (order) {
-          order[3] = statusSelect.value;
-          order[4] = notesTextarea.value;
-          
-          const success = await sheetsService.updateOrder(index, order);
-          
-          if (success) {
-            alert('Statut mis à jour avec succès');
-            loadOrders(); // Recharger les commandes
-          } else {
-            alert('Erreur lors de la mise à jour du statut');
-          }
-        }
-      } catch (error) {
-        console.error('Erreur:', error);
-        alert('Erreur lors de la mise à jour du statut');
-      }
-    }
-
-    // Recherche de commandes
-    document.getElementById('searchBox').addEventListener('input', function(e) {
-      const searchTerm = e.target.value.toLowerCase();
-      const orders = document.querySelectorAll('.order-item');
-      
-      orders.forEach(order => {
-        const orderText = order.textContent.toLowerCase();
-        order.style.display = orderText.includes(searchTerm) ? 'block' : 'none';
+    document.addEventListener('DOMContentLoaded', () => {
+      loadOrders();
+      document.getElementById('searchBox').addEventListener('input', async function(e) {
+        const search = e.target.value.toLowerCase();
+        const res = await fetch(API_URL);
+        const orders = await res.json();
+        const filtered = orders.filter(order =>
+          order.orderID.toLowerCase().includes(search) ||
+          order.email.toLowerCase().includes(search)
+        );
+        displayOrders(filtered);
       });
     });
-
-    // Charger les commandes au chargement de la page
-    loadOrders();
   </script>
 </body>
 </html> 
