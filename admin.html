@@ -6,58 +6,151 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/style.css">
   <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+    .container {
+      max-width: 900px; /* Augmenté pour plus d'espace */
+      margin: 0 auto;
+      padding: 1rem;
+    }
+    .header {
+      background: #333;
+      color: white;
+      padding: 1rem 0;
+    }
+    .header__inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      color: white;
+      text-decoration: none;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    .nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 1rem;
+    }
     .admin-panel {
       max-width: 800px;
       margin: 2rem auto;
       padding: 2rem;
       background: white;
       border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
-
+    .password-section {
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background-color: #f9f9f9;
+      border-radius: 4px;
+      border: 1px solid #eee;
+    }
+    .password-section input[type="password"], .password-section button {
+      padding: 10px;
+      margin-right: 10px;
+      border-radius: 4px;
+      border: 1px solid #ddd;
+    }
+    .password-section button {
+      background: #5cb85c;
+      color: white;
+      cursor: pointer;
+    }
+    .password-section button:hover {
+      background: #4cae4c;
+    }
     .order-list {
       margin-top: 2rem;
     }
-
     .order-item {
-      padding: 1rem;
+      padding: 1.5rem; /* Augmenté */
       border: 1px solid #ddd;
       border-radius: 4px;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem; /* Augmenté */
+      background-color: #fff;
     }
-
     .order-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 1rem;
+      flex-wrap: wrap; /* Pour les petits écrans */
     }
-
-    .status-select {
-      padding: 8px;
+    .order-details p {
+      margin: 0.5rem 0;
+      line-height: 1.6;
+    }
+    .order-actions label {
+      display: block;
+      margin-top: 0.5rem;
+      font-weight: bold;
+    }
+    .status-select, .notes-input {
+      width: calc(100% - 22px); /* Ajusté pour padding/border */
+      padding: 10px;
       border-radius: 4px;
-      border: 1px solid #ddd;
+      border: 1px solid #ccc;
+      margin-top: 0.25rem;
+      margin-bottom: 0.75rem;
     }
-
+    .notes-input {
+      min-height: 60px; /* Hauteur pour les notes */
+      resize: vertical;
+    }
     .save-btn {
-      background: #1DB954;
+      background: #1DB954; /* Vert Spotify */
       color: white;
       border: none;
-      padding: 8px 16px;
-      border-radius: 4px;
+      padding: 10px 20px;
+      border-radius: 20px; /* Plus arrondi */
       cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.2s ease;
+      display: block; /* Pour centrer ou aligner facilement */
+      margin-top: 1rem;
     }
-
     .save-btn:hover {
       background: #1ed760;
     }
-
     .search-box {
-      width: 100%;
+      width: calc(100% - 24px); /* Ajusté */
       padding: 12px;
       margin-bottom: 1rem;
       border: 1px solid #ddd;
       border-radius: 4px;
+      font-size: 1rem;
+    }
+     #loadingIndicator, #errorMessage {
+        text-align: center;
+        padding: 1rem;
+        margin-top: 1rem;
+        border-radius: 4px;
+    }
+    #loadingIndicator {
+        color: #007bff;
+    }
+    #errorMessage {
+        color: #dc3545;
+        background-color: #f8d7da;
+        border: 1px solid #f5c6cb;
+    }
+    /* Styles pour le message de succès */
+    .success-message {
+        padding: 10px;
+        background-color: #d4edda; /* Vert clair */
+        color: #155724; /* Texte vert foncé */
+        border: 1px solid #c3e6cb;
+        border-radius: 4px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        text-align: center;
     }
   </style>
 </head>
@@ -77,50 +170,231 @@
   <main class="container">
     <div class="admin-panel">
       <h1>Administration des commandes</h1>
+
+      <div class="password-section">
+        <label for="adminPassword">Mot de passe Administrateur:</label>
+        <input type="password" id="adminPassword" placeholder="Votre mot de passe">
+        <button onclick="initAdminView()">Accéder</button>
+      </div>
       
-      <input type="text" id="searchBox" class="search-box" placeholder="Rechercher une commande...">
-      
-      <div id="orderList" class="order-list">
-        <!-- Les commandes seront ajoutées ici -->
+      <div id="adminContent" style="display: none;">
+        <input type="text" id="searchBox" class="search-box" placeholder="Rechercher une commande par ID, email...">
+        <div id="loadingIndicator" style="display: none;">Chargement des commandes...</div>
+        <div id="errorMessage" style="display: none;"></div>
+        <div id="orderList" class="order-list">
+          <!-- Les commandes seront ajoutées ici -->
+        </div>
       </div>
     </div>
   </main>
 
   <script>
-    const API_URL = 'https://script.google.com/macros/s/AKfycbzF0-lgRXtXwiS5_K84xprt4FMea-yC85llnxHQGsbEuKEV-ir9ORjEMR55DZru_2rO/exec';
+    // --- IMPORTANT: METTEZ À JOUR AVEC VOTRE NOUVELLE URL DE SCRIPT ---
+    const API_URL = 'https://script.google.com/macros/s/AKfycbxEmJdgcerK1ENvsy8IvSnAZDJ6p4fr9hfO87haKbKrVXZaRf2Z3wnRzyQSDl527VtW/exec';
+    // --- IMPORTANT: METTEZ À JOUR AVEC VOTRE NOUVELLE URL DE SCRIPT ---
+    let adminPassword = "";
+    let allOrders = []; // Pour stocker toutes les commandes et filtrer localement
+
+    function initAdminView() {
+      adminPassword = document.getElementById('adminPassword').value;
+      if (!adminPassword) {
+        alert("Veuillez entrer le mot de passe administrateur.");
+        return;
+      }
+      document.querySelector('.password-section').style.display = 'none';
+      document.getElementById('adminContent').style.display = 'block';
+      loadOrders();
+    }
 
     async function loadOrders() {
-      const res = await fetch(API_URL);
-      const orders = await res.json();
-      displayOrders(orders);
+      const loadingIndicator = document.getElementById('loadingIndicator');
+      const errorMessage = document.getElementById('errorMessage');
+      const orderList = document.getElementById('orderList');
+      
+      loadingIndicator.style.display = 'block';
+      errorMessage.style.display = 'none';
+      orderList.innerHTML = '';
+
+
+      try {
+        // Pour charger les commandes, nous utilisons doGet, pas besoin de mot de passe ici
+        // car le script Google ne le demande pas pour doGet (lecture de toutes les commandes).
+        // Le mot de passe sera utilisé pour les actions POST (mise à jour).
+        const res = await fetch(API_URL);
+        if (!res.ok) {
+            const errorData = await res.json().catch(() => ({ error: `Erreur HTTP: ${res.status}` }));
+            throw new Error(errorData.error || `Erreur HTTP: ${res.status}`);
+        }
+        allOrders = await res.json();
+        if (allOrders.error) {
+            throw new Error(allOrders.error);
+        }
+        displayOrders(allOrders);
+      } catch (error) {
+        console.error("Erreur lors du chargement des commandes:", error);
+        errorMessage.textContent = "Erreur lors du chargement des commandes: " + error.message;
+        errorMessage.style.display = 'block';
+      } finally {
+        loadingIndicator.style.display = 'none';
+      }
     }
 
     function displayOrders(orders) {
       const container = document.getElementById('orderList');
-      container.innerHTML = '';
+      container.innerHTML = ''; // Vider la liste
+      if (orders.length === 0) {
+        container.innerHTML = '<p>Aucune commande à afficher.</p>';
+        return;
+      }
+
       orders.forEach(order => {
         const div = document.createElement('div');
         div.className = 'order-item';
+        div.dataset.orderId = order.orderID; // Stocker l'ID pour référence
+
+        // Convertir la date si elle est valide
+        let formattedDate = 'Date inconnue';
+        if (order.date) {
+            const dateObj = new Date(order.date);
+            if (!isNaN(dateObj)) {
+                formattedDate = dateObj.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' });
+            } else {
+                // Essayer de parser si c'est une chaîne de type "YYYY-MM-DD" ou similaire
+                const parts = String(order.date).split(/[-/]/);
+                if (parts.length === 3) {
+                    // Attention: new Date(year, monthIndex, day)
+                    const potentialDate = new Date(parts[0], parts[1] - 1, parts[2]);
+                    if(!isNaN(potentialDate)){
+                        formattedDate = potentialDate.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' });
+                    } else if (String(order.date).includes("T")) { // Si c'est un format ISO avec T
+                         const isoDate = new Date(String(order.date));
+                         if(!isNaN(isoDate)) {
+                            formattedDate = isoDate.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' });
+                         } else {
+                            formattedDate = String(order.date); // Afficher tel quel si parsing échoue
+                         }
+                    } else {
+                       formattedDate = String(order.date); // Afficher tel quel
+                    }
+                } else {
+                    formattedDate = String(order.date); // Afficher tel quel
+                }
+            }
+        }
+
+
         div.innerHTML = `
-          <strong>${order.orderID}</strong> - ${order.email} - ${order.date} - <span>${order.status}</span>
-          <br>Notes : ${order.notes || ''}
+          <div class="order-header">
+            <h3>Commande: ${order.orderID}</h3>
+          </div>
+          <div class="order-details">
+            <p><strong>Email:</strong> ${order.email || 'Non fourni'}</p>
+            <p><strong>Date:</strong> ${formattedDate}</p>
+            <div class="order-actions">
+              <label for="status-${order.orderID}">Statut:</label>
+              <select id="status-${order.orderID}" class="status-select">
+                <option value="pending" ${order.status === 'pending' ? 'selected' : ''}>En attente</option>
+                <option value="processing" ${order.status === 'processing' ? 'selected' : ''}>En traitement</option>
+                <option value="completed" ${order.status === 'completed' ? 'selected' : ''}>Complétée</option>
+                <option value="cancelled" ${order.status === 'cancelled' ? 'selected' : ''}>Annulée</option>
+                 <option value="refunded" ${order.status === 'refunded' ? 'selected' : ''}>Remboursée</option>
+              </select>
+              <label for="notes-${order.orderID}">Notes (visibles par le client si la page suivi les affiche):</label>
+              <textarea id="notes-${order.orderID}" class="notes-input" rows="3">${order.notes || ''}</textarea>
+              <button class="save-btn" onclick="updateOrder('${order.orderID}')">Sauvegarder</button>
+              <div id="message-${order.orderID}" style="margin-top:10px;"></div>
+            </div>
+          </div>
         `;
         container.appendChild(div);
       });
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-      loadOrders();
-      document.getElementById('searchBox').addEventListener('input', async function(e) {
-        const search = e.target.value.toLowerCase();
-        const res = await fetch(API_URL);
-        const orders = await res.json();
-        const filtered = orders.filter(order =>
-          order.orderID.toLowerCase().includes(search) ||
-          order.email.toLowerCase().includes(search)
-        );
+    async function updateOrder(orderID) {
+      const status = document.getElementById(`status-${orderID}`).value;
+      const notes = document.getElementById(`notes-${orderID}`).value;
+      const messageDiv = document.getElementById(`message-${orderID}`);
+      messageDiv.textContent = ''; // Clear previous messages
+      messageDiv.className = ''; // Clear previous styling
+
+      if (!adminPassword) {
+        alert("Le mot de passe administrateur est requis pour cette action. Veuillez le saisir en haut de la page.");
+        // Remettre le focus sur le champ de mot de passe ou afficher la section
+        document.querySelector('.password-section').style.display = 'block';
+        document.getElementById('adminPassword').focus();
+        return;
+      }
+      
+      const loadingIndicator = document.getElementById('loadingIndicator');
+      loadingIndicator.style.display = 'block';
+
+
+      try {
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json', // Important pour que Apps Script parse e.postData.contents
+          },
+          body: JSON.stringify({
+            password: adminPassword,
+            action: 'updateOrder',
+            orderID: orderID,
+            status: status,
+            notes: notes
+          })
+        });
+
+        const result = await res.json();
+        loadingIndicator.style.display = 'none';
+
+        if (result.success) {
+          messageDiv.textContent = result.message || "Commande mise à jour avec succès!";
+          messageDiv.className = 'success-message'; // Appliquer le style de succès
+          // Optionnel: Mettre à jour l'objet `allOrders` localement pour refléter le changement immédiatement
+          const orderIndex = allOrders.findIndex(o => o.orderID === orderID);
+          if (orderIndex > -1) {
+            allOrders[orderIndex].status = status;
+            allOrders[orderIndex].notes = notes;
+          }
+        } else {
+          messageDiv.textContent = "Erreur: " + (result.error || "Impossible de mettre à jour la commande.");
+          messageDiv.className = 'error-message'; // Appliquer un style d'erreur (à définir dans CSS)
+        }
+      } catch (error) {
+        loadingIndicator.style.display = 'none';
+        messageDiv.textContent = "Erreur de communication: " + error.message;
+        messageDiv.className = 'error-message';
+        console.error("Erreur lors de la mise à jour:", error);
+      }
+
+      // Cacher le message après quelques secondes
+      setTimeout(() => {
+        messageDiv.textContent = '';
+        messageDiv.className = '';
+      }, 5000);
+    }
+    
+    function filterOrders() {
+        const search = document.getElementById('searchBox').value.toLowerCase();
+        if (!allOrders || allOrders.length === 0) return;
+
+        const filtered = allOrders.filter(order => {
+          const orderID = order.orderID ? String(order.orderID).toLowerCase() : '';
+          const email = order.email ? String(order.email).toLowerCase() : '';
+          const status = order.status ? String(order.status).toLowerCase() : '';
+          const notes = order.notes ? String(order.notes).toLowerCase() : '';
+          return orderID.includes(search) || email.includes(search) || status.includes(search) || notes.includes(search);
+        });
         displayOrders(filtered);
-      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Ne pas charger les commandes automatiquement, attendre la saisie du mot de passe
+      // loadOrders(); // Déplacé dans initAdminView
+      const searchInput = document.getElementById('searchBox');
+      if (searchInput) {
+          searchInput.addEventListener('input', filterOrders);
+      }
     });
   </script>
 </body>
