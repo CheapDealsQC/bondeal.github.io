@@ -18,55 +18,7 @@
   --hover-bg: rgba(255, 255, 255, 0.05);
 }
 
-/* Light Theme */
-.light-theme {
-  --bg: #f5f5f5;
-  --fg: #333333;
-  --card-bg: #ffffff;
-  --card-bg-alt: #f8f9fa;
-  --shadow-color: rgba(0, 0, 0, 0.1);
-  --border-color: rgba(0, 0, 0, 0.1);
-  --hover-bg: rgba(0, 0, 0, 0.05);
-}
 
-/* Theme Toggle Button */
-.theme-toggle {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: var(--card-bg);
-  border: 2px solid var(--border-color);
-  color: var(--fg);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  transition: all var(--transition);
-  box-shadow: 0 4px 12px var(--shadow-color);
-}
-
-.theme-toggle:hover {
-  transform: scale(1.1);
-  background: var(--hover-bg);
-}
-
-.theme-toggle svg {
-  width: 24px;
-  height: 24px;
-  transition: transform var(--transition);
-}
-
-.light-theme .sun-icon {
-  display: none;
-}
-
-.dark-theme .moon-icon {
-  display: none;
-}
 
 /* Background alternés */
 section.hero   { background: var(--gradient); }
@@ -238,6 +190,11 @@ body::before {
   -webkit-overflow-scrolling: touch;
   scroll-snap-type: x mandatory;
   cursor: grab;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.feature-slider::-webkit-scrollbar {
+  display: none;
 }
 .feature-slider:active {
   cursor: grabbing;
@@ -1710,23 +1667,6 @@ input, textarea, select {
   box-shadow: 0 8px 24px var(--shadow-color);
 }
 
-/* Update chat widget for light theme */
-.light-theme .chat-container {
-  background: var(--card-bg);
-  border: 1px solid var(--border-color);
-}
-
-.light-theme .message.system {
-  background: var(--card-bg-alt);
-}
-
-/* Update form elements for light theme */
-.light-theme input:focus,
-.light-theme textarea:focus,
-.light-theme select:focus {
-  border-color: var(--accent1);
-  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
-}
 
 /* Update scrollbar for both themes */
 ::-webkit-scrollbar {
