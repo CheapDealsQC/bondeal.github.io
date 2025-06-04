@@ -213,7 +213,7 @@
       
       loadingIndicator.style.display = 'block';
       errorMessage.style.display = 'none';
-      orderList.innerHTML = '';
+      orderList.textContent = '';
 
 
       try {
@@ -241,9 +241,11 @@
 
     function displayOrders(orders) {
       const container = document.getElementById('orderList');
-      container.innerHTML = ''; // Vider la liste
+      container.textContent = '';
       if (orders.length === 0) {
-        container.innerHTML = '<p>Aucune commande à afficher.</p>';
+        const p = document.createElement('p');
+        p.textContent = 'Aucune commande à afficher.';
+        container.appendChild(p);
         return;
       }
 
@@ -283,29 +285,84 @@
         }
 
 
-        div.innerHTML = `
-          <div class="order-header">
-            <h3>Commande: ${order.orderID}</h3>
-          </div>
-          <div class="order-details">
-            <p><strong>Email:</strong> ${order.email || 'Non fourni'}</p>
-            <p><strong>Date:</strong> ${formattedDate}</p>
-            <div class="order-actions">
-              <label for="status-${order.orderID}">Statut:</label>
-              <select id="status-${order.orderID}" class="status-select">
-                <option value="pending" ${order.status === 'pending' ? 'selected' : ''}>En attente</option>
-                <option value="processing" ${order.status === 'processing' ? 'selected' : ''}>En traitement</option>
-                <option value="completed" ${order.status === 'completed' ? 'selected' : ''}>Complétée</option>
-                <option value="cancelled" ${order.status === 'cancelled' ? 'selected' : ''}>Annulée</option>
-                 <option value="refunded" ${order.status === 'refunded' ? 'selected' : ''}>Remboursée</option>
-              </select>
-              <label for="notes-${order.orderID}">Notes (visibles par le client si la page suivi les affiche):</label>
-              <textarea id="notes-${order.orderID}" class="notes-input" rows="3">${order.notes || ''}</textarea>
-              <button class="save-btn" onclick="updateOrder('${order.orderID}')">Sauvegarder</button>
-              <div id="message-${order.orderID}" style="margin-top:10px;"></div>
-            </div>
-          </div>
-        `;
+        const header = document.createElement('div');
+        header.className = 'order-header';
+        const h3 = document.createElement('h3');
+        h3.textContent = `Commande: ${order.orderID}`;
+        header.appendChild(h3);
+
+        const details = document.createElement('div');
+        details.className = 'order-details';
+
+        const emailP = document.createElement('p');
+        const emailStrong = document.createElement('strong');
+        emailStrong.textContent = 'Email:';
+        emailP.appendChild(emailStrong);
+        emailP.appendChild(document.createTextNode(' ' + (order.email || 'Non fourni')));
+        details.appendChild(emailP);
+
+        const dateP = document.createElement('p');
+        const dateStrong = document.createElement('strong');
+        dateStrong.textContent = 'Date:';
+        dateP.appendChild(dateStrong);
+        dateP.appendChild(document.createTextNode(' ' + formattedDate));
+        details.appendChild(dateP);
+
+        const actions = document.createElement('div');
+        actions.className = 'order-actions';
+
+        const labelStatus = document.createElement('label');
+        labelStatus.setAttribute('for', `status-${order.orderID}`);
+        labelStatus.textContent = 'Statut:';
+        actions.appendChild(labelStatus);
+
+        const select = document.createElement('select');
+        select.id = `status-${order.orderID}`;
+        select.className = 'status-select';
+        const options = [
+          ['pending', 'En attente'],
+          ['processing', 'En traitement'],
+          ['completed', 'Complétée'],
+          ['cancelled', 'Annulée'],
+          ['refunded', 'Remboursée']
+        ];
+        options.forEach(([value, label]) => {
+          const opt = document.createElement('option');
+          opt.value = value;
+          opt.textContent = label;
+          if (order.status === value) opt.selected = true;
+          select.appendChild(opt);
+        });
+        actions.appendChild(select);
+
+        const labelNotes = document.createElement('label');
+        labelNotes.setAttribute('for', `notes-${order.orderID}`);
+        labelNotes.textContent = 'Notes (visibles par le client si la page suivi les affiche):';
+        actions.appendChild(labelNotes);
+
+        const textarea = document.createElement('textarea');
+        textarea.id = `notes-${order.orderID}`;
+        textarea.className = 'notes-input';
+        textarea.rows = 3;
+        textarea.textContent = order.notes || '';
+        actions.appendChild(textarea);
+
+        const saveBtn = document.createElement('button');
+        saveBtn.className = 'save-btn';
+        saveBtn.textContent = 'Sauvegarder';
+        saveBtn.addEventListener('click', () => updateOrder(order.orderID));
+        actions.appendChild(saveBtn);
+
+        const msgDiv = document.createElement('div');
+        msgDiv.id = `message-${order.orderID}`;
+        msgDiv.style.marginTop = '10px';
+        actions.appendChild(msgDiv);
+
+        details.appendChild(actions);
+
+        div.appendChild(header);
+        div.appendChild(details);
+
         container.appendChild(div);
       });
     }
