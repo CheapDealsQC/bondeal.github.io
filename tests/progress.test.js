@@ -1,6 +1,3 @@
-const fs = require('fs');
-const path = require('path');
-
 describe('updateProgressBar', () => {
   beforeEach(() => {
     window.matchMedia = window.matchMedia || function() {
@@ -20,8 +17,8 @@ describe('updateProgressBar', () => {
       <div class="step"></div>
       <div class="step"></div>
     `;
-    const script = fs.readFileSync(path.resolve(__dirname, '../js/main.js'), 'utf8');
-    eval(script);
+    jest.resetModules();
+    require('../js/main.js');
     document.dispatchEvent(new Event('DOMContentLoaded'));
   });
 
