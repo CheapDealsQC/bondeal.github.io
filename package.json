@@ -1,0 +1,18 @@
+{
+  "name": "spotideals.github.io",
+  "version": "1.0.0",
+  "description": "Site web de Spotideals - Votre plateforme de deals Spotify.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^30.0.0-beta.3",
+    "jsdom": "^26.1.0"
+  }
+}
