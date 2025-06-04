@@ -127,6 +127,40 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Feature slider drag support
+    const featureSlider = document.querySelector('.feature-slider');
+    if (featureSlider) {
+        const sliderTrack = featureSlider.querySelector('.feature-slide-track');
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        const startDrag = (x) => {
+            isDown = true;
+            featureSlider.classList.add('dragging');
+            startX = x - featureSlider.offsetLeft;
+            scrollLeft = featureSlider.scrollLeft;
+        };
+
+        const endDrag = () => {
+            isDown = false;
+            featureSlider.classList.remove('dragging');
+        };
+
+        const moveDrag = (x) => {
+            if (!isDown) return;
+            const walk = x - featureSlider.offsetLeft - startX;
+            featureSlider.scrollLeft = scrollLeft - walk;
+        };
+
+        featureSlider.addEventListener('mousedown', e => startDrag(e.pageX));
+        featureSlider.addEventListener('touchstart', e => startDrag(e.touches[0].pageX), {passive: true});
+        window.addEventListener('mouseup', endDrag);
+        featureSlider.addEventListener('touchend', endDrag);
+        featureSlider.addEventListener('mousemove', e => moveDrag(e.pageX));
+        featureSlider.addEventListener('touchmove', e => moveDrag(e.touches[0].pageX), {passive: true});
+    }
+
     // Progress bar animation
     function updateProgressBar(step) {
         const fill = document.getElementById('progress-bar-fill');
@@ -138,14 +172,14 @@ document.addEventListener('DOMContentLoaded', function() {
         else if (step === 2) percent = 20;
         else if (step === 3) percent = 40;
         else if (step === 4) percent = 60;
-        else if (step === 5) percent = 80;
+        else if (step === 5) percent = 100;
         
         fill.style.width = percent + '%';
         
         steps.forEach((s, index) => {
             const stepNum = index + 1;
             s.classList.remove('active', 'completed');
-            
+
             if (stepNum < step) {
                 s.classList.add('completed');
             } else if (stepNum === step) {
@@ -153,6 +187,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+    window.updateProgressBar = updateProgressBar;
 
     // Theme Toggle
     const themeToggle = document.getElementById('theme-toggle');
@@ -183,14 +218,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Suivi de commande
-    const trackOrderBtn = document.getElementById('track-order-btn');
-    const orderNumberInput = document.getElementById('order-number');
-    const trackingResult = document.querySelector('.tracking-result');
+    const trackSection = document.getElementById('order-tracking');
+    if (trackSection) {
+        const trackOrderBtn = trackSection.querySelector('#track-order-btn');
+        const orderNumberInput = trackSection.querySelector('#order-number');
+        const trackingResult = trackSection.querySelector('.tracking-result');
 
-    if (trackOrderBtn && orderNumberInput && trackingResult) {
-        trackOrderBtn.addEventListener('click', () => {
-            const orderNumber = orderNumberInput.value.trim();
-            if (!orderNumber) return;
+        if (trackOrderBtn && orderNumberInput && trackingResult) {
+            trackOrderBtn.addEventListener('click', () => {
+                const orderNumber = orderNumberInput.value.trim();
+                if (!orderNumber) return;
 
             // Afficher le résultat
             trackingResult.style.display = 'block';
@@ -238,4 +275,5 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(simulateProgress, 3000);
         });
     }
-}); 
+});
+
