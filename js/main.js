@@ -172,14 +172,14 @@ document.addEventListener('DOMContentLoaded', function() {
         else if (step === 2) percent = 20;
         else if (step === 3) percent = 40;
         else if (step === 4) percent = 60;
-        else if (step === 5) percent = 80;
+        else if (step === 5) percent = 100;
         
         fill.style.width = percent + '%';
         
         steps.forEach((s, index) => {
             const stepNum = index + 1;
             s.classList.remove('active', 'completed');
-            
+
             if (stepNum < step) {
                 s.classList.add('completed');
             } else if (stepNum === step) {
@@ -187,6 +187,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+    window.updateProgressBar = updateProgressBar;
 
     // Theme Toggle
     const themeToggle = document.getElementById('theme-toggle');
