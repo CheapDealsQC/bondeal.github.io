@@ -183,14 +183,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Suivi de commande
-    const trackOrderBtn = document.getElementById('track-order-btn');
-    const orderNumberInput = document.getElementById('order-number');
-    const trackingResult = document.querySelector('.tracking-result');
+    const trackSection = document.getElementById('order-tracking');
+    if (trackSection) {
+        const trackOrderBtn = trackSection.querySelector('#track-order-btn');
+        const orderNumberInput = trackSection.querySelector('#order-number');
+        const trackingResult = trackSection.querySelector('.tracking-result');
 
-    if (trackOrderBtn && orderNumberInput && trackingResult) {
-        trackOrderBtn.addEventListener('click', () => {
-            const orderNumber = orderNumberInput.value.trim();
-            if (!orderNumber) return;
+        if (trackOrderBtn && orderNumberInput && trackingResult) {
+            trackOrderBtn.addEventListener('click', () => {
+                const orderNumber = orderNumberInput.value.trim();
+                if (!orderNumber) return;
 
             // Afficher le résultat
             trackingResult.style.display = 'block';
