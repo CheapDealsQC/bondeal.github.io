@@ -275,4 +275,5 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(simulateProgress, 3000);
         });
     }
-}); 
+});
+

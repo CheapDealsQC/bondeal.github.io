@@ -206,31 +206,83 @@
         }
         statusBadge.textContent = statusText;
         statusBadge.className = `status-badge ${statusClass}`;
-        orderDetails.innerHTML = `
-          <p><strong>Numéro de commande:</strong> ${data.orderID}</p>
-          <p><strong>Date de commande:</strong> ${new Date(data.date).toLocaleDateString()}</p>
-          <p><strong>Email:</strong> ${data.email}</p>
-          ${data.notes ? `<p><strong>Notes:</strong> ${data.notes}</p>` : ''}
-        `;
+        orderDetails.textContent = '';
+
+        const idP = document.createElement('p');
+        const idStrong = document.createElement('strong');
+        idStrong.textContent = 'Numéro de commande:';
+        idP.appendChild(idStrong);
+        idP.appendChild(document.createTextNode(' ' + data.orderID));
+        orderDetails.appendChild(idP);
+
+        const dateP = document.createElement('p');
+        const dateStrong = document.createElement('strong');
+        dateStrong.textContent = 'Date de commande:';
+        dateP.appendChild(dateStrong);
+        dateP.appendChild(document.createTextNode(' ' + new Date(data.date).toLocaleDateString()));
+        orderDetails.appendChild(dateP);
+
+        const emailP = document.createElement('p');
+        const emailStrong = document.createElement('strong');
+        emailStrong.textContent = 'Email:';
+        emailP.appendChild(emailStrong);
+        emailP.appendChild(document.createTextNode(' ' + data.email));
+        orderDetails.appendChild(emailP);
+
+        if (data.notes) {
+          const notesP = document.createElement('p');
+          const notesStrong = document.createElement('strong');
+          notesStrong.textContent = 'Notes:';
+          notesP.appendChild(notesStrong);
+          notesP.appendChild(document.createTextNode(' ' + data.notes));
+          orderDetails.appendChild(notesP);
+        }
         
         const orderDate = new Date(data.date);
-        timeline.innerHTML = `
-          <li class="timeline-item completed">
-            <div class="timeline-date">${orderDate.toLocaleDateString()}</div>
-            <div class="timeline-title">Commande reçue</div>
-            <div class="timeline-description">Votre commande a été enregistrée avec succès</div>
-          </li>
-          <li class="timeline-item ${data.status !== 'pending' ? 'completed' : 'pending'}">
-            <div class="timeline-date">${new Date(orderDate.getTime() + 3 * 24 * 60 * 60 * 1000).toLocaleDateString()}</div>
-            <div class="timeline-title">Vérification des informations</div>
-            <div class="timeline-description">Nous vérifions vos informations de compte</div>
-          </li>
-          <li class="timeline-item ${data.status === 'completed' ? 'completed' : 'future'}">
-            <div class="timeline-date">${new Date(orderDate.getTime() + 5 * 24 * 60 * 60 * 1000).toLocaleDateString()}</div>
-            <div class="timeline-title">Activation du compte</div>
-            <div class="timeline-description">Votre compte Spotify Premium est activé</div>
-          </li>
-        `;
+        timeline.textContent = '';
+
+        const steps = [
+          {
+            cls: 'completed',
+            date: orderDate,
+            title: 'Commande reçue',
+            desc: 'Votre commande a été enregistrée avec succès'
+          },
+          {
+            cls: data.status !== 'pending' ? 'completed' : 'pending',
+            date: new Date(orderDate.getTime() + 3 * 24 * 60 * 60 * 1000),
+            title: 'Vérification des informations',
+            desc: 'Nous vérifions vos informations de compte'
+          },
+          {
+            cls: data.status === 'completed' ? 'completed' : 'future',
+            date: new Date(orderDate.getTime() + 5 * 24 * 60 * 60 * 1000),
+            title: 'Activation du compte',
+            desc: 'Votre compte Spotify Premium est activé'
+          }
+        ];
+
+        steps.forEach(step => {
+          const li = document.createElement('li');
+          li.className = `timeline-item ${step.cls}`;
+
+          const dateDiv = document.createElement('div');
+          dateDiv.className = 'timeline-date';
+          dateDiv.textContent = step.date.toLocaleDateString();
+          li.appendChild(dateDiv);
+
+          const titleDiv = document.createElement('div');
+          titleDiv.className = 'timeline-title';
+          titleDiv.textContent = step.title;
+          li.appendChild(titleDiv);
+
+          const descDiv = document.createElement('div');
+          descDiv.className = 'timeline-description';
+          descDiv.textContent = step.desc;
+          li.appendChild(descDiv);
+
+          timeline.appendChild(li);
+        });
       } catch (error) {
         console.error("Erreur:", error);
         alert("Erreur lors de la vérification de la commande.");
