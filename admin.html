@@ -152,6 +152,21 @@
         margin-bottom: 10px;
         text-align: center;
     }
+    .logout-button {
+        background: #dc3545;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.2s ease;
+        margin-bottom: 1rem;
+        float: right;
+    }
+    .logout-button:hover {
+        background: #c82333;
+    }
   </style>
 </head>
 <body>
@@ -179,6 +194,7 @@
       
       <div id="adminContent" style="display: none;">
         <input type="text" id="searchBox" class="search-box" placeholder="Rechercher une commande par ID, email...">
+        <button id="logoutBtn" class="logout-button">Déconnexion</button>
         <div id="loadingIndicator" style="display: none;">Chargement des commandes...</div>
         <div id="errorMessage" style="display: none;"></div>
         <div id="orderList" class="order-list">
@@ -447,6 +463,11 @@
         displayOrders(filtered);
     }
 
+    function logout() {
+      localStorage.removeItem('adminPassword');
+      window.location.href = 'admin-login.html';
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       const stored = localStorage.getItem('adminPassword');
       if (stored === ADMIN_PASSWORD) {
@@ -459,7 +480,11 @@
       if (searchInput) {
           searchInput.addEventListener('input', filterOrders);
       }
+      const logoutBtn = document.getElementById('logoutBtn');
+      if (logoutBtn) {
+          logoutBtn.addEventListener('click', logout);
+      }
     });
   </script>
 </body>
-</html> 
+</html>
