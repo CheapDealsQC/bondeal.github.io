@@ -207,21 +207,29 @@
   <script>
     // --- IMPORTANT: METTEZ À JOUR AVEC VOTRE NOUVELLE URL DE SCRIPT ---
     const API_URL = 'https://script.google.com/macros/s/AKfycbxEmJdgcerK1ENvsy8IvSnAZDJ6p4fr9hfO87haKbKrVXZaRf2Z3wnRzyQSDl527VtW/exec';
-    const ADMIN_PASSWORD = "1C1GCEA_enCA1146CA1146&oq=&gs_lcrp=EgZjaHJvbWUqEQgDEAAYAxhCGI8BGLQCGOoCMgkIABAjGCcY6gIyCQgBECMYJxjqAjIJCAIQIxgnGOoCMhEIAxAAGAMYQhiPARi0AhjqAjIRCAQQABgDGEIYjwEYtAIY6gIyEQg";
+    const ADMIN_PASSWORD_HASH = "db4820111574318070358f047cc49d2aa7bc6e6e614af9ea8083c2c3f95b2569";
     // --- IMPORTANT: METTEZ À JOUR AVEC VOTRE NOUVELLE URL DE SCRIPT ---
-    let adminPassword = "";
+    let adminPasswordHash = "";
     let allOrders = []; // Pour stocker toutes les commandes et filtrer localement
 
+    async function hashPassword(pwd) {
+      const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pwd));
+      return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
     function initAdminView() {
-      adminPassword = document.getElementById("adminPassword").value.trim();
-      if (adminPassword !== ADMIN_PASSWORD) {
-        alert("Mot de passe incorrect.");
-        return;
-      }
-      localStorage.setItem('adminPassword', adminPassword);
-      document.querySelector('.password-section').style.display = 'none';
-      document.getElementById('adminContent').style.display = 'block';
-      loadOrders();
+      const pwd = document.getElementById("adminPassword").value.trim();
+      hashPassword(pwd).then(hash => {
+        adminPasswordHash = hash;
+        if (adminPasswordHash !== ADMIN_PASSWORD_HASH) {
+          alert("Mot de passe incorrect.");
+          return;
+        }
+        localStorage.setItem('adminPasswordHash', adminPasswordHash);
+        document.querySelector('.password-section').style.display = 'none';
+        document.getElementById('adminContent').style.display = 'block';
+        loadOrders();
+      });
     }
 
     async function loadOrders() {
@@ -392,7 +400,7 @@
       messageDiv.textContent = ''; // Clear previous messages
       messageDiv.className = ''; // Clear previous styling
 
-      if (!adminPassword) {
+      if (!adminPasswordHash) {
         alert("Le mot de passe administrateur est requis pour cette action. Veuillez le saisir en haut de la page.");
         // Remettre le focus sur le champ de mot de passe ou afficher la section
         document.querySelector('.password-section').style.display = 'block';
@@ -411,7 +419,7 @@
             'Content-Type': 'application/json', // Important pour que Apps Script parse e.postData.contents
           },
           body: JSON.stringify({
-            password: adminPassword,
+            password: adminPasswordHash,
             action: 'updateOrder',
             orderID: orderID,
             status: status,
@@ -469,9 +477,9 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      const stored = localStorage.getItem('adminPassword');
-      if (stored === ADMIN_PASSWORD) {
-        adminPassword = stored;
+      const stored = localStorage.getItem('adminPasswordHash');
+      if (stored === ADMIN_PASSWORD_HASH) {
+        adminPasswordHash = stored;
         document.querySelector('.password-section').style.display = 'none';
         document.getElementById('adminContent').style.display = 'block';
         loadOrders();
