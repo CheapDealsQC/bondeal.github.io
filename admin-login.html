@@ -82,14 +82,28 @@
     </div>
   </main>
   <script>
-    const ADMIN_PASSWORD = "1C1GCEA_enCA1146CA1146&oq=&gs_lcrp=EgZjaHJvbWUqEQgDEAAYAxhCGI8BGLQCGOoCMgkIABAjGCcY6gIyCQgBECMYJxjqAjIJCAIQIxgnGOoCMhEIAxAAGAMYQhiPARi0AhjqAjIRCAQQABgDGEIYjwEYtAIY6gIyEQg";
-    document.getElementById('loginBtn').addEventListener('click', () => {
+    const ADMIN_PASSWORD_HASH = '713bfda78870bf9d1b261f565286f85e97ee614efe5f0faf7c34e7ca4f65baca';
+
+    async function hashPassword(str) {
+      const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+      return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    document.getElementById('loginBtn').addEventListener('click', async () => {
       const pwd = document.getElementById('adminPwd').value.trim();
-      if (pwd === ADMIN_PASSWORD) {
-        localStorage.setItem('adminPassword', pwd);
+      const hashed = await hashPassword(pwd);
+      if (hashed === ADMIN_PASSWORD_HASH) {
+        localStorage.setItem('adminHash', hashed);
         window.location.href = 'admin.html';
       } else {
         alert('Mot de passe incorrect.');
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const stored = localStorage.getItem('adminHash');
+      if (stored === ADMIN_PASSWORD_HASH) {
+        window.location.href = 'admin.html';
       }
     });
   </script>

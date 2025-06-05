@@ -7,7 +7,6 @@ Site accessible à l'adresse : https://spotideals.github.io/index.html
 ## Description
 SpotiDeals est une plateforme qui vous permet de trouver les meilleures offres sur les abonnements Spotify.
 
- codex/add-deployment-section-to-readme.md
 ## Déployer l'API `/exec`
 
 Le site interagit avec un script Web (Google Apps Script ou intégration Airtable) exposant une URL se terminant par `/exec`. Pour mettre ce service en place :
@@ -47,4 +46,3 @@ npm test
 - **Home (`index.html`)** : page d'accueil présentant les offres et permettant la commande d'un abonnement Spotify.
 - **Tracking (`tracking.html`)** : permet de saisir un numéro de commande pour suivre son statut.
 - **Admin (`admin.html`)** : interface d'administration pour consulter et gérer les commandes.
- main

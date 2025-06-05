@@ -229,6 +229,7 @@
           </select>
           <button class="tool-btn" onclick="exportCSV()">Exporter CSV</button>
           <button class="tool-btn" onclick="printList()">Imprimer</button>
+          <button class="tool-btn" id="logoutBtn">Déconnexion</button>
         </div>
         <div class="stats">
           <div id="stat-total" class="stat-box">Total: 0</div>
@@ -248,18 +249,25 @@
   <script>
     // --- IMPORTANT: METTEZ À JOUR AVEC VOTRE NOUVELLE URL DE SCRIPT ---
     const API_URL = 'https://script.google.com/macros/s/AKfycbxEmJdgcerK1ENvsy8IvSnAZDJ6p4fr9hfO87haKbKrVXZaRf2Z3wnRzyQSDl527VtW/exec';
-    const ADMIN_PASSWORD = "1C1GCEA_enCA1146CA1146&oq=&gs_lcrp=EgZjaHJvbWUqEQgDEAAYAxhCGI8BGLQCGOoCMgkIABAjGCcY6gIyCQgBECMYJxjqAjIJCAIQIxgnGOoCMhEIAxAAGAMYQhiPARi0AhjqAjIRCAQQABgDGEIYjwEYtAIY6gIyEQg";
+    const ADMIN_PASSWORD_HASH = '713bfda78870bf9d1b261f565286f85e97ee614efe5f0faf7c34e7ca4f65baca';
     // --- IMPORTANT: METTEZ À JOUR AVEC VOTRE NOUVELLE URL DE SCRIPT ---
-    let adminPassword = "";
+    let adminPasswordHash = "";
     let allOrders = []; // Pour stocker toutes les commandes et filtrer localement
 
-    function initAdminView() {
-      adminPassword = document.getElementById("adminPassword").value.trim();
-      if (adminPassword !== ADMIN_PASSWORD) {
+    async function hashPassword(str) {
+      const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+      return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    async function initAdminView() {
+      const input = document.getElementById("adminPassword").value.trim();
+      const hashed = await hashPassword(input);
+      if (hashed !== ADMIN_PASSWORD_HASH) {
         alert("Mot de passe incorrect.");
         return;
       }
-      localStorage.setItem('adminPassword', adminPassword);
+      adminPasswordHash = hashed;
+      localStorage.setItem('adminHash', hashed);
       document.querySelector('.password-section').style.display = 'none';
       document.getElementById('adminContent').style.display = 'block';
       loadOrders();
@@ -448,7 +456,7 @@
       messageDiv.textContent = ''; // Clear previous messages
       messageDiv.className = ''; // Clear previous styling
 
-      if (!adminPassword) {
+      if (!adminPasswordHash) {
         alert("Le mot de passe administrateur est requis pour cette action. Veuillez le saisir en haut de la page.");
         // Remettre le focus sur le champ de mot de passe ou afficher la section
         document.querySelector('.password-section').style.display = 'block';
@@ -467,7 +475,7 @@
             'Content-Type': 'application/json', // Important pour que Apps Script parse e.postData.contents
           },
           body: JSON.stringify({
-            password: adminPassword,
+            password: adminPasswordHash,
             action: 'updateOrder',
             orderID: orderID,
             status: status,
@@ -507,23 +515,23 @@
     }
 
     async function resendEmail(orderID) {
-      if (!adminPassword) return alert('Mot de passe requis');
+      if (!adminPasswordHash) return alert('Mot de passe requis');
       const res = await fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password: adminPassword, action: 'resendEmail', orderID })
+        body: JSON.stringify({ password: adminPasswordHash, action: 'resendEmail', orderID })
       });
       const data = await res.json().catch(() => ({}));
       alert(data.message || 'Email renvoyé');
     }
 
     async function deleteOrder(orderID) {
-      if (!adminPassword) return alert('Mot de passe requis');
+      if (!adminPasswordHash) return alert('Mot de passe requis');
       if (!confirm('Supprimer cette commande ?')) return;
       const res = await fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password: adminPassword, action: 'deleteOrder', orderID })
+        body: JSON.stringify({ password: adminPasswordHash, action: 'deleteOrder', orderID })
       });
       const data = await res.json().catch(() => ({}));
       if (data.success) {
@@ -551,6 +559,11 @@
 
     function printList() {
       window.print();
+    }
+
+    function logout() {
+      localStorage.removeItem('adminHash');
+      window.location.href = 'admin-login.html';
     }
 
     function updateStats(data) {
@@ -602,9 +615,9 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      const stored = localStorage.getItem('adminPassword');
-      if (stored === ADMIN_PASSWORD) {
-        adminPassword = stored;
+      const stored = localStorage.getItem('adminHash');
+      if (stored === ADMIN_PASSWORD_HASH) {
+        adminPasswordHash = stored;
         document.querySelector('.password-section').style.display = 'none';
         document.getElementById('adminContent').style.display = 'block';
         loadOrders();
@@ -617,6 +630,8 @@
       if (statusSelect) statusSelect.addEventListener('change', filterOrders);
       const sortSelect = document.getElementById('sortSelect');
       if (sortSelect) sortSelect.addEventListener('change', filterOrders);
+      const logoutBtn = document.getElementById('logoutBtn');
+      if (logoutBtn) logoutBtn.addEventListener('click', logout);
     });
   </script>
   <script src="js/main.js"></script>
