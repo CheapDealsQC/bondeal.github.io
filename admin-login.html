@@ -81,17 +81,6 @@
     </div>
   </main>
   <script>
- codex/add-logout-button-to-admin-interface
-    const ADMIN_PASSWORD = "1C1GCEA_enCA1146CA1146&oq=&gs_lcrp=EgZjaHJvbWUqEQgDEAAYAxhCGI8BGLQCGOoCMgkIABAjGCcY6gIyCQgBECMYJxjqAjIJCAIQIxgnGOoCMhEIAxAAGAMYQhiPARi0AhjqAjIRCAQQABgDGEIYjwEYtAIY6gIyEQg";
-    document.addEventListener('DOMContentLoaded', () => {
-      const stored = localStorage.getItem('adminPassword');
-      if (stored === ADMIN_PASSWORD) {
-        window.location.href = 'admin.html';
-      }
-    });
-
-    document.getElementById('loginBtn').addEventListener('click', () => {
-=======
     const ADMIN_PASSWORD_HASH = "db4820111574318070358f047cc49d2aa7bc6e6e614af9ea8083c2c3f95b2569";
 
     async function hashPassword(pwd) {
@@ -99,8 +88,14 @@
       return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
     }
 
+    document.addEventListener('DOMContentLoaded', () => {
+      const stored = localStorage.getItem('adminPasswordHash');
+      if (stored === ADMIN_PASSWORD_HASH) {
+        window.location.href = 'admin.html';
+      }
+    });
+
     document.getElementById('loginBtn').addEventListener('click', async () => {
-      main
       const pwd = document.getElementById('adminPwd').value.trim();
       const hash = await hashPassword(pwd);
       if (hash === ADMIN_PASSWORD_HASH) {
