@@ -195,16 +195,17 @@
   <script>
     // --- IMPORTANT: METTEZ À JOUR AVEC VOTRE NOUVELLE URL DE SCRIPT ---
     const API_URL = 'https://script.google.com/macros/s/AKfycbxEmJdgcerK1ENvsy8IvSnAZDJ6p4fr9hfO87haKbKrVXZaRf2Z3wnRzyQSDl527VtW/exec';
+    const ADMIN_PASSWORD = "1C1GCEA_enCA1146CA1146&oq=&gs_lcrp=EgZjaHJvbWUqEQgDEAAYAxhCGI8BGLQCGOoCMgkIABAjGCcY6gIyCQgBECMYJxjqAjIJCAIQIxgnGOoCMhEIAxAAGAMYQhiPARi0AhjqAjIRCAQQABgDGEIYjwEYtAIY6gIyEQg";
     // --- IMPORTANT: METTEZ À JOUR AVEC VOTRE NOUVELLE URL DE SCRIPT ---
     let adminPassword = "";
     let allOrders = []; // Pour stocker toutes les commandes et filtrer localement
 
     function initAdminView() {
-      adminPassword = document.getElementById('adminPassword').value;
-      if (!adminPassword) {
-        alert("Veuillez entrer le mot de passe administrateur.");
-        return;
-      }
+    adminPassword = document.getElementById("adminPassword").value.trim();
+    if (adminPassword !== ADMIN_PASSWORD) {
+      alert("Mot de passe incorrect.");
+      return;
+    }
       document.querySelector('.password-section').style.display = 'none';
       document.getElementById('adminContent').style.display = 'block';
       loadOrders();
