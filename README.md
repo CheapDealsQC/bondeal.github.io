@@ -36,7 +36,7 @@ Une fois l'API déployée, remplacez la constante `API_URL` dans `admin.html` et
 
 ### Tests
 
-Après l'installation des dépendances, exécutez les tests Jest avec :
+Assurez-vous d'exécuter `npm install` pour installer les dépendances, puis lancez les tests Jest avec :
 ```bash
 npm test
 ```
