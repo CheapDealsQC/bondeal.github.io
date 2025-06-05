@@ -274,6 +274,7 @@ document.addEventListener('DOMContentLoaded', function() {
             updateTimeline();
             setTimeout(simulateProgress, 3000);
         });
+        }
     }
 });
 
