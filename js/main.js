@@ -189,6 +189,33 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     window.updateProgressBar = updateProgressBar;
 
+    // Theme Toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    
+    if (themeToggle) {
+        // Vérifier le thème sauvegardé
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            document.body.classList.toggle('light-theme', savedTheme === 'light');
+        } else {
+            document.body.classList.toggle('light-theme', !prefersDarkScheme.matches);
+        }
+
+        // Gérer le changement de thème
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light-theme');
+            const isLight = document.body.classList.contains('light-theme');
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        });
+
+        // Écouter les changements de préférence système
+        prefersDarkScheme.addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                document.body.classList.toggle('light-theme', !e.matches);
+            }
+        });
+    }
 
     // Suivi de commande
     const trackSection = document.getElementById('order-tracking');
