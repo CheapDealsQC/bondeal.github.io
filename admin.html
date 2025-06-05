@@ -197,11 +197,12 @@
     let allOrders = []; // Pour stocker toutes les commandes et filtrer localement
 
     function initAdminView() {
-    adminPassword = document.getElementById("adminPassword").value.trim();
-    if (adminPassword !== ADMIN_PASSWORD) {
-      alert("Mot de passe incorrect.");
-      return;
-    }
+      adminPassword = document.getElementById("adminPassword").value.trim();
+      if (adminPassword !== ADMIN_PASSWORD) {
+        alert("Mot de passe incorrect.");
+        return;
+      }
+      localStorage.setItem('adminPassword', adminPassword);
       document.querySelector('.password-section').style.display = 'none';
       document.getElementById('adminContent').style.display = 'block';
       loadOrders();
@@ -447,8 +448,13 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      // Ne pas charger les commandes automatiquement, attendre la saisie du mot de passe
-      // loadOrders(); // Déplacé dans initAdminView
+      const stored = localStorage.getItem('adminPassword');
+      if (stored === ADMIN_PASSWORD) {
+        adminPassword = stored;
+        document.querySelector('.password-section').style.display = 'none';
+        document.getElementById('adminContent').style.display = 'block';
+        loadOrders();
+      }
       const searchInput = document.getElementById('searchBox');
       if (searchInput) {
           searchInput.addEventListener('input', filterOrders);
