@@ -6,704 +6,704 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/style.css">
   <style>
-    body {
-      font-family: 'Roboto', sans-serif;
-      background-color: var(--bg);
-      color: var(--fg);
-    }
-    .container {
-      max-width: 900px; /* Augmenté pour plus d'espace */
-      margin: 0 auto;
-      padding: 1rem;
-    }
-    .header {
-      background: var(--card-bg);
-      color: var(--fg);
-      padding: 1rem 0;
-    }
-    .header__inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .logo {
-      color: var(--fg);
-      text-decoration: none;
-      font-size: 1.5rem;
-      font-weight: bold;
-    }
-    .nav a {
-      color: var(--fg);
-      text-decoration: none;
-      margin-left: 1rem;
-    }
-    .admin-panel {
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 2rem;
-      background: var(--card-bg);
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.4);
-    }
-    .toolbar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 1rem;
-      align-items: center;
-    }
-    .tool-btn {
-      padding: 8px 12px;
-      border-radius: 4px;
-      border: 1px solid var(--border-color);
-      background: var(--card-bg-alt);
-      cursor: pointer;
-      color: var(--fg);
-    }
-    .tool-btn:hover {
-      background: var(--hover-bg);
-    }
-    .tool-select {
-      padding: 8px 12px;
-      border-radius: 4px;
-      border: 1px solid var(--border-color);
-      background: var(--card-bg);
-      color: var(--fg);
-    }
-    .stats {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 1rem;
-    }
-    .stat-box {
-      flex: 1 1 120px;
-      background: var(--card-bg-alt);
-      border-radius: 4px;
-      padding: 10px;
-      text-align: center;
-      font-weight: bold;
-      color: var(--fg);
-    }
-    .password-section {
-      margin-bottom: 2rem;
-      padding: 1.5rem;
-      background-color: var(--card-bg-alt);
-      border-radius: 4px;
-      border: 1px solid var(--border-color);
-    }
-    .password-section input[type="password"], .password-section button {
-      padding: 10px;
-      margin-right: 10px;
-      border-radius: 4px;
-      border: 1px solid var(--border-color);
-      background: var(--card-bg);
-      color: var(--fg);
-    }
-    .password-section button {
-      background: #5cb85c;
-      color: white;
-      cursor: pointer;
-    }
-    .password-section button:hover {
-      background: #4cae4c;
-    }
-    .order-list {
-      margin-top: 2rem;
-    }
-    .order-item {
-      padding: 1.5rem; /* Augmenté */
-      border: 1px solid var(--border-color);
-      border-radius: 4px;
-      margin-bottom: 1.5rem; /* Augmenté */
-      background-color: var(--card-bg-alt);
-      color: var(--fg);
-    }
-    .order-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
-      flex-wrap: wrap; /* Pour les petits écrans */
-    }
-    .order-details p {
-      margin: 0.5rem 0;
-      line-height: 1.6;
-    }
-    .order-actions label {
-      display: block;
-      margin-top: 0.5rem;
-      font-weight: bold;
-    }
-    .status-select, .notes-input {
-      width: calc(100% - 22px); /* Ajusté pour padding/border */
-      padding: 10px;
-      border-radius: 4px;
-      border: 1px solid var(--border-color);
-      margin-top: 0.25rem;
-      margin-bottom: 0.75rem;
-      background: var(--card-bg);
-      color: var(--fg);
-    }
-    .notes-input {
-      min-height: 60px; /* Hauteur pour les notes */
-      resize: vertical;
-    }
-    .save-btn {
-      background: #1DB954; /* Vert Spotify */
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 20px; /* Plus arrondi */
-      cursor: pointer;
-      font-weight: bold;
-      transition: background-color 0.2s ease;
-      display: block; /* Pour centrer ou aligner facilement */
-      margin-top: 1rem;
-    }
-    .save-btn:hover {
-      background: #1ed760;
-    }
-    .search-box {
-      width: calc(100% - 24px); /* Ajusté */
-      padding: 12px;
-      margin-bottom: 1rem;
-      border: 1px solid var(--border-color);
-      border-radius: 4px;
-      font-size: 1rem;
-      background: var(--card-bg);
-      color: var(--fg);
-    }
-     #loadingIndicator, #errorMessage {
-        text-align: center;
-        padding: 1rem;
-        margin-top: 1rem;
-        border-radius: 4px;
-    }
-    #loadingIndicator {
-        color: #007bff;
-    }
-    #errorMessage {
-        color: #dc3545;
-        background-color: #f8d7da;
-        border: 1px solid #f5c6cb;
-    }
-    /* Styles pour le message de succès */
-    .success-message {
-        padding: 10px;
-        background-color: #d4edda; /* Vert clair */
-        color: #155724; /* Texte vert foncé */
-        border: 1px solid #c3e6cb;
-        border-radius: 4px;
-        margin-top: 10px;
-        margin-bottom: 10px;
-        text-align: center;
-    }
-    .logout-button {
-        background: #dc3545;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 20px;
-        cursor: pointer;
-        font-weight: bold;
-        transition: background-color 0.2s ease;
-        margin-bottom: 1rem;
-        float: right;
-    }
-    .logout-button:hover {
-        background: #c82333;
-    }
+  body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--bg);
+    color: var(--fg);
+  }
+  .container {
+    max-width: 900px; /* Augmenté pour plus d'espace */
+    margin: 0 auto;
+    padding: 1rem;
+  }
+  .header {
+    background: var(--card-bg);
+    color: var(--fg);
+    padding: 1rem 0;
+  }
+  .header__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo {
+    color: var(--fg);
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  .nav a {
+    color: var(--fg);
+    text-decoration: none;
+    margin-left: 1rem;
+  }
+  .admin-panel {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+  }
+  .toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 1rem;
+    align-items: center;
+  }
+  .tool-btn {
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    background: var(--card-bg-alt);
+    cursor: pointer;
+    color: var(--fg);
+  }
+  .tool-btn:hover {
+    background: var(--hover-bg);
+  }
+  .tool-select {
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    background: var(--card-bg);
+    color: var(--fg);
+  }
+  .stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 1rem;
+  }
+  .stat-box {
+    flex: 1 1 120px;
+    background: var(--card-bg-alt);
+    border-radius: 4px;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    color: var(--fg);
+  }
+  .password-section {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background-color: var(--card-bg-alt);
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+  }
+  .password-section input[type="password"], .password-section button {
+    padding: 10px;
+    margin-right: 10px;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    background: var(--card-bg);
+    color: var(--fg);
+  }
+  .password-section button {
+    background: #5cb85c;
+    color: white;
+    cursor: pointer;
+  }
+  .password-section button:hover {
+    background: #4cae4c;
+  }
+  .order-list {
+    margin-top: 2rem;
+  }
+  .order-item {
+    padding: 1.5rem; /* Augmenté */
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    margin-bottom: 1.5rem; /* Augmenté */
+    background-color: var(--card-bg-alt);
+    color: var(--fg);
+  }
+  .order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap; /* Pour les petits écrans */
+  }
+  .order-details p {
+    margin: 0.5rem 0;
+    line-height: 1.6;
+  }
+  .order-actions label {
+    display: block;
+    margin-top: 0.5rem;
+    font-weight: bold;
+  }
+  .status-select, .notes-input {
+    width: calc(100% - 22px); /* Ajusté pour padding/border */
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    margin-top: 0.25rem;
+    margin-bottom: 0.75rem;
+    background: var(--card-bg);
+    color: var(--fg);
+  }
+  .notes-input {
+    min-height: 60px; /* Hauteur pour les notes */
+    resize: vertical;
+  }
+  .save-btn {
+    background: #1DB954; /* Vert Spotify */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px; /* Plus arrondi */
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+    display: block; /* Pour centrer ou aligner facilement */
+    margin-top: 1rem;
+  }
+  .save-btn:hover {
+    background: #1ed760;
+  }
+  .search-box {
+    width: calc(100% - 24px); /* Ajusté */
+    padding: 12px;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1rem;
+    background: var(--card-bg);
+    color: var(--fg);
+  }
+   #loadingIndicator, #errorMessage {
+    text-align: center;
+    padding: 1rem;
+    margin-top: 1rem;
+    border-radius: 4px;
+  }
+  #loadingIndicator {
+    color: #007bff;
+  }
+  #errorMessage {
+    color: #dc3545;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+  }
+  /* Styles pour le message de succès */
+  .success-message {
+    padding: 10px;
+    background-color: #d4edda; /* Vert clair */
+    color: #155724; /* Texte vert foncé */
+    border: 1px solid #c3e6cb;
+    border-radius: 4px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  .logout-button {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+    margin-bottom: 1rem;
+    float: right;
+  }
+  .logout-button:hover {
+    background: #c82333;
+  }
   </style>
 </head>
 <body>
   <!-- HEADER -->
   <header class="header">
-    <div class="container header__inner">
-      <a href="index.html" class="logo">SpotiDeals</a>
-      <nav class="nav">
-        <a href="index.html">Accueil</a>
-        <a href="tracking.html">Suivi</a>
-      </nav>
-    </div>
+  <div class="container header__inner">
+    <a href="index.html" class="logo">SpotiDeals</a>
+    <nav class="nav">
+    <a href="index.html">Accueil</a>
+    <a href="tracking.html">Suivi</a>
+    </nav>
+  </div>
   </header>
 
   <!-- MAIN CONTENT -->
   <main class="container">
-    <div class="admin-panel">
-      <h1>Administration des commandes</h1>
+  <div class="admin-panel">
+    <h1>Administration des commandes</h1>
 
-      <div class="password-section">
-        <label for="adminPassword">Mot de passe Administrateur:</label>
-        <input type="password" id="adminPassword" placeholder="Votre mot de passe">
-        <button onclick="initAdminView()">Accéder</button>
-      </div>
-      
-      <div id="adminContent" style="display: none;">
- qvc6qm-codex/créer-une-page-admin-complète
-        <div class="toolbar">
-          <input type="text" id="searchBox" class="search-box" placeholder="Rechercher par ID ou email">
-          <select id="statusFilter" class="tool-select">
-            <option value="all">Tous</option>
-            <option value="pending">En attente</option>
-            <option value="processing">En traitement</option>
-            <option value="completed">Complétées</option>
-          </select>
-          <select id="sortSelect" class="tool-select">
-            <option value="date-desc">Date ▼</option>
-            <option value="date-asc">Date ▲</option>
-          </select>
-          <button class="tool-btn" onclick="exportCSV()">Exporter CSV</button>
-          <button class="tool-btn" onclick="printList()">Imprimer</button>
-          <button class="tool-btn" id="logoutBtn">Déconnexion</button>
-        </div>
-        <div class="stats">
-          <div id="stat-total" class="stat-box">Total: 0</div>
-          <div id="stat-pending" class="stat-box">En attente: 0</div>
-          <div id="stat-today" class="stat-box">Aujourd'hui: 0</div>
-          <div id="stat-week" class="stat-box">Complété cette semaine: 0%</div>
-        </div>
-=======
-        <input type="text" id="searchBox" class="search-box" placeholder="Rechercher une commande par ID, email...">
-        <button id="logoutBtn" class="logout-button">Déconnexion</button>
- main
-        <div id="loadingIndicator" style="display: none;">Chargement des commandes...</div>
-        <div id="errorMessage" style="display: none;"></div>
-        <div id="orderList" class="order-list">
-          <!-- Les commandes seront ajoutées ici -->
-        </div>
-      </div>
+    <div class="password-section">
+    <label for="adminPassword">Mot de passe Administrateur:</label>
+    <input type="password" id="adminPassword" placeholder="Votre mot de passe">
+    <button onclick="initAdminView()">Accéder</button>
     </div>
+    
+    <div id="adminContent" style="display: none;">
+ qvc6qm-codex/créer-une-page-admin-complète
+    <div class="toolbar">
+      <input type="text" id="searchBox" class="search-box" placeholder="Rechercher par ID ou email">
+      <select id="statusFilter" class="tool-select">
+      <option value="all">Tous</option>
+      <option value="pending">En attente</option>
+      <option value="processing">En traitement</option>
+      <option value="completed">Complétées</option>
+      </select>
+      <select id="sortSelect" class="tool-select">
+      <option value="date-desc">Date ▼</option>
+      <option value="date-asc">Date ▲</option>
+      </select>
+      <button class="tool-btn" onclick="exportCSV()">Exporter CSV</button>
+      <button class="tool-btn" onclick="printList()">Imprimer</button>
+      <button class="tool-btn" id="logoutBtn">Déconnexion</button>
+    </div>
+    <div class="stats">
+      <div id="stat-total" class="stat-box">Total: 0</div>
+      <div id="stat-pending" class="stat-box">En attente: 0</div>
+      <div id="stat-today" class="stat-box">Aujourd'hui: 0</div>
+      <div id="stat-week" class="stat-box">Complété cette semaine: 0%</div>
+    </div>
+=======
+    <input type="text" id="searchBox" class="search-box" placeholder="Rechercher une commande par ID, email...">
+    <button id="logoutBtn" class="logout-button">Déconnexion</button>
+ main
+    <div id="loadingIndicator" style="display: none;">Chargement des commandes...</div>
+    <div id="errorMessage" style="display: none;"></div>
+    <div id="orderList" class="order-list">
+      <!-- Les commandes seront ajoutées ici -->
+    </div>
+    </div>
+  </div>
   </main>
 
   <script>
-    // --- IMPORTANT: METTEZ À JOUR AVEC VOTRE NOUVELLE URL DE SCRIPT ---
-    const API_URL = 'https://script.google.com/macros/s/AKfycbxEmJdgcerK1ENvsy8IvSnAZDJ6p4fr9hfO87haKbKrVXZaRf2Z3wnRzyQSDl527VtW/exec';
+  // --- IMPORTANT: METTEZ À JOUR AVEC VOTRE NOUVELLE URL DE SCRIPT ---
+  const API_URL = 'https://script.google.com/macros/s/AKfycbxEmJdgcerK1ENvsy8IvSnAZDJ6p4fr9hfO87haKbKrVXZaRf2Z3wnRzyQSDl527VtW/exec';
  qvc6qm-codex/créer-une-page-admin-complète
-    const ADMIN_PASSWORD_HASH = '713bfda78870bf9d1b261f565286f85e97ee614efe5f0faf7c34e7ca4f65baca';
+  const ADMIN_PASSWORD_HASH = '713bfda78870bf9d1b261f565286f85e97ee614efe5f0faf7c34e7ca4f65baca';
 =======
-    const ADMIN_PASSWORD_HASH = "db4820111574318070358f047cc49d2aa7bc6e6e614af9ea8083c2c3f95b2569";
+  const ADMIN_PASSWORD_HASH = "db4820111574318070358f047cc49d2aa7bc6e6e614af9ea8083c2c3f95b2569";
  main
-    // --- IMPORTANT: METTEZ À JOUR AVEC VOTRE NOUVELLE URL DE SCRIPT ---
-    let adminPasswordHash = "";
-    let allOrders = []; // Pour stocker toutes les commandes et filtrer localement
+  // --- IMPORTANT: METTEZ À JOUR AVEC VOTRE NOUVELLE URL DE SCRIPT ---
+  let adminPasswordHash = "";
+  let allOrders = []; // Pour stocker toutes les commandes et filtrer localement
 
  qvc6qm-codex/créer-une-page-admin-complète
-    async function hashPassword(str) {
-      const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
-      return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
-    }
+  async function hashPassword(str) {
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+  }
 
-    async function initAdminView() {
-      const input = document.getElementById("adminPassword").value.trim();
-      const hashed = await hashPassword(input);
-      if (hashed !== ADMIN_PASSWORD_HASH) {
-        alert("Mot de passe incorrect.");
-        return;
-      }
-      adminPasswordHash = hashed;
-      localStorage.setItem('adminHash', hashed);
-      document.querySelector('.password-section').style.display = 'none';
-      document.getElementById('adminContent').style.display = 'block';
-      loadOrders();
+  async function initAdminView() {
+    const input = document.getElementById("adminPassword").value.trim();
+    const hashed = await hashPassword(input);
+    if (hashed !== ADMIN_PASSWORD_HASH) {
+    alert("Mot de passe incorrect.");
+    return;
+    }
+    adminPasswordHash = hashed;
+    localStorage.setItem('adminHash', hashed);
+    document.querySelector('.password-section').style.display = 'none';
+    document.getElementById('adminContent').style.display = 'block';
+    loadOrders();
 =======
-    async function hashPassword(pwd) {
-      const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pwd));
-      return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+  async function hashPassword(pwd) {
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pwd));
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+
+  function initAdminView() {
+    const pwd = document.getElementById("adminPassword").value.trim();
+    hashPassword(pwd).then(hash => {
+    adminPasswordHash = hash;
+    if (adminPasswordHash !== ADMIN_PASSWORD_HASH) {
+      alert("Mot de passe incorrect.");
+      return;
     }
-
-    function initAdminView() {
-      const pwd = document.getElementById("adminPassword").value.trim();
-      hashPassword(pwd).then(hash => {
-        adminPasswordHash = hash;
-        if (adminPasswordHash !== ADMIN_PASSWORD_HASH) {
-          alert("Mot de passe incorrect.");
-          return;
-        }
-        localStorage.setItem('adminPasswordHash', adminPasswordHash);
-        document.querySelector('.password-section').style.display = 'none';
-        document.getElementById('adminContent').style.display = 'block';
-        loadOrders();
-      });
- main
-    }
-
-    async function loadOrders() {
-      const loadingIndicator = document.getElementById('loadingIndicator');
-      const errorMessage = document.getElementById('errorMessage');
-      const orderList = document.getElementById('orderList');
-      
-      loadingIndicator.style.display = 'block';
-      errorMessage.style.display = 'none';
-      orderList.textContent = '';
-
-
-      try {
-        // Pour charger les commandes, nous utilisons doGet, pas besoin de mot de passe ici
-        // car le script Google ne le demande pas pour doGet (lecture de toutes les commandes).
-        // Le mot de passe sera utilisé pour les actions POST (mise à jour).
-        const res = await fetch(API_URL);
-        if (!res.ok) {
-            const errorData = await res.json().catch(() => ({ error: `Erreur HTTP: ${res.status}` }));
-            throw new Error(errorData.error || `Erreur HTTP: ${res.status}`);
-        }
-        allOrders = await res.json();
-        if (allOrders.error) {
-            throw new Error(allOrders.error);
-        }
-        updateStats(allOrders);
-        displayOrders(sortOrders(allOrders));
-      } catch (error) {
-        console.error("Erreur lors du chargement des commandes:", error);
-        errorMessage.textContent = "Erreur lors du chargement des commandes: " + error.message;
-        errorMessage.style.display = 'block';
-      } finally {
-        loadingIndicator.style.display = 'none';
-      }
-    }
-
-    function displayOrders(orders) {
-      const container = document.getElementById('orderList');
-      container.textContent = '';
-      if (orders.length === 0) {
-        const p = document.createElement('p');
-        p.textContent = 'Aucune commande à afficher.';
-        container.appendChild(p);
-        return;
-      }
-
-      orders.forEach(order => {
-        const div = document.createElement('div');
-        div.className = 'order-item';
-        div.dataset.orderId = order.orderID; // Stocker l'ID pour référence
-
-        // Convertir la date si elle est valide
-        let formattedDate = 'Date inconnue';
-        if (order.date) {
-            const dateObj = new Date(order.date);
-            if (!isNaN(dateObj)) {
-                formattedDate = dateObj.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' });
-            } else {
-                // Essayer de parser si c'est une chaîne de type "YYYY-MM-DD" ou similaire
-                const parts = String(order.date).split(/[-/]/);
-                if (parts.length === 3) {
-                    // Attention: new Date(year, monthIndex, day)
-                    const potentialDate = new Date(parts[0], parts[1] - 1, parts[2]);
-                    if(!isNaN(potentialDate)){
-                        formattedDate = potentialDate.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' });
-                    } else if (String(order.date).includes("T")) { // Si c'est un format ISO avec T
-                         const isoDate = new Date(String(order.date));
-                         if(!isNaN(isoDate)) {
-                            formattedDate = isoDate.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' });
-                         } else {
-                            formattedDate = String(order.date); // Afficher tel quel si parsing échoue
-                         }
-                    } else {
-                       formattedDate = String(order.date); // Afficher tel quel
-                    }
-                } else {
-                    formattedDate = String(order.date); // Afficher tel quel
-                }
-            }
-        }
-
-
-        const header = document.createElement('div');
-        header.className = 'order-header';
-        const h3 = document.createElement('h3');
-        h3.textContent = `Commande: ${order.orderID}`;
-        header.appendChild(h3);
-
-        const details = document.createElement('div');
-        details.className = 'order-details';
-
-        const emailP = document.createElement('p');
-        const emailStrong = document.createElement('strong');
-        emailStrong.textContent = 'Email:';
-        emailP.appendChild(emailStrong);
-        emailP.appendChild(document.createTextNode(' ' + (order.email || 'Non fourni')));
-        details.appendChild(emailP);
-
-        const dateP = document.createElement('p');
-        const dateStrong = document.createElement('strong');
-        dateStrong.textContent = 'Date:';
-        dateP.appendChild(dateStrong);
-        dateP.appendChild(document.createTextNode(' ' + formattedDate));
-        details.appendChild(dateP);
-
-        const actions = document.createElement('div');
-        actions.className = 'order-actions';
-
-        const labelStatus = document.createElement('label');
-        labelStatus.setAttribute('for', `status-${order.orderID}`);
-        labelStatus.textContent = 'Statut:';
-        actions.appendChild(labelStatus);
-
-        const select = document.createElement('select');
-        select.id = `status-${order.orderID}`;
-        select.className = 'status-select';
-        const options = [
-          ['pending', 'En attente'],
-          ['processing', 'En traitement'],
-          ['completed', 'Complétée'],
-          ['cancelled', 'Annulée'],
-          ['refunded', 'Remboursée']
-        ];
-        options.forEach(([value, label]) => {
-          const opt = document.createElement('option');
-          opt.value = value;
-          opt.textContent = label;
-          if (order.status === value) opt.selected = true;
-          select.appendChild(opt);
-        });
-        actions.appendChild(select);
-
-        const labelNotes = document.createElement('label');
-        labelNotes.setAttribute('for', `notes-${order.orderID}`);
-        labelNotes.textContent = 'Notes (visibles par le client si la page suivi les affiche):';
-        actions.appendChild(labelNotes);
-
-        const textarea = document.createElement('textarea');
-        textarea.id = `notes-${order.orderID}`;
-        textarea.className = 'notes-input';
-        textarea.rows = 3;
-        textarea.textContent = order.notes || '';
-        actions.appendChild(textarea);
-
-        const saveBtn = document.createElement('button');
-        saveBtn.className = 'save-btn';
-        saveBtn.textContent = '✏️ Sauvegarder';
-        saveBtn.addEventListener('click', () => updateOrder(order.orderID));
-        actions.appendChild(saveBtn);
-
-        const emailBtn = document.createElement('button');
-        emailBtn.className = 'save-btn';
-        emailBtn.textContent = '📧';
-        emailBtn.title = 'Renvoyer l\'email';
-        emailBtn.addEventListener('click', () => resendEmail(order.orderID));
-        actions.appendChild(emailBtn);
-
-        const delBtn = document.createElement('button');
-        delBtn.className = 'save-btn';
-        delBtn.textContent = '🗑️';
-        delBtn.title = 'Supprimer';
-        delBtn.addEventListener('click', () => deleteOrder(order.orderID));
-        actions.appendChild(delBtn);
-
-        const msgDiv = document.createElement('div');
-        msgDiv.id = `message-${order.orderID}`;
-        msgDiv.style.marginTop = '10px';
-        actions.appendChild(msgDiv);
-
-        details.appendChild(actions);
-
-        div.appendChild(header);
-        div.appendChild(details);
-
-        container.appendChild(div);
-      });
-    }
-
-    async function updateOrder(orderID) {
-      const status = document.getElementById(`status-${orderID}`).value;
-      const notes = document.getElementById(`notes-${orderID}`).value;
-      const messageDiv = document.getElementById(`message-${orderID}`);
-      messageDiv.textContent = ''; // Clear previous messages
-      messageDiv.className = ''; // Clear previous styling
-
-      if (!adminPasswordHash) {
-        alert("Le mot de passe administrateur est requis pour cette action. Veuillez le saisir en haut de la page.");
-        // Remettre le focus sur le champ de mot de passe ou afficher la section
-        document.querySelector('.password-section').style.display = 'block';
-        document.getElementById('adminPassword').focus();
-        return;
-      }
-      
-      const loadingIndicator = document.getElementById('loadingIndicator');
-      loadingIndicator.style.display = 'block';
-
-
-      try {
-        const res = await fetch(API_URL, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json', // Important pour que Apps Script parse e.postData.contents
-          },
-          body: JSON.stringify({
-            password: adminPasswordHash,
-            action: 'updateOrder',
-            orderID: orderID,
-            status: status,
-            notes: notes
-          })
-        });
-
-        const result = await res.json();
-        loadingIndicator.style.display = 'none';
-
-        if (result.success) {
-          messageDiv.textContent = result.message || "Commande mise à jour avec succès!";
-          messageDiv.className = 'success-message'; // Appliquer le style de succès
-          // Optionnel: Mettre à jour l'objet `allOrders` localement pour refléter le changement immédiatement
-          const orderIndex = allOrders.findIndex(o => o.orderID === orderID);
-          if (orderIndex > -1) {
-            allOrders[orderIndex].status = status;
-            allOrders[orderIndex].notes = notes;
-          }
-          updateStats(allOrders);
-        } else {
-          messageDiv.textContent = "Erreur: " + (result.error || "Impossible de mettre à jour la commande.");
-          messageDiv.className = 'error-message'; // Appliquer un style d'erreur (à définir dans CSS)
-        }
-      } catch (error) {
-        loadingIndicator.style.display = 'none';
-        messageDiv.textContent = "Erreur de communication: " + error.message;
-        messageDiv.className = 'error-message';
-        console.error("Erreur lors de la mise à jour:", error);
-      }
-
-      // Cacher le message après quelques secondes
-      setTimeout(() => {
-        messageDiv.textContent = '';
-        messageDiv.className = '';
-      }, 5000);
-    }
-
-    async function resendEmail(orderID) {
-      if (!adminPasswordHash) return alert('Mot de passe requis');
-      const res = await fetch(API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password: adminPasswordHash, action: 'resendEmail', orderID })
-      });
-      const data = await res.json().catch(() => ({}));
-      alert(data.message || 'Email renvoyé');
-    }
-
-    async function deleteOrder(orderID) {
-      if (!adminPasswordHash) return alert('Mot de passe requis');
-      if (!confirm('Supprimer cette commande ?')) return;
-      const res = await fetch(API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password: adminPasswordHash, action: 'deleteOrder', orderID })
-      });
-      const data = await res.json().catch(() => ({}));
-      if (data.success) {
-        allOrders = allOrders.filter(o => o.orderID !== orderID);
-        filterOrders();
-        updateStats(allOrders);
-      } else {
-        alert(data.error || 'Erreur lors de la suppression');
-      }
-    }
-
-    function exportCSV() {
-      if (!allOrders.length) return;
-      const headers = ['orderID','email','date','status','notes'];
-      const rows = allOrders.map(o => headers.map(h => (o[h] || '').toString().replace(/"/g,'""')));
-      const csv = [headers.join(','), ...rows.map(r => '"' + r.join('","') + '"')].join('\n');
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'orders.csv';
-      a.click();
-      URL.revokeObjectURL(url);
-    }
-
-    function printList() {
-      window.print();
-    }
-
-    function logout() {
-      localStorage.removeItem('adminHash');
-      window.location.href = 'admin-login.html';
-    }
-
-    function updateStats(data) {
-      const total = data.length;
-      const pending = data.filter(o => o.status === 'pending').length;
-      const today = data.filter(o => {
-        const d = new Date(o.date);
-        const n = new Date();
-        return d.getFullYear() === n.getFullYear() && d.getMonth() === n.getMonth() && d.getDate() === n.getDate();
-      }).length;
-      const now = new Date();
-      const weekStart = new Date(now);
-      weekStart.setDate(now.getDate() - ((now.getDay() + 6) % 7));
-      const completedWeek = data.filter(o => o.status === 'completed' && new Date(o.date) >= weekStart).length;
-      const weekTotal = data.filter(o => new Date(o.date) >= weekStart).length;
-      const percent = weekTotal ? Math.round((completedWeek / weekTotal) * 100) : 0;
-      document.getElementById('stat-total').textContent = `Total: ${total}`;
-      document.getElementById('stat-pending').textContent = `En attente: ${pending}`;
-      document.getElementById('stat-today').textContent = `Aujourd'hui: ${today}`;
-      document.getElementById('stat-week').textContent = `Complété cette semaine: ${percent}%`;
-    }
-
-    function sortOrders(list) {
-      const sort = document.getElementById('sortSelect').value;
-      return list.slice().sort((a,b) => {
-        const da = new Date(a.date); const db = new Date(b.date);
-        if (sort === 'date-asc') return da - db;
-        return db - da;
-      });
-    }
-
-    function filterOrders() {
-        const search = document.getElementById('searchBox').value.toLowerCase();
-        const statusFilter = document.getElementById('statusFilter').value;
-        if (!allOrders || allOrders.length === 0) return;
-
-        let filtered = allOrders.filter(order => {
-          const orderID = order.orderID ? String(order.orderID).toLowerCase() : '';
-          const email = order.email ? String(order.email).toLowerCase() : '';
-          const status = order.status ? String(order.status).toLowerCase() : '';
-          const notes = order.notes ? String(order.notes).toLowerCase() : '';
-          const searchMatch = orderID.includes(search) || email.includes(search) || status.includes(search) || notes.includes(search);
-          const statusMatch = statusFilter === 'all' || status === statusFilter;
-          return searchMatch && statusMatch;
-        });
-        filtered = sortOrders(filtered);
-        displayOrders(filtered);
-        updateStats(filtered);
-    }
-
-    function logout() {
-      localStorage.removeItem('adminPassword');
-      window.location.href = 'admin-login.html';
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
- qvc6qm-codex/créer-une-page-admin-complète
-      const stored = localStorage.getItem('adminHash');
-=======
-      const stored = localStorage.getItem('adminPasswordHash');
- main
-      if (stored === ADMIN_PASSWORD_HASH) {
-        adminPasswordHash = stored;
-        document.querySelector('.password-section').style.display = 'none';
-        document.getElementById('adminContent').style.display = 'block';
-        loadOrders();
-      }
-      const searchInput = document.getElementById('searchBox');
-      if (searchInput) {
-          searchInput.addEventListener('input', filterOrders);
-      }
- qvc6qm-codex/créer-une-page-admin-complète
-      const statusSelect = document.getElementById('statusFilter');
-      if (statusSelect) statusSelect.addEventListener('change', filterOrders);
-      const sortSelect = document.getElementById('sortSelect');
-      if (sortSelect) sortSelect.addEventListener('change', filterOrders);
-      const logoutBtn = document.getElementById('logoutBtn');
-      if (logoutBtn) logoutBtn.addEventListener('click', logout);
-=======
-      const logoutBtn = document.getElementById('logoutBtn');
-      if (logoutBtn) {
-          logoutBtn.addEventListener('click', logout);
-      }
- main
+    localStorage.setItem('adminPasswordHash', adminPasswordHash);
+    document.querySelector('.password-section').style.display = 'none';
+    document.getElementById('adminContent').style.display = 'block';
+    loadOrders();
     });
+ main
+  }
+
+  async function loadOrders() {
+    const loadingIndicator = document.getElementById('loadingIndicator');
+    const errorMessage = document.getElementById('errorMessage');
+    const orderList = document.getElementById('orderList');
+    
+    loadingIndicator.style.display = 'block';
+    errorMessage.style.display = 'none';
+    orderList.textContent = '';
+
+
+    try {
+    // Pour charger les commandes, nous utilisons doGet, pas besoin de mot de passe ici
+    // car le script Google ne le demande pas pour doGet (lecture de toutes les commandes).
+    // Le mot de passe sera utilisé pour les actions POST (mise à jour).
+    const res = await fetch(API_URL);
+    if (!res.ok) {
+      const errorData = await res.json().catch(() => ({ error: `Erreur HTTP: ${res.status}` }));
+      throw new Error(errorData.error || `Erreur HTTP: ${res.status}`);
+    }
+    allOrders = await res.json();
+    if (allOrders.error) {
+      throw new Error(allOrders.error);
+    }
+    updateStats(allOrders);
+    displayOrders(sortOrders(allOrders));
+    } catch (error) {
+    console.error("Erreur lors du chargement des commandes:", error);
+    errorMessage.textContent = "Erreur lors du chargement des commandes: " + error.message;
+    errorMessage.style.display = 'block';
+    } finally {
+    loadingIndicator.style.display = 'none';
+    }
+  }
+
+  function displayOrders(orders) {
+    const container = document.getElementById('orderList');
+    container.textContent = '';
+    if (orders.length === 0) {
+    const p = document.createElement('p');
+    p.textContent = 'Aucune commande à afficher.';
+    container.appendChild(p);
+    return;
+    }
+
+    orders.forEach(order => {
+    const div = document.createElement('div');
+    div.className = 'order-item';
+    div.dataset.orderId = order.orderID; // Stocker l'ID pour référence
+
+    // Convertir la date si elle est valide
+    let formattedDate = 'Date inconnue';
+    if (order.date) {
+      const dateObj = new Date(order.date);
+      if (!isNaN(dateObj)) {
+        formattedDate = dateObj.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' });
+      } else {
+        // Essayer de parser si c'est une chaîne de type "YYYY-MM-DD" ou similaire
+        const parts = String(order.date).split(/[-/]/);
+        if (parts.length === 3) {
+          // Attention: new Date(year, monthIndex, day)
+          const potentialDate = new Date(parts[0], parts[1] - 1, parts[2]);
+          if(!isNaN(potentialDate)){
+            formattedDate = potentialDate.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' });
+          } else if (String(order.date).includes("T")) { // Si c'est un format ISO avec T
+             const isoDate = new Date(String(order.date));
+             if(!isNaN(isoDate)) {
+              formattedDate = isoDate.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' });
+             } else {
+              formattedDate = String(order.date); // Afficher tel quel si parsing échoue
+             }
+          } else {
+             formattedDate = String(order.date); // Afficher tel quel
+          }
+        } else {
+          formattedDate = String(order.date); // Afficher tel quel
+        }
+      }
+    }
+
+
+    const header = document.createElement('div');
+    header.className = 'order-header';
+    const h3 = document.createElement('h3');
+    h3.textContent = `Commande: ${order.orderID}`;
+    header.appendChild(h3);
+
+    const details = document.createElement('div');
+    details.className = 'order-details';
+
+    const emailP = document.createElement('p');
+    const emailStrong = document.createElement('strong');
+    emailStrong.textContent = 'Email:';
+    emailP.appendChild(emailStrong);
+    emailP.appendChild(document.createTextNode(' ' + (order.email || 'Non fourni')));
+    details.appendChild(emailP);
+
+    const dateP = document.createElement('p');
+    const dateStrong = document.createElement('strong');
+    dateStrong.textContent = 'Date:';
+    dateP.appendChild(dateStrong);
+    dateP.appendChild(document.createTextNode(' ' + formattedDate));
+    details.appendChild(dateP);
+
+    const actions = document.createElement('div');
+    actions.className = 'order-actions';
+
+    const labelStatus = document.createElement('label');
+    labelStatus.setAttribute('for', `status-${order.orderID}`);
+    labelStatus.textContent = 'Statut:';
+    actions.appendChild(labelStatus);
+
+    const select = document.createElement('select');
+    select.id = `status-${order.orderID}`;
+    select.className = 'status-select';
+    const options = [
+      ['pending', 'En attente'],
+      ['processing', 'En traitement'],
+      ['completed', 'Complétée'],
+      ['cancelled', 'Annulée'],
+      ['refunded', 'Remboursée']
+    ];
+    options.forEach(([value, label]) => {
+      const opt = document.createElement('option');
+      opt.value = value;
+      opt.textContent = label;
+      if (order.status === value) opt.selected = true;
+      select.appendChild(opt);
+    });
+    actions.appendChild(select);
+
+    const labelNotes = document.createElement('label');
+    labelNotes.setAttribute('for', `notes-${order.orderID}`);
+    labelNotes.textContent = 'Notes (visibles par le client si la page suivi les affiche):';
+    actions.appendChild(labelNotes);
+
+    const textarea = document.createElement('textarea');
+    textarea.id = `notes-${order.orderID}`;
+    textarea.className = 'notes-input';
+    textarea.rows = 3;
+    textarea.textContent = order.notes || '';
+    actions.appendChild(textarea);
+
+    const saveBtn = document.createElement('button');
+    saveBtn.className = 'save-btn';
+    saveBtn.textContent = '✏️ Sauvegarder';
+    saveBtn.addEventListener('click', () => updateOrder(order.orderID));
+    actions.appendChild(saveBtn);
+
+    const emailBtn = document.createElement('button');
+    emailBtn.className = 'save-btn';
+    emailBtn.textContent = '📧';
+    emailBtn.title = 'Renvoyer l\'email';
+    emailBtn.addEventListener('click', () => resendEmail(order.orderID));
+    actions.appendChild(emailBtn);
+
+    const delBtn = document.createElement('button');
+    delBtn.className = 'save-btn';
+    delBtn.textContent = '🗑️';
+    delBtn.title = 'Supprimer';
+    delBtn.addEventListener('click', () => deleteOrder(order.orderID));
+    actions.appendChild(delBtn);
+
+    const msgDiv = document.createElement('div');
+    msgDiv.id = `message-${order.orderID}`;
+    msgDiv.style.marginTop = '10px';
+    actions.appendChild(msgDiv);
+
+    details.appendChild(actions);
+
+    div.appendChild(header);
+    div.appendChild(details);
+
+    container.appendChild(div);
+    });
+  }
+
+  async function updateOrder(orderID) {
+    const status = document.getElementById(`status-${orderID}`).value;
+    const notes = document.getElementById(`notes-${orderID}`).value;
+    const messageDiv = document.getElementById(`message-${orderID}`);
+    messageDiv.textContent = ''; // Clear previous messages
+    messageDiv.className = ''; // Clear previous styling
+
+    if (!adminPasswordHash) {
+    alert("Le mot de passe administrateur est requis pour cette action. Veuillez le saisir en haut de la page.");
+    // Remettre le focus sur le champ de mot de passe ou afficher la section
+    document.querySelector('.password-section').style.display = 'block';
+    document.getElementById('adminPassword').focus();
+    return;
+    }
+    
+    const loadingIndicator = document.getElementById('loadingIndicator');
+    loadingIndicator.style.display = 'block';
+
+
+    try {
+    const res = await fetch(API_URL, {
+      method: 'POST',
+      headers: {
+      'Content-Type': 'application/json', // Important pour que Apps Script parse e.postData.contents
+      },
+      body: JSON.stringify({
+      password: adminPasswordHash,
+      action: 'updateOrder',
+      orderID: orderID,
+      status: status,
+      notes: notes
+      })
+    });
+
+    const result = await res.json();
+    loadingIndicator.style.display = 'none';
+
+    if (result.success) {
+      messageDiv.textContent = result.message || "Commande mise à jour avec succès!";
+      messageDiv.className = 'success-message'; // Appliquer le style de succès
+      // Optionnel: Mettre à jour l'objet `allOrders` localement pour refléter le changement immédiatement
+      const orderIndex = allOrders.findIndex(o => o.orderID === orderID);
+      if (orderIndex > -1) {
+      allOrders[orderIndex].status = status;
+      allOrders[orderIndex].notes = notes;
+      }
+      updateStats(allOrders);
+    } else {
+      messageDiv.textContent = "Erreur: " + (result.error || "Impossible de mettre à jour la commande.");
+      messageDiv.className = 'error-message'; // Appliquer un style d'erreur (à définir dans CSS)
+    }
+    } catch (error) {
+    loadingIndicator.style.display = 'none';
+    messageDiv.textContent = "Erreur de communication: " + error.message;
+    messageDiv.className = 'error-message';
+    console.error("Erreur lors de la mise à jour:", error);
+    }
+
+    // Cacher le message après quelques secondes
+    setTimeout(() => {
+    messageDiv.textContent = '';
+    messageDiv.className = '';
+    }, 5000);
+  }
+
+  async function resendEmail(orderID) {
+    if (!adminPasswordHash) return alert('Mot de passe requis');
+    const res = await fetch(API_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ password: adminPasswordHash, action: 'resendEmail', orderID })
+    });
+    const data = await res.json().catch(() => ({}));
+    alert(data.message || 'Email renvoyé');
+  }
+
+  async function deleteOrder(orderID) {
+    if (!adminPasswordHash) return alert('Mot de passe requis');
+    if (!confirm('Supprimer cette commande ?')) return;
+    const res = await fetch(API_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ password: adminPasswordHash, action: 'deleteOrder', orderID })
+    });
+    const data = await res.json().catch(() => ({}));
+    if (data.success) {
+    allOrders = allOrders.filter(o => o.orderID !== orderID);
+    filterOrders();
+    updateStats(allOrders);
+    } else {
+    alert(data.error || 'Erreur lors de la suppression');
+    }
+  }
+
+  function exportCSV() {
+    if (!allOrders.length) return;
+    const headers = ['orderID','email','date','status','notes'];
+    const rows = allOrders.map(o => headers.map(h => (o[h] || '').toString().replace(/"/g,'""')));
+    const csv = [headers.join(','), ...rows.map(r => '"' + r.join('","') + '"')].join('\n');
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'orders.csv';
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  function printList() {
+    window.print();
+  }
+
+  function logout() {
+    localStorage.removeItem('adminHash');
+    window.location.href = 'admin-login.html';
+  }
+
+  function updateStats(data) {
+    const total = data.length;
+    const pending = data.filter(o => o.status === 'pending').length;
+    const today = data.filter(o => {
+    const d = new Date(o.date);
+    const n = new Date();
+    return d.getFullYear() === n.getFullYear() && d.getMonth() === n.getMonth() && d.getDate() === n.getDate();
+    }).length;
+    const now = new Date();
+    const weekStart = new Date(now);
+    weekStart.setDate(now.getDate() - ((now.getDay() + 6) % 7));
+    const completedWeek = data.filter(o => o.status === 'completed' && new Date(o.date) >= weekStart).length;
+    const weekTotal = data.filter(o => new Date(o.date) >= weekStart).length;
+    const percent = weekTotal ? Math.round((completedWeek / weekTotal) * 100) : 0;
+    document.getElementById('stat-total').textContent = `Total: ${total}`;
+    document.getElementById('stat-pending').textContent = `En attente: ${pending}`;
+    document.getElementById('stat-today').textContent = `Aujourd'hui: ${today}`;
+    document.getElementById('stat-week').textContent = `Complété cette semaine: ${percent}%`;
+  }
+
+  function sortOrders(list) {
+    const sort = document.getElementById('sortSelect').value;
+    return list.slice().sort((a,b) => {
+    const da = new Date(a.date); const db = new Date(b.date);
+    if (sort === 'date-asc') return da - db;
+    return db - da;
+    });
+  }
+
+  function filterOrders() {
+    const search = document.getElementById('searchBox').value.toLowerCase();
+    const statusFilter = document.getElementById('statusFilter').value;
+    if (!allOrders || allOrders.length === 0) return;
+
+    let filtered = allOrders.filter(order => {
+      const orderID = order.orderID ? String(order.orderID).toLowerCase() : '';
+      const email = order.email ? String(order.email).toLowerCase() : '';
+      const status = order.status ? String(order.status).toLowerCase() : '';
+      const notes = order.notes ? String(order.notes).toLowerCase() : '';
+      const searchMatch = orderID.includes(search) || email.includes(search) || status.includes(search) || notes.includes(search);
+      const statusMatch = statusFilter === 'all' || status === statusFilter;
+      return searchMatch && statusMatch;
+    });
+    filtered = sortOrders(filtered);
+    displayOrders(filtered);
+    updateStats(filtered);
+  }
+
+  function logout() {
+    localStorage.removeItem('adminPassword');
+    window.location.href = 'admin-login.html';
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+ qvc6qm-codex/créer-une-page-admin-complète
+    const stored = localStorage.getItem('adminHash');
+=======
+    const stored = localStorage.getItem('adminPasswordHash');
+ main
+    if (stored === ADMIN_PASSWORD_HASH) {
+    adminPasswordHash = stored;
+    document.querySelector('.password-section').style.display = 'none';
+    document.getElementById('adminContent').style.display = 'block';
+    loadOrders();
+    }
+    const searchInput = document.getElementById('searchBox');
+    if (searchInput) {
+      searchInput.addEventListener('input', filterOrders);
+    }
+ qvc6qm-codex/créer-une-page-admin-complète
+    const statusSelect = document.getElementById('statusFilter');
+    if (statusSelect) statusSelect.addEventListener('change', filterOrders);
+    const sortSelect = document.getElementById('sortSelect');
+    if (sortSelect) sortSelect.addEventListener('change', filterOrders);
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) logoutBtn.addEventListener('click', logout);
+=======
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', logout);
+    }
+ main
+  });
   </script>
   <script src="js/main.js"></script>
 </body>
