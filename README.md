@@ -45,4 +45,10 @@ npm test
 
 - **Home (`index.html`)** : page d'accueil présentant les offres et permettant la commande d'un abonnement Spotify.
 - **Tracking (`tracking.html`)** : permet de saisir un numéro de commande pour suivre son statut.
+- **Admin login (`admin-login.html`)** : page d'authentification réservée à l'administration.
 - **Admin (`admin.html`)** : interface d'administration pour consulter et gérer les commandes.
+
+  - Gère les commandes : tri, recherche, modification de statut et notes
+  - Statistiques rapides, export CSV, impression et déconnexion sécurisée
+=======
+ main
