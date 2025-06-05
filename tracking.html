@@ -1,294 +1,300 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <title>SpotiDeals – Suivi de commande</title>
-  <meta name="description" content="Suivez l'état de votre commande SpotiDeals en temps réel. Entrez votre numéro de commande pour voir son statut.">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="css/style.css">
-  <style>
-    .tracking-form {
-      max-width: 500px;
-      margin: 2rem auto;
-      padding: 2rem;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-
-    .tracking-form input {
-      width: 100%;
-      padding: 12px;
-      margin: 8px 0;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      font-size: 16px;
-    }
-
-    .tracking-result {
-      margin-top: 2rem;
-      padding: 1.5rem;
-      border-radius: 8px;
-      display: none;
-    }
-
-    .tracking-result.active {
-      display: block;
-    }
-
-    .status-badge {
-      display: inline-block;
-      padding: 6px 12px;
-      border-radius: 20px;
-      font-size: 14px;
-      font-weight: 500;
-      margin: 8px 0;
-    }
-
-    .status-pending {
-      background: #fff3cd;
-      color: #856404;
-    }
-
-    .status-processing {
-      background: #cce5ff;
-      color: #004085;
-    }
-
-    .status-completed {
-      background: #d4edda;
-      color: #155724;
-    }
-
-    .timeline {
-      margin: 2rem 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .timeline-item {
-      position: relative;
-      padding-left: 30px;
-      margin-bottom: 1.5rem;
-    }
-
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: #e9ecef;
-    }
-
-    .timeline-item::after {
-      content: '';
-      position: absolute;
-      left: -4px;
-      top: 0;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: #1DB954;
-    }
-
-    .timeline-item.completed::after {
-      background: #1DB954;
-    }
-
-    .timeline-item.pending::after {
-      background: #ffc107;
-    }
-
-    .timeline-item.future::after {
-      background: #e9ecef;
-    }
-
-    .timeline-date {
-      font-size: 14px;
-      color: #6c757d;
-      margin-bottom: 4px;
-    }
-
-    .timeline-title {
-      font-weight: 500;
-      margin-bottom: 4px;
-    }
-
-    .timeline-description {
-      color: #6c757d;
-      font-size: 14px;
-    }
-  </style>
-</head>
-<body>
-  <!-- HEADER -->
-  <header class="header">
-    <div class="container header__inner">
-      <a href="index.html" class="logo">SpotiDeals</a>
-      <nav class="nav">
-        <a href="index.html#features">Fonctionnalités</a>
-        <a href="index.html#pricing">Tarifs</a>
-        <a href="index.html#how">Comment ça marche</a>
-        <a href="index.html#faq">FAQ</a>
-      </nav>
-      <a href="index.html#commande" class="btn btn--sm">Commander</a>
-    </div>
-  </header>
-
-  <!-- MAIN CONTENT -->
-  <main class="container">
-    <div class="tracking-container">
-      <h1>Suivi de commande</h1>
-      <p>Entrez votre numéro de commande pour suivre son statut</p>
-      
-      <form onsubmit="return checkOrder(event)" class="tracking-form">
-        <div class="form-group">
-          <input type="text" id="orderNumber" placeholder="Entrez votre numéro de commande" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Suivre ma commande</button>
-      </form>
-
-      <div id="trackingResult" class="tracking-result">
-        <div class="status-badge" id="statusBadge"></div>
-        <h2>Détails de la commande</h2>
-        <div id="orderDetails"></div>
-        
-        <ul class="timeline" id="orderTimeline">
-          <!-- Timeline items will be added here -->
-        </ul>
-      </div>
-    </div>
-  </main>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container footer__inner">
-      <div>© 2025 SpotiDeals</div>
-      <nav>
-        <a href="terms.html">CGV</a>
-        <a href="privacy.html">Confidentialité</a>
-        <a href="contact.html">Contact</a>
-      </nav>
-    </div>
-  </footer>
-
-  <script>
-    const API_URL = 'https://script.google.com/macros/s/AKfycbxEmJdgcerK1ENvsy8IvSnAZDJ6p4fr9hfO87haKbKrVXZaRf2Z3wnRzyQSDl527VtW/exec';
-
-    async function checkOrder(event) {
-      event.preventDefault();
-      const orderNumber = document.getElementById('orderNumber').value;
-      const resultDiv = document.getElementById('trackingResult');
-      const statusBadge = document.getElementById('statusBadge');
-      const orderDetails = document.getElementById('orderDetails');
-      const timeline = document.getElementById('orderTimeline');
-
-      try {
-        const res = await fetch(`${API_URL}?orderID=${orderNumber}`);
-        const data = await res.json();
-
-        if (data.error) {
-          alert("Commande introuvable");
-          return false;
-        }
-
-        resultDiv.classList.add('active');
-        let statusText = 'En attente de traitement';
-        let statusClass = 'status-pending';
-        if (data.status === 'processing') {
-          statusText = 'En cours de traitement';
-          statusClass = 'status-processing';
-        } else if (data.status === 'completed') {
-          statusText = 'Commande complétée';
-          statusClass = 'status-completed';
-        }
-        statusBadge.textContent = statusText;
-        statusBadge.className = `status-badge ${statusClass}`;
-        orderDetails.textContent = '';
-
-        const idP = document.createElement('p');
-        const idStrong = document.createElement('strong');
-        idStrong.textContent = 'Numéro de commande:';
-        idP.appendChild(idStrong);
-        idP.appendChild(document.createTextNode(' ' + data.orderID));
-        orderDetails.appendChild(idP);
-
-        const dateP = document.createElement('p');
-        const dateStrong = document.createElement('strong');
-        dateStrong.textContent = 'Date de commande:';
-        dateP.appendChild(dateStrong);
-        dateP.appendChild(document.createTextNode(' ' + new Date(data.date).toLocaleDateString()));
-        orderDetails.appendChild(dateP);
-
-        const emailP = document.createElement('p');
-        const emailStrong = document.createElement('strong');
-        emailStrong.textContent = 'Email:';
-        emailP.appendChild(emailStrong);
-        emailP.appendChild(document.createTextNode(' ' + data.email));
-        orderDetails.appendChild(emailP);
-
-        if (data.notes) {
-          const notesP = document.createElement('p');
-          const notesStrong = document.createElement('strong');
-          notesStrong.textContent = 'Notes:';
-          notesP.appendChild(notesStrong);
-          notesP.appendChild(document.createTextNode(' ' + data.notes));
-          orderDetails.appendChild(notesP);
-        }
-        
-        const orderDate = new Date(data.date);
-        timeline.textContent = '';
-
-        const steps = [
-          {
-            cls: 'completed',
-            date: orderDate,
-            title: 'Commande reçue',
-            desc: 'Votre commande a été enregistrée avec succès'
-          },
-          {
-            cls: data.status !== 'pending' ? 'completed' : 'pending',
-            date: new Date(orderDate.getTime() + 3 * 24 * 60 * 60 * 1000),
-            title: 'Vérification des informations',
-            desc: 'Nous vérifions vos informations de compte'
-          },
-          {
-            cls: data.status === 'completed' ? 'completed' : 'future',
-            date: new Date(orderDate.getTime() + 5 * 24 * 60 * 60 * 1000),
-            title: 'Activation du compte',
-            desc: 'Votre compte Spotify Premium est activé'
-          }
-        ];
-
-        steps.forEach(step => {
-          const li = document.createElement('li');
-          li.className = `timeline-item ${step.cls}`;
-
-          const dateDiv = document.createElement('div');
-          dateDiv.className = 'timeline-date';
-          dateDiv.textContent = step.date.toLocaleDateString();
-          li.appendChild(dateDiv);
-
-          const titleDiv = document.createElement('div');
-          titleDiv.className = 'timeline-title';
-          titleDiv.textContent = step.title;
-          li.appendChild(titleDiv);
-
-          const descDiv = document.createElement('div');
-          descDiv.className = 'timeline-description';
-          descDiv.textContent = step.desc;
-          li.appendChild(descDiv);
-
-          timeline.appendChild(li);
-        });
-      } catch (error) {
-        console.error("Erreur:", error);
-        alert("Erreur lors de la vérification de la commande.");
+  <head>
+    <meta charset="UTF-8" />
+    <title>SpotiDeals – Suivi de commande</title>
+    <meta
+      name="description"
+      content="Suivez l'état de votre commande SpotiDeals en temps réel
+    grâce à votre numéro de commande."
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      .tracking-form {
+        max-width: 500px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       }
-      return false;
-    }
-  </script>
-</body>
-</html> 
+
+      .tracking-form input {
+        width: 100%;
+        padding: 12px;
+        margin: 8px 0;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+      }
+
+      .tracking-result {
+        margin-top: 2rem;
+        padding: 1.5rem;
+        border-radius: 8px;
+        display: none;
+      }
+
+      .tracking-result.active {
+        display: block;
+      }
+
+      .status-badge {
+        display: inline-block;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 500;
+        margin: 8px 0;
+      }
+
+      .status-pending {
+        background: #fff3cd;
+        color: #856404;
+      }
+
+      .status-processing {
+        background: #cce5ff;
+        color: #004085;
+      }
+
+      .status-completed {
+        background: #d4edda;
+        color: #155724;
+      }
+
+      .timeline {
+        margin: 2rem 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .timeline-item {
+        position: relative;
+        padding-left: 30px;
+        margin-bottom: 1.5rem;
+      }
+
+      .timeline-item::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: #e9ecef;
+      }
+
+      .timeline-item::after {
+        content: '';
+        position: absolute;
+        left: -4px;
+        top: 0;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #1db954;
+      }
+
+      .timeline-item.completed::after {
+        background: #1db954;
+      }
+
+      .timeline-item.pending::after {
+        background: #ffc107;
+      }
+
+      .timeline-item.future::after {
+        background: #e9ecef;
+      }
+
+      .timeline-date {
+        font-size: 14px;
+        color: #6c757d;
+        margin-bottom: 4px;
+      }
+
+      .timeline-title {
+        font-weight: 500;
+        margin-bottom: 4px;
+      }
+
+      .timeline-description {
+        color: #6c757d;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header class="header">
+      <div class="container header__inner">
+        <a href="index.html" class="logo">SpotiDeals</a>
+        <nav class="nav">
+          <a href="index.html#features">Fonctionnalités</a>
+          <a href="index.html#pricing">Tarifs</a>
+          <a href="index.html#how">Comment ça marche</a>
+          <a href="index.html#faq">FAQ</a>
+        </nav>
+        <a href="index.html#commande" class="btn btn--sm">Commander</a>
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="container">
+      <div class="tracking-container">
+        <h1>Suivi de commande</h1>
+        <p>Entrez votre numéro de commande pour suivre son statut</p>
+
+        <form onsubmit="return checkOrder(event)" class="tracking-form">
+          <div class="form-group">
+            <input type="text" id="orderNumber" placeholder="Entrez votre numéro de commande" required />
+          </div>
+          <button type="submit" class="btn btn-primary">Suivre ma commande</button>
+        </form>
+
+        <div id="trackingResult" class="tracking-result">
+          <div class="status-badge" id="statusBadge"></div>
+          <h2>Détails de la commande</h2>
+          <div id="orderDetails"></div>
+
+          <ul class="timeline" id="orderTimeline">
+            <!-- Timeline items will be added here -->
+          </ul>
+        </div>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container footer__inner">
+        <div>© 2025 SpotiDeals</div>
+        <nav>
+          <a href="terms.html">CGV</a>
+          <a href="privacy.html">Confidentialité</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </div>
+    </footer>
+
+    <script>
+      const API_URL =
+        'https://script.google.com/macros/s/' +
+        'AKfycbxEmJdgcerK1ENvsy8IvSnAZDJ6p4fr9hfO87haKbKrVXZaRf2Z3wnRzyQSDl527VtW/exec';
+
+      async function checkOrder(event) {
+        event.preventDefault();
+        const orderNumber = document.getElementById('orderNumber').value;
+        const resultDiv = document.getElementById('trackingResult');
+        const statusBadge = document.getElementById('statusBadge');
+        const orderDetails = document.getElementById('orderDetails');
+        const timeline = document.getElementById('orderTimeline');
+
+        try {
+          const res = await fetch(`${API_URL}?orderID=${orderNumber}`);
+          const data = await res.json();
+
+          if (data.error) {
+            alert('Commande introuvable');
+            return false;
+          }
+
+          resultDiv.classList.add('active');
+          let statusText = 'En attente de traitement';
+          let statusClass = 'status-pending';
+          if (data.status === 'processing') {
+            statusText = 'En cours de traitement';
+            statusClass = 'status-processing';
+          } else if (data.status === 'completed') {
+            statusText = 'Commande complétée';
+            statusClass = 'status-completed';
+          }
+          statusBadge.textContent = statusText;
+          statusBadge.className = `status-badge ${statusClass}`;
+          orderDetails.textContent = '';
+
+          const idP = document.createElement('p');
+          const idStrong = document.createElement('strong');
+          idStrong.textContent = 'Numéro de commande:';
+          idP.appendChild(idStrong);
+          idP.appendChild(document.createTextNode(' ' + data.orderID));
+          orderDetails.appendChild(idP);
+
+          const dateP = document.createElement('p');
+          const dateStrong = document.createElement('strong');
+          dateStrong.textContent = 'Date de commande:';
+          dateP.appendChild(dateStrong);
+          dateP.appendChild(document.createTextNode(' ' + new Date(data.date).toLocaleDateString()));
+          orderDetails.appendChild(dateP);
+
+          const emailP = document.createElement('p');
+          const emailStrong = document.createElement('strong');
+          emailStrong.textContent = 'Email:';
+          emailP.appendChild(emailStrong);
+          emailP.appendChild(document.createTextNode(' ' + data.email));
+          orderDetails.appendChild(emailP);
+
+          if (data.notes) {
+            const notesP = document.createElement('p');
+            const notesStrong = document.createElement('strong');
+            notesStrong.textContent = 'Notes:';
+            notesP.appendChild(notesStrong);
+            notesP.appendChild(document.createTextNode(' ' + data.notes));
+            orderDetails.appendChild(notesP);
+          }
+
+          const orderDate = new Date(data.date);
+          timeline.textContent = '';
+
+          const steps = [
+            {
+              cls: 'completed',
+              date: orderDate,
+              title: 'Commande reçue',
+              desc: 'Votre commande a été enregistrée avec succès',
+            },
+            {
+              cls: data.status !== 'pending' ? 'completed' : 'pending',
+              date: new Date(orderDate.getTime() + 3 * 24 * 60 * 60 * 1000),
+              title: 'Vérification des informations',
+              desc: 'Nous vérifions vos informations de compte',
+            },
+            {
+              cls: data.status === 'completed' ? 'completed' : 'future',
+              date: new Date(orderDate.getTime() + 5 * 24 * 60 * 60 * 1000),
+              title: 'Activation du compte',
+              desc: 'Votre compte Spotify Premium est activé',
+            },
+          ];
+
+          steps.forEach((step) => {
+            const li = document.createElement('li');
+            li.className = `timeline-item ${step.cls}`;
+
+            const dateDiv = document.createElement('div');
+            dateDiv.className = 'timeline-date';
+            dateDiv.textContent = step.date.toLocaleDateString();
+            li.appendChild(dateDiv);
+
+            const titleDiv = document.createElement('div');
+            titleDiv.className = 'timeline-title';
+            titleDiv.textContent = step.title;
+            li.appendChild(titleDiv);
+
+            const descDiv = document.createElement('div');
+            descDiv.className = 'timeline-description';
+            descDiv.textContent = step.desc;
+            li.appendChild(descDiv);
+
+            timeline.appendChild(li);
+          });
+        } catch (error) {
+          console.error('Erreur:', error);
+          alert('Erreur lors de la vérification de la commande.');
+        }
+        return false;
+      }
+    </script>
+  </body>
+</html>
