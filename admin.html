@@ -45,6 +45,43 @@
       border-radius: 8px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 1rem;
+      align-items: center;
+    }
+    .tool-btn {
+      padding: 8px 12px;
+      border-radius: 4px;
+      border: 1px solid #ddd;
+      background: #eee;
+      cursor: pointer;
+    }
+    .tool-btn:hover {
+      background: #e0e0e0;
+    }
+    .tool-select {
+      padding: 8px 12px;
+      border-radius: 4px;
+      border: 1px solid #ddd;
+      background: #fff;
+    }
+    .stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 1rem;
+    }
+    .stat-box {
+      flex: 1 1 120px;
+      background: #f1f1f1;
+      border-radius: 4px;
+      padding: 10px;
+      text-align: center;
+      font-weight: bold;
+    }
     .password-section {
       margin-bottom: 2rem;
       padding: 1.5rem;
@@ -178,7 +215,27 @@
       </div>
       
       <div id="adminContent" style="display: none;">
-        <input type="text" id="searchBox" class="search-box" placeholder="Rechercher une commande par ID, email...">
+        <div class="toolbar">
+          <input type="text" id="searchBox" class="search-box" placeholder="Rechercher par ID ou email">
+          <select id="statusFilter" class="tool-select">
+            <option value="all">Tous</option>
+            <option value="pending">En attente</option>
+            <option value="processing">En traitement</option>
+            <option value="completed">Complétées</option>
+          </select>
+          <select id="sortSelect" class="tool-select">
+            <option value="date-desc">Date ▼</option>
+            <option value="date-asc">Date ▲</option>
+          </select>
+          <button class="tool-btn" onclick="exportCSV()">Exporter CSV</button>
+          <button class="tool-btn" onclick="printList()">Imprimer</button>
+        </div>
+        <div class="stats">
+          <div id="stat-total" class="stat-box">Total: 0</div>
+          <div id="stat-pending" class="stat-box">En attente: 0</div>
+          <div id="stat-today" class="stat-box">Aujourd'hui: 0</div>
+          <div id="stat-week" class="stat-box">Complété cette semaine: 0%</div>
+        </div>
         <div id="loadingIndicator" style="display: none;">Chargement des commandes...</div>
         <div id="errorMessage" style="display: none;"></div>
         <div id="orderList" class="order-list">
@@ -197,11 +254,12 @@
     let allOrders = []; // Pour stocker toutes les commandes et filtrer localement
 
     function initAdminView() {
-    adminPassword = document.getElementById("adminPassword").value.trim();
-    if (adminPassword !== ADMIN_PASSWORD) {
-      alert("Mot de passe incorrect.");
-      return;
-    }
+      adminPassword = document.getElementById("adminPassword").value.trim();
+      if (adminPassword !== ADMIN_PASSWORD) {
+        alert("Mot de passe incorrect.");
+        return;
+      }
+      localStorage.setItem('adminPassword', adminPassword);
       document.querySelector('.password-section').style.display = 'none';
       document.getElementById('adminContent').style.display = 'block';
       loadOrders();
@@ -230,7 +288,8 @@
         if (allOrders.error) {
             throw new Error(allOrders.error);
         }
-        displayOrders(allOrders);
+        updateStats(allOrders);
+        displayOrders(sortOrders(allOrders));
       } catch (error) {
         console.error("Erreur lors du chargement des commandes:", error);
         errorMessage.textContent = "Erreur lors du chargement des commandes: " + error.message;
@@ -350,9 +409,23 @@
 
         const saveBtn = document.createElement('button');
         saveBtn.className = 'save-btn';
-        saveBtn.textContent = 'Sauvegarder';
+        saveBtn.textContent = '✏️ Sauvegarder';
         saveBtn.addEventListener('click', () => updateOrder(order.orderID));
         actions.appendChild(saveBtn);
+
+        const emailBtn = document.createElement('button');
+        emailBtn.className = 'save-btn';
+        emailBtn.textContent = '📧';
+        emailBtn.title = 'Renvoyer l\'email';
+        emailBtn.addEventListener('click', () => resendEmail(order.orderID));
+        actions.appendChild(emailBtn);
+
+        const delBtn = document.createElement('button');
+        delBtn.className = 'save-btn';
+        delBtn.textContent = '🗑️';
+        delBtn.title = 'Supprimer';
+        delBtn.addEventListener('click', () => deleteOrder(order.orderID));
+        actions.appendChild(delBtn);
 
         const msgDiv = document.createElement('div');
         msgDiv.id = `message-${order.orderID}`;
@@ -414,6 +487,7 @@
             allOrders[orderIndex].status = status;
             allOrders[orderIndex].notes = notes;
           }
+          updateStats(allOrders);
         } else {
           messageDiv.textContent = "Erreur: " + (result.error || "Impossible de mettre à jour la commande.");
           messageDiv.className = 'error-message'; // Appliquer un style d'erreur (à définir dans CSS)
@@ -431,29 +505,120 @@
         messageDiv.className = '';
       }, 5000);
     }
-    
+
+    async function resendEmail(orderID) {
+      if (!adminPassword) return alert('Mot de passe requis');
+      const res = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: adminPassword, action: 'resendEmail', orderID })
+      });
+      const data = await res.json().catch(() => ({}));
+      alert(data.message || 'Email renvoyé');
+    }
+
+    async function deleteOrder(orderID) {
+      if (!adminPassword) return alert('Mot de passe requis');
+      if (!confirm('Supprimer cette commande ?')) return;
+      const res = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: adminPassword, action: 'deleteOrder', orderID })
+      });
+      const data = await res.json().catch(() => ({}));
+      if (data.success) {
+        allOrders = allOrders.filter(o => o.orderID !== orderID);
+        filterOrders();
+        updateStats(allOrders);
+      } else {
+        alert(data.error || 'Erreur lors de la suppression');
+      }
+    }
+
+    function exportCSV() {
+      if (!allOrders.length) return;
+      const headers = ['orderID','email','date','status','notes'];
+      const rows = allOrders.map(o => headers.map(h => (o[h] || '').toString().replace(/"/g,'""')));
+      const csv = [headers.join(','), ...rows.map(r => '"' + r.join('","') + '"')].join('\n');
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'orders.csv';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function printList() {
+      window.print();
+    }
+
+    function updateStats(data) {
+      const total = data.length;
+      const pending = data.filter(o => o.status === 'pending').length;
+      const today = data.filter(o => {
+        const d = new Date(o.date);
+        const n = new Date();
+        return d.getFullYear() === n.getFullYear() && d.getMonth() === n.getMonth() && d.getDate() === n.getDate();
+      }).length;
+      const now = new Date();
+      const weekStart = new Date(now);
+      weekStart.setDate(now.getDate() - ((now.getDay() + 6) % 7));
+      const completedWeek = data.filter(o => o.status === 'completed' && new Date(o.date) >= weekStart).length;
+      const weekTotal = data.filter(o => new Date(o.date) >= weekStart).length;
+      const percent = weekTotal ? Math.round((completedWeek / weekTotal) * 100) : 0;
+      document.getElementById('stat-total').textContent = `Total: ${total}`;
+      document.getElementById('stat-pending').textContent = `En attente: ${pending}`;
+      document.getElementById('stat-today').textContent = `Aujourd'hui: ${today}`;
+      document.getElementById('stat-week').textContent = `Complété cette semaine: ${percent}%`;
+    }
+
+    function sortOrders(list) {
+      const sort = document.getElementById('sortSelect').value;
+      return list.slice().sort((a,b) => {
+        const da = new Date(a.date); const db = new Date(b.date);
+        if (sort === 'date-asc') return da - db;
+        return db - da;
+      });
+    }
+
     function filterOrders() {
         const search = document.getElementById('searchBox').value.toLowerCase();
+        const statusFilter = document.getElementById('statusFilter').value;
         if (!allOrders || allOrders.length === 0) return;
 
-        const filtered = allOrders.filter(order => {
+        let filtered = allOrders.filter(order => {
           const orderID = order.orderID ? String(order.orderID).toLowerCase() : '';
           const email = order.email ? String(order.email).toLowerCase() : '';
           const status = order.status ? String(order.status).toLowerCase() : '';
           const notes = order.notes ? String(order.notes).toLowerCase() : '';
-          return orderID.includes(search) || email.includes(search) || status.includes(search) || notes.includes(search);
+          const searchMatch = orderID.includes(search) || email.includes(search) || status.includes(search) || notes.includes(search);
+          const statusMatch = statusFilter === 'all' || status === statusFilter;
+          return searchMatch && statusMatch;
         });
+        filtered = sortOrders(filtered);
         displayOrders(filtered);
+        updateStats(filtered);
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      // Ne pas charger les commandes automatiquement, attendre la saisie du mot de passe
-      // loadOrders(); // Déplacé dans initAdminView
+      const stored = localStorage.getItem('adminPassword');
+      if (stored === ADMIN_PASSWORD) {
+        adminPassword = stored;
+        document.querySelector('.password-section').style.display = 'none';
+        document.getElementById('adminContent').style.display = 'block';
+        loadOrders();
+      }
       const searchInput = document.getElementById('searchBox');
       if (searchInput) {
           searchInput.addEventListener('input', filterOrders);
       }
+      const statusSelect = document.getElementById('statusFilter');
+      if (statusSelect) statusSelect.addEventListener('change', filterOrders);
+      const sortSelect = document.getElementById('sortSelect');
+      if (sortSelect) sortSelect.addEventListener('change', filterOrders);
     });
   </script>
+  <script src="js/main.js"></script>
 </body>
-</html> 
+</html>
