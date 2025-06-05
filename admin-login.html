@@ -7,9 +7,15 @@
   <link rel="stylesheet" href="css/style.css">
   <style>
     body {
+
       font-family: 'Roboto', sans-serif;
       background-color: #0a0b0e;
       color: #e5e5e5;
+=======
+      font-family: sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+ main
     }
     .container {
       max-width: 900px;
@@ -41,9 +47,15 @@
       max-width: 600px;
       margin: 2rem auto;
       padding: 2rem;
+
       background: #1a1b23;
       border-radius: 8px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+=======
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+ main
       text-align: center;
     }
     .admin-panel input[type="password"], .admin-panel button {
@@ -53,6 +65,7 @@
       border: 1px solid #ddd;
     }
     .admin-panel button {
+
       background: #1DB954;
       color: white;
       cursor: pointer;
@@ -60,6 +73,14 @@
     }
     .admin-panel button:hover {
       background: #1ed760;
+=======
+      background: #5cb85c;
+      color: white;
+      cursor: pointer;
+    }
+    .admin-panel button:hover {
+      background: #4cae4c;
+ main
     }
   </style>
 </head>
@@ -82,6 +103,7 @@
     </div>
   </main>
   <script>
+
     const ADMIN_PASSWORD_HASH = '713bfda78870bf9d1b261f565286f85e97ee614efe5f0faf7c34e7ca4f65baca';
 
     async function hashPassword(str) {
@@ -108,5 +130,32 @@
     });
   </script>
   <script src="js/main.js"></script>
+=======
+    const ADMIN_PASSWORD_HASH = "db4820111574318070358f047cc49d2aa7bc6e6e614af9ea8083c2c3f95b2569";
+
+    async function hashPassword(pwd) {
+      const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pwd));
+      return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const stored = localStorage.getItem('adminPasswordHash');
+      if (stored === ADMIN_PASSWORD_HASH) {
+        window.location.href = 'admin.html';
+      }
+    });
+
+    document.getElementById('loginBtn').addEventListener('click', async () => {
+      const pwd = document.getElementById('adminPwd').value.trim();
+      const hash = await hashPassword(pwd);
+      if (hash === ADMIN_PASSWORD_HASH) {
+        localStorage.setItem('adminPasswordHash', hash);
+        window.location.href = 'admin.html';
+      } else {
+        alert('Mot de passe incorrect.');
+      }
+    });
+  </script>
+ main
 </body>
 </html>
