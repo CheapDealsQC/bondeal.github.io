@@ -242,11 +242,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Simuler les dates de la timeline
         const now = new Date();
-        const paymentDate = new Date(now.getTime() + 1000 * 60 * 30);
-        const verificationDate = new Date(now.getTime() + 1000 * 60 * 60);
-        document.getElementById('timeline-order-date').textContent = now.toLocaleString();
-        document.getElementById('timeline-payment-date').textContent = paymentDate.toLocaleString();
-        document.getElementById('timeline-verification-date').textContent = verificationDate.toLocaleString();
+        const thirtyMinutes = 1000 * 60 * 30;
+        const sixtyMinutes = 1000 * 60 * 60;
+        const paymentDate = new Date(now.getTime() + thirtyMinutes);
+        const verificationDate = new Date(now.getTime() + sixtyMinutes);
+
+        const orderDateStr = now.toLocaleString();
+        const paymentDateStr = paymentDate.toLocaleString();
+        const verificationDateStr = verificationDate.toLocaleString();
+
+        document.getElementById('timeline-order-date').textContent = orderDateStr;
+        document.getElementById('timeline-payment-date').textContent = paymentDateStr;
+        document.getElementById('timeline-verification-date').textContent = verificationDateStr;
         document.getElementById('timeline-activation-date').textContent = 'En attente';
         document.getElementById('timeline-confirmation-date').textContent = 'En attente';
 
