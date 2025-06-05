@@ -7,9 +7,9 @@
   <link rel="stylesheet" href="css/style.css">
   <style>
     body {
-      font-family: sans-serif;
-      background-color: #f4f4f4;
-      color: #333;
+      font-family: 'Roboto', sans-serif;
+      background-color: var(--bg);
+      color: var(--fg);
     }
     .container {
       max-width: 900px; /* Augmenté pour plus d'espace */
@@ -17,8 +17,8 @@
       padding: 1rem;
     }
     .header {
-      background: #333;
-      color: white;
+      background: var(--card-bg);
+      color: var(--fg);
       padding: 1rem 0;
     }
     .header__inner {
@@ -27,13 +27,13 @@
       align-items: center;
     }
     .logo {
-      color: white;
+      color: var(--fg);
       text-decoration: none;
       font-size: 1.5rem;
       font-weight: bold;
     }
     .nav a {
-      color: white;
+      color: var(--fg);
       text-decoration: none;
       margin-left: 1rem;
     }
@@ -41,9 +41,9 @@
       max-width: 800px;
       margin: 2rem auto;
       padding: 2rem;
-      background: white;
+      background: var(--card-bg);
       border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.4);
     }
     .toolbar {
       display: flex;
@@ -55,18 +55,20 @@
     .tool-btn {
       padding: 8px 12px;
       border-radius: 4px;
-      border: 1px solid #ddd;
-      background: #eee;
+      border: 1px solid var(--border-color);
+      background: var(--card-bg-alt);
       cursor: pointer;
+      color: var(--fg);
     }
     .tool-btn:hover {
-      background: #e0e0e0;
+      background: var(--hover-bg);
     }
     .tool-select {
       padding: 8px 12px;
       border-radius: 4px;
-      border: 1px solid #ddd;
-      background: #fff;
+      border: 1px solid var(--border-color);
+      background: var(--card-bg);
+      color: var(--fg);
     }
     .stats {
       display: flex;
@@ -76,24 +78,27 @@
     }
     .stat-box {
       flex: 1 1 120px;
-      background: #f1f1f1;
+      background: var(--card-bg-alt);
       border-radius: 4px;
       padding: 10px;
       text-align: center;
       font-weight: bold;
+      color: var(--fg);
     }
     .password-section {
       margin-bottom: 2rem;
       padding: 1.5rem;
-      background-color: #f9f9f9;
+      background-color: var(--card-bg-alt);
       border-radius: 4px;
-      border: 1px solid #eee;
+      border: 1px solid var(--border-color);
     }
     .password-section input[type="password"], .password-section button {
       padding: 10px;
       margin-right: 10px;
       border-radius: 4px;
-      border: 1px solid #ddd;
+      border: 1px solid var(--border-color);
+      background: var(--card-bg);
+      color: var(--fg);
     }
     .password-section button {
       background: #5cb85c;
@@ -108,10 +113,11 @@
     }
     .order-item {
       padding: 1.5rem; /* Augmenté */
-      border: 1px solid #ddd;
+      border: 1px solid var(--border-color);
       border-radius: 4px;
       margin-bottom: 1.5rem; /* Augmenté */
-      background-color: #fff;
+      background-color: var(--card-bg-alt);
+      color: var(--fg);
     }
     .order-header {
       display: flex;
@@ -133,9 +139,11 @@
       width: calc(100% - 22px); /* Ajusté pour padding/border */
       padding: 10px;
       border-radius: 4px;
-      border: 1px solid #ccc;
+      border: 1px solid var(--border-color);
       margin-top: 0.25rem;
       margin-bottom: 0.75rem;
+      background: var(--card-bg);
+      color: var(--fg);
     }
     .notes-input {
       min-height: 60px; /* Hauteur pour les notes */
@@ -160,9 +168,11 @@
       width: calc(100% - 24px); /* Ajusté */
       padding: 12px;
       margin-bottom: 1rem;
-      border: 1px solid #ddd;
+      border: 1px solid var(--border-color);
       border-radius: 4px;
       font-size: 1rem;
+      background: var(--card-bg);
+      color: var(--fg);
     }
      #loadingIndicator, #errorMessage {
         text-align: center;
