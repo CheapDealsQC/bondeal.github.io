@@ -240,7 +240,6 @@
     </div>
     
     <div id="adminContent" style="display: none;">
- qvc6qm-codex/créer-une-page-admin-complète
     <div class="toolbar">
       <input type="text" id="searchBox" class="search-box" placeholder="Rechercher par ID ou email">
       <select id="statusFilter" class="tool-select">
@@ -263,10 +262,6 @@
       <div id="stat-today" class="stat-box">Aujourd'hui: 0</div>
       <div id="stat-week" class="stat-box">Complété cette semaine: 0%</div>
     </div>
-=======
-    <input type="text" id="searchBox" class="search-box" placeholder="Rechercher une commande par ID, email...">
-    <button id="logoutBtn" class="logout-button">Déconnexion</button>
- main
     <div id="loadingIndicator" style="display: none;">Chargement des commandes...</div>
     <div id="errorMessage" style="display: none;"></div>
     <div id="orderList" class="order-list">
@@ -279,53 +274,27 @@
   <script>
   // --- IMPORTANT: METTEZ À JOUR AVEC VOTRE NOUVELLE URL DE SCRIPT ---
   const API_URL = 'https://script.google.com/macros/s/AKfycbxEmJdgcerK1ENvsy8IvSnAZDJ6p4fr9hfO87haKbKrVXZaRf2Z3wnRzyQSDl527VtW/exec';
- qvc6qm-codex/créer-une-page-admin-complète
-  const ADMIN_PASSWORD_HASH = '713bfda78870bf9d1b261f565286f85e97ee614efe5f0faf7c34e7ca4f65baca';
-=======
   const ADMIN_PASSWORD_HASH = "db4820111574318070358f047cc49d2aa7bc6e6e614af9ea8083c2c3f95b2569";
- main
-  // --- IMPORTANT: METTEZ À JOUR AVEC VOTRE NOUVELLE URL DE SCRIPT ---
   let adminPasswordHash = "";
   let allOrders = []; // Pour stocker toutes les commandes et filtrer localement
 
- qvc6qm-codex/créer-une-page-admin-complète
-  async function hashPassword(str) {
-    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
-    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
-  }
-
-  async function initAdminView() {
-    const input = document.getElementById("adminPassword").value.trim();
-    const hashed = await hashPassword(input);
-    if (hashed !== ADMIN_PASSWORD_HASH) {
-    alert("Mot de passe incorrect.");
-    return;
-    }
-    adminPasswordHash = hashed;
-    localStorage.setItem('adminHash', hashed);
-    document.querySelector('.password-section').style.display = 'none';
-    document.getElementById('adminContent').style.display = 'block';
-    loadOrders();
-=======
   async function hashPassword(pwd) {
     const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pwd));
     return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
   }
 
-  function initAdminView() {
+  async function initAdminView() {
     const pwd = document.getElementById("adminPassword").value.trim();
-    hashPassword(pwd).then(hash => {
-    adminPasswordHash = hash;
-    if (adminPasswordHash !== ADMIN_PASSWORD_HASH) {
+    const hash = await hashPassword(pwd);
+    if (hash !== ADMIN_PASSWORD_HASH) {
       alert("Mot de passe incorrect.");
       return;
     }
+    adminPasswordHash = hash;
     localStorage.setItem('adminPasswordHash', adminPasswordHash);
     document.querySelector('.password-section').style.display = 'none';
     document.getElementById('adminContent').style.display = 'block';
     loadOrders();
-    });
- main
   }
 
   async function loadOrders() {
@@ -617,7 +586,7 @@
   }
 
   function logout() {
-    localStorage.removeItem('adminHash');
+    localStorage.removeItem('adminPasswordHash');
     window.location.href = 'admin-login.html';
   }
 
@@ -669,17 +638,8 @@
     updateStats(filtered);
   }
 
-  function logout() {
-    localStorage.removeItem('adminPassword');
-    window.location.href = 'admin-login.html';
-  }
-
   document.addEventListener('DOMContentLoaded', () => {
- qvc6qm-codex/créer-une-page-admin-complète
-    const stored = localStorage.getItem('adminHash');
-=======
     const stored = localStorage.getItem('adminPasswordHash');
- main
     if (stored === ADMIN_PASSWORD_HASH) {
     adminPasswordHash = stored;
     document.querySelector('.password-section').style.display = 'none';
@@ -690,19 +650,12 @@
     if (searchInput) {
       searchInput.addEventListener('input', filterOrders);
     }
- qvc6qm-codex/créer-une-page-admin-complète
     const statusSelect = document.getElementById('statusFilter');
     if (statusSelect) statusSelect.addEventListener('change', filterOrders);
     const sortSelect = document.getElementById('sortSelect');
     if (sortSelect) sortSelect.addEventListener('change', filterOrders);
     const logoutBtn = document.getElementById('logoutBtn');
     if (logoutBtn) logoutBtn.addEventListener('click', logout);
-=======
-    const logoutBtn = document.getElementById('logoutBtn');
-    if (logoutBtn) {
-      logoutBtn.addEventListener('click', logout);
-    }
- main
   });
   </script>
   <script src="js/main.js"></script>
