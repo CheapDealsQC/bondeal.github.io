@@ -36,4 +36,19 @@ export function initScrollReveal() {
         // For this project, one is sufficient.
         revealObserver.observe(elem);
     });
+}
+
+export function initHeroParallax() {
+    const heroVisual = document.querySelector('.hero__visual');
+    if (!heroVisual) return;
+
+    const onScroll = () => {
+        const scrollY = window.scrollY;
+        // Apply a gentle parallax effect. Adjust the divisor for more/less effect.
+        heroVisual.style.transform = `translateY(${scrollY * 0.1}px)`;
+    };
+
+    window.addEventListener('scroll', () => {
+        window.requestAnimationFrame(onScroll);
+    }, { passive: true });
 } 

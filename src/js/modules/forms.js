@@ -15,33 +15,30 @@ function initHeroForm() {
   }
 }
 
-function initFormValidation() {
-  const orderForm = document.querySelector('#orderForm');
+function initOrderForm() {
+  const orderForm = document.getElementById('order-form');
   if (!orderForm) return;
 
-  const submitButton = orderForm.querySelector('#submitOrder');
-  const formStatus = orderForm.querySelector('#form-status');
+  const orderBtn = document.getElementById('order-btn');
+  const checkboxes = orderForm.querySelectorAll('.consent-checks input[type="checkbox"]');
+  const emailInput = document.getElementById('cmd-email');
+  const passwordInput = document.getElementById('cmd-password');
 
-  if (!submitButton || !formStatus) return;
+  const validate = () => {
+    if (!orderBtn || !emailInput || !passwordInput) return;
+    const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+    const emailValid = emailInput.checkValidity() && emailInput.value.trim() !== '';
+    const passwordValid = passwordInput.value.trim() !== '';
+    orderBtn.disabled = !(allChecked && emailValid && passwordValid);
+  };
 
-  orderForm.addEventListener('input', () => {
-    const isValid = orderForm.checkValidity();
-    submitButton.disabled = !isValid;
-  });
+  orderForm.addEventListener('input', validate);
+  orderForm.addEventListener('change', validate); // For checkboxes
 
-  // Accessibility: Announce status on attempt to click disabled button
-  submitButton.parentElement.addEventListener('click', (e) => {
-    if (submitButton.disabled && e.target === submitButton) {
-        formStatus.textContent = 'Veuillez compléter tous les champs obligatoires pour continuer.';
-        // Clear the message after a few seconds so it can be re-announced
-        setTimeout(() => {
-            formStatus.textContent = '';
-        }, 3000);
-    }
-  });
+  validate(); // Initial check
 }
 
 export function initForms() {
   initHeroForm();
-  initFormValidation();
+  initOrderForm();
 } 

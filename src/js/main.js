@@ -5,7 +5,7 @@ import { initFeatureSlider } from './modules/feature-slider.js';
 import { initForms } from './modules/forms.js';
 import { initUI } from './modules/ui.js';
 import { initTracking } from './modules/tracking.js';
-import { initScrollReveal } from './modules/animations.js';
+import { initScrollReveal, initHeroParallax } from './modules/animations.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   initCookieConsent();
@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initUI();
   initTracking();
   initScrollReveal();
+  initHeroParallax();
 });
 
 // Mock Data
