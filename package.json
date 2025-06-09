@@ -3,16 +3,20 @@
   "version": "1.0.0",
   "description": "SpotiDeals website build process.",
   "private": true,
+  "main": "index.js",
   "scripts": {
-    "build:css": "npx postcss src/css/style.css -o dist/css/style.min.css",
-    "build:js": "npx esbuild src/js/main.js --bundle --minify --outfile=dist/js/main.min.js",
+    "clean": "rimraf dist",
+    "copy:images": "cpr src/images dist/images -o",
+    "copy:favicon": "cpr src/favicon dist/favicon -o",
+    "build:css": "postcss src/css/style.css -o dist/css/style.min.css",
+    "build:js": "esbuild src/js/main.js --bundle --minify --outfile=dist/js/main.min.js",
     "build:login": "npx esbuild src/js/login.js --bundle --minify --outfile=dist/js/login.min.js",
     "build:admin": "npx esbuild src/js/admin.js --bundle --minify --outfile=dist/js/admin.min.js",
     "build:auth": "npx esbuild src/js/modules/auth.js --bundle --minify --outfile=dist/js/auth.min.js",
     "build:tracking": "npx esbuild src/js/modules/tracking.js --bundle --minify --outfile=dist/js/tracking.min.js",
     "build:paiement": "npx esbuild src/js/paiement.js --bundle --minify --outfile=dist/js/paiement.min.js",
     "build:contact": "npx esbuild src/js/contact.js --bundle --minify --outfile=dist/js/contact.min.js",
-    "build": "npx npm-run-all --parallel build:*",
+    "build": "npm-run-all clean --parallel copy:* build:*",
     "watch:css": "npx postcss src/css/style.css -o dist/css/style.min.css --watch",
     "watch:js": "npx esbuild src/js/main.js --bundle --outfile=dist/js/main.min.js --watch",
     "watch:login": "npx esbuild src/js/login.js --bundle --outfile=dist/js/login.min.js --watch",
@@ -21,17 +25,19 @@
     "watch:tracking": "npx esbuild src/js/modules/tracking.js --bundle --outfile=dist/js/tracking.min.js --watch",
     "watch:paiement": "npx esbuild src/js/paiement.js --bundle --outfile=dist/js/paiement.min.js --watch",
     "watch:contact": "npx esbuild src/js/contact.js --bundle --outfile=dist/js/contact.min.js --watch",
-    "watch": "npx npm-run-all --parallel watch:*"
+    "watch": "npm-run-all --parallel watch:*"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "autoprefixer": "^10.4.19",
+    "cpr": "^3.0.1",
     "cssnano": "^7.0.4",
     "esbuild": "^0.23.0",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.4.39",
-    "postcss-cli": "^11.0.0"
+    "postcss-cli": "^11.0.0",
+    "rimraf": "^6.0.1"
   }
-} 
+}
