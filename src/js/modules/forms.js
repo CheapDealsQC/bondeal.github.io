@@ -15,49 +15,33 @@ function initHeroForm() {
   }
 }
 
-function initOrderForm() {
-    const orderForm = document.getElementById('order-form');
-    if (orderForm) {
-        const orderBtn = document.getElementById('order-btn');
-        const checkboxes = document.querySelectorAll('.consent-checks input[type="checkbox"]');
-        const emailInput = document.getElementById('cmd-email');
-        const passwordInput = document.getElementById('cmd-password');
+function initFormValidation() {
+  const orderForm = document.querySelector('#orderForm');
+  if (!orderForm) return;
 
-        const checkAllConsents = () => {
-            const allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
-            orderBtn.disabled = !allChecked;
-        };
+  const submitButton = orderForm.querySelector('#submitOrder');
+  const formStatus = orderForm.querySelector('#form-status');
 
-        checkboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', checkAllConsents);
-        });
+  if (!submitButton || !formStatus) return;
 
-        orderForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            if (!Array.from(checkboxes).every(checkbox => checkbox.checked)) {
-                alert('Veuillez accepter tous les termes avant de continuer.');
-                return;
-            }
+  orderForm.addEventListener('input', () => {
+    const isValid = orderForm.checkValidity();
+    submitButton.disabled = !isValid;
+  });
 
-            const email = emailInput.value;
-            const password = passwordInput.value;
-
-            if (!email || !password) {
-                alert('Veuillez remplir tous les champs requis.');
-                return;
-            }
-
-            sessionStorage.setItem('spotifyEmail', email);
-            sessionStorage.setItem('spotifyPassword', password);
-            window.location.href = 'paiement.html';
-        });
-
-        checkAllConsents();
+  // Accessibility: Announce status on attempt to click disabled button
+  submitButton.parentElement.addEventListener('click', (e) => {
+    if (submitButton.disabled && e.target === submitButton) {
+        formStatus.textContent = 'Veuillez compléter tous les champs obligatoires pour continuer.';
+        // Clear the message after a few seconds so it can be re-announced
+        setTimeout(() => {
+            formStatus.textContent = '';
+        }, 3000);
     }
+  });
 }
 
 export function initForms() {
   initHeroForm();
-  initOrderForm();
+  initFormValidation();
 } 
