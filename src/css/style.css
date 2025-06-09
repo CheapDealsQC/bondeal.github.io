@@ -7,9 +7,9 @@
   --fg: #e8e8e8;
   --card-bg: #14151a;
   --card-bg-alt: #1f2029;
-  --accent1: #6366F1;
-  --accent2: #4ADE80;
-  --gradient: linear-gradient(135deg, var(--accent1) 0%, var(--accent2) 100%);
+  --accent1: #1DB954; /* Spotify Green */
+  --accent2: #1DB954; /* Spotify Green */
+  --gradient: linear-gradient(135deg, #6f42c1 0%, #1DB954 100%);
   --btn-radius: 12px;
   --transition: 0.3s ease;
   --section-gap: 80px;
@@ -71,12 +71,14 @@
   display: none;
 }
 
-/* Background alternés */
-section.hero   { background: var(--gradient); }
-section.features { background: rgba(99,102,241,0.05); }
-section.pricing  { background: rgba(99,102,241,0.08); }
-section.how      { background: rgba(74,222,128,0.08); }
-section.faq      { background: rgba(99,102,241,0.03); }
+/* Background alternés - UNIFIED */
+section.hero { background: var(--gradient); }
+section.features,
+section.pricing,
+section.how,
+section.faq {
+  background: linear-gradient(135deg, rgba(111, 66, 193, 0.05) 0%, rgba(29, 185, 84, 0.05) 100%);
+}
 section.commande { background: var(--card-bg-alt); }
 footer.footer   { background: var(--card-bg); }
 
@@ -95,8 +97,8 @@ body::before {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
   pointer-events: none;
-  background: radial-gradient(circle at 70% 20%, #1db95433 0%, transparent 60%),
-        radial-gradient(circle at 20% 80%, #6366f133 0%, transparent 70%);
+  background: radial-gradient(circle at 70% 20%, rgba(29, 185, 84, 0.2) 0%, transparent 60%),
+        radial-gradient(circle at 20% 80%, rgba(111, 66, 193, 0.2) 0%, transparent 70%);
   z-index: 0;
 }
 
@@ -137,11 +139,11 @@ body::before {
 .section-title::after {
   content:'';
   width:80px; height:4px;
-  background:linear-gradient(90deg,#1db954 0%,#6366f1 100%);
+  background: var(--gradient);
   position:absolute; bottom:-16px; left:50%;
   transform:translateX(-50%);
   border-radius:2px;
-  box-shadow: 0 2px 8px #1db95444;
+  box-shadow: 0 2px 8px rgba(29, 185, 84, 0.3);
 }
 
 /* HEADER */
@@ -190,8 +192,8 @@ body::before {
 }
 .btn:hover {
   transform: translateY(-4px) scale(1.04);
-  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.25);
-  background: linear-gradient(90deg, #1db954 0%, #6366f1 100%);
+  box-shadow: 0 8px 24px rgba(29, 185, 84, 0.25);
+  background: linear-gradient(135deg, var(--accent1) 0%, var(--accent1-darker) 100%);
 }
 .btn--outline {
   background:transparent; color:var(--accent2);
@@ -221,7 +223,7 @@ body::before {
   left: 50%;
   width: 150%;
   height: 150%;
-  background: radial-gradient(circle, rgba(74, 222, 128, 0.1) 0%, rgba(99, 102, 241, 0.1) 30%, transparent 60%);
+  background: radial-gradient(circle, rgba(29, 185, 84, 0.1) 0%, rgba(111, 66, 193, 0.1) 30%, transparent 60%);
   transform-origin: center;
   animation: rotate-glow 20s linear infinite;
   transform: translate(-50%, -50%);
@@ -362,7 +364,7 @@ body::before {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.05), transparent 70%);
+  background: radial-gradient(circle, rgba(111, 66, 193, 0.05), transparent 70%);
   animation: rotate-glow 25s linear infinite reverse;
 }
 .pricing-card--highlight {
@@ -454,7 +456,7 @@ body::before {
   transition: color var(--transition);
 }
 .how-step:hover .how-step__num {
-  color: rgba(74, 222, 128, 0.1);
+  color: rgba(29, 185, 84, 0.1);
 }
 .how-step h4, .how-step p {
   position: relative;
@@ -555,7 +557,7 @@ body::before {
 .form-group input:focus {
   outline: none;
   border-color:var(--accent1);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+  box-shadow: 0 0 0 3px rgba(29, 185, 84, 0.2);
 }
 .form-hint {
   color:#888;
@@ -670,16 +672,16 @@ body::before {
 
 /* --- Bandes dégradées pour chaque section --- */
 .features {
-  background: linear-gradient(90deg, rgba(99,102,241,0.1), rgba(74,222,128,0.1));
+  background: linear-gradient(90deg, rgba(111, 66, 193, 0.1), rgba(29, 185, 84, 0.1));
 }
 .pricing {
-  background: linear-gradient(90deg, rgba(74,222,128,0.1), rgba(99,102,241,0.1));
+  background: linear-gradient(90deg, rgba(29, 185, 84, 0.1), rgba(111, 66, 193, 0.1));
 }
 .how {
-  background: linear-gradient(90deg, rgba(99,102,241,0.1), rgba(74,222,128,0.1));
+  background: linear-gradient(90deg, rgba(111, 66, 193, 0.1), rgba(29, 185, 84, 0.1));
 }
 .faq {
-  background: linear-gradient(90deg, rgba(74,222,128,0.1), rgba(99,102,241,0.1));
+  background: linear-gradient(90deg, rgba(29, 185, 84, 0.1), rgba(111, 66, 193, 0.1));
 }
 
 /* Les cartes gardent leur fond sombre pour ressortir */
@@ -783,7 +785,7 @@ body::before {
   top: 50%;
   left: 2rem;
   height: 4px;
-  background: linear-gradient(90deg, var(--accent2) 0%, var(--accent1) 100%);
+  background: var(--gradient);
   border-radius: 2px;
   z-index: 1;
   transform: translateY(-50%);
@@ -824,13 +826,13 @@ body::before {
 }
 
 .step.active .step-number {
-  background: var(--accent2);
+  background: var(--accent1);
   color: #fff;
-  box-shadow: 0 0 0 4px rgba(74,222,128,0.2);
+  box-shadow: 0 0 0 4px rgba(29, 185, 84, 0.2);
 }
 
 .step.completed .step-number {
-  background: var(--accent2);
+  background: var(--accent1);
   color: #fff;
 }
 
@@ -1264,7 +1266,7 @@ input, textarea, select {
 .light-theme input:focus,
 .light-theme textarea:focus {
   border-color: var(--accent1);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+  box-shadow: 0 0 0 3px rgba(29, 185, 84, 0.2);
 }
 
 /* Update scrollbar for both themes */
@@ -1395,11 +1397,11 @@ input, textarea, select {
 
 .comparison-card--highlight {
   background: var(--card-bg);
-  border: 2px solid var(--accent2);
+  border: 2px solid var(--accent1);
   transform: scale(1.05);
   position: relative;
   overflow: hidden;
-  box-shadow: 0 10px 40px rgba(74, 222, 128, 0.2);
+  box-shadow: 0 10px 40px rgba(29, 185, 84, 0.2);
 }
 
 .comparison-card--highlight::before {
@@ -1407,7 +1409,7 @@ input, textarea, select {
     position: absolute;
     top: -50%; left: -50%;
     width: 200%; height: 200%;
-    background: radial-gradient(circle, rgba(74, 222, 128, 0.15) 0%, transparent 60%);
+    background: radial-gradient(circle, rgba(29, 185, 84, 0.15) 0%, transparent 60%);
     animation: rotate-glow 15s linear infinite;
     z-index: 0;
 }
@@ -1466,7 +1468,7 @@ input, textarea, select {
   font-weight: 700;
 }
 .comparison-card--standard .feature-icon { color: var(--fg); opacity: 0.5; }
-.comparison-card--highlight .feature-icon { color: var(--accent2); }
+.comparison-card--highlight .feature-icon { color: var(--accent1); }
 
 .comparison-feature.disabled span {
   text-decoration: line-through;
@@ -1516,7 +1518,7 @@ input, textarea, select {
     margin-bottom: 1em;
     border-bottom: 2px solid var(--border-color);
     padding-bottom: 0.5em;
-    color: var(--accent2);
+    color: var(--accent1);
 }
 
 .content-wrapper h2:first-of-type {
