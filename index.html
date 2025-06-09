@@ -42,6 +42,7 @@
   <!-- Fonts (Inter for body, Poppins for titles) + CSS -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="https://fonts.gstatic.com/s/poppins/v21/pxiByp8kv8JHgFVrLEj6Z1xlFd2JQEk.woff2" as="font" type="font/woff2" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="dist/css/style.min.css">
 </head>
@@ -126,7 +127,6 @@
 
   <!-- HERO -->
   <section class="hero" id="hero" data-reveal>
-    <div class="hero__background"></div>
     <div class="container hero__inner">
       <div class="hero__copy">
         <h1 class="hero__title">L'Expérience Premium. Le Prix en Moins.</h1>
@@ -137,15 +137,15 @@
         </div>
         <div class="hero__social-proof">
           <div class="avatars">
-            <img src="dist/images/avatar-1.jpg" alt="Avatar client 1" loading="lazy">
-            <img src="dist/images/avatar-2.jpg" alt="Avatar client 2" loading="lazy">
-            <img src="dist/images/avatar-3.jpg" alt="Avatar client 3" loading="lazy">
+            <img src="dist/images/avatar-1.webp" alt="Avatar client 1" loading="lazy">
+            <img src="dist/images/avatar-2.webp" alt="Avatar client 2" loading="lazy">
+            <img src="dist/images/avatar-3.webp" alt="Avatar client 3" loading="lazy">
           </div>
           <p>+ de 500 clients satisfaits nous ont fait confiance !</p>
         </div>
       </div>
       <div class="hero__visual">
-        <img src="https://placehold.co/400x800/0f2027/2c7744?text=SpotiDeals" alt="Application Spotify sur un téléphone" class="hero__mockup" loading="lazy">
+        <img src="dist/images/hero-phone.webp" alt="Aperçu Spotify Premium sur smartphone" class="hero__mockup" loading="lazy" decoding="async">
       </div>
     </div>
   </section>

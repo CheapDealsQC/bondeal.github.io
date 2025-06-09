@@ -228,6 +228,10 @@ body::before {
 .btn--outline:hover {
   background:var(--accent2); color:#121212;
 }
+.btn:focus-visible {
+  outline: 2px solid var(--accent1);
+  outline-offset: 2px;
+}
 
 /* HERO Section Refresh */
 .hero {
@@ -235,16 +239,14 @@ body::before {
   overflow: hidden;
   padding: var(--section-gap) 0;
   color: var(--color-text-main);
+  background: linear-gradient(135deg, var(--sd-bg-900), #063a28);
 }
 
 .hero__background {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: transparent;
-  z-index: 0;
+  display: none; /* No longer needed */
 }
 .hero__background::after {
-  content: none;
+  content: none; /* Effect is now on body */
 }
 
 .hero__inner {
