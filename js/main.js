@@ -1,8 +1,28 @@
+'use strict';
+
 // Gestion du formulaire de commande
 document.addEventListener('DOMContentLoaded', function() {
+  // Cache DOM elements
   const orderForm = document.getElementById('order-form');
   const orderBtn = document.getElementById('order-btn');
   const checkboxes = document.querySelectorAll('.consent-checks input[type="checkbox"]');
+  const signupForm = document.getElementById('signup-form');
+  const heroEmail = document.getElementById('hero-email');
+  const heroPassword = document.getElementById('hero-password');
+  const cmdEmail = document.getElementById('cmd-email');
+  const cmdPassword = document.getElementById('cmd-password');
+  const emailInput = document.getElementById('email');
+  const passwordInput = document.getElementById('password');
+  const faqItems = document.querySelectorAll('.faq-item');
+  const cookieConsent = document.getElementById('cookie-consent');
+  const acceptCookies = document.getElementById('accept-cookies');
+  const rejectCookies = document.getElementById('reject-cookies');
+  const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+  const nav = document.querySelector('.nav');
+  const backToTop = document.getElementById('back-to-top');
+  const featureSlider = document.querySelector('.feature-slider');
+  const themeToggle = document.getElementById('theme-toggle');
+  const trackSection = document.getElementById('order-tracking');
 
   // Fonction pour vérifier si toutes les cases sont cochées
   function checkAllConsents() {
@@ -27,8 +47,8 @@ document.addEventListener('DOMContentLoaded', function() {
       }
 
       // Récupérer les valeurs du formulaire
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
+      const email = emailInput.value;
+      const password = passwordInput.value;
 
       // Validation basique
       if (!email || !password) {
@@ -42,12 +62,11 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // Hero → Paiement
-  const signupForm = document.getElementById('signup-form');
   if (signupForm) {
     signupForm.addEventListener('submit', e => {
       e.preventDefault();
-      const hE = document.getElementById('hero-email').value.trim();
-      const hP = document.getElementById('hero-password').value.trim();
+      const hE = heroEmail.value.trim();
+      const hP = heroPassword.value.trim();
       if (!hE || !hP) return;
       sessionStorage.setItem('spotifyEmail', hE);
       sessionStorage.setItem('spotifyPassword', hP);
@@ -56,33 +75,25 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // Commander → Paiement
-  const cmdE = document.getElementById('cmd-email');
-  const cmdP = document.getElementById('cmd-password');
-  const oBtn = document.getElementById('order-btn');
-  
-  if (cmdE && cmdP && oBtn) {
+  if (cmdEmail && cmdPassword && orderBtn) {
     function valC() { 
-      oBtn.disabled = !(cmdE.checkValidity() && cmdP.value.trim()); 
+      orderBtn.disabled = !(cmdEmail.checkValidity() && cmdPassword.value.trim()); 
     }
-    cmdE.addEventListener('input', valC);
-    cmdP.addEventListener('input', valC);
-    oBtn.addEventListener('click', () => {
-      sessionStorage.setItem('spotifyEmail', cmdE.value);
-      sessionStorage.setItem('spotifyPassword', cmdP.value);
+    cmdEmail.addEventListener('input', valC);
+    cmdPassword.addEventListener('input', valC);
+    orderBtn.addEventListener('click', () => {
+      sessionStorage.setItem('spotifyEmail', cmdEmail.value);
+      sessionStorage.setItem('spotifyPassword', cmdPassword.value);
       window.location.href = 'paiement.html';
     });
   }
 
   // FAQ accordéon
-  document.querySelectorAll('.faq-item').forEach(i => {
+  faqItems.forEach(i => {
     i.querySelector('h4').addEventListener('click', () => i.classList.toggle('open'));
   });
 
   // Cookie Consent
-  const cookieConsent = document.getElementById('cookie-consent');
-  const acceptCookies = document.getElementById('accept-cookies');
-  const rejectCookies = document.getElementById('reject-cookies');
-
   if (cookieConsent && acceptCookies && rejectCookies) {
     if (!localStorage.getItem('cookieConsent')) {
       cookieConsent.style.display = 'block';
@@ -100,9 +111,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // Mobile Menu
-  const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-  const nav = document.querySelector('.nav');
-
   if (mobileMenuBtn && nav) {
     mobileMenuBtn.addEventListener('click', () => {
       nav.classList.toggle('active');
@@ -111,8 +119,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // Back to Top Button
-  const backToTop = document.getElementById('back-to-top');
-
   if (backToTop) {
     window.addEventListener('scroll', () => {
       if (window.pageYOffset > 300) {
@@ -128,7 +134,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // Feature slider drag support
-  const featureSlider = document.querySelector('.feature-slider');
   if (featureSlider) {
     const sliderTrack = featureSlider.querySelector('.feature-slide-track');
     let isDown = false;
@@ -190,7 +195,6 @@ document.addEventListener('DOMContentLoaded', function() {
   window.updateProgressBar = updateProgressBar;
 
   // Theme Toggle
-  const themeToggle = document.getElementById('theme-toggle');
   const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
   
   if (themeToggle) {
@@ -218,7 +222,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // Suivi de commande
-  const trackSection = document.getElementById('order-tracking');
   if (trackSection) {
     const trackOrderBtn = trackSection.querySelector('#track-order-btn');
     const orderNumberInput = trackSection.querySelector('#order-number');
@@ -228,6 +231,9 @@ document.addEventListener('DOMContentLoaded', function() {
       trackOrderBtn.addEventListener('click', () => {
         const orderNumber = orderNumberInput.value.trim();
         if (!orderNumber) return;
+
+      // NOTE: The following is mock data for demonstration purposes.
+      // In a real application, this would be an API call to a backend service.
 
       // Afficher le résultat
       trackingResult.style.display = 'block';
@@ -247,32 +253,38 @@ document.addEventListener('DOMContentLoaded', function() {
       document.getElementById('timeline-verification-date').textContent = new Date(now.getTime() + 1000 * 60 * 60).toLocaleString();
       document.getElementById('timeline-activation-date').textContent = 'En attente';
       document.getElementById('timeline-confirmation-date').textContent = 'En attente';
-
-      // Simuler la progression
-      let currentStep = 1;
-      const timelineItems = document.querySelectorAll('.timeline-item');
       
+      // Simuler la progression de la barre de statut
       const updateTimeline = () => {
-        timelineItems.forEach((item, index) => {
-          if (index < currentStep) {
-            item.classList.add('completed');
-          } else {
-            item.classList.remove('completed');
-          }
-        });
+        const steps = trackingResult.querySelectorAll('.timeline-item');
+        let completedSteps = 1;
+
+        if (Math.random() > 0.3) { // Simuler la confirmation du paiement
+          steps[1].classList.add('completed');
+          completedSteps++;
+        }
+        if (Math.random() > 0.6) { // Simuler la vérification
+          steps[2].classList.add('completed');
+          completedSteps++;
+        }
+        // ... etc.
       };
 
-      // Simuler les mises à jour
       const simulateProgress = () => {
-        if (currentStep < 3) {
+        let currentStep = 1;
+        updateProgressBar(currentStep);
+        const interval = setInterval(() => {
           currentStep++;
-          updateTimeline();
-          setTimeout(simulateProgress, 3000);
-        }
+          if (currentStep > 5) {
+            clearInterval(interval);
+            return;
+          }
+          updateProgressBar(currentStep);
+        }, 2000);
       };
 
       updateTimeline();
-      setTimeout(simulateProgress, 3000);
+      simulateProgress(); // Démarrer la simulation
     });
     }
   }

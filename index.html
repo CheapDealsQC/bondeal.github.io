@@ -42,6 +42,7 @@
   <!-- Montserrat + CSS -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/custom.css">
 </head>
 <body>
 
@@ -143,7 +144,7 @@
          id="hero-password"
          placeholder="Votre mot de passe Spotify"
          required>
-      <button type="submit" class="btn btn--green">Commencer</button>
+      <button type="submit" class="btn">Commencer</button>
     </form>
     </div>
   </div>
@@ -189,17 +190,17 @@
       <div class="feature-card"><div class="feature-card__icon">🔥</div><h3>Prix imbattable</h3><p>+ 50 % d'économie</p></div>
       <div class="feature-card"><div class="feature-card__icon">⚡</div><h3>Activation rapide</h3><p>3 à 5 jours ouvrables</p></div>
       <div class="feature-card"><div class="feature-card__icon">🌍</div><h3>Service mondial</h3><p>Sans VPN</p></div>
-      <div class="feature-card"><div class="feature-card__icon">💳</div><h3>Paiement sécurisé</h3><p>Carte ou Cadeau<br><span style='font-size:0.95em;'>Nous prépayons les 12 mois sur votre compte</span></p></div>
+      <div class="feature-card"><div class="feature-card__icon">💳</div><h3>Paiement sécurisé</h3><p>Carte ou Cadeau<br><span class="font-sm">Nous prépayons les 12 mois sur votre compte</span></p></div>
       <div class="feature-card"><div class="feature-card__icon">🚫</div><h3>Sans VPN/Proxy</h3><p>Accès direct, pas de paramétrage supplémentaire.</p></div>
-      <div class="feature-card"><div class="feature-card__icon">⭐</div><h3>Support réactif</h3><p></p></div>
+      <div class="feature-card"><div class="feature-card__icon">⭐</div><h3>Support réactif</h3><p>Contactez-nous à tout moment.</p></div>
       <div class="feature-card"><div class="feature-card__icon">🎵</div><h3>Votre propre compte</h3><p>Écoutez votre musique</p></div>
       <!-- répétition pour bouclage -->
       <div class="feature-card"><div class="feature-card__icon">🔥</div><h3>Prix imbattable</h3><p>+ 50 % d'économie</p></div>
       <div class="feature-card"><div class="feature-card__icon">⚡</div><h3>Activation rapide</h3><p>3 à 5 jours ouvrables</p></div>
       <div class="feature-card"><div class="feature-card__icon">🌍</div><h3>Service mondial</h3><p>Sans VPN</p></div>
-      <div class="feature-card"><div class="feature-card__icon">💳</div><h3>Paiement sécurisé</h3><p>Carte ou Cadeau<br><span style='font-size:0.95em;'>Nous prépayons les 12 mois sur votre compte</span></p></div>
+      <div class="feature-card"><div class="feature-card__icon">💳</div><h3>Paiement sécurisé</h3><p>Carte ou Cadeau<br><span class="font-sm">Nous prépayons les 12 mois sur votre compte</span></p></div>
       <div class="feature-card"><div class="feature-card__icon">🚫</div><h3>Sans VPN/Proxy</h3><p>Accès direct, pas de paramétrage supplémentaire.</p></div>
-      <div class="feature-card"><div class="feature-card__icon">⭐</div><h3>Support réactif</h3><p></p></div>
+      <div class="feature-card"><div class="feature-card__icon">⭐</div><h3>Support réactif</h3><p>Contactez-nous à tout moment.</p></div>
       <div class="feature-card"><div class="feature-card__icon">🎵</div><h3>Votre propre compte</h3><p>Écoutez votre musique</p></div>
     </div>
     </div>
@@ -562,13 +563,13 @@
     </form>
 
     <!-- Section de suivi de commande -->
-    <div class="order-tracking" style="display: none;">
+    <div class="order-tracking hidden">
     <h3>Suivi de commande</h3>
     <div class="tracking-form">
       <input type="text" id="order-number-inline" placeholder="Numéro de commande" required>
       <button type="button" class="btn" id="track-order-btn-inline">Suivre ma commande</button>
     </div>
-    <div class="tracking-result" style="display: none;">
+    <div class="tracking-result hidden">
       <h4>État de votre commande</h4>
       <div class="tracking-status">
       <div class="status-step active">
@@ -608,7 +609,7 @@
     </div>
 
     <!-- Résultat du suivi -->
-    <div class="tracking-result" style="display: none;">
+    <div class="tracking-result hidden">
     <div class="tracking-header">
       <div class="tracking-info">
       <h3>Commande #<span id="result-order-number"></span></h3>
@@ -708,12 +709,15 @@
     <a href="privacy.html">Confidentialité</a>
     <a href="contact.html">Contact</a>
     </div>
-    <div class="footer-copy">© 2025 SpotiDeals</div>
+    <div class="footer-copy">© <span id="current-year"></span> SpotiDeals</div>
   </div>
   </footer>
 
   <!-- SCRIPTS -->
   <script src="js/main.js"></script>
+  <script>
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
 
