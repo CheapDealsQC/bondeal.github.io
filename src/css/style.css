@@ -45,13 +45,11 @@
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  -webkit-transition: all var(--transition);
   transition: all var(--transition);
   box-shadow: 0 4px 12px var(--shadow-color);
 }
 
 .theme-toggle:hover {
-  -webkit-transform: scale(1.1);
   transform: scale(1.1);
   background: var(--hover-bg);
 }
@@ -187,11 +185,9 @@ body::before {
   padding:14px 28px; border:none;
   border-radius:var(--btn-radius);
   text-decoration:none; font-weight:700;
-  -webkit-transition:transform 0.2s, box-shadow 0.2s, background 0.2s;
   transition:transform 0.2s, box-shadow 0.2s, background 0.2s;
 }
 .btn:hover {
-  -webkit-transform: translateY(-4px) scale(1.04);
   transform: translateY(-4px) scale(1.04);
   box-shadow: 0 8px 24px #1db95433;
   background: linear-gradient(90deg, #1db954 0%, #6366f1 100%);
@@ -242,7 +238,6 @@ body::before {
   position: relative;
   margin-top: 20px;
   margin-bottom: var(--section-gap);
-  -webkit-overflow-scrolling: touch;
   scroll-snap-type: x mandatory;
   cursor: grab;
 }

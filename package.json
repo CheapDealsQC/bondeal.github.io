@@ -4,12 +4,16 @@
   "description": "SpotiDeals website build process.",
   "private": true,
   "scripts": {
-    "build": "npx npm-run-all build:**",
     "build:css": "npx postcss src/css/style.css -o dist/css/style.min.css",
     "build:js": "npx esbuild src/js/main.js --bundle --minify --outfile=dist/js/main.min.js",
-    "watch": "npx npm-run-all --parallel watch:**",
-    "watch:css": "npx postcss src/css/style.css -o dist/css/style.min.css -w",
-    "watch:js": "npx esbuild src/js/main.js --bundle --outfile=dist/js/main.js --watch"
+    "build:login": "npx esbuild src/js/login.js --bundle --minify --outfile=dist/js/login.min.js",
+    "build:admin": "npx esbuild src/js/admin.js --bundle --minify --outfile=dist/js/admin.min.js",
+    "build": "npx npm-run-all --parallel build:*",
+    "watch:css": "npx postcss src/css/style.css -o dist/css/style.min.css --watch",
+    "watch:js": "npx esbuild src/js/main.js --bundle --outfile=dist/js/main.min.js --watch",
+    "watch:login": "npx esbuild src/js/login.js --bundle --outfile=dist/js/login.min.js --watch",
+    "watch:admin": "npx esbuild src/js/admin.js --bundle --outfile=dist/js/admin.min.js --watch",
+    "watch": "npx npm-run-all --parallel watch:*"
   },
   "keywords": [],
   "author": "",
