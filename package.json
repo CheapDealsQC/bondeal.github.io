@@ -1,0 +1,25 @@
+{
+  "name": "spotideals",
+  "version": "1.0.0",
+  "description": "SpotiDeals website build process.",
+  "private": true,
+  "scripts": {
+    "build": "npx npm-run-all build:**",
+    "build:css": "npx postcss src/css/style.css -o dist/css/style.min.css",
+    "build:js": "npx esbuild src/js/main.js --bundle --minify --outfile=dist/js/main.min.js",
+    "watch": "npx npm-run-all --parallel watch:**",
+    "watch:css": "npx postcss src/css/style.css -o dist/css/style.min.css -w",
+    "watch:js": "npx esbuild src/js/main.js --bundle --outfile=dist/js/main.js --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.4.19",
+    "cssnano": "^7.0.4",
+    "esbuild": "^0.23.0",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^8.4.39",
+    "postcss-cli": "^11.0.0"
+  }
+} 
