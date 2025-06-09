@@ -1765,3 +1765,56 @@ section {
   scroll-snap-align: start;
   scroll-margin-top: 60px; /* height of sticky header */
 }
+
+.hero__social-proof {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.hero__social-proof .avatars {
+  display: flex;
+}
+
+.avatar {
+  width: 100%;
+  height: auto;
+  max-width: 72px; /* Mobile first */
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  box-shadow: var(--shadow-lg);
+  border: 3px solid var(--sd-bg-900);
+  margin-left: -20px;
+  transition: transform var(--transition);
+}
+
+.avatar:first-child {
+  margin-left: 0;
+}
+
+.avatar:hover {
+  transform: scale(1.1);
+  z-index: 5;
+}
+
+@media (min-width: 768px) {
+  .avatar {
+    max-width: 96px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .avatar {
+    max-width: 120px;
+  }
+}
+
+.hero__social-proof p {
+  font-size: 16px;
+  color: var(--color-text-secondary);
+}
+
+.hero__visual {
+  flex: 1;
+}
