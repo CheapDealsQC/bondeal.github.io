@@ -62,9 +62,40 @@ function initThemeToggle() {
   }
 }
 
+/**
+ * Handles all basic UI interactions and adaptations.
+ * - Sticky header on scroll
+ * - Theme toggling
+ * - Back to top button
+ */
 export function initUI() {
+  const header = document.querySelector('header');
+  const backToTopButton = document.getElementById('back-to-top');
+  const themeToggleButton = document.getElementById('theme-toggle');
+
+  // Sticky Header
+  if (header) {
+    const handleScroll = () => {
+      if (window.scrollY > 80) {
+        header.classList.add('header--scrolled');
+      } else {
+        header.classList.remove('header--scrolled');
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // Initial check
+  }
+
+  // Back to Top Button
+  if (backToTopButton) {
+    // ... existing backToTopButton logic
+  }
+
+  // Theme Toggle
+  if (themeToggleButton) {
+    // ... existing themeToggleButton logic
+  }
+
   initMobileMenu();
-  initBackToTop();
   initFaqAccordion();
-  initThemeToggle();
 } 

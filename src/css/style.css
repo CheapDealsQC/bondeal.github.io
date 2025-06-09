@@ -22,6 +22,12 @@
   --border-color: rgba(255, 255, 255, 0.1);
   --shadow-color: rgba(0, 0, 0, 0.4);
 
+  /* SpotiDeals Palette */
+  --sd-bg-900: #050d0a;
+  --sd-bg-800: #031a15;
+  --sd-accent: #1ee480;
+  --sd-accent-strong: #0ab25d;
+
   --btn-radius: 12px;
   --transition: 0.3s ease;
   --section-gap: 80px;
@@ -331,47 +337,38 @@ body::before {
   }
 }
 
-/* Trust Section - Glassmorphism */
+/* Trust Section - Glassmorphism Cards */
 .trust-badges {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 24px;
+    max-width: 1100px; /* Limit max width for larger screens */
+    margin: 0 auto; /* Center the grid */
 }
 
-.trust-badge {
-    background: rgba(31, 32, 41, 0.5); /* Semi-transparent background */
-    backdrop-filter: blur(12px); /* The "glass" effect */
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
-    padding: 32px;
-    text-align: center;
-    transition: all var(--transition);
+.trust-card {
+  background: rgba(255, 255, 255, .04);
+  border: 1px solid rgba(255, 255, 255, .10);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 12px;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  transition: transform .2s, box-shadow .2s;
 }
 
-.trust-badge:hover {
-    transform: translateY(-8px) scale(1.02); /* Added scale for consistency */
-    background: rgba(31, 32, 41, 0.7);
-    border-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 16px 32px -8px var(--shadow-color); /* Added for consistency */
+@media (prefers-reduced-motion: no-preference) {
+  .trust-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 12px 24px -8px rgba(0, 0, 0, .6);
+  }
 }
 
-.trust-badge__img {
-    height: 50px;
-    margin-bottom: 16px;
-    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
-}
-
-.trust-badge h3 {
-    font-family: 'Montserrat', sans-serif;
-    margin-bottom: 8px;
-    color: var(--color-text-main);
-}
-
-.trust-badge p {
-    color: var(--color-text-secondary);
-    font-size: 0.95rem;
-    line-height: 1.5;
+.icon-xl {
+  display: block;
+  font-size: 2.75rem;
+  color: var(--sd-accent);
+  margin: 0 auto 0.75rem;
 }
 
 /* Hide the old form */
@@ -1684,4 +1681,27 @@ input, textarea, select {
     transition: opacity 0.5s ease;
     transform: none;
   }
+}
+
+.hero__social-proof .avatars img:first-child {
+  margin-left: 0;
+}
+
+header nav a:hover {
+  color: var(--sd-accent-strong);
+}
+
+header.header--scrolled {
+  background-color: rgba(5, 13, 10, 0.7); /* semi-transparent version of --sd-bg-900 */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.header__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
 }

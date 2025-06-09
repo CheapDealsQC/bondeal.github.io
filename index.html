@@ -145,35 +145,33 @@
         </div>
       </div>
       <div class="hero__visual">
-        <img src="https://placehold.co/400x800/0f2027/2c7744?text=SpotiDeals" alt="Application Spotify sur un téléphone" class="hero__mockup">
+        <img src="https://placehold.co/400x800/0f2027/2c7744?text=SpotiDeals" alt="Application Spotify sur un téléphone" class="hero__mockup" loading="lazy">
       </div>
     </div>
   </section>
 
   <!-- POURQUOI NOUS FAIRE CONFIANCE -->
   <section class="trust" id="trust" data-reveal>
-  <div class="container">
-    <h2 class="section-title">Pourquoi nous faire confiance ?</h2>
-    
-    <!-- Badges de Sécurité -->
-    <div class="trust-badges">
-    <div class="trust-badge">
-      <img src="dist/images/ssl-badge.svg" alt="SSL Sécurisé" class="trust-badge__img" loading="lazy">
-      <h3>SSL Sécurisé</h3>
-      <p>Site protégé par HTTPS</p>
+    <div class="container">
+      <h2 class="section-title">Pourquoi nous faire confiance ?</h2>
+      <div class="trust-badges">
+          <article class="trust-card">
+              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 256 256" class="icon-xl"><path d="M229.66,77.66l-96-56a8,8,0,0,0-7.32,0l-96,56A8,8,0,0,0,28,85.19V176a8,8,0,0,0,2.34,5.66l96,56a8,8,0,0,0,7.32,0l96-56A8,8,0,0,0,228,176V85.19A8,8,0,0,0,229.66,77.66ZM112,128.35,76.18,153.1a8,8,0,1,1-8.36-13.84L106,116.65,72.48,93.38a8,8,0,1,1,9-13.24L112,98.35,144,79.82a8,8,0,0,1,9.64,12.42L121,117.35l30.34,21.24a8,8,0,0,1-1.62,14.65,8,8,0,0,1-8-1.77ZM212,168.81,128,218.42,44,168.81V92.38l84,49.22v.1a8,8,0,0,0,7.32,0v-.1l84-49.22Z"></path></svg>
+              <h3>SSL Sécurisé</h3>
+              <p>Site protégé par HTTPS</p>
+          </article>
+          <article class="trust-card">
+              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 256 256" class="icon-xl"><path d="M224,48H32A16,16,0,0,0,16,64V192a16,16,0,0,0,16,16H224a16,16,0,0,0,16-16V64A16,16,0,0,0,224,48ZM208,168a8,8,0,0,1-8,8H56a8,8,0,0,1,0-16H200A8,8,0,0,1,208,168Zm0-32a8,8,0,0,1-8,8H56a8,8,0,0,1,0-16H200A8,8,0,0,1,208,136ZM96,96a12,12,0,1,1-12,12A12,12,0,0,1,96,96Z"></path></svg>
+              <h3>Paiement Sécurisé</h3>
+              <p>Transactions protégées par PayPal</p>
+          </article>
+          <article class="trust-card">
+              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 256 256" class="icon-xl"><path d="M200,64H144V48a24,24,0,0,0-48,0V64H56A16,16,0,0,0,40,80V200a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V80A16,16,0,0,0,200,64Zm-80-8a8,8,0,0,1,16,0V64H112Zm0,80a16,16,0,1,1,16,16A16,16,0,0,1,120,136Z"></path></svg>
+              <h3>Confidentialité</h3>
+              <p>Vos données sont supprimées après activation</p>
+          </article>
+      </div>
     </div>
-    <div class="trust-badge">
-      <img src="dist/images/payment-badge.svg" alt="Paiement Sécurisé" class="trust-badge__img" loading="lazy">
-      <h3>Paiement Sécurisé</h3>
-      <p>Transactions protégées par PayPal</p>
-    </div>
-    <div class="trust-badge">
-      <img src="dist/images/privacy-badge.svg" alt="Confidentialité" class="trust-badge__img" loading="lazy">
-      <h3>Confidentialité</h3>
-      <p>Vos données sont supprimées après activation</p>
-    </div>
-    </div>
-  </div>
   </section>
 
   <!-- FEATURES – Slider défilant -->
@@ -577,101 +575,15 @@
   </section>
 
   <!-- SUIVI DE COMMANDE -->
-  <section class="order-tracking" id="order-tracking">
+  <section class="order-tracking" id="order-tracking" data-reveal>
   <div class="container">
-    <h2 class="section-title">Suivi de Commande</h2>
-    
-    <!-- Recherche de commande -->
-    <div class="tracking-search">
-    <div class="tracking-form">
-      <input type="text" id="order-number" placeholder="Numéro de commande" required>
-      <button class="btn" id="track-order-btn">Suivre ma commande</button>
-    </div>
-    <p class="tracking-hint">Entrez votre numéro de commande reçu par email</p>
-    </div>
-
-    <!-- Résultat du suivi -->
-    <div class="tracking-result hidden">
-    <div class="tracking-header">
-      <div class="tracking-info">
-      <h3>Commande #<span id="result-order-number"></span></h3>
-      <p class="tracking-date">Date: <span id="result-order-date"></span></p>
-      </div>
-      <div class="tracking-status">
-      <span class="status-badge" id="result-order-status">En cours</span>
-      </div>
-    </div>
-
-    <div class="tracking-timeline">
-      <div class="timeline-item completed">
-      <div class="timeline-icon">📝</div>
-      <div class="timeline-content">
-        <h4>Commande reçue</h4>
-        <p>Votre commande a été enregistrée</p>
-        <span class="timeline-date" id="timeline-order-date"></span>
-      </div>
-      </div>
-      <div class="timeline-item">
-      <div class="timeline-icon">💳</div>
-      <div class="timeline-content">
-        <h4>Paiement confirmé</h4>
-        <p>Votre paiement a été validé</p>
-        <span class="timeline-date" id="timeline-payment-date"></span>
-      </div>
-      </div>
-      <div class="timeline-item">
-      <div class="timeline-icon">🔍</div>
-      <div class="timeline-content">
-        <h4>Vérification en cours</h4>
-        <p>Nous vérifions vos informations</p>
-        <span class="timeline-date" id="timeline-verification-date"></span>
-      </div>
-      </div>
-      <div class="timeline-item">
-      <div class="timeline-icon">⚡</div>
-      <div class="timeline-content">
-        <h4>Activation</h4>
-        <p>Activation de votre Premium</p>
-        <span class="timeline-date" id="timeline-activation-date"></span>
-      </div>
-      </div>
-      <div class="timeline-item">
-      <div class="timeline-icon">✉️</div>
-      <div class="timeline-content">
-        <h4>Confirmation</h4>
-        <p>Email de confirmation envoyé et données supprimées de nos systèmes</p>
-        <span class="timeline-date" id="timeline-confirmation-date"></span>
-      </div>
-      </div>
-    </div>
-
-    <div class="tracking-details">
-      <h4>Détails de la commande</h4>
-      <div class="details-grid">
-      <div class="detail-item">
-        <span class="detail-label">Email Spotify</span>
-        <span class="detail-value" id="result-email"></span>
-      </div>
-      <div class="detail-item">
-        <span class="detail-label">Montant payé</span>
-        <span class="detail-value" id="result-amount"></span>
-      </div>
-      <div class="detail-item">
-        <span class="detail-label">Méthode de paiement</span>
-        <span class="detail-value" id="result-payment-method"></span>
-      </div>
-      <div class="detail-item">
-        <span class="detail-label">Délai estimé</span>
-        <span class="detail-value" id="result-estimated-time"></span>
-      </div>
-      </div>
-    </div>
-
-    <div class="tracking-support">
-      <h4>Besoin d'aide ?</h4>
-      <p>Notre équipe est disponible 24/7 pour vous aider</p>
-      <a href="contact.html" class="btn btn--outline">Contacter le support</a>
-    </div>
+    <h2 class="section-title">Suivre ma commande</h2>
+    <form id="tracking-form" class="tracking-form">
+      <input type="text" id="order-id" placeholder="Numéro de commande ou email" required>
+      <button type="submit" class="btn">Suivre</button>
+    </form>
+    <div id="tracking-status" class="tracking-status" aria-live="polite">
+      <!-- Le statut de la commande s'affichera ici -->
     </div>
   </div>
   </section>
