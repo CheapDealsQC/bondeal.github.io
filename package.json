@@ -16,7 +16,7 @@
     "build:tracking": "npx esbuild src/js/modules/tracking.js --bundle --minify --outfile=dist/js/tracking.min.js",
     "build:paiement": "npx esbuild src/js/paiement.js --bundle --minify --outfile=dist/js/paiement.min.js",
     "build:contact": "npx esbuild src/js/contact.js --bundle --minify --outfile=dist/js/contact.min.js",
-    "build": "npm-run-all clean --parallel copy:* build:*",
+    "build": "npm-run-all clean build:css --parallel copy:* build:js build:login build:admin build:auth build:tracking build:paiement build:contact",
     "watch:css": "npx postcss src/css/style.css -o dist/css/style.min.css --watch",
     "watch:js": "npx esbuild src/js/main.js --bundle --outfile=dist/js/main.min.js --watch",
     "watch:login": "npx esbuild src/js/login.js --bundle --outfile=dist/js/login.min.js --watch",
