@@ -39,8 +39,10 @@
   }
   </script>
   
-  <!-- Montserrat + CSS -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+  <!-- Fonts (Inter for body, Poppins for titles) + CSS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="dist/css/style.min.css">
 </head>
 <body>
@@ -123,7 +125,7 @@
   </div>
 
   <!-- HERO -->
-  <section class="hero" id="hero">
+  <section class="hero" id="hero" data-reveal>
     <div class="hero__background"></div>
     <div class="container hero__inner">
       <div class="hero__copy">
@@ -142,13 +144,14 @@
           <p>+ de 500 clients satisfaits nous ont fait confiance !</p>
         </div>
       </div>
+      <div class="hero__visual">
+        <img src="https://placehold.co/400x800/0f2027/2c7744?text=SpotiDeals" alt="Application Spotify sur un téléphone" class="hero__mockup">
+      </div>
     </div>
   </section>
 
-  <div class="divider divider--slant"></div>
-
   <!-- POURQUOI NOUS FAIRE CONFIANCE -->
-  <section class="trust" id="trust">
+  <section class="trust" id="trust" data-reveal>
   <div class="container">
     <h2 class="section-title">Pourquoi nous faire confiance ?</h2>
     
@@ -173,10 +176,8 @@
   </div>
   </section>
 
-  <div class="divider divider--slant"></div>
-
   <!-- FEATURES – Slider défilant -->
-  <section class="features" id="features">
+  <section class="features" id="features" data-reveal>
   <div class="container">
     <h2 class="section-title">Pourquoi SpotiDeals ?</h2>
     <div class="feature-slider">
@@ -220,10 +221,8 @@
   </div>
   </section>
 
-  <div class="divider divider--slant"></div>
-
   <!-- NOTRE OFFRE UNIQUE -->
-  <section id="pricing" class="pricing animated-section">
+  <section id="pricing" class="pricing animated-section" data-reveal>
   <div class="container">
     <h2 class="section-title">Notre offre unique</h2>
     <div class="grid grid--1">
@@ -240,10 +239,8 @@
   </div>
   </section>
 
-  <div class="divider divider--slant"></div>
-
   <!-- COMPARAISON DES PRIX -->
-  <section class="comparison" id="comparison">
+  <section class="comparison" id="comparison" data-reveal>
   <div class="container">
     <h2 class="section-title">Comparatif des Prix</h2>
     <div class="comparison-grid">
@@ -348,10 +345,8 @@
   </div>
   </section>
 
-  <div class="divider divider--slant"></div>
-
   <!-- HOW IT WORKS -->
-  <section class="how" id="how">
+  <section class="how" id="how" data-reveal>
   <div class="container">
     <h2 class="section-title">Comment ça marche ?</h2>
     <div class="grid grid--3">
@@ -384,63 +379,41 @@
   </div>
   </section>
 
-  <div class="divider divider--slant"></div>
-
   <!-- LÉGALITÉ ET RESPONSABILITÉ -->
-  <section class="legal" id="legal">
-  <div class="container">
-    <h2 class="section-title">Légalité et Responsabilité</h2>
-    <div class="legal-grid">
-    <div class="legal-item">
-      <div class="legal-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6s1.5-2 5-2 5 2 5 2v14s-1.5-1-5-1-5 1-5 1V6z"></path><path d="M14 6s1.5-2 5-2 5 2 5 2v14s-1.5-1-5-1-5 1-5 1V6z"></path></svg></div>
-      <div class="legal-text">
-      <h3>Service Légal</h3>
-      <p>Notre service consiste uniquement à effectuer un achat officiel de Spotify Premium dans un pays où les prix sont plus avantageux. Il s'agit d'un achat légitime via les canaux officiels de Spotify.</p>
+  <section class="legal" id="legal" data-reveal>
+    <div class="container">
+      <h2 class="section-title">Légalité et Responsabilité</h2>
+      <div class="faq-list">
+        <div class="faq-item" data-reveal>
+          <h4><span class="faq-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6s1.5-2 5-2 5 2 5 2v14s-1.5-1-5-1-5 1-5 1V6z"></path><path d="M14 6s1.5-2 5-2 5 2 5 2v14s-1.5-1-5-1-5 1-5 1V6z"></path></svg></span> Service Légal</h4>
+          <p>Notre service consiste uniquement à effectuer un achat officiel de Spotify Premium dans un pays où les prix sont plus avantageux. Il s'agit d'un achat légitime via les canaux officiels de Spotify.</p>
+        </div>
+        <div class="faq-item" data-reveal data-reveal-delay="100ms">
+          <h4><span class="faq-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></span> Différence de Prix</h4>
+          <p>Nous utilisons simplement la différence de prix entre les pays, comme le font de nombreux services de voyage et d'achat international. C'est une pratique commerciale courante et légale.</p>
+        </div>
+        <div class="faq-item" data-reveal data-reveal-delay="200ms">
+          <h4><span class="faq-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></span> Conformité Spotify</h4>
+          <p>L'achat est effectué selon les conditions d'utilisation de Spotify. Nous n'utilisons aucun moyen de contournement ou de modification du service.</p>
+        </div>
+        <div class="faq-item" data-reveal data-reveal-delay="300ms">
+          <h4><span class="faq-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></span> Clause de Non-Responsabilité</h4>
+          <p>Nous ne sommes pas responsables des décisions de Spotify concernant votre compte. Nous vendons uniquement notre service d'activation et n'avons aucun contrôle sur les politiques ou décisions de Spotify.</p>
+        </div>
+        <div class="faq-item" data-reveal data-reveal-delay="400ms">
+           <h4><span class="faq-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></span> Protection du Service</h4>
+          <p>En utilisant notre service, vous acceptez que nous ne pouvons être tenus responsables de toute action de Spotify, y compris mais sans s'y limiter : suspension de compte, bannissement, ou modification des conditions d'utilisation.</p>
+        </div>
+        <div class="faq-item" data-reveal data-reveal-delay="500ms">
+          <h4><span class="faq-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg></span> Acceptation des Risques</h4>
+          <p>En commandant, vous reconnaissez être conscient des risques potentiels liés à l'utilisation de notre service et acceptez que nous ne pouvons être tenus responsables des décisions de Spotify.</p>
+        </div>
       </div>
     </div>
-    <div class="legal-item">
-      <div class="legal-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></div>
-      <div class="legal-text">
-      <h3>Différence de Prix</h3>
-      <p>Nous utilisons simplement la différence de prix entre les pays, comme le font de nombreux services de voyage et d'achat international. C'est une pratique commerciale courante et légale.</p>
-      </div>
-    </div>
-    <div class="legal-item">
-      <div class="legal-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></div>
-      <div class="legal-text">
-      <h3>Conformité Spotify</h3>
-      <p>L'achat est effectué selon les conditions d'utilisation de Spotify. Nous n'utilisons aucun moyen de contournement ou de modification du service.</p>
-      </div>
-    </div>
-    <div class="legal-item">
-      <div class="legal-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></div>
-      <div class="legal-text">
-      <h3>Clause de Non-Responsabilité</h3>
-      <p>Nous ne sommes pas responsables des décisions de Spotify concernant votre compte. Nous vendons uniquement notre service d'activation et n'avons aucun contrôle sur les politiques ou décisions de Spotify.</p>
-      </div>
-    </div>
-    <div class="legal-item">
-      <div class="legal-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
-      <div class="legal-text">
-      <h3>Protection du Service</h3>
-      <p>En utilisant notre service, vous acceptez que nous ne pouvons être tenus responsables de toute action de Spotify, y compris mais sans s'y limiter : suspension de compte, bannissement, ou modification des conditions d'utilisation.</p>
-      </div>
-    </div>
-    <div class="legal-item">
-      <div class="legal-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg></div>
-      <div class="legal-text">
-      <h3>Acceptation des Risques</h3>
-      <p>En commandant, vous reconnaissez être conscient des risques potentiels liés à l'utilisation de notre service et acceptez que nous ne pouvons être tenus responsables des décisions de Spotify.</p>
-      </div>
-    </div>
-    </div>
-  </div>
   </section>
 
-  <div class="divider divider--slant"></div>
-
   <!-- FAQ – Accordéon animé -->
-  <section id="faq" class="faq animated-section">
+  <section id="faq" class="faq animated-section" data-reveal>
   <div class="container">
     <h2 class="section-title">Questions fréquentes</h2>
     <div class="faq-item" style="--delay:0.1s"><h4>1) Prolonger l'abonnement ?</h4><p>Oui, vous pouvez renouveler à tout moment.</p></div>
@@ -450,10 +423,8 @@
   </div>
   </section>
 
-  <div class="divider divider--slant"></div>
-
   <!-- SECTION IMPORTANTE -->
-  <section class="important" id="important">
+  <section class="important" id="important" data-reveal>
   <div class="container">
     <h2 class="section-title">Points clés à retenir</h2>
     <ul class="important-list">
@@ -503,10 +474,8 @@
   </svg>
   </button>
 
-  <div class="divider divider--slant"></div>
-
   <!-- COMMANDE -->
-  <section class="commande card" id="commande">
+  <section class="commande card" id="commande" data-reveal>
   <div class="container">
     <h2 class="section-title">🛒 Commander maintenant</h2>
     
@@ -706,8 +675,6 @@
     </div>
   </div>
   </section>
-
-  <div class="divider divider--slant"></div>
 
   <!-- Back to Top Button -->
   <button id="back-to-top" class="back-to-top" aria-label="Retour en haut">
