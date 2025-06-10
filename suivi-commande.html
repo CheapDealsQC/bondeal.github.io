@@ -16,9 +16,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
   <!-- CSS -->
   <link rel="stylesheet" href="/css/modern-style.css">
+  <link rel="stylesheet" href="/css/animations.css">
+  <link rel="stylesheet" href="/css/background-effects.css">
+  <link rel="stylesheet" href="/css/form-animations.css">
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -156,7 +158,10 @@
   <header class="header">
     <div class="container header-container">
       <div class="logo">
-        <img src="/images/logo.svg" alt="SpotiDeals Logo" height="40">
+        <picture>
+          <source srcset="/images/webp/logo.webp" type="image/webp">
+          <img src="/images/logo.svg" alt="SpotiDeals Logo" height="40">
+        </picture>
         <span class="logo-text">SpotiDeals</span>
       </div>
       <nav class="nav-links">
@@ -166,8 +171,11 @@
       </nav>
     </div>
   </header>
-
-  <section class="section">
+  <section class="section has-wave-bg">
+    <!-- Effet d'arrière-plan subtil -->
+    <div class="wave-bg"></div>
+    <div class="particles-container" id="tracking-particles"></div>
+    
     <div class="container">
       <div class="section-title">
         <h1>Suivi de commande</h1>
@@ -196,7 +204,10 @@
     <div class="container">
       <div class="footer-content">
         <div class="footer-about">
-          <img src="/images/logo.svg" alt="SpotiDeals Logo" height="40" class="footer-logo">
+          <picture>
+            <source srcset="/images/webp/logo.webp" type="image/webp">
+            <img src="/images/logo.svg" alt="SpotiDeals Logo" height="40" class="footer-logo">
+          </picture>
           <p>SpotiDeals fournit uniquement un service d'intermédiation d'achat. Nous ne revendons pas Spotify et ne sommes pas affiliés à Spotify AB.</p>
         </div>
         
@@ -381,9 +392,13 @@
       
       if (orderIdParam) {
         document.getElementById('order-id').value = orderIdParam;
-        checkOrderStatus(orderIdParam);
-      }
+        checkOrderStatus(orderIdParam);      }
     });
   </script>
+  
+  <!-- Scripts -->
+  <script src="/js/modern-main.js"></script>
+  <script src="/js/background-effects.js"></script>
+  <script src="/js/form-validation.js"></script>
 </body>
 </html>

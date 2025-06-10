@@ -1,0 +1,205 @@
+/* Process Section Styling - SpotiDeals */
+
+.process-steps-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: relative;
+  max-width: 800px;
+  margin: 3rem auto;
+  padding: 1rem;
+}
+
+/* Connector line between steps */
+.process-connector {
+  position: absolute;
+  left: 2rem;
+  top: 3rem;
+  bottom: 3rem;
+  width: 4px;
+  background: var(--gradient-secondary);
+  border-radius: 2px;
+  z-index: 1;
+  transform-origin: top center;
+  animation: grow-line 1.5s ease-out forwards;
+  opacity: 0.5;
+}
+
+@keyframes grow-line {
+  0% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 0.5;
+  }
+}
+
+.process-step {
+  display: flex;
+  gap: 2rem;
+  position: relative;
+  transition: var(--transition);
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.process-step.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.process-step-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  background: var(--gradient-primary);
+  color: var(--white);
+  font-size: 1.5rem;
+  font-weight: 700;
+  border-radius: 50%;
+  box-shadow: var(--shadow);
+  z-index: 2;
+  transition: var(--transition);
+}
+
+.process-step:hover .process-step-number {
+  transform: scale(1.1);
+  box-shadow: var(--shadow-hover);
+}
+
+.process-step-content {
+  background: var(--white);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  flex: 1;
+  position: relative;
+  transition: var(--transition);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.process-step:hover .process-step-content {
+  transform: translateX(5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.process-step h3 {
+  color: var(--primary);
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.process-step p {
+  color: var(--text);
+  margin-bottom: 0;
+}
+
+.process-icon {
+  position: absolute;
+  right: 1.5rem;
+  top: 1.5rem;
+  font-size: 1.5rem;
+  color: var(--secondary);
+  opacity: 0.7;
+  transition: var(--transition);
+}
+
+.process-step:hover .process-icon {
+  transform: rotate(15deg) scale(1.2);
+  opacity: 1;
+  color: var(--primary);
+}
+
+/* Add pulse animation to steps on visibility */
+.process-step.is-visible:nth-child(even) .process-step-number {
+  animation: pulse-glow 2s infinite alternate;
+}
+
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 0 0 5px rgba(29, 185, 84, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(29, 185, 84, 0.8);
+  }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .process-steps-container {
+    margin: 2rem auto;
+    padding: 0.5rem;
+  }
+  
+  .process-connector {
+    left: 1.5rem;
+  }
+  
+  .process-step {
+    gap: 1rem;
+  }
+  
+  .process-step-number {
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+  
+  .process-step-content {
+    padding: 1rem;
+  }
+  
+  .process-step h3 {
+    font-size: 1.1rem;
+    margin-right: 1.5rem;
+  }
+  
+  .process-step p {
+    font-size: 0.9rem;
+  }
+  
+  .process-icon {
+    font-size: 1.2rem;
+    top: 1rem;
+    right: 1rem;
+  }
+}
+
+/* Small mobile screens */
+@media (max-width: 480px) {
+  .process-steps-container {
+    gap: 1.5rem;
+  }
+  
+  .process-step {
+    gap: 0.75rem;
+  }
+  
+  .process-step-number {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1rem;
+  }
+  
+  /* Reduce animations on small screens for better performance */
+  .process-step:hover .process-step-content {
+    transform: none;
+  }
+  
+  .process-step:hover .process-step-number {
+    transform: none;
+  }
+  
+  /* Hide glow effects on small screens for performance */
+  .glow-effect {
+    display: none;
+  }
+}

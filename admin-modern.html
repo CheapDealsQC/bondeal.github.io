@@ -15,9 +15,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
-  <!-- Font Awesome -->
+    <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+  <!-- Animations CSS -->
+  <link rel="stylesheet" href="/css/animations.css">
   
   <style>
     :root {
@@ -330,7 +332,10 @@
     <div class="container">
       <div class="header">
         <div class="header-title">
-          <img src="/images/logo.svg" alt="SpotiDeals Logo">
+          <picture>
+            <source srcset="/images/webp/logo.webp" type="image/webp">
+            <img src="/images/logo.svg" alt="SpotiDeals Logo">
+          </picture>
           <h1>Administration SpotiDeals</h1>
         </div>
         <button id="logout-btn" class="btn btn-view">Déconnexion</button>
@@ -395,9 +400,11 @@
   </div>
   
   <div id="login-container" class="container">
-    <div class="card">
-      <div class="header-title" style="justify-content: center; margin-bottom: 2rem;">
-        <img src="/images/logo.svg" alt="SpotiDeals Logo">
+    <div class="card">      <div class="header-title" style="justify-content: center; margin-bottom: 2rem;">
+        <picture>
+          <source srcset="/images/webp/logo.webp" type="image/webp">
+          <img src="/images/logo.svg" alt="SpotiDeals Logo">
+        </picture>
         <h1>Admin Login</h1>
       </div>
       

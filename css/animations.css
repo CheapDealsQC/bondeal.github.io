@@ -1,0 +1,254 @@
+/* Animations complémentaires pour SpotiDeals */
+
+/* Animation de pulse pour le numéro de commande */
+@keyframes pulse-once {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); color: var(--primary); }
+  100% { transform: scale(1); }
+}
+
+.pulse {
+  animation: pulse-once 0.3s ease-in-out;
+}
+
+/* Animation de secousse pour les champs invalides */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-5px); }
+  40%, 80% { transform: translateX(5px); }
+}
+
+.shake-animation {
+  animation: shake 0.5s ease-in-out;
+  border-color: var(--danger) !important;
+}
+
+/* Animation du bouton de chargement */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading .fa-spin {
+  animation: spin 1s linear infinite;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+/* Style pour l'affichage du numéro de commande */
+#order-id-display {
+  font-family: 'Courier New', monospace;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--secondary);
+  padding: 10px;
+  background: rgba(67, 130, 255, 0.05);
+  border-radius: var(--border-radius);
+  display: inline-block;
+  margin: 10px 0;
+}
+
+/* Effet de vague sur les boutons */
+.btn-wave {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-wave::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%, -50%);
+  transform-origin: 50% 50%;
+}
+
+.btn-wave:focus:not(:active)::after {
+  animation: ripple 1s ease-out;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 0.5;
+  }
+  20% {
+    transform: scale(25, 25);
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(40, 40);
+  }
+}
+
+/* Input focused state */
+.input-focused {
+  position: relative;
+}
+
+.input-focused::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--gradient-secondary);
+  transform: scaleX(0);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+}
+
+.input-focused.input-active::after {
+  transform: scaleX(1);
+}
+
+.form-control.has-value {
+  border-color: var(--secondary);
+}
+
+/* Hover effect for CTA button */
+.btn-cta.hover-effect {
+  animation: none;
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 15px 30px rgba(29, 185, 84, 0.2);
+}
+
+/* Zoom effect for price cards */
+.price-card {
+  transition: var(--transition);
+  will-change: transform;
+}
+
+.price-card:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-lg);
+  z-index: 2;
+}
+
+.price-card .price {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary);
+  transition: var(--transition);
+}
+
+.price-card:hover .price {
+  transform: scale(1.1);
+}
+
+/* Animation classes */
+.fade-in {
+  animation: fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.slide-up {
+  animation: slideUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.slide-right {
+  animation: slideRight 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.slide-left {
+  animation: slideLeft 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Delay classes for staggered animations */
+.delay-100 {
+  animation-delay: 0.1s;
+}
+
+.delay-200 {
+  animation-delay: 0.2s;
+}
+
+.delay-300 {
+  animation-delay: 0.3s;
+}
+
+.delay-400 {
+  animation-delay: 0.4s;
+}
+
+.delay-500 {
+  animation-delay: 0.5s;
+}
+
+/* Mobile optimizations for animations */
+@media (max-width: 768px) {
+  /* Reduce animation distance on mobile for better performance */
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes slideRight {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes slideLeft {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  /* Use will-change for hardware acceleration on animation elements */
+  .animate-on-scroll {
+    will-change: transform, opacity;
+  }
+  
+  /* Reduce or disable certain animations for better mobile performance */
+  .wave-bg::before,
+  .wave-bg::after {
+    animation-duration: 90s; /* slow down wave animation */
+  }
+  
+  /* Make animations more gentle on mobile */
+  .is-visible {
+    transition-duration: 0.4s;
+  }
+}
+
+/* Reduce animations for users who prefer reduced motion */
+@media (prefers-reduced-motion) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .animate-on-scroll {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

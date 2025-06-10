@@ -1,5 +1,92 @@
 // SpotiDeals Main JavaScript - Created: June 2025
 document.addEventListener('DOMContentLoaded', function() {
+    // Chargement de la section process
+    const processSection = document.getElementById('process-section-container');
+    if (processSection) {
+        fetch('/sections/process-section.html')
+            .then(response => response.text())
+            .then(html => {
+                processSection.innerHTML = html;
+                // Réinitialiser l'observation pour les nouveaux éléments
+                initializeObservers();
+            })
+            .catch(error => console.error('Erreur de chargement de la section process:', error));
+    }
+
+    // Fonction pour initialiser les observers sur les éléments dynamiques
+    function initializeObservers() {
+        // Observer pour les animations au défilement
+        document.querySelectorAll('.animate-on-scroll:not(.observed)').forEach(element => {
+            observer.observe(element);
+            element.classList.add('observed');
+        });
+    }
+
+    // Animation au défilement
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.15
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                if (entry.target.dataset.delay) {
+                    entry.target.style.animationDelay = entry.target.dataset.delay;
+                }
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.animate-on-scroll').forEach(element => {
+        observer.observe(element);
+    });
+
+    // Animation du bouton CTA
+    const ctaButton = document.querySelector('.btn-cta');
+    if (ctaButton) {
+        ctaButton.addEventListener('mouseover', function() {
+            this.classList.add('hover-effect');
+        });
+        ctaButton.addEventListener('mouseout', function() {
+            this.classList.remove('hover-effect');
+        });
+    }
+
+    // Effets interactifs pour le formulaire
+    const formInputs = document.querySelectorAll('.form-control');
+    formInputs.forEach(input => {
+        // Effet de focus
+        input.addEventListener('focus', function() {
+            this.parentElement.classList.add('input-focused');
+        });
+
+        // Effet de blur
+        input.addEventListener('blur', function() {
+            this.parentElement.classList.remove('input-focused');
+            if (this.value.trim() !== '') {
+                this.classList.add('has-value');
+            } else {
+                this.classList.remove('has-value');
+            }
+        });
+
+        // Validation en temps réel
+        input.addEventListener('input', function() {
+            if (this.checkValidity()) {
+                this.classList.remove('is-invalid');
+                this.classList.add('is-valid');
+            } else {
+                this.classList.remove('is-valid');
+                if (this.value.trim() !== '') {
+                    this.classList.add('is-invalid');
+                }
+            }
+        });
+    });
+
     // Generate Order ID function
     function generateOrderId() {
         const randomString = Math.random().toString(36).substring(2, 7).toUpperCase();
@@ -125,34 +212,95 @@ document.addEventListener('DOMContentLoaded', function() {
         }).render('#paypal-button-container');
     }
 
-    // Form validation
+    // Amélioration du formulaire de commande
     const orderForm = document.getElementById('orderForm');
     if (orderForm) {
-        orderForm.addEventListener('submit', function(event) {
-            // Check Spotify username/email
-            const spotifyUser = document.getElementById('spotifyUser');
-            if (spotifyUser && !spotifyUser.value.trim()) {
-                event.preventDefault();
-                alert('Veuillez entrer votre nom d\'utilisateur ou email Spotify.');
+        // Génération visuelle du numéro de commande
+        const orderIdDisplay = document.getElementById('order-id-display');
+        if (orderIdDisplay) {
+            const newOrderId = generateOrderId();
+            
+            // Animation du numéro de commande
+            let currentIndex = 0;
+            const chars = newOrderId.split('');
+            const interval = setInterval(() => {
+                if (currentIndex < chars.length) {
+                    orderIdDisplay.textContent += chars[currentIndex];
+                    currentIndex++;
+                    // Effet de pulsation à chaque caractère ajouté
+                    orderIdDisplay.classList.add('pulse');
+                    setTimeout(() => {
+                        orderIdDisplay.classList.remove('pulse');
+                    }, 150);
+                } else {
+                    clearInterval(interval);
+                    // Sauvegarder l'ID dans un champ caché
+                    const orderIdInput = document.createElement('input');
+                    orderIdInput.type = 'hidden';
+                    orderIdInput.name = 'orderId';
+                    orderIdInput.value = newOrderId;
+                    orderForm.appendChild(orderIdInput);
+                }
+            }, 100);
+        }
+
+        // Validation dynamique et visuelle du formulaire
+        orderForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formFields = orderForm.querySelectorAll('.form-control');
+            let isValid = true;
+            let firstInvalidField = null;
+
+            // Validation de chaque champ avec effet visuel
+            formFields.forEach(field => {
+                if (!field.checkValidity()) {
+                    isValid = false;
+                    field.classList.add('is-invalid');
+                    field.classList.remove('is-valid');
+                    
+                    // Animation de secousse pour les champs invalides
+                    field.classList.add('shake-animation');
+                    setTimeout(() => {
+                        field.classList.remove('shake-animation');
+                    }, 500);
+                    
+                    // Mémoriser le premier champ invalide
+                    if (!firstInvalidField) firstInvalidField = field;
+                } else {
+                    field.classList.add('is-valid');
+                    field.classList.remove('is-invalid');
+                }
+            });
+
+            // Focus sur le premier champ invalide
+            if (firstInvalidField) {
+                firstInvalidField.focus();
                 return;
             }
             
-            // Check password strength
-            const tempPass = document.getElementById('tempPass');
-            if (tempPass) {
-                const result = checkPasswordStrength(tempPass.value);
-                if (!result.isStrong) {
-                    event.preventDefault();
-                    alert('Veuillez utiliser un mot de passe temporaire plus sécurisé.');
-                    return;
-                }
-            }
-            
-            // Everything looks good, continue with submission
-            // Set form submission time for tracking
-            const formTimeField = document.getElementById('formTime');
-            if (formTimeField) {
-                formTimeField.value = new Date().toISOString();
+            if (isValid) {
+                // Effet de chargement du bouton
+                const submitButton = orderForm.querySelector('[type="submit"]');
+                submitButton.disabled = true;
+                submitButton.classList.add('loading');
+                submitButton.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Traitement en cours...';
+                
+                // Simuler le traitement (à remplacer par l'envoi réel du formulaire)
+                setTimeout(() => {
+                    // Afficher le message de succès avec animation
+                    const successMessage = document.createElement('div');
+                    successMessage.className = 'alert alert-success fade-in';
+                    successMessage.innerHTML = '<i class="fas fa-check-circle"></i> Commande enregistrée avec succès! Vous allez recevoir un email de confirmation.';
+                    
+                    orderForm.innerHTML = '';
+                    orderForm.appendChild(successMessage);
+                    
+                    // Redirection après quelques secondes (si nécessaire)
+                    // setTimeout(() => {
+                    //     window.location.href = '/suivi-commande.html';
+                    // }, 3000);
+                }, 1500);
             }
         });
     }

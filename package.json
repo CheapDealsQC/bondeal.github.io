@@ -18,7 +18,7 @@
     "url": "https://github.com/spotideals/spotideals.github.io/issues"
   },
   "homepage": "https://github.com/spotideals/spotideals.github.io#readme",
-  "dependencies": {
+  "devDependencies": {
     "sharp": "^0.34.2"
   }
 }

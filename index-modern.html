@@ -15,10 +15,12 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
-  <!-- CSS -->
-  <link rel="stylesheet" href="/css/modern-style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">  <!-- CSS -->  <link rel="stylesheet" href="/css/modern-style.css">
+  <link rel="stylesheet" href="/css/animations.css">
+  <link rel="stylesheet" href="/css/price-section.css">
+  <link rel="stylesheet" href="/css/process-section.css">
+  <link rel="stylesheet" href="/css/background-effects.css">
+  <link rel="stylesheet" href="/css/form-animations.css">
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -26,9 +28,11 @@
 
 <body>
   <header class="header">
-    <div class="container header-container">
-      <div class="logo">
-        <img src="/images/logo.svg" alt="SpotiDeals Logo" height="40">
+    <div class="container header-container">      <div class="logo">
+        <picture>
+          <source srcset="/images/webp/logo.webp" type="image/webp">
+          <img src="/images/logo.svg" alt="SpotiDeals Logo" height="40">
+        </picture>
         <span class="logo-text">SpotiDeals</span>
       </div>
       <nav class="nav-links">
@@ -38,45 +42,97 @@
       </nav>
     </div>
   </header>
-
-  <section class="hero">
+  <section class="hero has-wave-bg">
+    <!-- Effet d'arrière-plan subtil -->
+    <div class="wave-bg"></div>
+    <div class="particles-container" id="hero-particles"></div>
+    
     <div class="container">
       <div class="hero-content">
-        <h1 class="animate-on-scroll">Abonnement Spotify Premium<br>à <span class="highlight">-53%</span></h1>
+        <h1 class="animate-on-scroll gradient-text">Abonnement Spotify Premium<br>à <span class="highlight">-53%</span></h1>
         <p class="animate-on-scroll">Obtenez 12 mois d'abonnement Spotify Premium pour seulement 82,62$ au lieu de 175,12$ - Une économie de plus de 92$</p>
         <a href="#commander" class="btn btn-primary btn-lg animate-on-scroll">Économiser maintenant</a>
       </div>
     </div>
   </section>
-
-  <section class="section" id="economie">
-    <div class="container">
-      <div class="section-title">
-        <h2>Profitez d'une réduction exceptionnelle</h2>
-      </div>
-      
-      <div class="price-comparison">
-        <div class="price-card animate-on-scroll">
-          <div class="price-label">Forfait individuel <strong>12 mois prépayés</strong></div>
-          <div class="price-amount">82,62$ CAD</div>
-          <div class="price-original"><s>175,12$</s> tout frais inclus</div>
-          <div class="price-savings">Économisez 53%</div>
+  <!-- Section Prix avec effet de zoom et design premium -->
+<section class="section section-alt" id="prix">
+  <div class="container">
+    <div class="section-title">
+      <h2>Nos tarifs</h2>
+      <p class="section-subtitle">Économisez plus de 50% sur votre abonnement Spotify Premium</p>
+    </div>
+    
+    <div class="price-cards-container">
+      <div class="price-comparison-grid">
+        <!-- Carte prix normal -->
+        <div class="price-card price-card-standard animate-on-scroll slide-up">
+          <div class="price-card-badge">Prix standard</div>
+          <div class="price-card-header">
+            <h3>Prix officiel</h3>
+            <div class="price-value">175,12$<span class="price-period">/ 12 mois</span></div>
+          </div>
+          <div class="price-card-body">
+            <ul class="price-features">
+              <li><i class="fas fa-check"></i> Écoute hors ligne</li>
+              <li><i class="fas fa-check"></i> Musique sans pub</li>
+              <li><i class="fas fa-check"></i> Son haute qualité</li>
+              <li><i class="fas fa-check"></i> Playlists personnalisées</li>
+              <li><i class="fas fa-check"></i> Accès multi-appareils</li>
+            </ul>
+            <div class="price-action">
+              <span class="btn btn-outline disabled">Prix régulier</span>
+            </div>
+          </div>
         </div>
         
-        <div class="price-features">
-          <ul class="check-list">
-            <li>✓ Musique sans publicité</li>
-            <li>✓ Mode hors connexion</li>
-            <li>✓ Qualité audio supérieure</li>
-            <li>✓ Valide 12 mois complets</li>
-            <li>✓ Service 100% légal</li>
-          </ul>
+        <!-- Carte prix SpotiDeals -->
+        <div class="price-card price-card-premium animate-on-scroll slide-up" data-delay="0.2s">
+          <div class="price-card-badge highlight-badge">Prix SpotiDeals</div>
+          <div class="price-card-header">
+            <h3>Prix réduit</h3>
+            <div class="price-value highlight">82,62$<span class="price-period">/ 12 mois</span></div>
+            <div class="price-saving">Économisez 92,50$ (53%)</div>
+          </div>
+          <div class="price-card-body">
+            <ul class="price-features">
+              <li><i class="fas fa-check highlight"></i> <strong>Écoute hors ligne</strong></li>
+              <li><i class="fas fa-check highlight"></i> <strong>Musique sans pub</strong></li>
+              <li><i class="fas fa-check highlight"></i> <strong>Son haute qualité</strong></li>
+              <li><i class="fas fa-check highlight"></i> <strong>Playlists personnalisées</strong></li>
+              <li><i class="fas fa-check highlight"></i> <strong>Accès multi-appareils</strong></li>
+              <li><i class="fas fa-check highlight"></i> <strong>Activation garantie</strong></li>
+              <li><i class="fas fa-check highlight"></i> <strong>Support client dédié</strong></li>
+            </ul>
+            <div class="price-action">
+              <a href="#commander" class="btn btn-cta btn-wave">Commander maintenant</a>
+            </div>
+          </div>
         </div>
       </div>
+        <!-- Bandeau paiements acceptés -->
+      <div class="payment-methods-container animate-on-scroll fade-in" data-delay="0.4s">
+        <p class="text-center">Paiements sécurisés acceptés :</p>
+        <picture>
+          <source srcset="/images/webp/payment-methods.webp" type="image/webp">
+          <img src="/images/payment-methods.svg" alt="Méthodes de paiement acceptées" class="payment-methods-img">
+        </picture>
+      </div>
+    </div>
+  </div>
+</section>  <!-- Inclusion de la section process -->
+  <section class="section has-wave-bg" id="comment-ca-marche">
+    <!-- Effet d'arrière-plan subtil -->
+    <div class="wave-bg"></div>
+    <div class="particles-container" id="process-particles"></div>
+    
+    <div id="process-section-container">
+      <!-- Le contenu de process-section.html sera chargé ici avec JavaScript -->
     </div>
   </section>
 
-  <section class="section section-alt" id="comment-ca-marche">
+  <!-- Ancienne section - remplacée par la nouvelle version interactive -->
+  <section class="section section-alt hidden-section" id="old-comment-ca-marche">
     <div class="container">
       <div class="section-title">
         <h2>Comment ça marche</h2>
@@ -186,9 +242,11 @@
         <div class="testimonial-card animate-on-scroll">
           <div class="testimonial-content">
             <p>"J'étais sceptique au début, mais tout a parfaitement fonctionné ! J'économise plus de 90$ et mon compte Spotify Premium fonctionne exactement comme avant."</p>
-          </div>
-          <div class="testimonial-author">
-            <img src="/images/avatar-1.webp" alt="Avatar" class="testimonial-avatar">
+          </div>          <div class="testimonial-author">
+            <picture>
+              <source srcset="/images/webp/avatar-1.webp" type="image/webp">
+              <img src="/images/avatar-1.svg" alt="Avatar" class="testimonial-avatar">
+            </picture>
             <div>
               <div class="testimonial-name">Marie L.</div>
               <div class="testimonial-title">Cliente depuis 2024</div>
@@ -199,9 +257,11 @@
         <div class="testimonial-card animate-on-scroll">
           <div class="testimonial-content">
             <p>"Processus simple et efficace. Abonnement activé en 48h et j'économise une belle somme. Je recommanderai certainement à mes amis !"</p>
-          </div>
-          <div class="testimonial-author">
-            <img src="/images/avatar-2.webp" alt="Avatar" class="testimonial-avatar">
+          </div>          <div class="testimonial-author">
+            <picture>
+              <source srcset="/images/webp/avatar-2.webp" type="image/webp">
+              <img src="/images/avatar-2.svg" alt="Avatar" class="testimonial-avatar">
+            </picture>
             <div>
               <div class="testimonial-name">Thomas B.</div>
               <div class="testimonial-title">Client depuis 2024</div>
@@ -212,9 +272,11 @@
         <div class="testimonial-card animate-on-scroll">
           <div class="testimonial-content">
             <p>"Service client réactif et transparent. L'activation a pris moins de 72h et tout fonctionne parfaitement depuis. Très satisfaite de cette économie."</p>
-          </div>
-          <div class="testimonial-author">
-            <img src="/images/avatar-3.webp" alt="Avatar" class="testimonial-avatar">
+          </div>          <div class="testimonial-author">
+            <picture>
+              <source srcset="/images/webp/avatar-3.webp" type="image/webp">
+              <img src="/images/avatar-3.svg" alt="Avatar" class="testimonial-avatar">
+            </picture>
             <div>
               <div class="testimonial-name">Sophie M.</div>
               <div class="testimonial-title">Cliente depuis 2025</div>
@@ -401,9 +463,11 @@
 
   <footer class="footer">
     <div class="container">
-      <div class="footer-content">
-        <div class="footer-about">
-          <img src="/images/logo.svg" alt="SpotiDeals Logo" height="40" class="footer-logo">
+      <div class="footer-content">        <div class="footer-about">
+          <picture>
+            <source srcset="/images/webp/logo.webp" type="image/webp">
+            <img src="/images/logo.svg" alt="SpotiDeals Logo" height="40" class="footer-logo">
+          </picture>
           <p>SpotiDeals fournit uniquement un service d'intermédiation d'achat. Nous ne revendons pas Spotify et ne sommes pas affiliés à Spotify AB.</p>
         </div>
         
@@ -430,12 +494,16 @@
         <p class="mt-2">SpotiDeals est un service indépendant d'intermédiation d'achat et n'est pas affilié à Spotify AB.</p>
       </div>
     </div>
-  </footer>
-
-  <!-- PayPal SDK -->
+  </footer>  <!-- PayPal SDK -->
   <script src="https://www.paypal.com/sdk/js?client-id=AW-bLBrtEPaB0FTD-Oa4rQ1gbQBNLkkqsAtGh968nfbb-HA_ih-Cptg_1UzbE9GYagkCPtHFEUosfm&currency=CAD"></script>
   
   <!-- Main Script -->
   <script src="/js/modern-main.js"></script>
+  
+  <!-- Background Effects Script -->
+  <script src="/js/background-effects.js"></script>
+  
+  <!-- Form Validation Script -->
+  <script src="/js/form-validation.js"></script>
 </body>
 </html>
