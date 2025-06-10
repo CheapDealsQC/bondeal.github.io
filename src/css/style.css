@@ -848,4 +848,48 @@ button:focus-visible, .btn:focus-visible {
   color: var(--sd-color-text-main);
   min-height: 1.5em; /* réserve de l'espace pour le message */
   text-align: center;
+}
+
+/* 1. Container Footer */
+.footer {
+  padding: var(--sd-space-6) var(--sd-space-4);
+  background: var(--sd-color-bg-dark);
+}
+
+/* 2. Contenu flex */
+.footer__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sd-space-4);
+}
+@media (min-width: 768px) {
+  .footer__content {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+/* 3. Texte copyright */
+.footer__copy {
+  font-size: var(--sd-font-size-sm);
+  color: var(--sd-color-text-muted);
+  text-align: center;
+}
+
+/* 4. Liens */
+.footer__links {
+  display: flex;
+  gap: var(--sd-space-4);
+}
+.footer__link {
+  font-size: var(--sd-font-size-sm);
+  color: var(--sd-color-text-main);
+  text-decoration: none;
+  transition: color 0.3s var(--sd-transition-ease);
+}
+.footer__link:hover,
+.footer__link:focus-visible {
+  color: var(--sd-color-accent);
+  text-decoration: underline;
 } 
