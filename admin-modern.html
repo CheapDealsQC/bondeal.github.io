@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>SpotiDeals – Administration</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/favicon/site.webmanifest">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --primary: #1db954;
+      --primary-dark: #169c46;
+      --dark: #121212;
+      --dark-secondary: #282828;
+      --white: #ffffff;
+      --gray-100: #f8f9fa;
+      --gray-200: #e9ecef;
+      --gray-300: #dee2e6;
+      --gray-400: #ced4da;
+      --gray-500: #adb5bd;
+      --success: #43a047;
+      --warning: #ffb74d;
+      --danger: #e53935;
+      --info: #29b6f6;
+      --border-radius: 8px;
+      --shadow: 0 4px 6px rgba(0,0,0,0.07);
+      --font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: var(--font-family);
+      background-color: var(--gray-100);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+    
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--gray-300);
+    }
+    
+    .header-title {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .header-title img {
+      height: 40px;
+    }
+    
+    h1 {
+      font-weight: 700;
+      font-size: 1.8rem;
+      color: var(--dark);
+      margin: 0;
+    }
+    
+    .card {
+      background: var(--white);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+    
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .stat-card {
+      background: var(--white);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      padding: 1.5rem;
+      text-align: center;
+    }
+    
+    .stat-value {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    
+    .stat-label {
+      color: var(--gray-500);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .table-container {
+      overflow-x: auto;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    th, td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--gray-300);
+    }
+    
+    th {
+      background-color: var(--gray-200);
+      font-weight: 600;
+      color: var(--dark);
+    }
+    
+    tr:hover {
+      background-color: var(--gray-100);
+    }
+    
+    .status-select {
+      padding: 0.6rem;
+      border-radius: var(--border-radius);
+      border: 1px solid var(--gray-300);
+      background-color: var(--white);
+      font-family: var(--font-family);
+      width: 100%;
+    }
+    
+    .status-en-cours {
+      color: var(--info);
+      font-weight: 500;
+    }
+    
+    .status-livre {
+      color: var(--success);
+      font-weight: 500;
+    }
+    
+    .status-rembourse {
+      color: var(--danger);
+      font-weight: 500;
+    }
+    
+    .search-container {
+      display: flex;
+      margin-bottom: 1.5rem;
+    }
+    
+    .search-input {
+      flex: 1;
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--gray-300);
+      border-radius: var(--border-radius) 0 0 var(--border-radius);
+      font-family: var(--font-family);
+    }
+    
+    .search-btn {
+      padding: 0.8rem 1.5rem;
+      background-color: var(--primary);
+      color: var(--white);
+      border: none;
+      border-radius: 0 var(--border-radius) var(--border-radius) 0;
+      cursor: pointer;
+    }
+    
+    .filter-container {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    
+    .filter-btn {
+      padding: 0.6rem 1.2rem;
+      background-color: var(--white);
+      border: 1px solid var(--gray-300);
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .filter-btn:hover, .filter-btn.active {
+      background-color: var(--primary);
+      color: var(--white);
+      border-color: var(--primary);
+    }
+    
+    .footer {
+      margin-top: 2rem;
+      text-align: center;
+      color: var(--gray-500);
+      font-size: 0.9rem;
+    }
+    
+    .actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+    
+    .btn {
+      padding: 0.5rem 0.8rem;
+      border: none;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    
+    .btn-view {
+      background-color: var(--gray-200);
+      color: var(--dark);
+    }
+    
+    .btn-delete {
+      background-color: var(--danger);
+      color: var(--white);
+    }
+    
+    .hidden {
+      display: none;
+    }
+    
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem;
+      }
+      
+      .stats {
+        grid-template-columns: 1fr;
+      }
+      
+      th, td {
+        padding: 0.7rem;
+        font-size: 0.9rem;
+      }
+    }
+    
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    
+    .modal {
+      background-color: var(--white);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      width: 90%;
+      max-width: 500px;
+      padding: 2rem;
+      position: relative;
+    }
+    
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+    
+    .modal-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0;
+    }
+    
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--gray-500);
+    }
+    
+    .modal-close:hover {
+      color: var(--dark);
+    }
+    
+    .modal-content {
+      margin-bottom: 1.5rem;
+    }
+    
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app" class="hidden">
+    <div class="container">
+      <div class="header">
+        <div class="header-title">
+          <img src="/images/logo.svg" alt="SpotiDeals Logo">
+          <h1>Administration SpotiDeals</h1>
+        </div>
+        <button id="logout-btn" class="btn btn-view">Déconnexion</button>
+      </div>
+      
+      <div class="stats">
+        <div class="stat-card">
+          <div id="total-orders" class="stat-value">0</div>
+          <div class="stat-label">Commandes totales</div>
+        </div>
+        
+        <div class="stat-card">
+          <div id="pending-orders" class="stat-value">0</div>
+          <div class="stat-label">En cours</div>
+        </div>
+        
+        <div class="stat-card">
+          <div id="completed-orders" class="stat-value">0</div>
+          <div class="stat-label">Livré</div>
+        </div>
+        
+        <div class="stat-card">
+          <div id="refunded-orders" class="stat-value">0</div>
+          <div class="stat-label">Remboursé</div>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="search-container">
+          <input type="text" id="search-input" class="search-input" placeholder="Rechercher par ID ou date...">
+          <button id="search-btn" class="search-btn">
+            <i class="fas fa-search"></i> Rechercher
+          </button>
+        </div>
+        
+        <div class="filter-container">
+          <button data-filter="all" class="filter-btn active">Toutes</button>
+          <button data-filter="En cours" class="filter-btn">En cours</button>
+          <button data-filter="Livré" class="filter-btn">Livré</button>
+          <button data-filter="Remboursé" class="filter-btn">Remboursé</button>
+        </div>
+        
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>ID Commande</th>
+                <th>Date</th>
+                <th>Statut</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="orders-table"></tbody>
+          </table>
+        </div>
+      </div>
+      
+      <div class="footer">
+        <p>© 2025 SpotiDeals Administration - Tous droits réservés</p>
+      </div>
+    </div>
+  </div>
+  
+  <div id="login-container" class="container">
+    <div class="card">
+      <div class="header-title" style="justify-content: center; margin-bottom: 2rem;">
+        <img src="/images/logo.svg" alt="SpotiDeals Logo">
+        <h1>Admin Login</h1>
+      </div>
+      
+      <div id="login-error" class="hidden" style="color: var(--danger); margin-bottom: 1rem; text-align: center;">
+        Mot de passe incorrect
+      </div>
+      
+      <div style="max-width: 400px; margin: 0 auto;">
+        <div style="margin-bottom: 1.5rem;">
+          <label for="password" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Mot de passe</label>
+          <input type="password" id="password" class="search-input" style="width: 100%">
+        </div>
+        
+        <button id="login-btn" class="btn search-btn" style="width: 100%;">Connexion</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal for order details -->
+  <div id="order-modal" class="modal-overlay hidden">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 class="modal-title">Détails de la commande</h2>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-content">
+        <p><strong>ID:</strong> <span id="modal-id"></span></p>
+        <p><strong>Date:</strong> <span id="modal-date"></span></p>
+        <p><strong>Statut:</strong> <span id="modal-status"></span></p>
+        <p><strong>Client:</strong> <span id="modal-customer"></span></p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-view modal-close-btn">Fermer</button>
+        <button class="btn btn-delete" id="modal-delete">Supprimer</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const ADMIN_PASSWORD = "1C1GCEA_enCA1146CA1146&oq=&gs_lcrp=EgZjaHJvbWUqEQgDEAAYAxhCGI8BGLQCGOoCMgkIABAjGCcY6gIyCQgBECMYJxjqAjIJCAIQIxgnGOoCMhEIAxAAGAMYQhiPARi0AhjqAjIRCAQQABgDGEIYjwEYtAIY6gIyEQg";
+      const loginContainer = document.getElementById('login-container');
+      const app = document.getElementById('app');
+      const loginBtn = document.getElementById('login-btn');
+      const loginError = document.getElementById('login-error');
+      const password = document.getElementById('password');
+      const logoutBtn = document.getElementById('logout-btn');
+      const ordersTable = document.getElementById('orders-table');
+      const totalOrders = document.getElementById('total-orders');
+      const pendingOrders = document.getElementById('pending-orders');
+      const completedOrders = document.getElementById('completed-orders');
+      const refundedOrders = document.getElementById('refunded-orders');
+      const searchBtn = document.getElementById('search-btn');
+      const searchInput = document.getElementById('search-input');
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const orderModal = document.getElementById('order-modal');
+      const modalClose = document.querySelector('.modal-close');
+      const modalCloseBtn = document.querySelector('.modal-close-btn');
+      const modalDelete = document.getElementById('modal-delete');
+      
+      let orders = [];
+      let currentFilter = 'all';
+      let currentOrderId = null;
+      
+      // Check if already logged in
+      const checkAuth = () => {
+        const isAuth = sessionStorage.getItem('spotideals_admin_auth') === 'true';
+        loginContainer.classList.toggle('hidden', isAuth);
+        app.classList.toggle('hidden', !isAuth);
+        
+        if (isAuth) {
+          loadOrders();
+        }
+      };
+      
+      // Login handling
+      loginBtn.addEventListener('click', () => {
+        if (password.value === ADMIN_PASSWORD) {
+          sessionStorage.setItem('spotideals_admin_auth', 'true');
+          loginError.classList.add('hidden');
+          checkAuth();
+        } else {
+          loginError.classList.remove('hidden');
+        }
+      });
+      
+      password.addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+          loginBtn.click();
+        }
+      });
+      
+      // Logout handling
+      logoutBtn.addEventListener('click', () => {
+        sessionStorage.removeItem('spotideals_admin_auth');
+        checkAuth();
+      });
+      
+      // Load and display orders
+      function loadOrders() {
+        orders = [];
+        let pending = 0, completed = 0, refunded = 0;
+        
+        Object.keys(localStorage).forEach(key => {
+          if (key.startsWith('SD-')) {
+            try {
+              const orderData = JSON.parse(localStorage.getItem(key));
+              const order = {
+                id: key,
+                date: orderData.date,
+                status: orderData.status,
+                customer: orderData.customer || 'N/A'
+              };
+              
+              orders.push(order);
+              
+              // Count by status
+              if (order.status === 'En cours') pending++;
+              else if (order.status === 'Livré') completed++;
+              else if (order.status === 'Remboursé') refunded++;
+            } catch (e) {
+              console.error('Error parsing order:', key, e);
+            }
+          }
+        });
+        
+        // Sort by date (newest first)
+        orders.sort((a, b) => new Date(b.date) - new Date(a.date));
+        
+        // Update stats
+        totalOrders.textContent = orders.length;
+        pendingOrders.textContent = pending;
+        completedOrders.textContent = completed;
+        refundedOrders.textContent = refunded;
+        
+        // Display orders
+        renderOrders();
+      }
+      
+      function renderOrders() {
+        // Clear table
+        ordersTable.innerHTML = '';
+        
+        // Filter orders
+        let filteredOrders = orders;
+        if (currentFilter !== 'all') {
+          filteredOrders = orders.filter(order => order.status === currentFilter);
+        }
+        
+        // Apply search
+        const searchTerm = searchInput.value.toLowerCase();
+        if (searchTerm) {
+          filteredOrders = filteredOrders.filter(order => 
+            order.id.toLowerCase().includes(searchTerm) || 
+            new Date(order.date).toLocaleString().toLowerCase().includes(searchTerm)
+          );
+        }
+        
+        // No results
+        if (filteredOrders.length === 0) {
+          ordersTable.innerHTML = `
+            <tr>
+              <td colspan="4" style="text-align: center; padding: 2rem;">
+                Aucune commande trouvée
+              </td>
+            </tr>
+          `;
+          return;
+        }
+        
+        // Render orders
+        filteredOrders.forEach(order => {
+          const statusClass = `status-${order.status === 'En cours' ? 'en-cours' : 
+                                        order.status === 'Livré' ? 'livre' : 
+                                        'rembourse'}`;
+                                        
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${order.id}</td>
+            <td>${new Date(order.date).toLocaleString()}</td>
+            <td>
+              <select class="status-select ${statusClass}" data-id="${order.id}">
+                <option value="En cours" ${order.status === 'En cours' ? 'selected' : ''}>En cours</option>
+                <option value="Livré" ${order.status === 'Livré' ? 'selected' : ''}>Livré</option>
+                <option value="Remboursé" ${order.status === 'Remboursé' ? 'selected' : ''}>Remboursé</option>
+              </select>
+            </td>
+            <td class="actions">
+              <button class="btn btn-view view-order" data-id="${order.id}">
+                <i class="fas fa-eye"></i> Voir
+              </button>
+              <button class="btn btn-delete delete-order" data-id="${order.id}">
+                <i class="fas fa-trash"></i>
+              </button>
+            </td>
+          `;
+          
+          ordersTable.appendChild(row);
+        });
+        
+        // Add event listeners to status selects
+        document.querySelectorAll('.status-select').forEach(select => {
+          select.addEventListener('change', function() {
+            const orderId = this.getAttribute('data-id');
+            const newStatus = this.value;
+            updateOrderStatus(orderId, newStatus);
+            
+            // Update select class
+            this.className = `status-select status-${newStatus === 'En cours' ? 'en-cours' : 
+                                                  newStatus === 'Livré' ? 'livre' : 
+                                                  'rembourse'}`;
+          });
+        });
+        
+        // Add event listeners to view buttons
+        document.querySelectorAll('.view-order').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const orderId = this.getAttribute('data-id');
+            showOrderDetails(orderId);
+          });
+        });
+        
+        // Add event listeners to delete buttons
+        document.querySelectorAll('.delete-order').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const orderId = this.getAttribute('data-id');
+            if (confirm(`Êtes-vous sûr de vouloir supprimer la commande ${orderId} ?`)) {
+              deleteOrder(orderId);
+            }
+          });
+        });
+      }
+      
+      function updateOrderStatus(orderId, status) {
+        try {
+          const orderData = JSON.parse(localStorage.getItem(orderId));
+          orderData.status = status;
+          localStorage.setItem(orderId, JSON.stringify(orderData));
+          
+          // Update local array
+          const order = orders.find(o => o.id === orderId);
+          if (order) order.status = status;
+          
+          // Update stats
+          loadOrders();
+        } catch (e) {
+          console.error('Error updating order:', e);
+          alert('Erreur lors de la mise à jour du statut.');
+        }
+      }
+      
+      function deleteOrder(orderId) {
+        try {
+          localStorage.removeItem(orderId);
+          orders = orders.filter(order => order.id !== orderId);
+          renderOrders();
+          loadOrders();
+        } catch (e) {
+          console.error('Error deleting order:', e);
+          alert('Erreur lors de la suppression de la commande.');
+        }
+      }
+      
+      function showOrderDetails(orderId) {
+        const order = orders.find(o => o.id === orderId);
+        if (!order) return;
+        
+        currentOrderId = orderId;
+        
+        document.getElementById('modal-id').textContent = order.id;
+        document.getElementById('modal-date').textContent = new Date(order.date).toLocaleString();
+        document.getElementById('modal-status').textContent = order.status;
+        document.getElementById('modal-customer').textContent = order.customer;
+        
+        orderModal.classList.remove('hidden');
+      }
+      
+      // Search functionality
+      searchBtn.addEventListener('click', () => {
+        renderOrders();
+      });
+      
+      searchInput.addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+          renderOrders();
+        }
+      });
+      
+      // Filter functionality
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          currentFilter = this.getAttribute('data-filter');
+          renderOrders();
+        });
+      });
+      
+      // Modal close
+      modalClose.addEventListener('click', () => {
+        orderModal.classList.add('hidden');
+      });
+      
+      modalCloseBtn.addEventListener('click', () => {
+        orderModal.classList.add('hidden');
+      });
+      
+      // Modal delete
+      modalDelete.addEventListener('click', () => {
+        if (currentOrderId && confirm(`Êtes-vous sûr de vouloir supprimer la commande ${currentOrderId} ?`)) {
+          deleteOrder(currentOrderId);
+          orderModal.classList.add('hidden');
+        }
+      });
+      
+      // Close modal when clicking outside
+      orderModal.addEventListener('click', function(event) {
+        if (event.target === orderModal) {
+          orderModal.classList.add('hidden');
+        }
+      });
+      
+      // Check authentication on load
+      checkAuth();
+    });
+  </script>
+</body>
+</html>

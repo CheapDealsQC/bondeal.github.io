@@ -1,0 +1,18 @@
+<!-- SVG to be converted to webp -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500">
+  <defs>
+    <linearGradient id="greenGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1db954;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#169c46;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="10" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <circle cx="250" cy="250" r="240" fill="url(#greenGradient)" filter="url(#shadow)"/>
+  <g filter="url(#shadow)" fill="#121212">
+    <path d="M130,170 C130,160 135,150 145,150 L190,150 C200,150 210,160 210,170 L210,330 C210,340 200,350 190,350 L145,350 C135,350 130,340 130,330 Z" />
+    <path d="M240,170 C240,160 245,150 255,150 L300,150 C340,150 370,180 370,220 C370,260 340,290 300,290 L280,290 L280,330 C280,340 270,350 260,350 L255,350 C245,350 240,340 240,330 Z M280,230 L300,230 C310,230 320,225 320,215 C320,205 310,200 300,200 L280,200 Z" />
+  </g>
+  <text x="410" y="260" font-family="Arial, sans-serif" font-size="60" font-weight="bold" fill="#121212" filter="url(#shadow)">®</text>
+</svg>
