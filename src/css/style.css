@@ -1,0 +1,35 @@
+body {
+    font-family: var(--sd-font-family);
+    background-color: var(--sd-color-bg-dark);
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: var(--sd-color-bg-light);
+    box-shadow: var(--sd-elev-1);
+    z-index: 1000;
+}
+
+nav ul {
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    padding: 1em;
+    margin: 0;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+main {
+    margin-top: 80px;
+    padding: 2em;
+}
