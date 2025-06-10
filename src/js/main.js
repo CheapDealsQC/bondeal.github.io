@@ -6,6 +6,7 @@ import { initForms } from './modules/forms.js';
 import { initUI } from './modules/ui.js';
 import { initTracking } from './modules/tracking.js';
 import { initScrollReveal, initHeroParallax } from './modules/animations.js';
+import { initPayPalButtons } from './modules/paypal.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   initCookieConsent();
@@ -15,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initTracking();
   initScrollReveal();
   initHeroParallax();
+  initPayPalButtons();
 });
 
 // Mock Data
