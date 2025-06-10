@@ -1,10 +1,13 @@
 {
   "name": "spotideals",
   "version": "1.0.0",
+  "homepage": "https://spotideals.github.io",
   "description": "SpotiDeals website build process.",
   "private": true,
   "main": "index.js",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "clean": "rimraf dist",
     "copy:images": "cpr src/images dist/images -o",
     "copy:favicon": "cpr src/favicon dist/favicon -o",
@@ -35,6 +38,7 @@
     "cpr": "^3.0.1",
     "cssnano": "^7.0.4",
     "esbuild": "^0.23.0",
+    "gh-pages": "^6.3.0",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.4.39",
     "postcss-cli": "^11.0.0",
