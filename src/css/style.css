@@ -239,4 +239,214 @@ section {
 button:focus-visible, .btn:focus-visible {
   outline: 2px solid var(--sd-accent);
   outline-offset: 4px;
+}
+
+/* 1. Conteneur Offre */
+.offre {
+  padding: var(--sd-space-6) var(--sd-space-4);
+  background: var(--sd-color-bg-light);
+}
+
+/* 2. Titre de section */
+.offre__title {
+  font-size: 1.25rem;                        /* ~20px */
+  font-weight: var(--sd-font-weight-semibold);
+  text-align: center;
+  color: var(--sd-color-text-main);
+  margin-bottom: var(--sd-space-4);
+}
+
+/* 3. Carte d'offre */
+.offer-card {
+  max-width: 375px;
+  margin: 0 auto;
+  background: var(--sd-color-bg-dark);
+  color: var(--sd-color-text-main);
+  border-radius: var(--sd-radius);
+  box-shadow: var(--sd-elev-2);
+  padding: var(--sd-space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sd-space-4);
+}
+
+/* 3.1. Titre du pack */
+.offer-card__heading {
+  font-size: var(--sd-font-size-4xl);        /* 1.5rem / 24px */
+  font-weight: var(--sd-font-weight-semibold);
+  text-align: center;
+}
+
+/* 3.2. Prix */
+.offer-card__price {
+  text-align: center;
+}
+.offer-card__old {
+  text-decoration: line-through;
+  color: var(--sd-color-text-muted);
+  margin-right: var(--sd-space-2);
+}
+.offer-card__new {
+  font-weight: var(--sd-font-weight-bold);
+  color: var(--sd-color-primary);
+}
+
+/* 3.3. Liste des bullets */
+.offer-card__list {
+  list-style: disc inside;
+  color: var(--sd-color-text-muted);
+  font-size: var(--sd-font-size-sm);         /* 0.875rem / 14px */
+  display: flex;
+  flex-direction: column;
+  gap: var(--sd-space-2);
+}
+
+/* 3.4. Bouton full-width */
+.btn--full {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-top: var(--sd-space-4);
+}
+
+/* 1. Conteneur Comparatif */
+.comparatif {
+  padding: var(--sd-space-6) var(--sd-space-4);
+  background: var(--sd-color-bg-light);
+}
+
+/* 2. Titre de section */
+.comparatif__title {
+  font-size: 1.25rem;                      /* ~20px */
+  font-weight: var(--sd-font-weight-semibold);
+  text-align: center;
+  color: var(--sd-color-text-main);
+  margin-bottom: var(--sd-space-4);
+}
+
+/* 3. Grid des cartes */
+.comparatif__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sd-space-4);
+}
+
+/* 3.1. Carte Standard */
+.comp-card--standard {
+  background: var(--sd-color-bg-dark);
+  color: var(--sd-color-text-muted);
+  opacity: 0.4;
+  border: 1px dashed var(--sd-color-text-muted);
+  border-radius: var(--sd-radius);
+  padding: var(--sd-space-4);
+}
+.comp-card--standard .comp-card__heading {
+  font-size: 1.125rem;                     /* ~18px */
+  font-weight: var(--sd-font-weight-semibold);
+  margin-bottom: var(--sd-space-2);
+}
+.comp-card--standard .comp-card__price {
+  font-size: 1.5rem;                       /* ~24px */
+  font-weight: var(--sd-font-weight-bold);
+}
+
+/* 3.2. Carte Offre */
+.comp-card--offer {
+  background: var(--sd-color-bg-dark);
+  color: var(--sd-color-text-main);
+  border: 1px solid var(--sd-color-accent);
+  box-shadow: var(--sd-elev-2);
+  border-radius: var(--sd-radius);
+  padding: var(--sd-space-4);
+  transition: transform 0.3s var(--sd-transition-ease),
+              box-shadow 0.3s var(--sd-transition-ease);
+}
+.comp-card--offer:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--sd-elev-3);
+}
+.comp-card--offer .comp-card__heading {
+  font-size: 1.125rem;
+  font-weight: var(--sd-font-weight-semibold);
+  margin-bottom: var(--sd-space-2);
+}
+.comp-card--offer .comp-card__price {
+  font-size: 1.5rem;
+  font-weight: var(--sd-font-weight-bold);
+  color: var(--sd-color-accent);
+}
+
+/* 4. Économie */
+.comparatif__savings {
+  text-align: center;
+  font-size: var(--sd-font-size-lg);
+  font-weight: var(--sd-font-weight-semibold);
+  margin-top: var(--sd-space-4);
+  color: var(--sd-color-text-main);
+}
+
+/* Container */
+.trust {
+  padding: var(--sd-space-6) var(--sd-space-4);
+  background: var(--sd-color-bg-light);
+}
+
+/* Titre */
+.trust__title {
+  font-size: 1.25rem;                         /* ~20px */
+  font-weight: var(--sd-font-weight-semibold);
+  text-align: center;
+  color: var(--sd-color-text-main);
+  margin-bottom: var(--sd-space-4);
+}
+
+/* Grille */
+.trust__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sd-space-4);
+}
+@media (min-width: 768px) {
+  .trust__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Cartes glassmorphism */
+.trust-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.10);
+  backdrop-filter: blur(8px);
+  border-radius: var(--sd-radius);
+  padding: var(--sd-space-4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s var(--sd-transition-ease),
+              box-shadow 0.3s var(--sd-transition-ease);
+}
+.trust-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--sd-elev-2);
+}
+
+/* Icône */
+.trust-card .icon-xl {
+  font-size: 2.75rem;
+  color: var(--sd-color-accent);
+  margin-bottom: var(--sd-space-2);
+}
+
+/* Heading & Texte */
+.trust-card__heading {
+  font-size: 1.125rem;                        /* ~18px */
+  font-weight: var(--sd-font-weight-semibold);
+  margin-bottom: var(--sd-space-2);
+  color: var(--sd-color-text-main);
+  text-align: center;
+}
+.trust-card__text {
+  font-size: var(--sd-font-size-sm);          /* 14px */
+  color: var(--sd-color-text-muted);
+  text-align: center;
 } 

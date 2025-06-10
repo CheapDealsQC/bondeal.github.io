@@ -19,7 +19,7 @@
       <nav class="nav">
         <a href="#features">Fonctionnalités</a>
         <a href="#details">Détails</a>
-        <a href="#pricing">Offre</a>
+        <a href="#offre">Offre</a>
         <a href="#how">Comment ça marche</a>
         <a href="#faq">FAQ</a>
         <a href="#important">Important</a>
@@ -93,15 +93,100 @@
   </section>
   <div class="divider"></div>
 
-  <!-- PRICING -->
-  <section class="pricing" id="pricing">
-    <div class="container">
-      <h2 class="section-title">Notre offre unique</h2>
-      <div class="pricing-card">
-        <h3>Pack 12 mois INDIVIDUEL</h3>
-        <p class="pricing-card__price">82<span class="pricing-card__cents">,62</span> $ CAD</p>
-        <p class="original-price">175,12 $ CAD</p>
-        <button class="btn btn--order" onclick="scrollToOrder()">Choisir ce pack</button>
+  <!-- OFFRE -->
+  <section id="offre" class="offre">
+    <!-- 1. Titre de section -->
+    <h2 class="offre__title">
+      Notre Offre
+    </h2>
+
+    <!-- 2. Carte d'offre -->
+    <div class="offer-card">
+      <!-- 2.1. Nom du pack -->
+      <h3 class="offer-card__heading">
+        Pack 12 mois<br>INDIVIDUEL
+      </h3>
+
+      <!-- 2.2. Prix -->
+      <p class="offer-card__price">
+        <span class="offer-card__old">175,12 $</span>
+        <span class="offer-card__new">82,62 $ CAD</span>
+      </p>
+
+      <!-- 2.3. Liste bullets -->
+      <ul class="offer-card__list">
+        <li>Activation sous 48 – 72 h ouvrables</li>
+        <li>Service 100 % légal via canal Spotify</li>
+        <li>Suppression des données après activation</li>
+        <li>Remboursement complet si non livré sous 30 jours</li>
+      </ul>
+
+      <!-- 2.4. Bouton d'action -->
+      <a href="#order" class="btn btn--primary btn--full">
+        Choisir ce pack
+      </a>
+    </div>
+  </section>
+  <div class="divider"></div>
+
+  <!-- Comparatif -->
+  <section id="comparatif" class="comparatif">
+    <h2 class="comparatif__title">
+      Comparatif des Prix
+    </h2>
+
+    <div class="comparatif__grid">
+      <div class="comp-card comp-card--standard">
+        <h3 class="comp-card__heading">Prix officiel Spotify</h3>
+        <p class="comp-card__price">175,12 $</p>
+      </div>
+
+      <div class="comp-card comp-card--offer">
+        <h3 class="comp-card__heading">Notre Offre</h3>
+        <p class="comp-card__price">82,62 $</p>
+      </div>
+    </div>
+
+    <p class="comparatif__savings">
+      💰 Vous économisez 92,50 $ !
+    </p>
+  </section>
+  <div class="divider"></div>
+
+  <!-- Pourquoi nous faire confiance ? -->
+  <section id="trust" class="trust">
+    <!-- 1. Titre de section -->
+    <h2 class="trust__title">
+      Pourquoi nous faire confiance ?
+    </h2>
+
+    <!-- 2. Grille de cartes -->
+    <div class="trust__grid">
+      <!-- Sécurité -->
+      <div class="trust-card">
+        <i class="icon ph-shield-check icon-xl"></i>
+        <h4 class="trust-card__heading">Sécurité</h4>
+        <p class="trust-card__text">
+          Service 100 % légal &amp; HTTPS
+        </p>
+      </div>
+
+      <!-- Rapidité -->
+      <div class="trust-card">
+        <i class="icon ph-clock icon-xl"></i>
+        <h4 class="trust-card__heading">Rapidité</h4>
+        <p class="trust-card__text">
+          Activation en 48 – 72 h ouvrables
+        </p>
+      </div>
+
+      <!-- Confidentialité -->
+      <div class="trust-card">
+        <i class="icon ph-trash icon-xl"></i>
+        <h4 class="trust-card__heading">Confidentialité</h4>
+        <p class="trust-card__text">
+          Suppression des données après activation
+        </p>
       </div>
     </div>
   </section>
