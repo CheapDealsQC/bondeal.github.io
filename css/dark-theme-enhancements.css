@@ -1,0 +1,178 @@
+/* 
+ * SpotiDeals - Dark Theme Enhancements
+ * Extensions et améliorations pour le thème sombre style Spotify
+ */
+
+/* Ajustements des couleurs pour une meilleure visibilité */
+.dark-theme {
+  /* Renforcement de la cohérence avec Spotify */
+  --dark-bg: #121212;
+  --card-bg: #181818;
+  --card-hover-bg: #282828;
+}
+
+/* Scrollbar personnalisée pour le thème sombre */
+.dark-theme::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.dark-theme::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+.dark-theme::-webkit-scrollbar-thumb {
+  background: rgba(29, 185, 84, 0.5);
+  border-radius: 4px;
+}
+
+.dark-theme::-webkit-scrollbar-thumb:hover {
+  background: rgba(29, 185, 84, 0.7);
+}
+
+/* Éléments Spotify distinctifs */
+.dark-theme .spotify-icon {
+  color: var(--spotify-green);
+  transition: transform 0.2s ease;
+}
+
+.dark-theme .spotify-icon:hover {
+  transform: scale(1.1);
+}
+
+/* Loader style Spotify */
+.dark-theme .spotify-loader {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  position: relative;
+}
+
+.dark-theme .spotify-loader::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 3px solid rgba(29, 185, 84, 0.2);
+  border-top-color: var(--spotify-green);
+  animation: spotify-spin 1s infinite linear;
+}
+
+@keyframes spotify-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Effet de transition entre les pages */
+.dark-theme .page-transition-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--dark-bg);
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+.dark-theme.page-transition .page-transition-overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Améliorations pour boutons et liens */
+.dark-theme a:not(.btn) {
+  color: var(--spotify-green);
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.dark-theme a:not(.btn):hover {
+  color: var(--spotify-green-hover);
+  text-decoration: underline;
+}
+
+/* Effet de survol pour les cartes */
+.dark-theme .card,
+.dark-theme .feature-item,
+.dark-theme .testimonial-card,
+.dark-theme .price-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.dark-theme .card:hover,
+.dark-theme .feature-item:hover,
+.dark-theme .testimonial-card:hover,
+.dark-theme .price-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  background-color: var(--card-hover-bg);
+}
+
+/* Effet de pulse Spotify pour les éléments importants */
+.dark-theme .spotify-pulse {
+  position: relative;
+}
+
+.dark-theme .spotify-pulse::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  box-shadow: 0 0 0 0 rgba(29, 185, 84, 0.7);
+  animation: spotify-pulse 2s infinite cubic-bezier(0.66, 0, 0, 1);
+}
+
+@keyframes spotify-pulse {
+  to {
+    box-shadow: 0 0 0 15px rgba(29, 185, 84, 0);
+  }
+}
+
+/* Effet de texte néon pour les titres importants */
+.dark-theme .neon-text {
+  color: var(--spotify-green);
+  text-shadow: 0 0 5px rgba(29, 185, 84, 0.5),
+               0 0 10px rgba(29, 185, 84, 0.3),
+               0 0 15px rgba(29, 185, 84, 0.2);
+}
+
+/* Adaptations pour images sur fond sombre */
+.dark-theme img:not(.no-filter) {
+  filter: brightness(0.9);
+}
+
+/* Styles pour le mode visualisation audio */
+.dark-theme .audio-visualizer-large {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: 60px;
+  gap: 3px;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  margin: 20px 0;
+}
+
+.dark-theme .visualizer-bar-large {
+  width: 6px;
+  background-color: var(--spotify-green);
+  border-radius: 3px 3px 0 0;
+  transition: height 0.2s ease;
+}
+
+/* Effet de focus renforcé pour l'accessibilité */
+.dark-theme input:focus,
+.dark-theme textarea:focus,
+.dark-theme select:focus {
+  outline: 2px solid var(--spotify-green);
+  outline-offset: 2px;
+}

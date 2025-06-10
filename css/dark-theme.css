@@ -1,0 +1,396 @@
+/* 
+ * Dark Theme (Spotify Style) for SpotiDeals
+ * Created: June 10, 2025
+ */
+
+:root {
+  /* Base Colors - Dark Theme */
+  --dark-bg: #121212;
+  --dark-bg-secondary: #181818;
+  --dark-bg-tertiary: #282828;
+  --dark-text: #FFFFFF;
+  --dark-text-secondary: rgba(255, 255, 255, 0.7);
+  --dark-text-tertiary: rgba(255, 255, 255, 0.5);
+  --dark-border: rgba(255, 255, 255, 0.1);
+  
+  /* Spotify Brand Colors */
+  --spotify-green: #1DB954;
+  --spotify-green-hover: #1ed760;
+  --spotify-green-active: #169c46;
+  --spotify-black: #191414;
+  --spotify-blue: #4382FF;
+  
+  /* Theme-specific gradients */
+  --dark-gradient-primary: linear-gradient(135deg, #1DB954, #169c46);
+  --dark-gradient-secondary: linear-gradient(135deg, #4382FF, #2568E5);
+  --dark-gradient-bg: linear-gradient(135deg, #121212, #181818);
+  --dark-gradient-card: linear-gradient(135deg, rgba(40, 40, 40, 0.7), rgba(30, 30, 30, 0.7));
+  
+  /* Dark shadows */
+  --dark-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --dark-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  --dark-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.7);
+  --dark-shadow-green: 0 4px 12px rgba(29, 185, 84, 0.3);
+  --dark-shadow-blue: 0 4px 12px rgba(67, 130, 255, 0.3);
+}
+
+/* Apply dark theme to body */
+body {
+  background-color: var(--dark-bg);
+  color: var(--dark-text);
+}
+
+/* Header styling */
+.header {
+  background-color: rgba(18, 18, 18, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--dark-border);
+}
+
+.nav-links a {
+  color: var(--dark-text-secondary);
+}
+
+.nav-links a:hover {
+  color: var(--dark-text);
+}
+
+.logo-text {
+  color: var(--dark-text);
+}
+
+/* Section backgrounds */
+.section {
+  background-color: var(--dark-bg);
+}
+
+.section-alt {
+  background-color: var(--dark-bg-secondary);
+}
+
+.section-title h2 {
+  color: var(--dark-text);
+}
+
+.section-subtitle {
+  color: var(--dark-text-secondary);
+}
+
+/* Hero section */
+.hero {
+  background-color: var(--dark-bg);
+  background-image: none;
+}
+
+.hero::before {
+  background: var(--dark-gradient-bg);
+}
+
+.hero-content-enhanced {
+  background: rgba(40, 40, 40, 0.3);
+  border: 1px solid var(--dark-border);
+  box-shadow: var(--dark-shadow);
+}
+
+/* Gradient text effect */
+.gradient-text {
+  background: linear-gradient(135deg, var(--spotify-green), var(--spotify-blue));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
+/* Button styles */
+.btn-primary {
+  background: var(--spotify-green);
+  color: #FFFFFF;
+  border: none;
+}
+
+.btn-primary:hover {
+  background: var(--spotify-green-hover);
+  box-shadow: var(--dark-shadow-green);
+}
+
+.btn-primary:active {
+  background: var(--spotify-green-active);
+}
+
+.btn-outline {
+  border: 1px solid var(--dark-border);
+  color: var(--dark-text-secondary);
+  background: transparent;
+}
+
+.btn-outline:hover {
+  border-color: var(--dark-text);
+  color: var(--dark-text);
+}
+
+.btn-cta {
+  background: var(--dark-gradient-primary);
+  color: #FFFFFF;
+  border: none;
+}
+
+.btn-cta:hover {
+  box-shadow: var(--dark-shadow-green);
+  transform: translateY(-2px);
+}
+
+/* Card styles */
+.card {
+  background: var(--dark-bg-tertiary);
+  border: 1px solid var(--dark-border);
+  box-shadow: var(--dark-shadow);
+}
+
+/* Price cards */
+.price-card {
+  background: var(--dark-bg-tertiary);
+  border: 1px solid var(--dark-border);
+  box-shadow: var(--dark-shadow);
+}
+
+.price-card-premium {
+  border: 1px solid rgba(29, 185, 84, 0.3);
+  box-shadow: 0 0 20px rgba(29, 185, 84, 0.1);
+}
+
+.price-card-premium:hover {
+  box-shadow: 0 10px 30px rgba(29, 185, 84, 0.2);
+}
+
+.price-card-header {
+  border-bottom: 1px solid var(--dark-border);
+}
+
+.price-value {
+  color: var(--dark-text);
+}
+
+.highlight {
+  color: var(--spotify-green);
+}
+
+.price-card-badge {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--dark-text-secondary);
+}
+
+.highlight-badge {
+  background: rgba(29, 185, 84, 0.2);
+  color: var(--spotify-green);
+}
+
+/* Features section */
+.feature-item {
+  background: var(--dark-bg-tertiary);
+  border: 1px solid var(--dark-border);
+}
+
+.feature-icon {
+  color: var(--spotify-green);
+}
+
+/* Testimonials */
+.testimonial-card {
+  background: var(--dark-bg-tertiary);
+  border: 1px solid var(--dark-border);
+  box-shadow: var(--dark-shadow);
+}
+
+.testimonial-card:hover {
+  box-shadow: var(--dark-shadow-lg);
+  transform: translateY(-5px);
+}
+
+.star {
+  color: var(--spotify-green);
+}
+
+.testimonial-badge {
+  background: rgba(29, 185, 84, 0.2);
+  color: var(--spotify-green);
+}
+
+/* Form elements */
+.form-control {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--dark-border);
+  color: var(--dark-text);
+}
+
+.form-control:focus {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: var(--spotify-blue);
+  box-shadow: 0 0 0 2px rgba(67, 130, 255, 0.2);
+}
+
+.form-label {
+  color: var(--dark-text-secondary);
+}
+
+.form-check-label {
+  color: var(--dark-text-secondary);
+}
+
+.form-check-input {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--dark-border);
+}
+
+.form-check-input:checked {
+  background-color: var(--spotify-green);
+  border-color: var(--spotify-green);
+}
+
+/* FAQ section */
+.faq-item {
+  background: var(--dark-bg-tertiary);
+  border: 1px solid var(--dark-border);
+}
+
+.faq-question {
+  color: var(--dark-text);
+}
+
+.faq-answer {
+  color: var(--dark-text-secondary);
+}
+
+/* Footer */
+.footer {
+  background-color: var(--dark-bg-secondary);
+  border-top: 1px solid var(--dark-border);
+}
+
+.footer-heading {
+  color: var(--dark-text);
+}
+
+.footer-links a {
+  color: var(--dark-text-secondary);
+}
+
+.footer-links a:hover {
+  color: var(--spotify-green);
+}
+
+.footer-bottom {
+  border-top: 1px solid var(--dark-border);
+  color: var(--dark-text-tertiary);
+}
+
+/* Alerts */
+.alert {
+  background-color: var(--dark-bg-tertiary);
+  border: 1px solid var(--dark-border);
+}
+
+.alert-title {
+  color: var(--dark-text);
+}
+
+.alert-icon {
+  color: var(--spotify-green);
+}
+
+.alert-content {
+  color: var(--dark-text-secondary);
+}
+
+.alert-success {
+  background-color: rgba(29, 185, 84, 0.1);
+  border-color: rgba(29, 185, 84, 0.3);
+}
+
+.alert-warning {
+  background-color: rgba(255, 183, 77, 0.1);
+  border-color: rgba(255, 183, 77, 0.3);
+}
+
+.alert-danger {
+  background-color: rgba(229, 57, 53, 0.1);
+  border-color: rgba(229, 57, 53, 0.3);
+}
+
+/* Process section elements */
+.process-step {
+  background: var(--dark-bg-tertiary);
+  border: 1px solid var(--dark-border);
+}
+
+.process-step-number {
+  background: var(--spotify-green);
+  color: #FFFFFF;
+}
+
+.process-connector {
+  background: rgba(29, 185, 84, 0.3);
+}
+
+/* Parallax elements */
+.spotify-element.element-primary {
+  background: var(--dark-gradient-primary);
+}
+
+.spotify-element.element-secondary {
+  background: var(--dark-gradient-secondary);
+}
+
+.premium-text::after {
+  background: var(--dark-gradient-primary);
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+  color: var(--dark-text-secondary);
+}
+
+.scroll-indicator:hover {
+  color: var(--spotify-green);
+}
+
+/* Wave background and particles */
+.wave-bg::before,
+.wave-bg::after {
+  opacity: 0.05;
+}
+
+.particle {
+  opacity: 0.15;
+  background: linear-gradient(135deg, var(--spotify-green), var(--spotify-blue));
+}
+
+/* Password strength */
+.strength-bar {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.strength-bar[data-strength="1"] {
+  background-color: #e53935;
+  width: 25%;
+}
+
+.strength-bar[data-strength="2"] {
+  background-color: #ffb74d;
+  width: 50%;
+}
+
+.strength-bar[data-strength="3"] {
+  background-color: #4382ff;
+  width: 75%;
+}
+
+.strength-bar[data-strength="4"] {
+  background-color: var(--spotify-green);
+  width: 100%;
+}
+
+/* Selection styling */
+::selection {
+  background-color: rgba(29, 185, 84, 0.2);
+  color: var(--dark-text);
+}

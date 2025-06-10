@@ -47,14 +47,18 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Particle count reduced for mobile optimization');
         }
     };
-    
-    // Créer les particules pour les sections avec des effets
+      // Créer les particules pour les sections avec des effets
     createParticles('hero-particles', heroParticleCount);
     createParticles('process-particles', processParticleCount);
     
     // Ajouter l'effet de lumière qui suit le curseur uniquement sur desktop
     if (!isMobile) {
         addGlowEffect();
+    }
+    
+    // Détecter le thème sombre et adapter les effets
+    if (document.documentElement.classList.contains('dark-theme')) {
+        enhanceParticlesForDarkTheme();
     }
     
     // Réinitialiser les effets lors du redimensionnement de la fenêtre
@@ -235,4 +239,114 @@ function disableAllEffects() {
     
     // Améliorer la performance globale
     document.documentElement.classList.add('reduced-motion');
+}
+
+/**
+ * Améliore les effets de particules pour le thème sombre
+ */
+function enhanceParticlesForDarkTheme() {
+    // Sélectionner toutes les particules
+    const particles = document.querySelectorAll('.particle');
+    
+    particles.forEach(particle => {
+        // Augmenter légèrement l'opacité pour une meilleure visibilité sur fond sombre
+        particle.style.opacity = '0.2';
+        
+        // Appliquer des effets de flou et de luminosité pour un look plus brillant
+        particle.style.filter = 'blur(1px) brightness(1.3)';
+        
+        // Ajouter un léger halo pour un effet plus lumineux
+        particle.style.boxShadow = '0 0 10px rgba(29, 185, 84, 0.2)';
+        
+        // Ajuster le dégradé de couleur pour qu'il soit plus visible et rappelle Spotify
+        if (Math.random() > 0.5) {
+            particle.style.background = 'linear-gradient(135deg, rgba(29, 185, 84, 0.7), rgba(67, 130, 255, 0.6))';
+        } else {
+            particle.style.background = 'linear-gradient(135deg, rgba(67, 130, 255, 0.7), rgba(29, 185, 84, 0.6))';
+        }
+    });
+    
+    // Améliorer l'effet des vagues pour le thème sombre
+    const waveBgs = document.querySelectorAll('.wave-bg');
+    waveBgs.forEach(waveBg => {
+        const before = document.createElement('style');
+        before.textContent = `
+            .wave-bg::before {
+                background: linear-gradient(135deg, rgba(29, 185, 84, 0.05), rgba(67, 130, 255, 0.05));
+                opacity: 0.1;
+            }
+            
+            .wave-bg::after {
+                background: linear-gradient(135deg, rgba(67, 130, 255, 0.05), rgba(29, 185, 84, 0.05));
+                opacity: 0.15;
+            }
+        `;
+        document.head.appendChild(before);
+    });
+    
+    // Améliorer l'effet de brillance
+    enhanceGlowForDarkTheme();
+}
+
+/**
+ * Améliore l'effet de brillance pour le thème sombre
+ */
+function enhanceGlowForDarkTheme() {
+    // Sélectionner l'effet de brillance s'il existe
+    const glowEffect = document.querySelector('.glow-effect');
+    
+    if (!glowEffect) return;
+    
+    // Augmenter l'intensité et le flou pour un effet plus prononcé sur fond sombre
+    glowEffect.style.filter = 'blur(30px)';
+    glowEffect.style.backgroundImage = 'radial-gradient(circle, rgba(29, 185, 84, 0.4), transparent 70%)';
+    
+    // Ajouter des classes pour différents effets de couleur
+    glowEffect.classList.add('dark-theme-glow');
+    
+    // Créer une nouvelle règle CSS pour les variations de couleur
+    const style = document.createElement('style');
+    style.textContent = `
+        .glow-effect.dark-theme-glow {
+            mix-blend-mode: screen;
+            z-index: 2;
+        }
+        
+        .glow-effect.dark-theme-glow.glow-green {
+            background-image: radial-gradient(circle, rgba(29, 185, 84, 0.5), transparent 70%);
+        }
+        
+        .glow-effect.dark-theme-glow.glow-blue {
+            background-image: radial-gradient(circle, rgba(67, 130, 255, 0.5), transparent 70%);
+        }
+    `;
+    document.head.appendChild(style);
+    
+    // Modifier le comportement du suivi de souris pour varier les couleurs
+    document.addEventListener('mousemove', function(e) {
+        // Ne pas modifier s'il n'y a pas d'effet de brillance
+        if (!document.querySelector('.glow-effect.dark-theme-glow')) return;
+        
+        // Changer les couleurs en fonction des éléments survolés
+        const hoverElement = document.elementFromPoint(e.clientX, e.clientY);
+        if (hoverElement) {
+            // Vérifier le type d'élément pour changer la couleur de l'effet
+            if (hoverElement.closest('.btn-cta') || 
+                hoverElement.closest('.feature-icon') ||
+                hoverElement.closest('.price-card-premium')) {
+                glowEffect.classList.add('glow-green');
+                glowEffect.classList.remove('glow-blue');
+            } 
+            else if (hoverElement.closest('a') || 
+                    hoverElement.closest('.form-control') ||
+                    hoverElement.closest('.testimonial-card')) {
+                glowEffect.classList.add('glow-blue');
+                glowEffect.classList.remove('glow-green');
+            }
+            else {
+                glowEffect.classList.remove('glow-green');
+                glowEffect.classList.remove('glow-blue');
+            }
+        }
+    });
 }
