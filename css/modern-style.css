@@ -1048,24 +1048,44 @@ a:hover {
 
 .faq-answer {
   height: 0;
+  opacity: 0;
   overflow: hidden;
   transition: var(--transition);
   padding: 0 1.25rem;
   background-color: var(--white);
+  transform: translateY(-10px);
 }
 
 .faq-item.active .faq-question {
   background-color: var(--primary-light);
+  box-shadow: 0 3px 5px rgba(29, 185, 84, 0.1);
+}
+
+.faq-item.active .faq-question h3 {
+  color: var(--primary-dark);
 }
 
 .faq-item.active .faq-question i {
   transform: rotate(180deg);
+  color: var(--primary);
 }
 
 .faq-item.active .faq-answer {
   height: auto;
+  opacity: 1;
   padding: 1.25rem;
   border-top: 1px solid rgba(0,0,0,0.05);
+  transform: translateY(0);
+}
+
+@media (hover: hover) {
+  .faq-question:hover {
+    background-color: var(--gray-100);
+  }
+  
+  .faq-question:hover h3 {
+    color: var(--primary);
+  }
 }
 
 /* Footer */

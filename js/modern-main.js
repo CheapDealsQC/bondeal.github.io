@@ -53,19 +53,33 @@ document.addEventListener('DOMContentLoaded', function() {
         ctaButton.addEventListener('mouseout', function() {
             this.classList.remove('hover-effect');
         });
-    }
-
-    // Effets interactifs pour le formulaire
+    }    // Effets interactifs avancés pour le formulaire
     const formInputs = document.querySelectorAll('.form-control');
     formInputs.forEach(input => {
-        // Effet de focus
+        // Vérifier si le champ a déjà une valeur
+        if (input.value.trim() !== '') {
+            input.classList.add('has-value');
+        }
+        
+        // Effet de focus amélioré
         input.addEventListener('focus', function() {
+            // Ajouter classe pour animation de focus
             this.parentElement.classList.add('input-focused');
+            
+            // Effet de surbrillance subtile
+            if (!document.querySelector('html').classList.contains('reduced-motion')) {
+                this.style.boxShadow = '0 0 0 3px rgba(67, 130, 255, 0.15)';
+            }
         });
 
-        // Effet de blur
+        // Effet de blur amélioré
         input.addEventListener('blur', function() {
             this.parentElement.classList.remove('input-focused');
+            
+            // Réinitialiser l'effet de surbrillance
+            this.style.boxShadow = '';
+            
+            // Gérer la classe has-value
             if (this.value.trim() !== '') {
                 this.classList.add('has-value');
             } else {
@@ -322,15 +336,41 @@ document.addEventListener('DOMContentLoaded', function() {
                 checkAll.checked = [...requiredChecks].every(c => c.checked);
             });
         });
-    }
-
-    // FAQ accordions
+    }    // FAQ accordions enhanced with smooth animations
     const faqItems = document.querySelectorAll('.faq-question');
     if (faqItems) {
         faqItems.forEach(question => {
+            // Determine if we should reduce motion effects
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            
             question.addEventListener('click', () => {
                 const item = question.parentNode;
+                const answer = item.querySelector('.faq-answer');
+                const icon = question.querySelector('i');
+                
+                // Toggle active state
                 item.classList.toggle('active');
+                
+                // Smooth animation for the chevron
+                if (icon) {
+                    icon.style.transition = 'transform 0.3s ease';
+                    if (item.classList.contains('active')) {
+                        icon.style.transform = 'rotate(180deg)';
+                    } else {
+                        icon.style.transform = 'rotate(0deg)';
+                    }
+                }
+                
+                // Smooth animation for the answer height
+                if (!prefersReducedMotion && answer) {
+                    if (item.classList.contains('active')) {
+                        answer.style.height = answer.scrollHeight + 'px';
+                        answer.style.opacity = '1';
+                    } else {
+                        answer.style.height = '0px';
+                        answer.style.opacity = '0';
+                    }
+                }
             });
         });
     }
