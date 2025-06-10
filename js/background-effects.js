@@ -18,6 +18,36 @@ document.addEventListener('DOMContentLoaded', function() {
     const heroParticleCount = isSmallMobile ? 2 : (isMobile ? 4 : 10);
     const processParticleCount = isSmallMobile ? 3 : (isMobile ? 6 : 15);
     
+    // Exposer la fonction de réduction de particules pour l'optimisation mobile
+    window.reduceParticleCount = function(forceMobile) {
+        if (forceMobile || isMobile) {
+            // Réduire le nombre de particules existantes
+            document.querySelectorAll('.particles-container').forEach(container => {
+                const particles = container.querySelectorAll('.particle');
+                // Garder seulement la moitié des particules
+                for (let i = 0; i < particles.length; i++) {
+                    if (i % 2 === 0) {
+                        particles[i].remove();
+                    }
+                }
+            });
+            
+            // Appliquer des optimisations CSS supplémentaires
+            const style = document.createElement('style');
+            style.textContent = `
+                .particle {
+                    animation-duration: 60s !important; /* Ralentir pour économiser la CPU */
+                }
+                .wave-bg::before, .wave-bg::after {
+                    animation-duration: 90s !important;
+                }
+            `;
+            document.head.appendChild(style);
+            
+            console.log('Particle count reduced for mobile optimization');
+        }
+    };
+    
     // Créer les particules pour les sections avec des effets
     createParticles('hero-particles', heroParticleCount);
     createParticles('process-particles', processParticleCount);

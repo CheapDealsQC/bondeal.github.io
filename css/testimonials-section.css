@@ -1,0 +1,206 @@
+/* Testimonials Section Enhanced Styling - SpotiDeals */
+
+/* Star ratings */
+.rating {
+  display: flex;
+  margin: 0.5rem 0 1rem;
+}
+
+.star {
+  color: #FFD700;
+  font-size: 1.2rem;
+  margin-right: 0.25rem;
+  position: relative;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.testimonial-card.is-visible .star {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Staggered animation delay for stars */
+.testimonial-card.is-visible .star:nth-child(1) {
+  transition-delay: 0.1s;
+}
+
+.testimonial-card.is-visible .star:nth-child(2) {
+  transition-delay: 0.2s;
+}
+
+.testimonial-card.is-visible .star:nth-child(3) {
+  transition-delay: 0.3s;
+}
+
+.testimonial-card.is-visible .star:nth-child(4) {
+  transition-delay: 0.4s;
+}
+
+.testimonial-card.is-visible .star:nth-child(5) {
+  transition-delay: 0.5s;
+}
+
+/* Badge design */
+.testimonial-badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background-color: var(--primary);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.5rem 0.75rem;
+  border-radius: 30px;
+  box-shadow: 0 3px 10px rgba(29, 185, 84, 0.2);
+  transform: rotate(5deg) translateY(-5px);
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.testimonial-card.is-visible .testimonial-badge {
+  opacity: 1;
+  transform: rotate(5deg) translateY(0);
+  transition-delay: 0.6s;
+}
+
+/* Enhanced card design */
+.testimonial-card {
+  transform-style: preserve-3d;
+  transform: perspective(1000px) rotateY(0deg) translateY(20px);
+  opacity: 0;
+  transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), 
+              box-shadow 0.8s ease,
+              opacity 0.8s ease;
+}
+
+.testimonial-card.is-visible {
+  opacity: 1;
+  transform: perspective(1000px) rotateY(0deg) translateY(0);
+}
+
+.testimonial-card:hover {
+  transform: perspective(1000px) rotateY(5deg) translateY(-15px);
+}
+
+/* Enhanced content styling */
+.testimonial-content {
+  position: relative;
+  z-index: 1;
+}
+
+.testimonial-content::before {
+  content: '"';
+  font-size: 4rem;
+  position: absolute;
+  top: -2rem;
+  left: -1rem;
+  color: rgba(29, 185, 84, 0.1);
+  font-family: 'Georgia', serif;
+  z-index: -1;
+}
+
+/* Enhanced avatar */
+.testimonial-avatar-container {
+  position: relative;
+}
+
+.testimonial-avatar {
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.testimonial-card:hover .testimonial-avatar {
+  transform: scale(1.15) rotate(-5deg);
+}
+
+/* Subtle highlight glow */
+.testimonial-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(120deg, rgba(29, 185, 84, 0.03) 0%, rgba(67, 130, 255, 0.03) 100%);
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.testimonial-card:hover::after {
+  opacity: 1;
+}
+
+/* Testimonial grid with improved masonry-like layout */
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  gap: 2.5rem;
+  perspective: 1000px;
+}
+
+/* Support for verified customer badge */
+.verified-customer {
+  display: flex;
+  align-items: center;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--primary);
+}
+
+.verified-customer i {
+  margin-right: 0.5rem;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .testimonial-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .testimonial-card {
+    padding: 1.5rem;
+  }
+  
+  .testimonial-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .star {
+    font-size: 1rem;
+  }
+  
+  .testimonial-badge {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.5rem;
+  }
+}
+
+/* Accessibility - reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .testimonial-card,
+  .testimonial-card.is-visible,
+  .testimonial-card:hover,
+  .star,
+  .testimonial-card.is-visible .star,
+  .testimonial-badge,
+  .testimonial-card.is-visible .testimonial-badge,
+  .testimonial-avatar,
+  .testimonial-card:hover .testimonial-avatar {
+    transition-duration: 0.1ms;
+    transform: none;
+  }
+  
+  .testimonial-card.is-visible {
+    opacity: 1;
+  }
+  
+  .testimonial-card.is-visible .star,
+  .testimonial-card.is-visible .testimonial-badge {
+    opacity: 1;
+  }
+}

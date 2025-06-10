@@ -1,0 +1,286 @@
+/* Hero Parallax Effects for SpotiDeals Premium Design */
+
+/* Container for parallax elements */
+.parallax-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* Main layer classes */
+.parallax-layer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  will-change: transform; /* Optimize performance */
+  transition: transform 0.1s cubic-bezier(0.2, 0.8, 0.2, 1); /* Smooth movement */
+}
+
+/* Specific layer depths */
+.layer-back {
+  z-index: 1;
+}
+
+.layer-mid {
+  z-index: 2;
+}
+
+.layer-front {
+  z-index: 3;
+}
+
+/* Floating Spotify elements */
+.spotify-element {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.85;
+  filter: blur(0.5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  will-change: transform;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.note-element {
+  position: absolute;
+  opacity: 0.7;
+  will-change: transform;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+/* Element sizes and positions */
+.element-sm {
+  width: 60px;
+  height: 60px;
+}
+
+.element-md {
+  width: 80px;
+  height: 80px;
+}
+
+.element-lg {
+  width: 120px;
+  height: 120px;
+}
+
+/* Element colors */
+.element-primary {
+  background: var(--gradient-primary);
+}
+
+.element-secondary {
+  background: var(--gradient-secondary);
+}
+
+.element-accent {
+  background: linear-gradient(135deg, var(--accent), var(--secondary));
+}
+
+/* Enhanced hero content */
+.hero-enhanced {
+  position: relative;
+  overflow: hidden;
+  min-height: 80vh;
+  padding-top: 8vh;
+  padding-bottom: 8vh;
+  display: flex;
+  align-items: center;
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--white);
+  opacity: 0.7;
+  font-size: 0.85rem;
+  text-align: center;
+  z-index: 10;
+  transition: opacity 0.3s ease;
+  cursor: pointer;
+}
+
+.scroll-indicator i {
+  display: block;
+  font-size: 1.5rem;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+.scroll-indicator:hover {
+  opacity: 1;
+}
+
+/* Premium text effects */
+.premium-text {
+  position: relative;
+  display: inline-block;
+}
+
+.premium-text::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 8px;
+  bottom: -4px;
+  left: 0;
+  background: var(--gradient-primary);
+  border-radius: 4px;
+  opacity: 0.5;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.premium-text.is-visible::after {
+  transform: scaleX(1);
+}
+
+/* 3D depth shine effect */
+.depth-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.depth-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.15),
+    transparent,
+    transparent
+  );
+  opacity: 0;
+  transform: rotate(30deg);
+  transition: opacity 0.6s, transform 1.2s;
+  pointer-events: none;
+}
+
+.depth-card:hover::before {
+  opacity: 1;
+  transform: rotate(0deg);
+}
+
+/* Enhanced hero content */
+.hero-content-enhanced {
+  position: relative;
+  z-index: 10;
+  max-width: 650px;
+  backdrop-filter: blur(5px);
+  padding: 30px;
+  border-radius: var(--border-radius-lg);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transform: perspective(1000px) rotateX(0deg);
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.hero-content-enhanced:hover {
+  box-shadow: 0 15px 40px -10px rgba(0, 0, 0, 0.3);
+  transform: perspective(1000px) rotateX(2deg) translateY(-5px);
+}
+
+/* Spotify visualization elements */
+.visualization-dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary);
+  opacity: 0.8;
+}
+
+.visualization-bar {
+  position: absolute;
+  width: 6px;
+  height: 30px;
+  background: var(--primary);
+  border-radius: 3px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero-enhanced {
+    min-height: 70vh;
+    padding-top: 4vh;
+    padding-bottom: 4vh;
+  }
+  
+  .element-lg {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .element-md {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .element-sm {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .hero-content-enhanced {
+    padding: 20px;
+    backdrop-filter: blur(8px);
+    background: rgba(255, 255, 255, 0.12);
+  }
+  
+  /* Hide complex effects on mobile */
+  .visualization-dot, .visualization-bar {
+    display: none;
+  }
+}
+
+/* For users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .parallax-layer {
+    transition: none;
+    transform: none !important;
+  }
+  
+  .scroll-indicator i {
+    animation: none;
+  }
+  
+  .premium-text::after {
+    transition: none;
+  }
+  
+  .hero-content-enhanced {
+    transform: none !important;
+    transition: none;
+  }
+  
+  .hero-content-enhanced:hover {
+    transform: none !important;
+  }
+  
+  .depth-card::before {
+    display: none;
+  }
+}

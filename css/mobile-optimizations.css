@@ -1,0 +1,202 @@
+/* Mobile Performance Optimizations - SpotiDeals */
+
+/* Applied when JS detects mobile device */
+.mobile-optimized .wave-bg::before,
+.mobile-optimized .wave-bg::after {
+  animation-duration: 90s !important; /* Slow down animations */
+}
+
+/* Simplify wave animations on mobile */
+.wave-bg.mobile-simplified::before,
+.wave-bg.mobile-simplified::after {
+  opacity: 0.02 !important;
+  border-radius: 48% !important; /* Simpler shape */
+  animation-timing-function: linear !important; /* Simpler easing */
+}
+
+/* Optimize transitions for testimonial cards on mobile */
+@media (max-width: 767px) {
+  .testimonial-card {
+    backface-visibility: initial;
+    transform-style: flat;
+    will-change: transform;
+  }
+  
+  .testimonial-card.is-visible {
+    transform: translateY(0) !important;
+  }
+  
+  /* More efficient hover effects for mobile */
+  .testimonial-card:hover,
+  .price-card:hover,
+  .process-step:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: var(--shadow-hover);
+  }
+  
+  /* Disable 3D effects on mobile for better performance */
+  .testimonial-card:hover .testimonial-avatar {
+    transform: scale(1.1) !important;
+  }
+  
+  /* Optimize particles */
+  .particle {
+    opacity: 0.5;
+    width: 4px;
+    height: 4px;
+  }
+  
+  /* Optimize animations */
+  .animate-on-scroll {
+    transition-duration: 0.3s !important;
+  }
+  
+  /* Optimize form effect animations */
+  .form-control:focus {
+    box-shadow: 0 0 0 2px rgba(67, 130, 255, 0.15);
+  }
+}
+
+/* Improvements for content visibility */
+.lazy-background {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 500px;
+}
+
+/* Optimize button hover effects for touch devices */
+@media (hover: none) {
+  .btn:hover {
+    transform: none !important;
+  }
+  
+  .btn-wave::after {
+    display: none;
+  }
+  
+  .btn-cta.hover-effect {
+    animation: none !important;
+    transform: none !important;
+    box-shadow: var(--shadow) !important;
+  }
+}
+
+/* Optimize images for mobile */
+@media (max-width: 767px) {
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* Hide certain animations on very small devices */
+@media (max-width: 480px) {
+  .wave-bg::before, 
+  .wave-bg::after {
+    animation: none !important;
+    opacity: 0.02 !important;
+  }
+  
+  .glow-effect {
+    display: none !important;
+  }
+}
+
+/* Memory optimizations for low-end devices */
+@media (max-width: 767px) {
+  .hero, .section {
+    contain: layout style paint;
+  }
+}
+
+/* Mobile optimizations for Parallax Hero */
+@media (max-width: 767px) {
+  /* Optimize hero section for mobile */
+  .hero-enhanced {
+    height: auto;
+    min-height: 60vh; /* Reduced height on mobile */
+  }
+  
+  /* Simplify parallax effects */
+  .parallax-layer {
+    transform: none !important; /* Disable complex transforms */
+  }
+  
+  /* Only show critical hero elements */
+  .spotify-element:nth-child(n+3),
+  .note-element:nth-child(n+2) {
+    display: none; /* Hide extra elements to improve performance */
+  }
+  
+  /* Enhance readability of hero text */
+  .hero-content-enhanced {
+    backdrop-filter: blur(10px); /* Stronger blur for better text contrast */
+    background-color: rgba(255, 255, 255, 0.12); /* Slightly more opaque background */
+    padding: 20px;
+    margin: 0 auto;
+    width: 90%;
+  }
+  
+  /* Optimize hero title for small screens */
+  .hero-enhanced h1 {
+    font-size: 1.8rem;
+    line-height: 1.3;
+  }
+  
+  /* Remove expensive 3D effects */
+  .depth-card:hover::before {
+    opacity: 0;
+    display: none;
+  }
+  
+  /* Disable GPU-intensive animations */
+  .premium-text::after {
+    transition-duration: 0.2s;
+    opacity: 0.6;
+  }
+}
+
+/* Very small screens need further optimization */
+@media (max-width: 480px) {
+  .hero-enhanced {
+    min-height: 50vh;
+  }
+  
+  /* Hide all decorative elements on very small screens */
+  .spotify-element, 
+  .note-element,
+  .visualization-dot, 
+  .visualization-bar {
+    display: none;
+  }
+  
+  /* Further optimize hero content */
+  .hero-content-enhanced {
+    width: 95%;
+    padding: 15px;
+    margin-top: 20px;
+  }
+}
+
+/* For users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .parallax-container,
+  .parallax-layer {
+    transform: none !important;
+    transition: none !important;
+  }
+  
+  .premium-text::after {
+    transition: none !important;
+    transform: scaleX(1);
+    opacity: 0.3;
+  }
+  
+  .spotify-element, .note-element {
+    animation: none !important;
+  }
+  
+  .hero-content-enhanced:hover {
+    transform: none !important;
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.2);
+  }
+}

@@ -18,9 +18,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">  <!-- CSS -->  <link rel="stylesheet" href="/css/modern-style.css">
   <link rel="stylesheet" href="/css/animations.css">
   <link rel="stylesheet" href="/css/price-section.css">
-  <link rel="stylesheet" href="/css/process-section.css">
-  <link rel="stylesheet" href="/css/background-effects.css">
+  <link rel="stylesheet" href="/css/process-section.css">  <link rel="stylesheet" href="/css/background-effects.css">
   <link rel="stylesheet" href="/css/form-animations.css">
+  <link rel="stylesheet" href="/css/testimonials-section.css">
+  <link rel="stylesheet" href="/css/hero-parallax.css">
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -41,18 +42,35 @@
         <a href="#temoignages">Témoignages</a>
       </nav>
     </div>
-  </header>
-  <section class="hero has-wave-bg">
+  </header>  <section class="hero hero-enhanced has-wave-bg">
     <!-- Effet d'arrière-plan subtil -->
     <div class="wave-bg"></div>
     <div class="particles-container" id="hero-particles"></div>
     
+    <!-- Parallax container -->
+    <div class="parallax-container">
+      <!-- Back layer - moves slowly -->
+      <div class="parallax-layer layer-back" data-speed="0.03" data-scroll="0.1"></div>
+      
+      <!-- Middle layer - moves at medium speed -->
+      <div class="parallax-layer layer-mid" data-speed="0.06" data-scroll="0.2"></div>
+      
+      <!-- Front layer - moves faster for greater depth effect -->
+      <div class="parallax-layer layer-front" data-speed="0.09" data-scroll="0.3"></div>
+    </div>
+    
     <div class="container">
-      <div class="hero-content">
-        <h1 class="animate-on-scroll gradient-text">Abonnement Spotify Premium<br>à <span class="highlight">-53%</span></h1>
-        <p class="animate-on-scroll">Obtenez 12 mois d'abonnement Spotify Premium pour seulement 82,62$ au lieu de 175,12$ - Une économie de plus de 92$</p>
+      <div class="hero-content hero-content-enhanced depth-card">
+        <h1 class="animate-on-scroll gradient-text">Abonnement <span class="premium-text">Spotify Premium</span><br>à <span class="highlight premium-text">-53%</span></h1>
+        <p class="animate-on-scroll">Obtenez 12 mois d'abonnement Spotify Premium pour seulement <span class="premium-text">82,62$</span> au lieu de 175,12$ - Une économie de plus de 92$</p>
         <a href="#commander" class="btn btn-primary btn-lg animate-on-scroll">Économiser maintenant</a>
       </div>
+    </div>
+    
+    <!-- Scroll indicator -->
+    <div class="scroll-indicator">
+      <span>Découvrir</span>
+      <i class="fas fa-chevron-down"></i>
     </div>
   </section>
   <!-- Section Prix avec effet de zoom et design premium -->
@@ -238,45 +256,87 @@
         <h2>Ce que nos clients disent</h2>
       </div>
       
-      <div class="testimonial-grid">
-        <div class="testimonial-card animate-on-scroll">
+      <div class="testimonial-grid">        <div class="testimonial-card animate-on-scroll">
+          <div class="testimonial-badge">Client vérifié</div>
+          <div class="rating">
+            <div class="star"><i class="fas fa-star"></i></div>
+            <div class="star"><i class="fas fa-star"></i></div>
+            <div class="star"><i class="fas fa-star"></i></div>
+            <div class="star"><i class="fas fa-star"></i></div>
+            <div class="star"><i class="fas fa-star"></i></div>
+          </div>
           <div class="testimonial-content">
             <p>"J'étais sceptique au début, mais tout a parfaitement fonctionné ! J'économise plus de 90$ et mon compte Spotify Premium fonctionne exactement comme avant."</p>
-          </div>          <div class="testimonial-author">          <picture>
-            <source srcset="/images/webp/avatar-1.webp" type="image/webp">
-            <img src="/images/avatar-1.svg" alt="Avatar" class="testimonial-avatar" loading="lazy">
-          </picture>
+          </div>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar-container">
+              <picture>
+                <source srcset="/images/webp/avatar-1.webp" type="image/webp">
+                <img src="/images/avatar-1.svg" alt="Avatar" class="testimonial-avatar" loading="lazy">
+              </picture>
+            </div>
             <div>
               <div class="testimonial-name">Marie L.</div>
               <div class="testimonial-title">Cliente depuis 2024</div>
+              <div class="verified-customer">
+                <i class="fas fa-check-circle"></i> Achat vérifié
+              </div>
             </div>
           </div>
         </div>
-        
-        <div class="testimonial-card animate-on-scroll">
+          <div class="testimonial-card animate-on-scroll">
+          <div class="testimonial-badge">Top client</div>
+          <div class="rating">
+            <div class="star"><i class="fas fa-star"></i></div>
+            <div class="star"><i class="fas fa-star"></i></div>
+            <div class="star"><i class="fas fa-star"></i></div>
+            <div class="star"><i class="fas fa-star"></i></div>
+            <div class="star"><i class="fas fa-star-half-alt"></i></div>
+          </div>
           <div class="testimonial-content">
             <p>"Processus simple et efficace. Abonnement activé en 48h et j'économise une belle somme. Je recommanderai certainement à mes amis !"</p>
-          </div>          <div class="testimonial-author">          <picture>
-            <source srcset="/images/webp/avatar-2.webp" type="image/webp">
-            <img src="/images/avatar-2.svg" alt="Avatar" class="testimonial-avatar" loading="lazy">
-          </picture>
+          </div>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar-container">
+              <picture>
+                <source srcset="/images/webp/avatar-2.webp" type="image/webp">
+                <img src="/images/avatar-2.svg" alt="Avatar" class="testimonial-avatar" loading="lazy">
+              </picture>
+            </div>
             <div>
               <div class="testimonial-name">Thomas B.</div>
               <div class="testimonial-title">Client depuis 2024</div>
+              <div class="verified-customer">
+                <i class="fas fa-check-circle"></i> Achat vérifié
+              </div>
             </div>
           </div>
         </div>
-        
-        <div class="testimonial-card animate-on-scroll">
+          <div class="testimonial-card animate-on-scroll">
+          <div class="testimonial-badge">Client fidèle</div>
+          <div class="rating">
+            <div class="star"><i class="fas fa-star"></i></div>
+            <div class="star"><i class="fas fa-star"></i></div>
+            <div class="star"><i class="fas fa-star"></i></div>
+            <div class="star"><i class="fas fa-star"></i></div>
+            <div class="star"><i class="fas fa-star"></i></div>
+          </div>
           <div class="testimonial-content">
             <p>"Service client réactif et transparent. L'activation a pris moins de 72h et tout fonctionne parfaitement depuis. Très satisfaite de cette économie."</p>
-          </div>          <div class="testimonial-author">          <picture>
-            <source srcset="/images/webp/avatar-3.webp" type="image/webp">
-            <img src="/images/avatar-3.svg" alt="Avatar" class="testimonial-avatar" loading="lazy">
-          </picture>
+          </div>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar-container">
+              <picture>
+                <source srcset="/images/webp/avatar-3.webp" type="image/webp">
+                <img src="/images/avatar-3.svg" alt="Avatar" class="testimonial-avatar" loading="lazy">
+              </picture>
+            </div>
             <div>
               <div class="testimonial-name">Sophie M.</div>
               <div class="testimonial-title">Cliente depuis 2025</div>
+              <div class="verified-customer">
+                <i class="fas fa-check-circle"></i> Achat vérifié
+              </div>
             </div>
           </div>
         </div>
@@ -496,11 +556,16 @@
   
   <!-- Main Script -->
   <script src="/js/modern-main.js"></script>
-  
-  <!-- Background Effects Script -->
+    <!-- Background Effects Script -->
   <script src="/js/background-effects.js"></script>
-  
-  <!-- Form Validation Script -->
+  <!-- Hero Parallax Script -->
+  <script src="/js/hero-parallax.js"></script>
+    <!-- Form Validation Script -->
   <script src="/js/form-validation.js"></script>
+    <!-- Testimonials Animations Script -->
+  <script src="/js/testimonials-animations.js"></script>
+  
+  <!-- Mobile Optimizations -->
+  <script src="/js/mobile-optimizations.js"></script>
 </body>
 </html>
