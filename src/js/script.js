@@ -13,10 +13,13 @@ document.addEventListener('DOMContentLoaded', () => {
         return `ORD-${year}${month}${day}-${random}`;
     };
 
-    orderNumberField.value = generateOrderNumber();
+    if (orderNumberField) {
+        orderNumberField.value = generateOrderNumber();
+    }
 
-    // Activer le bouton si le formulaire est valide
-    orderForm.addEventListener('input', () => {
-        submitButton.disabled = !orderForm.checkValidity();
-    });
+    if (orderForm && submitButton) {
+        orderForm.addEventListener('input', () => {
+            submitButton.disabled = !orderForm.checkValidity();
+        });
+    }
 });

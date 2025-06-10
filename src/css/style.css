@@ -1,6 +1,6 @@
 body {
     font-family: var(--sd-font-family);
-    background-color: var(--sd-color-bg-dark);
+    background: var(--sd-color-bg-dark);
     color: #fff;
     margin: 0;
     padding: 0;
@@ -10,26 +10,217 @@ header {
     position: fixed;
     top: 0;
     width: 100%;
-    background-color: var(--sd-color-bg-light);
+    background: var(--sd-color-bg-light);
     box-shadow: var(--sd-elev-1);
     z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    height: 64px;
+}
+
+.logo img {
+    height: 40px;
 }
 
 nav ul {
     display: flex;
-    justify-content: space-around;
+    gap: 2rem;
     list-style: none;
-    padding: 1em;
     margin: 0;
+    padding: 0;
 }
 
 nav a {
     color: #fff;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: color 0.2s;
+}
+
+nav a:hover {
+    color: var(--sd-color-accent);
 }
 
 main {
     margin-top: 80px;
-    padding: 2em;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2rem 1rem 3rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+#hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    text-align: center;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.cta-buttons button {
+    background: var(--sd-color-accent);
+    color: #222;
+    border: none;
+    border-radius: var(--sd-radius);
+    padding: 0.8em 1.6em;
+    font-size: 1.1em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s;
+    box-shadow: var(--sd-elev-1);
+}
+
+.cta-buttons button:hover {
+    background: #1be88a;
+    box-shadow: var(--sd-elev-2);
+}
+
+.testimonials {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0.5rem 0;
+}
+
+.testimonials img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--sd-color-accent);
+}
+
+.hero-image img {
+    width: 220px;
+    max-width: 90vw;
+    filter: drop-shadow(0 8px 32px #22ff9e44);
+    border-radius: 2rem;
+    margin-top: 1rem;
+}
+
+section {
+    background: rgba(26,42,49,0.85);
+    border-radius: var(--sd-radius);
+    box-shadow: var(--sd-elev-1);
+    padding: 2rem;
+}
+
+#order .important-box {
+    background: #1be88a22;
+    border-left: 5px solid var(--sd-color-accent);
+    border-radius: var(--sd-radius);
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+#orderForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    max-width: 420px;
+    margin: 0 auto;
+}
+
+#orderForm label {
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+}
+
+#orderForm input[type="email"],
+#orderForm input[type="password"] {
+    padding: 0.7em 1em;
+    border-radius: var(--sd-radius);
+    border: none;
+    font-size: 1em;
+    margin-bottom: 0.5rem;
+    background: #222c;
+    color: #fff;
+}
+
+#orderForm .checkboxes {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.98em;
+}
+
+#orderForm button {
+    background: var(--sd-color-accent);
+    color: #222;
+    border: none;
+    border-radius: var(--sd-radius);
+    padding: 0.8em 1.6em;
+    font-size: 1.1em;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: background 0.2s, box-shadow 0.2s;
+    box-shadow: var(--sd-elev-1);
+}
+
+#orderForm button:disabled {
+    background: #444;
+    color: #bbb;
+    cursor: not-allowed;
+}
+
+footer {
+    text-align: center;
+    padding: 2rem 1rem 1rem 1rem;
+    background: var(--sd-color-bg-light);
+    color: #fff;
+    border-radius: var(--sd-radius) var(--sd-radius) 0 0;
+    margin-top: 2rem;
+}
+
+footer ul {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    list-style: none;
+    margin: 1rem 0 0 0;
+    padding: 0;
+}
+
+footer a {
+    color: var(--sd-color-accent);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 700px) {
+    header {
+        flex-direction: column;
+        height: auto;
+        padding: 1rem;
+    }
+    nav ul {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    main {
+        padding: 1rem 0.2rem 2rem 0.2rem;
+    }
+    section {
+        padding: 1rem;
+    }
+    .hero-image img {
+        width: 120px;
+    }
 }
