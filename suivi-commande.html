@@ -395,10 +395,18 @@
         checkOrderStatus(orderIdParam);      }
     });
   </script>
-  
-  <!-- Scripts -->
+    <!-- Scripts -->
   <script src="/js/modern-main.js"></script>
   <script src="/js/background-effects.js"></script>
+  <script>
+    // Initialize tracking page particles
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize particles only if the function exists
+      if (typeof createParticles === 'function') {
+        createParticles('tracking-particles', window.innerWidth <= 768 ? 5 : 8);
+      }
+    });
+  </script>
   <script src="/js/form-validation.js"></script>
 </body>
 </html>
