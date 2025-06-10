@@ -312,11 +312,60 @@
   <div class="divider"></div>
 
   <!-- FAQ -->
-  <section class="faq" id="faq">
-    <div class="container">
-      <h2 class="section-title">FAQ</h2>
-      <details><summary>Puis-je renouveler mon abonnement ?</summary><p>Oui, à la fin de la période.</p></details>
-      <details><summary>Le service est-il légal ?</summary><p>Oui, nous fournissons un service d'achat de codes prépayés.</p></details>
+  <section id="faq" class="faq">
+    <!-- 1. Titre de section -->
+    <h2 class="faq__title">
+      FAQ
+    </h2>
+
+    <!-- 2. Accordion FAQ -->
+    <div class="faq__accordion">
+      <!-- Q1 : Prolonger l'abonnement -->
+      <details class="faq__item">
+        <summary class="faq__summary">
+          <span>Comment prolonger mon abonnement ?</span>
+          <i class="icon ph-chevron-down faq__icon"></i>
+        </summary>
+        <p class="faq__content">
+          Il vous suffit de passer une nouvelle commande 48 h avant la fin de votre abonnement actuel.
+        </p>
+      </details>
+
+      <!-- Q2 : Déjà abonné -->
+      <details class="faq__item">
+        <summary class="faq__summary">
+          <span>Déjà abonné sur Spotify ?</span>
+          <i class="icon ph-chevron-down faq__icon"></i>
+        </summary>
+        <p class="faq__content">
+          Activez un nouvel email ou modifiez votre email existant avant de passer commande.
+        </p>
+      </details>
+
+      <!-- Q3 : Compte bloqué -->
+      <details class="faq__item">
+        <summary class="faq__summary">
+          <span>Mon compte est bloqué ?</span>
+          <i class="icon ph-chevron-down faq__icon"></i>
+        </summary>
+        <p class="faq__content">
+          Contactez-nous à 
+          <a href="mailto:spotideals.github.io@gmail.com" class="faq__link">
+            spotideals.github.io@gmail.com
+          </a> pour assistance.
+        </p>
+      </details>
+
+      <!-- Q4 : VPN -->
+      <details class="faq__item">
+        <summary class="faq__summary">
+          <span>Ai-je besoin d'un VPN ?</span>
+          <i class="icon ph-chevron-down faq__icon"></i>
+        </summary>
+        <p class="faq__content">
+          Non, votre compte fonctionne normalement après activation, sans VPN.
+        </p>
+      </details>
     </div>
   </section>
   <div class="divider"></div>

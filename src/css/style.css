@@ -581,4 +581,76 @@ button:focus-visible, .btn:focus-visible {
   font-size: var(--sd-font-size-sm);           /* ~14px */
   color: var(--sd-color-text-muted);
   line-height: 1.5;
+}
+
+/* Container FAQ */
+.faq {
+  padding: var(--sd-space-6) var(--sd-space-4);
+  background: var(--sd-color-bg-light);
+}
+
+/* Titre */
+.faq__title {
+  font-size: 1.25rem;                        /* ~20px */
+  font-weight: var(--sd-font-weight-semibold);
+  text-align: center;
+  color: var(--sd-color-text-main);
+  margin-bottom: var(--sd-space-4);
+}
+
+/* Accordion wrapper */
+.faq__accordion {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sd-space-4);
+}
+
+/* FAQ item */
+.faq__item {
+  background: var(--sd-color-bg-dark);
+  border-radius: var(--sd-radius);
+  padding: var(--sd-space-4);
+  overflow: hidden;
+}
+
+/* Remove default marker */
+.faq__item summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Summary header */
+.faq__summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-size: var(--sd-font-size-lg);         /* ~18px */
+  font-weight: var(--sd-font-weight-semibold);
+  color: var(--sd-color-text-main);
+}
+
+/* Chevron icon */
+.faq__icon {
+  font-size: 1.25rem;
+  color: var(--sd-color-accent);
+  transition: transform 0.3s var(--sd-transition-ease);
+}
+
+/* Rotate icon when open */
+.faq__item[open] .faq__icon {
+  transform: rotate(180deg);
+}
+
+/* Content text */
+.faq__content {
+  margin-top: var(--sd-space-2);
+  font-size: var(--sd-font-size-sm);          /* ~14px */
+  color: var(--sd-color-text-muted);
+  line-height: 1.5;
+}
+
+/* Link in content */
+.faq__link {
+  color: var(--sd-color-accent);
+  text-decoration: underline;
 } 
