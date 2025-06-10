@@ -1,0 +1,40 @@
+1. Landing page responsive et ultra claire pour un service d’achat légal de Spotify à l’étranger (style agence de conciergerie numérique).
+   - Sections : Hero, Étapes, Comparatif de prix, Bloc “Pourquoi c’est légal”, Bloc “Important - Sécurité du compte”, Bloc consentement (7 cases à cocher), Formulaire de commande, Confirmation + numéro de commande, Mentions légales, Footer.
+
+2. Encadré « Important – Sécurité du Compte » :
+   - Liste à puces : changer mdp avant la commande, utiliser un mot de passe temporaire, ne jamais donner le mot de passe habituel.
+   - Style doux, avec icônes et animation légère.
+
+3. Génère 7 cases à cocher obligatoires avec des libellés simples, style clair et juridiquement prudent :
+   - Je comprends que vous vous connecterez temporairement à mon compte.
+   - Je m'engage à changer mon mot de passe après l'activation.
+   - Je comprends que toutes mes données sont supprimées après l'achat.
+   - Je confirme que mon abonnement actuel est inactif.
+   - Je comprends qu’aucun remboursement n’est possible après activation.
+   - Je reconnais que vous ne vendez pas Spotify mais un service d’achat.
+   - Je comprends que je pourrai utiliser mon compte normalement sans VPN.
+
+4. Tableau comparatif des prix :
+   - Prix Spotify Canada (175,12 $ CAD /an) vs ton service (82,62 $ CAD /an), économies ~47 %.
+
+5. Script JS générant un ID de commande unique (SD‑XXXX‑XXXX), à afficher après soumission du formulaire.
+
+6. Formulaire HTML sécurisé :
+   - Champs : Nom, Prénom, Email, Identifiant Spotify, Mot de passe temporaire (min 12 caractères, majuscule, minuscule, chiffre, symbole), Téléphone (facultatif).
+   - Validation JS forte.
+   - Envoi via Formspree (https://formspree.io/f/xanorewp).
+   - Redirection vers PayPal Smart Buttons (client-id fourni, CAD).
+   - Affiche « 🎉 Votre commande #SD‑XXXX est en cours. »
+
+7. UI/UX Design :
+   - Palette : #1DB954 (vert), #f5f5f5 (fond clair), #1a1a1a (texte sombre).
+   - Police : Poppins.
+   - Boutons animés au hover, icônes CSS animées, dark-mode, images .webp qualité 85, responsive mobile/desktop.
+
+8. Espace admin (admin.html) :
+   - Protégé par mot de passe.
+   - Liste des commandes reçues via Formspree, statuts (en cours, livrée).
+   - Recherche par numéro de commande.
+
+9. Logo AI prompt :
+   - Logo moderne “SD”, style tech et clean, vert #1DB954 + noir/gris foncé, .webp fond transparent, <200 Ko, plat, élégant, version horizontale et carrée.
