@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>SpotiDeals – Suivi de commande</title>
+  <meta name="description" content="Suivez l'état de votre commande SpotiDeals">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/favicon/site.webmanifest">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/modern-style.css">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+  <style>
+    .tracking-container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .order-status {
+      margin-top: 2rem;
+      padding: 2rem;
+      border-radius: var(--border-radius);
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+    
+    .status-steps {
+      display: flex;
+      justify-content: space-between;
+      margin: 3rem 0;
+      position: relative;
+    }
+    
+    .status-steps::before {
+      content: '';
+      position: absolute;
+      top: 15px;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--gray-300);
+      z-index: 1;
+    }
+    
+    .step {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      width: 30%;
+    }
+    
+    .step-icon {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background: var(--gray-300);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+    }
+    
+    .step.active .step-icon {
+      background: var(--primary);
+    }
+    
+    .step.completed .step-icon {
+      background: var(--success);
+    }
+    
+    .step-label {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--gray-500);
+    }
+    
+    .step.active .step-label {
+      color: var(--primary);
+      font-weight: 600;
+    }
+    
+    .step.completed .step-label {
+      color: var(--success);
+      font-weight: 600;
+    }
+    
+    .status-message {
+      text-align: center;
+      margin: 2rem 0;
+      padding: 1rem;
+      border-radius: var(--border-radius);
+    }
+    
+    .message-pending {
+      background-color: rgba(255, 183, 77, 0.1);
+      color: #ff9800;
+    }
+    
+    .message-processing {
+      background-color: rgba(3, 169, 244, 0.1);
+      color: #03a9f4;
+    }
+    
+    .message-completed {
+      background-color: rgba(67, 160, 71, 0.1);
+      color: var(--success);
+    }
+    
+    .message-refunded {
+      background-color: rgba(229, 57, 53, 0.1);
+      color: var(--danger);
+    }
+    
+    .order-details {
+      margin-top: 2rem;
+      border-top: 1px solid var(--gray-300);
+      padding-top: 2rem;
+    }
+    
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      border-bottom: 1px dashed var(--gray-300);
+    }
+    
+    .detail-label {
+      font-weight: 600;
+      color: var(--text);
+    }
+    
+    .not-found {
+      text-align: center;
+      padding: 2rem;
+      background-color: rgba(229, 57, 53, 0.1);
+      border-radius: var(--border-radius);
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header">
+    <div class="container header-container">
+      <div class="logo">
+        <img src="/images/logo.svg" alt="SpotiDeals Logo" height="40">
+        <span class="logo-text">SpotiDeals</span>
+      </div>
+      <nav class="nav-links">
+        <a href="index-modern.html">Accueil</a>
+        <a href="index-modern.html#comment-ca-marche">Comment ça marche</a>
+        <a href="index-modern.html#commander">Commander</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <h1>Suivi de commande</h1>
+      </div>
+      
+      <div class="tracking-container">
+        <div class="card">
+          <form id="tracking-form">
+            <div class="form-group">
+              <label class="form-label" for="order-id">Numéro de commande</label>
+              <input type="text" class="form-control" id="order-id" placeholder="Ex: SD-20250610-AB1C2" required>
+            </div>
+            
+            <button type="submit" class="btn btn-primary btn-block">Vérifier l'état de ma commande</button>
+          </form>
+        </div>
+        
+        <div id="order-result" class="hidden">
+          <!-- Le contenu sera chargé dynamiquement ici -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-about">
+          <img src="/images/logo.svg" alt="SpotiDeals Logo" height="40" class="footer-logo">
+          <p>SpotiDeals fournit uniquement un service d'intermédiation d'achat. Nous ne revendons pas Spotify et ne sommes pas affiliés à Spotify AB.</p>
+        </div>
+        
+        <div class="footer-links-container">
+          <h3 class="footer-heading">Liens rapides</h3>
+          <ul class="footer-links">
+            <li><a href="index-modern.html#comment-ca-marche">Comment ça marche</a></li>
+            <li><a href="index-modern.html#avantages">Avantages</a></li>
+            <li><a href="index-modern.html#commander">Commander</a></li>
+            <li><a href="index-modern.html#faq">FAQ</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links-container">
+          <h3 class="footer-heading">Contact</h3>
+          <ul class="footer-links">
+            <li><a href="mailto:spotideals.github.io@gmail.com"><i class="fas fa-envelope"></i> spotideals.github.io@gmail.com</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>Copyright © 2025 SpotiDeals. Tous droits réservés.</p>
+        <p class="mt-2">SpotiDeals est un service indépendant d'intermédiation d'achat et n'est pas affilié à Spotify AB.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const trackingForm = document.getElementById('tracking-form');
+      const orderResult = document.getElementById('order-result');
+      
+      trackingForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const orderId = document.getElementById('order-id').value.trim();
+        checkOrderStatus(orderId);
+      });
+      
+      function checkOrderStatus(orderId) {
+        // Récupération des données de commande depuis localStorage
+        const orderData = localStorage.getItem(orderId);
+        
+        if (!orderData) {
+          // Commande non trouvée
+          showNotFound();
+          return;
+        }
+        
+        try {
+          const order = JSON.parse(orderData);
+          showOrderStatus(orderId, order);
+        } catch (e) {
+          console.error('Error parsing order data:', e);
+          showNotFound();
+        }
+      }
+      
+      function showNotFound() {
+        orderResult.innerHTML = `
+          <div class="not-found mt-4">
+            <h3><i class="fas fa-exclamation-circle"></i> Commande non trouvée</h3>
+            <p>Le numéro de commande que vous avez entré n'existe pas dans notre système. Veuillez vérifier et réessayer.</p>
+          </div>
+        `;
+        orderResult.classList.remove('hidden');
+      }
+      
+      function showOrderStatus(orderId, order) {
+        // Déterminer l'étape actuelle et les classes CSS correspondantes
+        const status = order.status;
+        let stepClasses = ['', '', ''];
+        let messageClass = '';
+        let messageText = '';
+        
+        switch(status) {
+          case 'En cours':
+            stepClasses = ['completed', 'active', ''];
+            messageClass = 'message-processing';
+            messageText = 'Votre commande est en cours de traitement. Nous procédons à l\'activation de votre abonnement Spotify Premium.';
+            break;
+          case 'Livré':
+            stepClasses = ['completed', 'completed', 'completed'];
+            messageClass = 'message-completed';
+            messageText = 'Votre commande a été complétée avec succès. Votre abonnement Spotify Premium est maintenant actif pour 12 mois. N\'oubliez pas de changer votre mot de passe !';
+            break;
+          case 'Remboursé':
+            messageClass = 'message-refunded';
+            messageText = 'Cette commande a été remboursée. Veuillez nous contacter si vous avez des questions.';
+            break;
+          default:
+            stepClasses = ['active', '', ''];
+            messageClass = 'message-pending';
+            messageText = 'Votre commande a été reçue et est en attente de traitement.';
+        }
+        
+        // Formater la date
+        const orderDate = new Date(order.date).toLocaleString();
+        
+        // Construire le HTML
+        let resultHTML = `
+          <div class="order-status mt-4">
+            <h2>Commande: ${orderId}</h2>
+        `;
+        
+        // Si remboursé, afficher uniquement le message
+        if (status === 'Remboursé') {
+          resultHTML += `
+            <div class="status-message ${messageClass}">
+              <p><i class="fas fa-info-circle"></i> ${messageText}</p>
+            </div>
+            
+            <div class="order-details">
+              <div class="detail-row">
+                <span class="detail-label">Date de commande:</span>
+                <span>${orderDate}</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Statut:</span>
+                <span>${status}</span>
+              </div>
+            </div>
+          `;
+        } else {
+          // Sinon, afficher les étapes
+          resultHTML += `
+            <div class="status-steps">
+              <div class="step ${stepClasses[0]}">
+                <div class="step-icon"><i class="fas fa-check"></i></div>
+                <div class="step-label">Commande reçue</div>
+              </div>
+              <div class="step ${stepClasses[1]}">
+                <div class="step-icon"><i class="fas fa-cog"></i></div>
+                <div class="step-label">En cours d'activation</div>
+              </div>
+              <div class="step ${stepClasses[2]}">
+                <div class="step-icon"><i class="fas fa-check-circle"></i></div>
+                <div class="step-label">Activé avec succès</div>
+              </div>
+            </div>
+            
+            <div class="status-message ${messageClass}">
+              <p><i class="fas fa-info-circle"></i> ${messageText}</p>
+            </div>
+            
+            <div class="order-details">
+              <div class="detail-row">
+                <span class="detail-label">Date de commande:</span>
+                <span>${orderDate}</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Statut:</span>
+                <span>${status}</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Produit:</span>
+                <span>Abonnement Spotify Premium 12 mois</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Montant:</span>
+                <span>82,62$ CAD</span>
+              </div>
+            </div>
+          `;
+        }
+        
+        resultHTML += `
+          </div>
+        `;
+        
+        orderResult.innerHTML = resultHTML;
+        orderResult.classList.remove('hidden');
+        
+        // Scroll to result
+        orderResult.scrollIntoView({ behavior: 'smooth' });
+      }
+      
+      // Check if there's an order ID in the URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const orderIdParam = urlParams.get('order');
+      
+      if (orderIdParam) {
+        document.getElementById('order-id').value = orderIdParam;
+        checkOrderStatus(orderIdParam);
+      }
+    });
+  </script>
+</body>
+</html>

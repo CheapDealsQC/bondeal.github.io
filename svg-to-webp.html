@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVG to WebP Converter</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f7f9fc;
+        }
+        h1 {
+            color: #4285f4;
+            text-align: center;
+        }
+        .instruction {
+            background-color: #e8f0fe;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .converter {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .row {
+            display: flex;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+        .preview {
+            margin-top: 20px;
+            text-align: center;
+        }
+        button {
+            background-color: #4285f4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #3367d6;
+        }
+        .download-btn {
+            background-color: #0f9d58;
+        }
+        .download-btn:hover {
+            background-color: #0b8043;
+        }
+        input[type="file"] {
+            display: none;
+        }
+        .file-label {
+            background-color: #f1f3f4;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+            border: 1px solid #dadce0;
+        }
+        .file-name {
+            margin-left: 10px;
+            font-style: italic;
+        }
+        #preview-original, #preview-webp {
+            max-width: 300px;
+            max-height: 300px;
+            display: block;
+            margin: 10px auto;
+            border: 1px solid #dadce0;
+            background-color: white;
+        }
+        .quality-control {
+            margin: 20px 0;
+        }
+        .quality-slider {
+            width: 100%;
+            margin: 10px 0;
+        }
+        .download-all {
+            margin-top: 20px;
+            text-align: center;
+        }
+        #conversion-log {
+            margin-top: 20px;
+            background-color: #f1f3f4;
+            padding: 10px;
+            border-radius: 4px;
+            max-height: 200px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        .log-entry {
+            margin-bottom: 5px;
+            padding: 5px;
+        }
+        .log-success {
+            background-color: #e6f4ea;
+            color: #0b8043;
+        }
+        .log-error {
+            background-color: #fce8e6;
+            color: #d93025;
+        }
+    </style>
+</head>
+<body>
+    <h1>SpotiDeals SVG to WebP Converter</h1>
+    
+    <div class="instruction">
+        <p><strong>Instructions:</strong></p>
+        <ol>
+            <li>Click the "Choose SVG File" button to select an SVG file</li>
+            <li>Adjust the quality slider to set the WebP quality (higher values = better quality, larger file size)</li>
+            <li>Click "Convert to WebP" to process the image</li>
+            <li>Click "Download WebP" to save the converted image</li>
+        </ol>
+    </div>
+    
+    <div class="converter">
+        <div class="row">
+            <label class="file-label" for="svg-file">Choose SVG File</label>
+            <input type="file" id="svg-file" accept=".svg" multiple>
+            <span class="file-name" id="file-name">No file chosen</span>
+        </div>
+        
+        <div class="quality-control">
+            <label for="quality">WebP Quality: <span id="quality-value">80</span>%</label><br>
+            <input type="range" id="quality" class="quality-slider" min="0" max="100" value="80">
+        </div>
+        
+        <div class="row">
+            <button id="convert-btn">Convert to WebP</button>
+        </div>
+        
+        <div class="preview">
+            <div class="row" style="justify-content: space-around;">
+                <div>
+                    <h3>Original SVG</h3>
+                    <img id="preview-original">
+                </div>
+                <div>
+                    <h3>WebP Result</h3>
+                    <img id="preview-webp">
+                    <div style="margin-top: 10px;">
+                        <button id="download-btn" class="download-btn" disabled>Download WebP</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="download-all">
+            <button id="process-all-btn" disabled>Process All Files</button>
+        </div>
+        
+        <div id="conversion-log">
+            <div class="log-entry">Waiting for files to be selected...</div>
+        </div>
+    </div>
+
+    <script>
+        const svgFileInput = document.getElementById('svg-file');
+        const fileName = document.getElementById('file-name');
+        const convertBtn = document.getElementById('convert-btn');
+        const downloadBtn = document.getElementById('download-btn');
+        const processAllBtn = document.getElementById('process-all-btn');
+        const previewOriginal = document.getElementById('preview-original');
+        const previewWebp = document.getElementById('preview-webp');
+        const qualitySlider = document.getElementById('quality');
+        const qualityValue = document.getElementById('quality-value');
+        const conversionLog = document.getElementById('conversion-log');
+        
+        let currentSvg = null;
+        let currentWebp = null;
+        let selectedFiles = [];
+        let currentFileIndex = 0;
+        
+        // Update quality value display
+        qualitySlider.addEventListener('input', () => {
+            qualityValue.textContent = qualitySlider.value;
+        });
+        
+        // Handle file selection
+        svgFileInput.addEventListener('change', (e) => {
+            selectedFiles = Array.from(e.target.files);
+            
+            if (selectedFiles.length > 0) {
+                fileName.textContent = selectedFiles.length === 1 
+                    ? selectedFiles[0].name 
+                    : `${selectedFiles.length} files selected`;
+                
+                // Display the first file as preview
+                displaySvgPreview(selectedFiles[0]);
+                
+                // Enable the process all button if multiple files are selected
+                processAllBtn.disabled = selectedFiles.length <= 1;
+                
+                logMessage(`${selectedFiles.length} file(s) selected`, 'log-success');
+            } else {
+                fileName.textContent = 'No file chosen';
+                previewOriginal.src = '';
+                processAllBtn.disabled = true;
+                logMessage('No files selected', 'log-error');
+            }
+        });
+        
+        // Display SVG preview
+        function displaySvgPreview(file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                previewOriginal.src = e.target.result;
+                currentSvg = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+        
+        // Convert SVG to WebP
+        convertBtn.addEventListener('click', () => {
+            if (!currentSvg) {
+                logMessage('Please select an SVG file first', 'log-error');
+                return;
+            }
+            
+            convertSvgToWebp(currentSvg, qualitySlider.value / 100);
+        });
+        
+        // Process all selected files
+        processAllBtn.addEventListener('click', () => {
+            currentFileIndex = 0;
+            processNextFile();
+        });
+        
+        function processNextFile() {
+            if (currentFileIndex < selectedFiles.length) {
+                const file = selectedFiles[currentFileIndex];
+                logMessage(`Processing ${file.name} (${currentFileIndex + 1}/${selectedFiles.length})...`);
+                
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const svg = e.target.result;
+                    
+                    // Convert to WebP
+                    convertSvgToWebpAndDownload(svg, qualitySlider.value / 100, file.name.replace('.svg', '.webp'));
+                    
+                    // Process next file
+                    currentFileIndex++;
+                    setTimeout(processNextFile, 500);
+                };
+                reader.readAsDataURL(file);
+            } else {
+                logMessage('All files processed successfully!', 'log-success');
+            }
+        }
+        
+        // Convert SVG to WebP and show preview
+        function convertSvgToWebp(svgData, quality) {
+            const img = new Image();
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                // Ensure we get a reasonable size for the canvas
+                canvas.width = img.naturalWidth || 400;
+                canvas.height = img.naturalHeight || 400;
+                
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0);
+                
+                try {
+                    // Convert to WebP
+                    currentWebp = canvas.toDataURL('image/webp', quality);
+                    
+                    // Display preview
+                    previewWebp.src = currentWebp;
+                    downloadBtn.disabled = false;
+                    
+                    logMessage('Conversion successful!', 'log-success');
+                } catch (error) {
+                    logMessage(`Error during conversion: ${error.message}`, 'log-error');
+                }
+            };
+            img.onerror = () => {
+                logMessage('Failed to load SVG image', 'log-error');
+            };
+            img.src = svgData;
+        }
+        
+        // Convert and download automatically
+        function convertSvgToWebpAndDownload(svgData, quality, filename) {
+            const img = new Image();
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                canvas.width = img.naturalWidth || 400;
+                canvas.height = img.naturalHeight || 400;
+                
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0);
+                
+                try {
+                    // Convert to WebP
+                    const webpData = canvas.toDataURL('image/webp', quality);
+                    
+                    // Create download link and trigger download
+                    const a = document.createElement('a');
+                    a.href = webpData;
+                    a.download = filename;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    
+                    logMessage(`Successfully converted and downloaded ${filename}`, 'log-success');
+                } catch (error) {
+                    logMessage(`Error processing ${filename}: ${error.message}`, 'log-error');
+                }
+            };
+            img.onerror = () => {
+                logMessage(`Failed to load ${filename}`, 'log-error');
+            };
+            img.src = svgData;
+        }
+        
+        // Download WebP image
+        downloadBtn.addEventListener('click', () => {
+            if (!currentWebp) return;
+            
+            // Create download link
+            const a = document.createElement('a');
+            a.href = currentWebp;
+            a.download = selectedFiles[0].name.replace('.svg', '.webp');
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            
+            logMessage(`Downloaded ${a.download}`, 'log-success');
+        });
+        
+        // Add log entry
+        function logMessage(message, className = '') {
+            const logEntry = document.createElement('div');
+            logEntry.className = `log-entry ${className}`;
+            logEntry.textContent = message;
+            conversionLog.appendChild(logEntry);
+            conversionLog.scrollTop = conversionLog.scrollHeight;
+        }
+        
+        // Label click should trigger file input
+        document.querySelector('.file-label').addEventListener('click', () => {
+            svgFileInput.click();
+        });
+    </script>
+</body>
+</html>

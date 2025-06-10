@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>SpotiDeals - Redirection</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Montserrat', -apple-system, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background: #f8f9fa;
+      color: #333;
+      text-align: center;
+      padding: 1rem;
+    }
+    
+    .logo {
+      width: 120px;
+      height: auto;
+      margin-bottom: 2rem;
+    }
+    
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      max-width: 600px;
+    }
+    
+    .btn {
+      display: inline-block;
+      background: #1db954;
+      color: white;
+      text-decoration: none;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .btn:hover {
+      background: #169c46;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+  <img class="logo" src="/images/logo.svg" alt="SpotiDeals Logo">
+  <h1>SpotiDeals - Nouvelle version disponible</h1>
+  <p>Nous avons mis à jour notre site pour une meilleure expérience. Vous allez être redirigé vers la nouvelle version dans <span id="countdown">5</span> secondes.</p>
+  <a href="index-modern.html" class="btn">Accéder maintenant</a>
+  
+  <script>
+    // Countdown and redirect
+    let count = 5;
+    const countdownEl = document.getElementById('countdown');
+    
+    const interval = setInterval(() => {
+      count--;
+      countdownEl.textContent = count;
+      
+      if (count <= 0) {
+        clearInterval(interval);
+        window.location.href = 'index-modern.html';
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
