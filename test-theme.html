@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Test du Thème Sombre - SpotiDeals</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    h1, h2 {
+      margin-bottom: 20px;
+    }
+    
+    button {
+      background: #1DB954;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+    
+    .result-box {
+      background-color: #f5f5f5;
+      border: 1px solid #ddd;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+    
+    .dark-theme {
+      background-color: #121212;
+      color: #ffffff;
+    }
+    
+    .dark-theme .result-box {
+      background-color: #282828;
+      border-color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Test de Diagnostic - Thème Sombre SpotiDeals</h1>
+    
+    <button id="toggle-theme">Basculer thème clair/sombre</button>
+    
+    <div class="result-box">
+      <h2>1. Test des fichiers CSS</h2>
+      <div id="css-status">Vérification...</div>
+    </div>
+    
+    <div class="result-box">
+      <h2>2. Test des fichiers JavaScript</h2>
+      <div id="js-status">Vérification...</div>
+    </div>
+    
+    <div class="result-box">
+      <h2>3. Test des images</h2>
+      <div id="img-status">Vérification...</div>
+    </div>
+    
+    <div class="result-box">
+      <h2>4. Préférences système</h2>
+      <div id="pref-status">Vérification...</div>
+    </div>
+    
+    <div class="result-box">
+      <h2>5. LocalStorage</h2>
+      <div id="storage-status">Vérification...</div>
+    </div>
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Référence au bouton de bascule du thème
+      const themeToggle = document.getElementById('toggle-theme');
+      
+      // Test CSS
+      const cssStatus = document.getElementById('css-status');
+      const darkThemeCSS = document.createElement('link');
+      darkThemeCSS.rel = 'stylesheet';
+      darkThemeCSS.href = '/css/dark-theme.css';
+      darkThemeCSS.onload = function() {
+        cssStatus.innerHTML = '✅ Le fichier dark-theme.css a été chargé avec succès.';
+      };
+      darkThemeCSS.onerror = function() {
+        cssStatus.innerHTML = '❌ Impossible de charger dark-theme.css. Vérifiez le chemin.';
+      };
+      document.head.appendChild(darkThemeCSS);
+      
+      // Test JavaScript
+      const jsStatus = document.getElementById('js-status');
+      try {
+        // Tentative de chargement dynamique du JS
+        const darkThemeScript = document.createElement('script');
+        darkThemeScript.src = '/js/dark-theme.js';
+        darkThemeScript.onload = function() {
+          jsStatus.innerHTML = '✅ Le fichier dark-theme.js a été chargé avec succès.';
+        };
+        darkThemeScript.onerror = function() {
+          jsStatus.innerHTML = '❌ Impossible de charger dark-theme.js. Vérifiez le chemin.';
+        };
+        document.body.appendChild(darkThemeScript);
+      } catch (error) {
+        jsStatus.innerHTML = `❌ Erreur lors du chargement du JavaScript: ${error.message}`;
+      }
+      
+      // Test des images
+      const imgStatus = document.getElementById('img-status');
+      let imagesLoaded = 0;
+      let imagesError = 0;
+      
+      const imagesToTest = [
+        '/images/avatar-1.svg',
+        '/images/webp/avatar-1.webp',
+        '/images/spotify-icon.svg',
+        '/images/logo.svg'
+      ];
+      
+      imagesToTest.forEach(src => {
+        const img = new Image();
+        img.onload = function() {
+          imagesLoaded++;
+          updateImageStatus();
+        };
+        img.onerror = function() {
+          imagesError++;
+          updateImageStatus();
+        };
+        img.src = src;
+      });
+      
+      function updateImageStatus() {
+        if (imagesLoaded + imagesError === imagesToTest.length) {
+          imgStatus.innerHTML = `✅ ${imagesLoaded}/${imagesToTest.length} images ont été chargées correctement.<br>` +
+                              `${imagesError > 0 ? '❌ ' + imagesError + ' images n\'ont pas pu être chargées.' : ''}`;
+        }
+      }
+      
+      // Test des préférences système
+      const prefStatus = document.getElementById('pref-status');
+      if (window.matchMedia) {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+        prefStatus.innerHTML = `Votre système est configuré en mode ${prefersDark.matches ? 'sombre' : 'clair'}.<br>` +
+                              `La fonctionnalité prefers-color-scheme est supportée par votre navigateur.`;
+      } else {
+        prefStatus.innerHTML = '❌ Votre navigateur ne supporte pas la détection du thème système (prefers-color-scheme).';
+      }
+      
+      // Test du localStorage
+      const storageStatus = document.getElementById('storage-status');
+      try {
+        localStorage.setItem('theme_test', 'working');
+        const testValue = localStorage.getItem('theme_test');
+        if (testValue === 'working') {
+          storageStatus.innerHTML = '✅ LocalStorage fonctionne correctement. Les préférences du thème peuvent être sauvegardées.';
+        } else {
+          storageStatus.innerHTML = '❌ LocalStorage ne fonctionne pas correctement.';
+        }
+        localStorage.removeItem('theme_test');
+      } catch (error) {
+        storageStatus.innerHTML = `❌ Erreur avec LocalStorage: ${error.message}`;
+      }
+      
+      // Implémentation du toggle
+      themeToggle.addEventListener('click', function() {
+        document.body.classList.toggle('dark-theme');
+        if (document.body.classList.contains('dark-theme')) {
+          localStorage.setItem('theme', 'dark');
+        } else {
+          localStorage.setItem('theme', 'light');
+        }
+      });
+      
+      // Appliquer le thème sauvegardé
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      
+      if (savedTheme === 'dark' || (savedTheme !== 'light' && prefersDark)) {
+        document.body.classList.add('dark-theme');
+      }
+    });
+  </script>
+</body>
+</html>

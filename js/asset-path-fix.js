@@ -2,14 +2,24 @@
  * Asset Path Verification for SpotiDeals
  * This script runs on page load to verify that assets can load correctly
  * and fixes common path issues that may occur with GitHub Pages deployments
+ * 
+ * FIX URGENT: Ajustement des chemins pour GitHub Pages - Juin 2025
  */
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Asset verification script loaded');
+    console.log('Asset verification script loaded - v2');
     
     // Function to check if we're on GitHub Pages
     function isGitHubPages() {
         return window.location.hostname.endsWith('github.io');
+    }
+    
+    // Ajouter un message de diagnostic visible à l'écran
+    if (isGitHubPages()) {
+        const debugInfo = document.createElement('div');
+        debugInfo.style.cssText = 'position: fixed; bottom: 10px; right: 10px; background: rgba(0,0,0,0.7); color: white; padding: 10px; font-size: 12px; z-index: 9999; border-radius: 5px;';
+        debugInfo.innerHTML = 'PathFix v2 actif';
+        document.body.appendChild(debugInfo);
     }
     
     // Test if an asset is loadable
@@ -24,12 +34,11 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => resolve(false), 3000);
         });
     }
-    
-    // Generate alternative paths to try
+      // Generate alternative paths to try
     function getAlternativePaths(originalPath) {
         const paths = [];
         
-        // Try without leading slash
+        // Try without leading slash (le plus susceptible de fonctionner sur GitHub Pages)
         if (originalPath.startsWith('/')) {
             paths.push(originalPath.substring(1));
         }
@@ -38,6 +47,21 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!originalPath.startsWith('/')) {
             paths.push('/' + originalPath);
         }
+        
+        // Try with relative path to current directory
+        if (originalPath.startsWith('/')) {
+            paths.push('.' + originalPath);
+        }
+        
+        // Try with relative path without leading slash
+        if (originalPath.startsWith('/')) {
+            paths.push('.' + originalPath);
+            paths.push(originalPath.substring(1));
+        }
+        
+        // Essayer d'autres combinaisons
+        paths.push('./images/' + originalPath.split('/').pop()); // Essai direct avec le nom du fichier
+        paths.push('../images/' + originalPath.split('/').pop());
         
         // Try with and without /spotideals.github.io prefix
         if (!originalPath.includes('/spotideals.github.io/')) {
