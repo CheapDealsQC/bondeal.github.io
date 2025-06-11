@@ -176,3 +176,90 @@
   outline: 2px solid var(--spotify-green);
   outline-offset: 2px;
 }
+
+/* Optimisations pour appareils mobiles */
+.mobile-device.dark-theme {
+  /* Simplifier les ombres et effets pour les performances */
+  --dark-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --dark-shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.5);
+  
+  /* Ajustements pour les performances mobiles */
+  --particle-count: 4;
+  --animation-duration-multiplier: 1.5;
+}
+
+/* Adaptations spécifiques pour chaque navigateur */
+/* Safari */
+.browser-safari.dark-theme {
+  /* Fix pour backdrop-filter dans Safari */
+  --backdrop-opacity: 0.85; /* Plus opaque pour compenser */
+  
+  /* Ajustements aux transitions problématiques */
+  --hover-transition-duration: 0.15s;
+}
+
+/* Firefox */
+.browser-firefox.dark-theme {
+  /* Firefox gère différemment certains filtres */
+  --firefox-blur-compensation: 1.2;
+}
+
+/* Edge et IE */
+.browser-edge.dark-theme,
+.browser-ie.dark-theme {
+  /* Ajustements pour les navigateurs Microsoft */
+  --ms-browser-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Préférences de réduction de mouvement */
+@media (prefers-reduced-motion: reduce) {
+  .dark-theme {
+    /* Désactiver ou simplifier les animations */
+    --hover-scale: none;
+    --motion-scale: 1;
+    --animation-duration-multiplier: 3;
+  }
+  
+  .dark-theme .animated-element,
+  .dark-theme .spotify-effect,
+  .dark-theme .hover-transform {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* Mode haute performance (moins d'effets) */
+.dark-theme.reduced-animations {
+  --particle-opacity: 0.3;
+  --max-particles: 5;
+  
+  /* Désactiver les effets complexes */
+  .complex-animation,
+  .audio-visualization {
+    display: none !important;
+  }
+}
+
+/* Support de WebP */
+.webp-support .dark-theme .webp-bg {
+  background-image: url('/images/webp/hero-background.webp');
+}
+
+.no-webp-support .dark-theme .webp-bg {
+  background-image: url('/images/hero-background.svg');
+}
+
+/* Améliorations pour écrans haute résolution */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .dark-theme {
+    --border-width: 0.5px; /* Bordures plus fines sur écrans haute résolution */
+  }
+}
+
+/* Fallback pour navigateurs anciens sans support des variables CSS */
+.no-css-vars {
+  /* Fallbacks spécifiques */
+  background-color: #121212 !important;
+  color: #FFFFFF !important;
+}
