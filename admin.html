@@ -4,23 +4,58 @@
 <meta charset="utf-8">
 <title>SpotiDeals – Admin</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<style>
-  body{font-family:system-ui,sans-serif;margin:0;background:#f3f3f3}
-  main{max-width:820px;margin:2rem auto;padding:1.5rem;background:#fff;border-radius:12px}
-  h1{margin-top:0}
-  table{width:100%;border-collapse:collapse;margin-top:1rem}
-  th,td{padding:.6rem;border-bottom:1px solid #ddd;text-align:left;font-size:.95rem}
-  select{padding:.3rem}
-</style>
+  <!-- Global and Dark Theme Styles -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/dark-theme.css">
+  <link rel="stylesheet" href="css/design-system.css">
+  <style>
+    body { background: var(--secondary); color: var(--text-light); margin: 0; font-family: var(--font-main); }
+    header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; background: var(--secondary); }
+    header a { color: var(--text-light); margin-left: 1rem; text-decoration: none; font-weight: 500; transition: var(--transition); }
+    header a:hover { color: var(--primary); }
+    .card { background: var(--card); padding: 1.5rem; border-radius: var(--radius-lg); max-width: 900px; margin: 2rem auto; box-shadow: var(--shadow-lg); }
+    table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    th, td { padding: .75rem; border-bottom: 1px solid var(--gray-light); text-align: left; font-size: .95rem; }
+    select { padding: .4rem; background: var(--card); color: var(--text-light); border: 1px solid var(--gray); border-radius: var(--radius-sm); }
+    /* Admin header and controls */
+    .admin-header { display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; background: var(--card); }
+    .admin-controls input,
+    .admin-controls select,
+    .admin-controls button { margin-left: 0.5rem; padding: 0.5rem 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--gray); background: var(--secondary); color: var(--text-light); }
+  </style>
 </head>
 <body>
-<main id="app" hidden>
-  <h1>Suivi des commandes</h1>
-  <table>
-    <thead><tr><th>ID</th><th>Date</th><th>Statut</th></tr></thead>
-    <tbody id="tbody"></tbody>
-  </table>
-</main>
+  <!-- Header/navigation -->
+  <header>
+    <div class="branding">
+      <img src="images/logo.svg" alt="Logo SD" height="40">
+      <span>SD Admin</span>
+    </div>
+    <nav>
+      <a href="index.html">Accueil</a>
+    </nav>
+  </header>
+  <main id="app" class="fade-in" hidden>
+    <header class="admin-header">
+      <h1>Suivi des commandes</h1>
+      <div class="admin-controls">
+        <input type="text" id="searchInput" placeholder="Rechercher par ID...">
+        <select id="statusFilter">
+          <option value="">Tous les statuts</option>
+          <option value="En cours">En cours</option>
+          <option value="Livré">Livré</option>
+          <option value="Remboursé">Remboursé</option>
+        </select>
+        <button id="exportCsv">Exporter CSV</button>
+      </div>
+    </header>
+    <table>
+      <thead>
+        <tr><th>ID</th><th>Date</th><th>Statut</th><th>Actions</th></tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </main>
 
 <script>
   const PASSWORD = "1C1GCEA_enCA1146CA1146&oq=&gs_lcrp=EgZjaHJvbWUqEQgDEAAYAxhCGI8BGLQCGOoCMgkIABAjGCcY6gIyCQgBECMYJxjqAjIJCAIQIxgnGOoCMhEIAxAAGAMYQhiPARi0AhjqAjIRCAQQABgDGEIYjwEYtAIY6gIyEQg";
@@ -48,6 +83,46 @@
     alert("Accès refusé.");
     location.href="/";
   }
+  
+  // --- Search, Filter and Export CSV ---
+  document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('searchInput');
+    const statusFilter = document.getElementById('statusFilter');
+    const exportBtn = document.getElementById('exportCsv');
+    const tbody = document.getElementById('tbody');
+
+    function applyFilters() {
+      const query = searchInput.value.trim().toLowerCase();
+      const statusVal = statusFilter.value;
+      [...tbody.querySelectorAll('tr')].forEach(row => {
+        const id = row.cells[0].textContent.toLowerCase();
+        const sel = row.cells[2].querySelector('select');
+        const status = sel ? sel.value : '';
+        const matchId = !query || id.includes(query);
+        const matchStatus = !statusVal || status === statusVal;
+        row.style.display = (matchId && matchStatus) ? '' : 'none';
+      });
+    }
+
+    searchInput.addEventListener('input', applyFilters);
+    statusFilter.addEventListener('change', applyFilters);
+
+    exportBtn.addEventListener('click', () => {
+      let csv = 'ID,Date,Statut\n';
+      Object.keys(localStorage).filter(k => k.startsWith('SD-')).forEach(key => {
+        const obj = JSON.parse(localStorage.getItem(key));
+        csv += `${key},${obj.date},${obj.status}\n`;
+      });
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'orders.csv';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    });
+  });
 </script>
 </body>
 </html>

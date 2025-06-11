@@ -65,7 +65,14 @@
     <div class="process-container">
       <!-- Image du processus animée -->
       <div class="process-visual animate-on-scroll fade-in">
-        <img src="/images/process-steps.svg" alt="Étapes du processus" class="process-image">
+        <!-- Process steps image high quality -->
+        <picture>
+          <source type="image/webp"
+            srcset="images/webp/process-steps.webp 1x, images/webp/process-steps.webp 2x">
+          <img src="images/process-steps.svg"
+            alt="Étapes du processus" class="process-image"
+            loading="lazy" decoding="async">
+        </picture>
       </div>
       
       <!-- Étapes détaillées interactives -->

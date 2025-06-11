@@ -57,7 +57,11 @@
       <!-- Bandeau paiements acceptés -->
       <div class="payment-methods-container animate-on-scroll fade-in" data-delay="0.4s">
         <p class="text-center">Paiements sécurisés acceptés :</p>
-        <img src="/images/payment-methods.svg" alt="Méthodes de paiement acceptées" class="payment-methods-img">
+        <picture>
+          <source type="image/webp"
+            srcset="images/webp/payment-methods.webp 1x, images/webp/payment-methods.webp 2x">
+          <img src="images/payment-methods.svg" alt="Méthodes de paiement acceptées" class="payment-methods-img" loading="lazy" decoding="async">
+        </picture>
       </div>
     </div>
   </div>

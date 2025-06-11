@@ -4,54 +4,246 @@
   <meta charset="utf-8">
   <title>SpotiDeals – Abonnement Spotify 12 mois à 82,62 $</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="icon" href="sd-logo.webp" type="image/webp">
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+  <link rel="icon" type="image/webp" sizes="32x32" href="favicon/favicon-32x32.webp">
+  <!-- Core styles -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/hero-parallax.css">
+  <link rel="stylesheet" href="css/mobile-optimizations.css">
+  <!-- Parallax Hero Script -->
+  <script src="js/hero-parallax.js" defer></script>
+  <script src="js/import-sections.js" defer></script>
+  <link rel="stylesheet" href="css/price-section.css">
+  <link rel="stylesheet" href="css/process-section.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/design-system.css">
+  <!-- Deferred scripts -->
+  <script src="js/background-effects.js" defer></script>
+  <script src="js/mobile-optimizations.js" defer></script>
+  <script src="js/form-validation.js" defer></script>
+  <script src="script.js" defer></script>
   <style>
-    :root { --green:#16a34a; --dark:#08391f; --light:#e8f7ec; }
-    body{margin:0;font-family:system-ui,-apple-system,sans-serif;background:var(--light);}
-    header{display:flex;align-items:center;padding:1rem 2rem;background:var(--dark);color:#fff}
+    :root {
+      --accent: #1db954;
+      --bg: #121212;
+      --card: #1e1e1e;
+      --text: #e0e0e0;
+      --subtext: #b3b3b3;
+    }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: var(--card);
+      color: var(--text);
+    }
     header img{height:40px;margin-right:.75rem}
     h1{font-size:1.4rem;margin:0}
-    main{max-width:840px;margin:2rem auto;padding:1.5rem;background:#fff;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.07)}
+    main {
+      max-width: 840px;
+      margin: 2rem auto;
+      padding: 1.5rem;
+      background: var(--card);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
     section{margin-bottom:2rem}
-    .alert{background:#fff7d4;border-left:4px solid var(--green);padding:1rem 1.25rem;border-radius:8px}
+    .alert {
+      background: #2a2a2a;
+      border-left: 4px solid var(--accent);
+      padding: 1rem 1.25rem;
+      border-radius: 8px;
+      color: var(--text);
+    }
     .alert h2{margin:.25rem 0 .75rem;font-size:1.1rem}
-    label{display:block;margin:.75rem 0 .25rem;font-weight:600}
-    input[type=text],input[type=email],input[type=password]{width:100%;padding:.6rem;border:1px solid #bbb;border-radius:6px;font-size:1rem}
+    label {
+      display: block;
+      margin: .75rem 0 .25rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    input[type=text],
+    input[type=email],
+    input[type=password] {
+      width: 100%;
+      padding: .6rem;
+      border: 1px solid #555;
+      border-radius: 6px;
+      font-size: 1rem;
+      background: #333;
+      color: var(--text);
+    }
     .checks>label{font-weight:400;display:flex;gap:.5rem;align-items:flex-start}
-    .price-card{background:var(--green);color:#fff;padding:1.25rem;border-radius:12px;text-align:center;font-size:1.2rem}
+    .price-card {
+      background: var(--accent);
+      color: #fff;
+      padding: 1.25rem;
+      border-radius: 12px;
+      text-align: center;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
     .price-card span{font-size:2rem;font-weight:700;display:block}
     #paypal-button-container{margin:1.5rem 0}
     button[type=submit]{background:var(--green);color:#fff;border:none;padding:.75rem 1rem;font-size:1rem;border-radius:6px;cursor:pointer}
     footer{text-align:center;font-size:.9rem;color:#555;margin:2rem 0}
+    /* style for info-card */
+    .info-card {
+      background: var(--card);
+      padding: 1rem 1.25rem;
+      border-radius: 8px;
+      margin: 1.5rem 0;
+      color: var(--text);
+    }
     @media (max-width:600px){
       header{flex-direction:column;align-items:flex-start;padding:1rem}
       main{padding:.7rem}
     }
+    /* Comparison section */
+    .comparison-section {
+      background: var(--card);
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+    }
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    .comparison-item {
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: center;
+      background: #2a2a2a;
+    }
+    .comparison-item.highlight {
+      border: 2px solid var(--accent);
+    }
+    .comparison-item .old-price {
+      text-decoration: line-through;
+      color: var(--subtext);
+    }
+    .comparison-item .new-price {
+      font-size: 2rem;
+      color: var(--accent);
+    }
+    @media (max-width:600px) {
+      .comparison-grid { grid-template-columns: 1fr; }
+    }
+    /* animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in {
+      opacity: 0;
+      animation: fadeIn 0.6s ease-out forwards;
+      animation-delay: 0.2s;
+    }
+    /* reveal on scroll */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* logo animation */
+    .logo {
+      animation: bounce 2s ease infinite;
+    }
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-10px); }
+      60% { transform: translateY(-5px); }
+    }
+    /* navigation links */
+    nav a {
+      margin-left: 1rem;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    nav a:hover {
+      color: var(--accent);
+    }
   </style>
 </head>
 <body>
-<header>
-  <img src="sd-logo.webp" alt="Logo SpotiDeals" height="40">
-  <h1>SpotiDeals – Service d’activation Spotify 12 mois</h1>
-</header>
+<header role="banner">
+    <div class="branding">
+      <a href="index.html" aria-label="Accueil">
+        <picture>
+          <source type="image/webp" srcset="images/webp/logo.webp">
+          <img src="images/logo.svg" alt="Logo SD" height="60" class="logo" loading="lazy" decoding="async">
+        </picture>
+      </a>
+      <h1>SD – Abonnement Spotify 12 mois</h1>
+    </div>
+    <nav role="navigation" aria-label="Menu principal">
+      <a href="index.html">Accueil</a>
+      <!-- accès Admin uniquement via lien direct /admin.html, non affiché ici -->
+    </nav>
+  </header>
+  <!-- Hero Parallax Section -->
+  <section id="hero" class="parallax-container hero-enhanced">
+    <div class="parallax-layer layer-back"></div>
+    <div class="parallax-layer layer-mid"></div>
+    <div class="parallax-layer layer-front"></div>
+    <div class="hero-content-enhanced">
+      <h2 class="premium-text">Spotify Premium à petit prix</h2>
+      <p>12 mois d’abonnement pour <strong>82,62 $ CAD</strong> au lieu de <s>175,12 $</s>.</p>
+      <a href="#orderForm" class="btn btn-cta btn-wave">Commander maintenant</a>
+    </div>
+    <div class="scroll-indicator" aria-label="Descendez pour découvrir">
+      <i class="fas fa-chevron-down"></i>
+      <span>Découvrez</span>
+    </div>
+  </section>
+  <!-- Dynamic Process Section Placeholder -->
+  <div id="process-section"></div>
+  <!-- Dynamic Comparatif Section Placeholder -->
+  <div id="comparatif-section"></div>
+  <!-- [Removed duplicate basic Hero Section; using Parallax Hero instead] -->
 
-<main>
-  <section class="alert">
-    <h2>Important — Sécurité du compte</h2>
+<main role="main">
+  <section class="alert fade-in reveal" aria-labelledby="security-title">
+    <h2 id="security-title">Important — Sécurité du compte</h2>
     <ul>
-      <li>Changez votre mot de passe Spotify AVANT de commander.</li>
-      <li>Utilisez un mot de passe <strong>temporaire</strong> que vous changerez après l’activation.</li>
+      <li>Changez votre mot de passe Spotify avant de commencer la commande.</li>
+      <li>Utilisez un mot de passe temporaire que vous pourrez changer après l’activation.</li>
       <li>Ne partagez jamais votre mot de passe habituel.</li>
     </ul>
   </section>
 
-  <section class="price-card">
-    <p>Forfait individuel <strong>12 mois prépayés</strong></p>
-    <span>82,62 $ CAD</span>
-    <p><s>175,12 $</s> tout frais inclus</p>
+  <!-- Dynamic Price Section Placeholder -->
+  <div id="price-section"></div>
+  <!-- Conditions et garanties -->
+  <section class="info-card fade-in reveal">
+    <h2>Conditions et garanties</h2>
+    <ul>
+      <li>La transaction peut prendre <strong>48 à 72 heures ouvrables</strong>.</li>
+      <li>Remboursement complet si la commande n’est pas livrée <strong>dans les 30 jours</strong>.</li>
+      <li>Aucun remboursement si l’activation est réalisée avec succès.</li>
+      <li>Aucune donnée client conservée après exécution de la commande.</li>
+      <li>Nous ne sommes pas responsables des décisions de Spotify : nous fournissons uniquement un service.</li>
+    </ul>
   </section>
 
-  <section class="checks">
+  <section class="checks fade-in reveal">
     <h2>Avant de poursuivre, veuillez confirmer :</h2>
     <label><input type="checkbox" required> Je comprends que vous vous connecterez temporairement à mon compte pour l’activation.</label>
     <label><input type="checkbox" required> Je comprends que toutes mes informations seront supprimées après l’activation.</label>
@@ -59,27 +251,58 @@
     <label><input type="checkbox" required> Je comprends que vous n’êtes pas responsable des décisions de Spotify concernant mon compte.</label>
     <label><input type="checkbox" required> Mon abonnement ne doit pas être actif au moment de l’achat.</label>
     <label><input type="checkbox" required> Je comprends qu’il n’y aura pas de remboursement si l’activation est réalisée.</label>
+    <label><input type="checkbox" required> Je comprends que je pourrai poursuivre mon abonnement sans utiliser de VPN.</label>
   </section>
 
-  <div id="paypal-button-container"></div>
+  <div id="paypal-button-container" class="fade-in reveal"></div>
 
-  <form id="orderForm" action="https://formspree.io/f/xanorewp" method="POST" hidden>
+  <form id="orderForm" action="https://formspree.io/f/xanorewp" method="POST" hidden class="fade-in reveal" aria-labelledby="orderform-title">
     <input type="hidden" name="orderId" id="orderId">
-    <label>Email pour le suivi</label>
-    <input type="email" name="email" required>
-    <label>Nom d’utilisateur / Email Spotify</label>
-    <input type="text" name="spotifyUser" required>
-    <label>Mot de passe temporaire Spotify</label>
-    <input type="password" name="tempPass" required>
+    <h2 id="orderform-title" class="sr-only">Formulaire de finalisation de commande</h2>
+    <label for="email">Email pour le suivi</label>
+    <input id="email" type="email" name="email" required aria-required="true">
+    <label for="spotifyUser">Nom d’utilisateur / Email Spotify</label>
+    <input id="spotifyUser" type="text" name="spotifyUser" required aria-required="true">
+    <label for="tempPass">Mot de passe temporaire Spotify</label>
+    <input id="tempPass" type="password" name="tempPass" required aria-required="true">
     <button type="submit">Envoyer la commande</button>
   </form>
 
-  <p id="confirmation" hidden>✅ Votre paiement a été reçu. Merci ! Complétez maintenant le formulaire ci‑dessus pour finaliser l’activation.</p>
+  <p id="confirmation" hidden class="fade-in reveal">✅ Votre paiement a été reçu. Merci ! Complétez maintenant le formulaire ci-dessus pour finaliser l’activation.</p>
+  <div id="order-id-display" hidden class="fade-in reveal">Votre numéro de commande : <span id="order-id-span"></span></div>
+  <!-- Comparison Section -->
+  <section id="comparison" class="comparison-section reveal">
+    <h2>Comparatif</h2>
+    <div class="comparison-grid">
+      <div class="comparison-item">
+        <h3>Prix Public</h3>
+        <p class="old-price">175,12 $ CAD</p>
+        <p class="new-price">175,12 $</p>
+      </div>
+      <div class="comparison-item highlight">
+        <h3>Notre Offre</h3>
+        <p class="old-price">175,12 $ CAD</p>
+        <p class="new-price">82,62 $ CAD</p>
+      </div>
+    </div>
+  </section>
 </main>
+  <!-- script reveal on scroll -->
+  <script>
+    function handleReveal() {
+      document.querySelectorAll('.reveal').forEach(el => {
+        const top = el.getBoundingClientRect().top;
+        if (top < window.innerHeight - 50) el.classList.add('show');
+      });
+    }
+    window.addEventListener('scroll', handleReveal);
+    window.addEventListener('DOMContentLoaded', handleReveal);
+  </script>
 
 <footer>
-  Copyright © 2025 SpotiDeals — contact : <a href="mailto:spotideals.github.io@gmail.com">spotideals.github.io@gmail.com</a><br>
-  SpotiDeals fournit uniquement un <em>service d’intermédiation d’achat</em>. Nous ne revendons pas Spotify et ne sommes pas affiliés à Spotify AB.
+  <p>Copyright © 2025 SD — contact : <a href="mailto:spotideals.github.io@gmail.com">spotideals.github.io@gmail.com</a></p>
+  <p><em>SD fournit uniquement un service d’intermédiation d’achat. Nous ne revendons pas Spotify et ne sommes pas affiliés à Spotify AB.</em></p>
+  <p><a href="privacy.html">Politique de confidentialité</a> | <a href="terms.html">Conditions générales de vente</a></p>
 </footer>
 
 <script src="https://www.paypal.com/sdk/js?client-id=AW-bLBrtEPaB0FTD-Oa4rQ1gbQBNLkkqsAtGh968nfbb-HA_ih-Cptg_1UzbE9GYagkCPtHFEUosfm&currency=CAD"></script>
@@ -96,11 +319,17 @@
     }),
     onApprove: (data, actions) => actions.order.capture().then(function(){
       const id = makeId();
-      localStorage.setItem(id, JSON.stringify({status:'En cours', date:new Date().toISOString()}));
+      // initial store minimal order
+      localStorage.setItem(id, JSON.stringify({date: new Date().toISOString(), status: 'En cours'}));
+      // populate order form and display confirmation
       document.getElementById('orderId').value = id;
-      document.getElementById('orderForm').hidden = false;
+      document.getElementById('order-id-span').textContent = id;
+      document.getElementById('order-id-display').hidden = false;
+      document.getElementById('order-id-display').classList.add('pulse');
       document.getElementById('confirmation').hidden = false;
-      window.scrollTo({top: document.getElementById('orderForm').offsetTop-20, behavior:'smooth'});
+      document.getElementById('orderForm').hidden = false;
+      // scroll to form
+      window.scrollTo({ top: document.getElementById('orderForm').offsetTop - 20, behavior: 'smooth' });
     })
   }).render('#paypal-button-container');
 </script>

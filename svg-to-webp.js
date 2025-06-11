@@ -25,7 +25,8 @@ async function convertFiles() {
       console.log(`Converting ${file} to WebP...`);
       
       await sharp(inputPath)
-        .webp({ quality: 90 })
+        // augmenter la qualité WebP pour une meilleure netteté
+        .webp({ quality: 95, effort: 6 })
         .toFile(outputPath);
         
       console.log(`Successfully converted ${file} to ${file.replace('.svg', '.webp')}`);
