@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>SpotiDeals - Test des assets</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .asset-test {
+      margin-bottom: 30px;
+      border: 1px solid #eee;
+      padding: 15px;
+    }
+    h2 {
+      margin-top: 0;
+    }
+    img {
+      max-width: 100px;
+      display: block;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Test des assets SpotiDeals</h1>
+  
+  <div class="asset-test">
+    <h2>1. Test image avatar SVG</h2>
+    <img src="/images/avatar-1.svg" alt="Avatar 1 SVG">
+    <p>Status: <span id="status1">Chargement...</span></p>
+  </div>
+  
+  <div class="asset-test">
+    <h2>2. Test image avatar WebP</h2>
+    <img src="/images/webp/avatar-1.webp" alt="Avatar 1 WebP">
+    <p>Status: <span id="status2">Chargement...</span></p>
+  </div>
+  
+  <div class="asset-test">
+    <h2>3. Test image background SVG</h2>
+    <img src="/images/hero-background.svg" alt="Hero Background">
+    <p>Status: <span id="status3">Chargement...</span></p>
+  </div>
+  
+  <div class="asset-test">
+    <h2>4. Test image background WebP</h2>
+    <img src="/images/webp/hero-background.webp" alt="Hero Background WebP">
+    <p>Status: <span id="status4">Chargement...</span></p>
+  </div>
+  
+  <div class="asset-test">
+    <h2>5. Test CSS Dark Theme</h2>
+    <div id="dark-theme-test" style="width: 100px; height: 100px; background-color: var(--dark-bg, #fff);">
+    </div>
+    <p>Status: <span id="status5">Vérification...</span></p>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Test images
+      const images = document.querySelectorAll('img');
+      images.forEach((img, index) => {
+        img.onload = function() {
+          document.getElementById('status' + (index + 1)).textContent = "Chargé avec succès";
+          document.getElementById('status' + (index + 1)).style.color = "green";
+        };
+        img.onerror = function() {
+          document.getElementById('status' + (index + 1)).textContent = "Erreur de chargement";
+          document.getElementById('status' + (index + 1)).style.color = "red";
+        };
+      });
+      
+      // Test CSS
+      setTimeout(function() {
+        const darkBgColor = getComputedStyle(document.getElementById('dark-theme-test')).backgroundColor;
+        if (darkBgColor !== 'rgb(255, 255, 255)') {
+          document.getElementById('status5').textContent = "CSS chargé avec succès";
+          document.getElementById('status5').style.color = "green";
+        } else {
+          document.getElementById('status5').textContent = "CSS non chargé correctement";
+          document.getElementById('status5').style.color = "red";
+        }
+      }, 500);
+    });
+  </script>
+
+  <link rel="stylesheet" href="/css/dark-theme.css">
+</body>
+</html>
