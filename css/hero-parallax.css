@@ -25,10 +25,6 @@
 /* Specific layer depths */
 .layer-back {
   z-index: 1;
-  /* Hero background image */
-  background-image: url('../images/webp/hero-background.webp');
-  background-size: cover;
-  background-position: center;
 }
 
 .layer-mid {
