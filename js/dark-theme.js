@@ -7,11 +7,18 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Logging pour le débogage
+    console.log('Dark theme script loaded');
+    
+    // Tester le chargement des assets
+    testAssetLoading();
+    
     // Initialiser les fonctionnalités du thème
     initDarkTheme();
     
     // Si le thème sombre est actif, appliquer les effets spécifiques au thème sombre
     if (document.documentElement.classList.contains('dark-theme')) {
+        console.log('Dark theme active - applying effects');
         // Ajouter des effets de survol de style Spotify
         initSpotifyHoverEffects();
         
@@ -33,6 +40,37 @@ document.addEventListener('DOMContentLoaded', () => {
     // Toujours initialiser le sélecteur de thème pour permettre le changement
     initThemeToggle();
 });
+
+/**
+ * Teste le chargement des assets principaux pour identifier les problèmes
+ */
+function testAssetLoading() {
+    console.log('Testing asset loading');
+    
+    // Vérifier les images d'avatars
+    const testImages = [
+        '/images/avatar-1.svg',
+        '/images/avatar-1.webp',
+        '/images/webp/avatar-1.webp',
+        '/images/hero-background.svg',
+        '/images/webp/hero-background.webp'
+    ];
+    
+    testImages.forEach(src => {
+        const img = new Image();
+        img.onload = () => console.log(`Asset loaded successfully: ${src}`);
+        img.onerror = () => console.error(`Failed to load asset: ${src}`);
+        img.src = src;
+    });
+    
+    // Vérifier si les styles sont appliqués correctement
+    setTimeout(() => {
+        if (document.documentElement.classList.contains('dark-theme')) {
+            const computedStyle = getComputedStyle(document.body);
+            console.log('Body background color:', computedStyle.backgroundColor);
+        }
+    }, 500);
+}
 
 /**
  * Initialise les fonctionnalités du thème sombre
