@@ -15,6 +15,7 @@
   --shadow-color: rgba(0, 0, 0, 0.4);
   --sd-accent: #22ff9e;
   --sd-accent-strong: #22ff9e;
+  --accent-secondary: #24e38c;
 
   /* Base Variables */
   --transition: var(--transition-base) var(--ease-in-out);
@@ -102,6 +103,33 @@ section {
   overflow: hidden;
   color: var(--color-text-main);
 }
+
+/* Halo glow */
+.hero::after{
+  content:'';
+  position:absolute;
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  width:800px;height:800px;
+  background:radial-gradient(circle, var(--sd-accent) 0%, rgba(29,185,84,0.15) 60%, transparent 80%);
+  filter:blur(120px);
+  opacity:0.7;
+  pointer-events:none;
+  animation:haloPulse 8s ease-in-out infinite;
+  z-index:0;
+}
+@keyframes haloPulse{
+  0%,100%{transform:translate(-50%,-50%) scale(1);} 
+  50%{transform:translate(-50%,-50%) scale(1.15);opacity:0.9;}
+}
+.hero>*{position:relative;z-index:1}
+
+/* Accent text + hover with secondary color */
+.accent{color:var(--sd-accent);transition:color .3s ease}
+.accent:hover{color:var(--accent-secondary)}
+
+/* Buttons accent hover */
+.btn:hover{background:var(--accent-secondary)}
+
 /* Responsive Breakpoints */
 @media (max-width: 600px) {
   /* Mobile: single column layout */
@@ -947,4 +975,40 @@ button:focus-visible, .btn:focus-visible {
 .footer__link:focus-visible {
   color: var(--sd-color-accent);
   text-decoration: underline;
+}
+
+/* --- Étapes Section --- */
+.steps-section {
+  padding: var(--section-gap) 0;
+}
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+.step-item {
+  background: var(--card-bg-alt, var(--color-bg-800));
+  border-radius: var(--radius-lg, 12px);
+  padding: 1.5rem;
+  text-align: center;
+  transition: transform var(--transition, 0.3s ease);
+}
+.step-item:hover {
+  transform: translateY(-6px);
+}
+.step-icon svg {
+  width: 48px;
+  height: 48px;
+  stroke: var(--sd-accent, #1db954);
+  stroke-width: 1.5;
+  margin-bottom: .75rem;
+}
+.step-item h3 {
+  margin: .5rem 0 .25rem;
+  font-size: 1.15rem;
+  color: var(--color-text-main, #fff);
+}
+.step-item p {
+  font-size: .9rem;
+  color: var(--color-text-secondary, #ccc);
 } 

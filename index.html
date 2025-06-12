@@ -8,17 +8,20 @@
   <!-- Favicons & Preconnect -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap">
   <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
   <link rel="icon" type="image/webp" sizes="32x32" href="favicon/favicon-32x32.webp">
+  <!-- Google Font Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <!-- Bundle & minified CSS -->
   <link rel="stylesheet" href="css/style.min.css">
-  <!-- Preload critical images -->
-  <link rel="preload" as="image" href="images/webp/hero-background.webp" type="image/webp">
-  <!-- Bundle & minified JS -->
-  <script src="js/main.min.js" defer></script>
+  <!-- Development / extended styles -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/testimonials-section.css">
+  <!-- Design+ overrides -->
   <style>
     :root {
       --accent: #1db954;
@@ -26,10 +29,13 @@
       --card: #1e1e1e;
       --text: #e0e0e0;
       --subtext: #b3b3b3;
+      --halo-y:0px;
+      --parallax:0px;
+      --accent-secondary:#24e38c;
     }
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, sans-serif;
+      font-family: 'Poppins', system-ui, -apple-system, sans-serif;
       background: var(--bg);
       color: var(--text);
     }
@@ -174,7 +180,29 @@
     nav a:hover {
       color: var(--accent);
     }
+    /* Hero halo parallax */
+    .hero::after{transform:translate(-50%,calc(-30% + var(--halo-y))) scale(1.15);transition:transform .1s linear;}
+    /* Steps section glow */
+    .steps-section{position:relative;z-index:1}
+    .steps-section::before{content:'';position:absolute;top:-200px;left:50%;width:600px;height:600px;transform:translateX(-50%);background:radial-gradient(circle,var(--accent) 0%,transparent 70%);filter:blur(120px);mix-blend-mode:screen;pointer-events:none;z-index:0}
+    /* Icon parallax */
+    .step-item span{display:inline-block;transform:translateY(calc(var(--parallax)*-1px));transition:transform .1s linear}
+    /* Accent hover */
+    .accent{color:var(--accent);padding:0 2px;transition:color .3s}
+    .accent:hover{color:var(--accent-secondary)}
+    .btn:hover{background:var(--accent-secondary)}
   </style>
+  <!-- OpenGraph -->
+  <meta property="og:title" content="Spotify Premium 12 mois à 82,62 $ CAD – Spotideals">
+  <meta property="og:description" content="Payez une seule fois, économisez 47 % et profitez de Spotify Premium pendant un an.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://spotideals.github.io/">
+  <meta property="og:image" content="https://spotideals.github.io/images/webp/logo.webp">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Spotify Premium 12 mois à 82,62 $ CAD – Spotideals">
+  <meta name="twitter:description" content="Économisez 47 % sur votre abonnement Spotify Premium annuel.">
+  <meta name="twitter:image" content="https://spotideals.github.io/images/webp/logo.webp">
 </head>
 <body>
 <header role="banner">
@@ -182,7 +210,7 @@
       <a href="index.html" aria-label="Accueil">
         <picture>
           <source type="image/webp" srcset="images/webp/logo.webp">
-          <img src="images/logo.svg" alt="Logo SD" height="60" class="logo" loading="lazy" decoding="async">
+          <img src="images/logo.svg" alt="Logo SD" height="60" class="logo" loading="lazy" decoding="async" fetchpriority="high">
         </picture>
       </a>
       <h1>SD – Abonnement Spotify 12 mois</h1>
@@ -198,17 +226,38 @@
     <div class="parallax-layer layer-mid"></div>
     <div class="parallax-layer layer-front"></div>
     <div class="hero-content-enhanced">
-      <h2 class="premium-text">Spotify Premium à petit prix</h2>
-      <p>12 mois d’abonnement pour <strong>82,62 $ CAD</strong> au lieu de <s>175,12 $</s>.</p>
-      <a href="#orderForm" class="btn btn-cta btn-wave">Commander maintenant</a>
+      <h2 class="premium-text" style="font-size:2.2rem;text-align:center">La même musique, <span class="accent">47 % moins cher</span></h2>
+      <p style="margin:.75rem 0 1.25rem;text-align:center">12 mois de Spotify Premium pour seulement <strong>82,62 $ CAD</strong>.</p>
+      <a href="#paypal-button-container" class="btn btn-cta btn-wave">Commander maintenant</a>
     </div>
     <div class="scroll-indicator" aria-label="Descendez pour découvrir">
       <i class="fas fa-chevron-down"></i>
       <span>Découvrez</span>
     </div>
   </section>
-  <!-- Dynamic Process Section Placeholder -->
-  <div id="process-section"></div>
+  <!-- Section Étapes -->
+  <section id="etapes" class="steps-section reveal">
+    <div class="container">
+      <h2 class="section-title">Comment ça marche</h2>
+      <div class="steps-grid">
+        <div class="step-item">
+          <div class="step-icon" data-feather="shopping-cart"></div>
+          <h3>Commander</h3>
+          <p>Réglez en toute sécurité via PayPal.</p>
+        </div>
+        <div class="step-item">
+          <div class="step-icon" data-feather="refresh-cw"></div>
+          <h3>Activation</h3>
+          <p>Nous activons votre abonnement (48–72 h).</p>
+        </div>
+        <div class="step-item">
+          <div class="step-icon" data-feather="headphones"></div>
+          <h3>Profiter</h3>
+          <p>Changez votre mot de passe et profitez !</p>
+        </div>
+      </div>
+    </div>
+  </section>
   <!-- Dynamic Comparatif Section Placeholder -->
   <div id="comparatif-section"></div>
   <!-- [Removed duplicate basic Hero Section; using Parallax Hero instead] -->
@@ -218,7 +267,7 @@
     <h2 id="security-title">Important — Sécurité du compte</h2>
     <ul>
       <li>Changez votre mot de passe Spotify avant de commencer la commande.</li>
-      <li>Utilisez un mot de passe temporaire que vous pourrez changer après l’activation.</li>
+      <li>Utilisez un mot de passe temporaire que vous pourrez changer après l'activation.</li>
       <li>Ne partagez jamais votre mot de passe habituel.</li>
     </ul>
   </section>
@@ -230,21 +279,21 @@
     <h2>Conditions et garanties</h2>
     <ul>
       <li>La transaction peut prendre <strong>48 à 72 heures ouvrables</strong>.</li>
-      <li>Remboursement complet si la commande n’est pas livrée <strong>dans les 30 jours</strong>.</li>
-      <li>Aucun remboursement si l’activation est réalisée avec succès.</li>
+      <li>Remboursement complet si la commande n'est pas livrée <strong>dans les 30 jours</strong>.</li>
+      <li>Aucun remboursement si l'activation est réalisée avec succès.</li>
       <li>Aucune donnée client conservée après exécution de la commande.</li>
       <li>Nous ne sommes pas responsables des décisions de Spotify : nous fournissons uniquement un service.</li>
     </ul>
   </section>
 
   <section class="checks fade-in reveal">
-    <h2>Avant de poursuivre, veuillez confirmer :</h2>
-    <label><input type="checkbox" required> Je comprends que vous vous connecterez temporairement à mon compte pour l’activation.</label>
-    <label><input type="checkbox" required> Je comprends que toutes mes informations seront supprimées après l’activation.</label>
-    <label><input type="checkbox" required> Je m’engage à changer mon mot de passe après l’activation.</label>
-    <label><input type="checkbox" required> Je comprends que vous n’êtes pas responsable des décisions de Spotify concernant mon compte.</label>
-    <label><input type="checkbox" required> Mon abonnement ne doit pas être actif au moment de l’achat.</label>
-    <label><input type="checkbox" required> Je comprends qu’il n’y aura pas de remboursement si l’activation est réalisée.</label>
+    <h2>Avant de poursuivre, veuillez confirmer :</h2>
+    <label><input type="checkbox" required> Je comprends que vous vous connecterez temporairement à mon compte pour l'activation.</label>
+    <label><input type="checkbox" required> Je comprends que toutes mes informations seront supprimées après l'activation.</label>
+    <label><input type="checkbox" required> Je m'engage à changer mon mot de passe après l'activation.</label>
+    <label><input type="checkbox" required> Je comprends que vous n'êtes pas responsable des décisions de Spotify concernant mon compte.</label>
+    <label><input type="checkbox" required> Mon abonnement ne doit pas être actif au moment de l'achat.</label>
+    <label><input type="checkbox" required> Je comprends qu'il n'y aura pas de remboursement si l'activation est réalisée.</label>
     <label><input type="checkbox" required> Je comprends que je pourrai poursuivre mon abonnement sans utiliser de VPN.</label>
   </section>
 
@@ -255,14 +304,14 @@
     <h2 id="orderform-title" class="sr-only">Formulaire de finalisation de commande</h2>
     <label for="email">Email pour le suivi</label>
     <input id="email" type="email" name="email" required aria-required="true">
-    <label for="spotifyUser">Nom d’utilisateur / Email Spotify</label>
+    <label for="spotifyUser">Nom d'utilisateur / Email Spotify</label>
     <input id="spotifyUser" type="text" name="spotifyUser" required aria-required="true">
     <label for="tempPass">Mot de passe temporaire Spotify</label>
     <input id="tempPass" type="password" name="tempPass" required aria-required="true">
     <button type="submit">Envoyer la commande</button>
   </form>
 
-  <p id="confirmation" hidden class="fade-in reveal">✅ Votre paiement a été reçu. Merci ! Complétez maintenant le formulaire ci-dessus pour finaliser l’activation.</p>
+  <p id="confirmation" hidden class="fade-in reveal">✅ Votre paiement a été reçu. Merci ! Complétez maintenant le formulaire ci-dessus pour finaliser l'activation.</p>
   <div id="order-id-display" hidden class="fade-in reveal">Votre numéro de commande : <span id="order-id-span"></span></div>
   <!-- Comparison Section -->
   <section id="comparison" class="comparison-section reveal">
@@ -277,6 +326,47 @@
         <h3>Notre Offre</h3>
         <p class="old-price">175,12 $ CAD</p>
         <p class="new-price">82,62 $ CAD</p>
+      </div>
+    </div>
+  </section>
+  <!-- Témoignages -->
+  <section id="temoignages" class="reveal" style="padding:4rem 0">
+    <div class="container">
+      <h2 class="section-title">Ils nous font confiance</h2>
+      <div class="testimonial-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-content"><p>"Service ultra-rapide et sérieux ! Je recommande."</p></div>
+          <div class="testimonial-author">
+            <picture><img src="images/avatar-1.webp" alt="Avatar Julie" class="testimonial-avatar" width="64" height="64" loading="lazy"></picture>
+            <p><strong>Julie P.</strong></p>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-content"><p>"J'ai économisé plus de 90 $ sans le moindre souci."</p></div>
+          <div class="testimonial-author">
+            <picture><img src="images/avatar-2.webp" alt="Avatar Marc" class="testimonial-avatar" width="64" height="64" loading="lazy"></picture>
+            <p><strong>Marc L.</strong></p>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-content"><p>"Activation en 2 jours : parfait !"</p></div>
+          <div class="testimonial-author">
+            <picture><img src="images/avatar-3.webp" alt="Avatar Sarah" class="testimonial-avatar" width="64" height="64" loading="lazy"></picture>
+            <p><strong>Sarah K.</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Accordéon -->
+  <section id="faq" class="faq reveal" style="padding:4rem 0">
+    <div class="container">
+      <h2 class="section-title">FAQ</h2>
+      <div class="faq-accordion">
+        <details class="faq-item"><summary>Est-ce légal&nbsp;?</summary><p>Oui : nous achetons un abonnement prépayé dans une zone géographique à tarif réduit. Le service d'intermédiation est légal.</p></details>
+        <details class="faq-item"><summary>Dois-je utiliser un VPN&nbsp;?</summary><p>Non : aucun VPN n'est requis après l'activation.</p></details>
+        <details class="faq-item"><summary>Quel est le délai d'activation&nbsp;?</summary><p>48 à 72 heures ouvrables.</p></details>
       </div>
     </div>
   </section>
@@ -295,7 +385,7 @@
 
 <footer>
   <p>Copyright © 2025 SD — contact : <a href="mailto:spotideals.github.io@gmail.com">spotideals.github.io@gmail.com</a></p>
-  <p><em>SD fournit uniquement un service d’intermédiation d’achat. Nous ne revendons pas Spotify et ne sommes pas affiliés à Spotify AB.</em></p>
+  <p><em>SD fournit uniquement un service d'intermédiation d'achat. Nous ne revendons pas Spotify et ne sommes pas affiliés à Spotify AB.</em></p>
   <p><a href="privacy.html">Politique de confidentialité</a> | <a href="terms.html">Conditions générales de vente</a></p>
 </footer>
 
@@ -326,6 +416,44 @@
       window.scrollTo({ top: document.getElementById('orderForm').offsetTop - 20, behavior: 'smooth' });
     })
   }).render('#paypal-button-container');
+</script>
+<!-- Feather Icons -->
+<script src="https://unpkg.com/feather-icons" defer></script>
+<script defer>document.addEventListener('DOMContentLoaded',()=>{if(window.feather){feather.replace();}});</script>
+<!-- Parallax extended script -->
+<script defer>
+  (function(){
+    const root=document.documentElement;
+    function update(){
+      const haloSpeed=0.25, paraSpeed=0.15, maxY=600;
+      const y=Math.min(window.scrollY*haloSpeed,maxY);
+      root.style.setProperty('--halo-y',y+'px');
+      root.style.setProperty('--parallax',(window.scrollY*paraSpeed).toFixed(2));
+    }
+    update();
+    window.addEventListener('scroll',update,{passive:true});
+  })();
+</script>
+<!-- Schema.org Product -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Abonnement Spotify Premium 12 mois",
+  "description": "Service d'activation d'un abonnement Spotify Premium annuel prépayé.",
+  "image": "https://spotideals.github.io/images/webp/logo.webp",
+  "brand": {
+    "@type": "Brand",
+    "name": "Spotideals"
+  },
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "CAD",
+    "price": "82.62",
+    "availability": "https://schema.org/InStock",
+    "url": "https://spotideals.github.io/"
+  }
+}
 </script>
 </body>
 </html>

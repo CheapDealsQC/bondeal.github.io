@@ -1,128 +1,74 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="utf-8">
-<title>SpotiDeals – Admin</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-  <!-- Global and Dark Theme Styles -->
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/dark-theme.css">
-  <link rel="stylesheet" href="css/design-system.css">
+  <meta charset="utf-8">
+  <title>Admin – Spotideals</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
   <style>
-    body { background: var(--secondary); color: var(--text-light); margin: 0; font-family: var(--font-main); }
-    header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; background: var(--secondary); }
-    header a { color: var(--text-light); margin-left: 1rem; text-decoration: none; font-weight: 500; transition: var(--transition); }
-    header a:hover { color: var(--primary); }
-    .card { background: var(--card); padding: 1.5rem; border-radius: var(--radius-lg); max-width: 900px; margin: 2rem auto; box-shadow: var(--shadow-lg); }
-    table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
-    th, td { padding: .75rem; border-bottom: 1px solid var(--gray-light); text-align: left; font-size: .95rem; }
-    select { padding: .4rem; background: var(--card); color: var(--text-light); border: 1px solid var(--gray); border-radius: var(--radius-sm); }
-    /* Admin header and controls */
-    .admin-header { display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; background: var(--card); }
-    .admin-controls input,
-    .admin-controls select,
-    .admin-controls button { margin-left: 0.5rem; padding: 0.5rem 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--gray); background: var(--secondary); color: var(--text-light); }
+    body{background:#0f2027;color:#e0e0e0;font-family:'Poppins',sans-serif;padding:2rem}
+    h1{font-size:1.5rem;margin-bottom:1.5rem;text-align:center}
+    .card{background:#142b33;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.4);padding:2rem;max-width:420px;margin:0 auto}
+    label{display:block;margin:0.75rem 0 0.25rem;font-weight:600}
+    input[type=text],input[type=password]{width:100%;padding:.6rem;border:1px solid #555;border-radius:6px;background:#19353f;color:#fff}
+    button{margin-top:1rem;width:100%;padding:.7rem;border:none;border-radius:6px;background:#1db954;color:#fff;font-weight:600;cursor:pointer}
+    #dashboard{display:none;max-width:1200px;margin:0 auto}
+    table{width:100%;border-collapse:collapse;margin-top:1rem}
+    th,td{padding:.5rem .75rem;border-bottom:1px solid rgba(255,255,255,.1);text-align:left}
+    th{background:#19353f}
+    tr:hover{background:#1a2d38}
+    .status-badge{padding:.25rem .5rem;border-radius:4px;font-size:.75rem}
+    .En\ cours{background:#ffb74d;color:#000}
+    .Livré{background:#43a047}
+    .Remboursé{background:#e53935}
+    .actions button{margin-right:.25rem;font-size:.8rem;padding:.4rem .6rem}
+    .top-bar{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+    .top-bar button{width:auto}
+    select{padding:.4rem .6rem;border-radius:6px;background:#19353f;color:#fff;border:1px solid #555}
   </style>
 </head>
 <body>
-  <!-- Header/navigation -->
-  <header>
-    <div class="branding">
-      <img src="images/logo.svg" alt="Logo SD" height="40">
-      <span>SD Admin</span>
-    </div>
-    <nav>
-      <a href="index.html">Accueil</a>
-    </nav>
-  </header>
-  <main id="app" class="fade-in" hidden>
-    <header class="admin-header">
-      <h1>Suivi des commandes</h1>
-      <div class="admin-controls">
-        <input type="text" id="searchInput" placeholder="Rechercher par ID...">
-        <select id="statusFilter">
-          <option value="">Tous les statuts</option>
+  <h1>Administration Spotideals</h1>
+  <!-- Login Card -->
+  <section id="login-card" class="card" aria-labelledby="login-title">
+    <h2 id="login-title" style="margin-top:0">Connexion</h2>
+    <label for="user">Utilisateur</label>
+    <input id="user" type="text" required>
+    <label for="pass">Mot de passe</label>
+    <input id="pass" type="password" required>
+    <button id="login-btn">Se connecter</button>
+    <p id="login-error" style="color:#e53935;display:none;margin-top:.5rem">Identifiants invalides</p>
+  </section>
+
+  <!-- Dashboard -->
+  <section id="dashboard">
+    <div class="top-bar">
+      <div>
+        <label for="filter">Filtrer :</label>
+        <select id="filter">
+          <option value="all">Toutes</option>
           <option value="En cours">En cours</option>
           <option value="Livré">Livré</option>
           <option value="Remboursé">Remboursé</option>
         </select>
-        <button id="exportCsv">Exporter CSV</button>
       </div>
-    </header>
-    <table>
+      <div>
+        <button id="export-btn">Export CSV</button>
+        <button id="logout-btn" style="background:#e53935">Déconnexion</button>
+      </div>
+    </div>
+    <table id="orders-table" aria-describedby="caption">
+      <caption id="caption" style="text-align:left;font-weight:600;margin-top:1rem">Commandes</caption>
       <thead>
-        <tr><th>ID</th><th>Date</th><th>Statut</th><th>Actions</th></tr>
+        <tr><th>ID</th><th>Nom</th><th>Email</th><th>État</th><th>Date</th><th>Actions</th></tr>
       </thead>
-      <tbody id="tbody"></tbody>
+      <tbody></tbody>
     </table>
-  </main>
-
-<script>
-  const PASSWORD = "1C1GCEA_enCA1146CA1146&oq=&gs_lcrp=EgZjaHJvbWUqEQgDEAAYAxhCGI8BGLQCGOoCMgkIABAjGCcY6gIyCQgBECMYJxjqAjIJCAIQIxgnGOoCMhEIAxAAGAMYQhiPARi0AhjqAjIRCAQQABgDGEIYjwEYtAIY6gIyEQg";
-  if (prompt("Mot de passe admin ?") === PASSWORD) {
-    document.getElementById('app').hidden = false;
-    const tbody = document.getElementById('tbody');
-    Object.keys(localStorage).sort().forEach(id=>{
-      if(!id.startsWith('SD-')) return;
-      const {date,status} = JSON.parse(localStorage.getItem(id));
-      const tr = document.createElement('tr');
-      tr.innerHTML = `<td>${id}</td><td>${new Date(date).toLocaleString()}</td>
-        <td>
-          <select>
-            <option ${status==='En cours'?'selected':''}>En cours</option>
-            <option ${status==='Livré'?'selected':''}>Livré</option>
-            <option ${status==='Remboursé'?'selected':''}>Remboursé</option>
-          </select>
-        </td>`;
-      tr.querySelector('select').onchange = e=>{
-        localStorage.setItem(id, JSON.stringify({date,status:e.target.value}));
-      };
-      tbody.appendChild(tr);
-    });
-  } else {
-    alert("Accès refusé.");
-    location.href="/";
-  }
-  
-  // --- Search, Filter and Export CSV ---
-  document.addEventListener('DOMContentLoaded', () => {
-    const searchInput = document.getElementById('searchInput');
-    const statusFilter = document.getElementById('statusFilter');
-    const exportBtn = document.getElementById('exportCsv');
-    const tbody = document.getElementById('tbody');
-
-    function applyFilters() {
-      const query = searchInput.value.trim().toLowerCase();
-      const statusVal = statusFilter.value;
-      [...tbody.querySelectorAll('tr')].forEach(row => {
-        const id = row.cells[0].textContent.toLowerCase();
-        const sel = row.cells[2].querySelector('select');
-        const status = sel ? sel.value : '';
-        const matchId = !query || id.includes(query);
-        const matchStatus = !statusVal || status === statusVal;
-        row.style.display = (matchId && matchStatus) ? '' : 'none';
-      });
-    }
-
-    searchInput.addEventListener('input', applyFilters);
-    statusFilter.addEventListener('change', applyFilters);
-
-    exportBtn.addEventListener('click', () => {
-      let csv = 'ID,Date,Statut\n';
-      Object.keys(localStorage).filter(k => k.startsWith('SD-')).forEach(key => {
-        const obj = JSON.parse(localStorage.getItem(key));
-        csv += `${key},${obj.date},${obj.status}\n`;
-      });
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'orders.csv';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    });
-  });
-</script>
+  </section>
+  <script src="js/admin.js" defer></script>
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>emailjs.init('NYLWAuzObYpYPa5H_');</script>
 </body>
 </html>
