@@ -4,6 +4,7 @@ body {
   font-family: 'Poppins', Arial, sans-serif;
   margin: 0;
   padding: 0;
+  padding-top: 56px;
 }
 .sticky {
   position: sticky;
@@ -117,9 +118,10 @@ body {
   font-weight: 800;
   margin-bottom: 1.2rem;
   color: #fff;
-  text-shadow: 0 2px 12px #1db95444;
+  text-shadow: 0 2px 12px #000a, 0 1px 0 #1db95444;
   line-height: 1.2;
   animation: fadeInUp 0.8s ease-out;
+  background: none;
 }
 .hero-content .accent {
   color: #24e38c;
@@ -148,6 +150,12 @@ body {
   color: #eafff3;
   margin-bottom: 2.5rem;
   animation: fadeInUp 0.8s ease-out 0.2s backwards;
+  background: rgba(24,28,32,0.72);
+  border-radius: 1rem;
+  padding: 0.7rem 1.2rem;
+  text-shadow: 0 2px 8px #000a;
+  margin-bottom: 2.5rem;
+  display: inline-block;
 }
 .hero-img-3d {
   width: 300px;
@@ -1047,8 +1055,12 @@ input:focus {
   transform: translateY(-6px) scale(1.03);
 }
 .testimonial-avatar {
-  width: 64px;
-  height: 64px;
+  width: 56px;
+  height: 56px;
+  min-width: 56px;
+  min-height: 56px;
+  max-width: 56px;
+  max-height: 56px;
   border-radius: 50%;
   margin-bottom: 1rem;
   box-shadow: 0 2px 8px #1db95422;
@@ -1058,11 +1070,25 @@ input:focus {
   background: #181c20;
   border: 2px solid #24e38c44;
   overflow: hidden;
-  transition: transform 0.25s cubic-bezier(0.4,0,0.2,1), box-shadow 0.25s;
 }
-.testimonial-card:hover .testimonial-avatar {
-  transform: scale(1.13) rotate(-3deg);
-  box-shadow: 0 4px 24px #1db95455, 0 0 0 6px #24e38c22;
+.testimonial-avatar svg {
+  width: 48px;
+  height: 48px;
+  display: block;
+}
+@media (max-width: 600px) {
+  .testimonial-avatar {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+    max-width: 40px;
+    max-height: 40px;
+  }
+  .testimonial-avatar svg {
+    width: 32px;
+    height: 32px;
+  }
 }
 .testimonial-name {
   font-weight: 700;
@@ -1930,18 +1956,21 @@ input:focus {
 }
 .onboarding-progress {
   position: fixed;
-  top: 0;
+  top: 56px;
   left: 0;
   width: 100vw;
   z-index: 1200;
   background: rgba(24,28,32,0.92);
   backdrop-filter: blur(8px);
-  box-shadow: 0 2px 16px #1db95411;
+  box-shadow: 0 2px 12px #1db95422;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 0.5rem 0;
   transition: transform 0.3s;
+  height: 38px;
+  min-height: 0;
+  border-bottom: 1px solid #24e38c33;
 }
 .onboarding-progress.hide {
   transform: translateY(-100%);
@@ -1993,6 +2022,8 @@ input:focus {
     height: 1.1rem;
     font-size: 0.9rem;
   }
+  body { padding-top: 48px; }
+  .onboarding-progress { top: 48px; height: 32px; font-size: 0.93rem; }
 }
 .scroll-progress-bar {
   position: fixed;
