@@ -198,6 +198,36 @@ document.addEventListener('DOMContentLoaded', function () {
       if(paypalBtn) paypalBtn.scrollIntoView({behavior:'smooth'});
     }, 600);
   });
+
+  // Forcer le rendu PayPal dès que la checklist est validée
+  const paypalContainer = document.getElementById('paypal-button-container');
+  const paypalError = document.getElementById('paypal-error');
+  function renderPayPalIfReady() {
+    if (paypalContainer && typeof paypal !== 'undefined' && !paypalContainer.hasChildNodes()) {
+      paypal.Buttons({
+        style: { layout: 'vertical', color: 'gold', shape: 'rect', label: 'paypal' },
+        createOrder: (data, actions) => actions.order.create({ purchase_units: [{ amount: { value: '82.62', currency_code:'CAD' } }] }),
+        onApprove: (data, actions) => actions.order.capture().then(function() {
+          // ... (logique de succès)
+        }),
+        onError: function(err) {
+          paypalError.classList.remove('hidden');
+          paypalError.textContent = '❌ Le paiement PayPal a échoué. Veuillez réessayer ou contacter le support.';
+        }
+      }).render('#paypal-button-container');
+      setTimeout(() => {
+        if (!paypalContainer.hasChildNodes()) {
+          paypalError.classList.remove('hidden');
+          paypalError.textContent = '❌ Le bouton PayPal n\'a pas pu se charger. Vérifiez votre connexion ou contactez le support.';
+        }
+      }, 8000);
+    }
+  }
+  // Appel au chargement et à chaque validation de la checklist
+  renderPayPalIfReady();
+  if (typeof checklistBoxes !== 'undefined') {
+    checklistBoxes.forEach(box => box.addEventListener('change', renderPayPalIfReady));
+  }
 });
 
 function shareSpotideal() {

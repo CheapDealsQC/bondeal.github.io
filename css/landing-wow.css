@@ -1738,6 +1738,11 @@ input:focus {
   align-items: center;
   margin: 1.2rem auto 0.7rem auto;
   min-height: 60px;
+  background: rgba(255,255,255,0.09);
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 24px #1db95422, 0 1.5px 8px #24e38c11;
+  padding: 1.2rem 0.7rem;
+  max-width: 340px;
 }
 .paypal-error {
   color: #ff4d4f;
@@ -1746,10 +1751,10 @@ input:focus {
   padding: 0.7rem 1.2rem;
   text-align: center;
   font-weight: 600;
-  margin: 1rem auto 0.5rem auto;
-  max-width: 420px;
   font-size: 1.08rem;
-  box-shadow: 0 1px 4px #ff4d4f22;
+  margin: 1rem auto 0 auto;
+  box-shadow: 0 2px 8px #ff4d4f22;
+  max-width: 340px;
 }
 
 /* Floating Elements */
@@ -2189,4 +2194,47 @@ input:focus {
 }
 @media (max-width: 900px) {
   .footer-bg { border-radius: 1rem 1rem 0 0; }
+}
+
+.payment-methods-bar {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  justify-content: center;
+  background: rgba(255,255,255,0.13);
+  border-radius: 1.2rem;
+  padding: 0.7rem 1.5rem;
+  margin: 2.5rem auto 0 auto;
+  max-width: 420px;
+  box-shadow: 0 4px 24px #1db95422, 0 1.5px 8px #24e38c11;
+  font-weight: 600;
+  color: #24e38c;
+  font-size: 1.08rem;
+  backdrop-filter: blur(8px);
+}
+.payment-methods-logos {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+.payment-methods-logos svg {
+  border-radius: 0.7rem;
+  box-shadow: 0 2px 8px #1db95411;
+  background: rgba(255,255,255,0.95);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.payment-methods-logos svg:hover {
+  transform: scale(1.08) rotate(-2deg);
+  box-shadow: 0 6px 24px #1db95433;
+}
+@media (max-width: 600px) {
+  .payment-methods-bar {
+    font-size: 0.98rem;
+    padding: 0.5rem 0.7rem;
+    max-width: 98vw;
+  }
+  .payment-methods-logos svg {
+    width: 28px;
+    height: 18px;
+  }
 }
