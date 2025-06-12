@@ -1,40 +1,12 @@
-name: Deploy to GitHub Pages
-
+name: disabled
 on:
+  workflow_dispatch:
   push:
-    branches:
-      - main  # Set a branch name to trigger deployment
-  pull_request:
+    branches: [ main ]
 
 jobs:
-  deploy:
+  noop:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
     steps:
-      - uses: actions/checkout@v3
-
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-            # Skip dependencies and build for static site
-      - name: Install only required dependencies if any
-        run: npm ci --only=prod || echo "No dependencies to install"
-
-      # 9) Copie le contenu du dossier dist/ à la racine du repo
-      - name: Copy dist to root
-        run: |
-          rsync -a --delete ${{ env.BUILD_DIR }}/ ./
-
-      # 10) Commit & push minified site dans main (skip ci pour éviter la boucle)
-      - name: Commit build output
-        uses: EndBug/add-and-commit@v9
-        with:
-          author_name: CI Bot
-          author_email: ci@example.com
-          message: 'chore: build output [skip ci]'
-          add: '.'
-          push: true
+      - name: Skip
+        run: echo "Workflow disabled"
