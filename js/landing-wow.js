@@ -52,7 +52,7 @@ if (goToPayPalBtn && typeof paypal !== 'undefined') {
         console.error('PayPal Error:', err);
       }
     }).render('#paypal-button-container');
-    // Optionnel : focus sur l'iframe PayPal après apparition
+    // Optionnel : focus sur l’iframe PayPal après apparition
     setTimeout(function() {
       const btn = document.querySelector('#paypal-button-container iframe');
       if (btn && btn.contentWindow) btn.contentWindow.focus();
