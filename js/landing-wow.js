@@ -182,6 +182,22 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   window.addEventListener('scroll', updateScrollBar);
   updateScrollBar();
+
+  // Checklist gating PayPal
+  const goToPayPalBtn = document.getElementById('goToPayPal');
+  function updatePayPalBtn() {
+    const allChecked = Array.from(checklistBoxes).every(box => box.checked);
+    goToPayPalBtn.disabled = !allChecked;
+  }
+  checklistBoxes.forEach(box => box.addEventListener('change', updatePayPalBtn));
+  updatePayPalBtn();
+  goToPayPalBtn.addEventListener('click', function() {
+    document.getElementById('commande').scrollIntoView({behavior:'smooth'});
+    setTimeout(()=>{
+      const paypalBtn = document.getElementById('paypal-button-container');
+      if(paypalBtn) paypalBtn.scrollIntoView({behavior:'smooth'});
+    }, 600);
+  });
 });
 
 function shareSpotideal() {

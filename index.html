@@ -53,6 +53,12 @@
     <div class="hero-visual">
       <img src="images/hero-phone.webp" alt="Mockup Spotify" class="hero-img-3d" loading="eager" fetchpriority="high">
     </div>
+    <div class="hero-mockup">
+      <picture>
+        <source srcset="images/webp/spotify-mockup.webp" type="image/webp">
+        <img src="images/spotify-mockup.png" alt="Mockup Spotify Premium" class="hero-img-3d" loading="lazy" decoding="async">
+      </picture>
+    </div>
   </section>
   <!-- Étapes -->
   <section id="etapes" class="steps-section slide-up aos-fade-up">
@@ -60,19 +66,30 @@
     <div class="steps-grid">
       <div class="step-card">
         <div class="step-number">1</div>
-        <i class="fas fa-shopping-cart"></i>
+        <div class="step-illustration">
+          <!-- SVG panier -->
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="#1db95422"/><path d="M14 20h20l-2 12H16l-2-12z" fill="#fff" stroke="#1db954" stroke-width="2"/><circle cx="19" cy="36" r="2" fill="#1db954"/><circle cx="29" cy="36" r="2" fill="#1db954"/></svg>
+        </div>
         <h3>Commander</h3>
         <p>Payez en toute sécurité via PayPal. Votre commande est immédiatement enregistrée.</p>
       </div>
+      <div class="step-arrow"><svg width="32" height="32" viewBox="0 0 32 32"><path d="M8 16h16m-6-6 6 6-6 6" stroke="#24e38c" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="step-card">
         <div class="step-number">2</div>
-        <i class="fas fa-bolt"></i>
+        <div class="step-illustration">
+          <!-- SVG éclair -->
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="#24e38c22"/><path d="M28 12 20 26h6l-2 10 8-14h-6l2-10z" fill="#fff" stroke="#24e38c" stroke-width="2"/></svg>
+        </div>
         <h3>Activation (48-72h)</h3>
         <p>Notre équipe active votre abonnement sous 3 jours ouvrés maximum.</p>
       </div>
+      <div class="step-arrow"><svg width="32" height="32" viewBox="0 0 32 32"><path d="M8 16h16m-6-6 6 6-6 6" stroke="#24e38c" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="step-card">
         <div class="step-number">3</div>
-        <i class="fas fa-headphones"></i>
+        <div class="step-illustration">
+          <!-- SVG casque audio -->
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="#1db95422"/><path d="M12 28a12 12 0 0 1 24 0v4a4 4 0 0 1-4 4h-2v-8h2a2 2 0 0 1 2 2v2m-20 0v-2a2 2 0 0 1 2-2h2v8h-2a4 4 0 0 1-4-4v-4z" stroke="#1db954" stroke-width="2" fill="#fff"/></svg>
+        </div>
         <h3>Profiter</h3>
         <p>Changez votre mot de passe et profitez de Spotify Premium pendant 12 mois.</p>
       </div>
@@ -168,6 +185,10 @@
         </div>
       </div>
     </div>
+    <div class="payment-methods-bar">
+      <span>Paiements acceptés :</span>
+      <img src="images/payment-methods.svg" alt="Méthodes de paiement" class="payment-methods-img" loading="lazy" decoding="async">
+    </div>
   </section>
   <!-- Conditions & Garanties -->
   <section class="conditions-section aos-fade-up">
@@ -177,17 +198,19 @@
       <li><strong>Aucune donnée conservée</strong> après activation</li>
     </ul>
   </section>
-  <!-- Checklist obligatoire -->
+  <!-- Checklist obligatoire simplifiée -->
   <section class="checklist-section aos-fade-up">
-    <h2>Avant de commander, confirmez :</h2>
+    <h2>1. Confirmez ces points avant de payer</h2>
     <form id="checklist-form">
-      <label><input type="checkbox" class="checklist-box"> Je comprends que vous vous connecterez temporairement à mon compte pour l'activation.</label>
-      <label><input type="checkbox" class="checklist-box"> Je comprends que toutes mes informations seront supprimées après l'activation.</label>
-      <label><input type="checkbox" class="checklist-box"> Je m'engage à changer mon mot de passe après l'activation.</label>
-      <label><input type="checkbox" class="checklist-box"> Je comprends que vous n'êtes pas responsable des décisions de Spotify concernant mon compte.</label>
-      <label><input type="checkbox" class="checklist-box"> Mon abonnement ne doit pas être actif au moment de l'achat.</label>
-      <label><input type="checkbox" class="checklist-box"> Je comprends qu'il n'y aura pas de remboursement si l'activation est réalisée.</label>
-      <label><input type="checkbox" class="checklist-box"> Je comprends que je pourrai poursuivre mon abonnement sans utiliser de VPN.</label>
+      <ul class="checklist-ul">
+        <li><label><input type="checkbox" class="checklist-box"> J'accepte qu'un membre de l'équipe active mon abonnement sur mon compte Spotify.</label></li>
+        <li><label><input type="checkbox" class="checklist-box"> Je comprends que je dois fournir un mot de passe temporaire et le changer après activation.</label></li>
+        <li><label><input type="checkbox" class="checklist-box"> Je n'ai pas d'abonnement actif actuellement.</label></li>
+        <li><label><input type="checkbox" class="checklist-box"> J'ai lu et j'accepte les conditions de vente.</label></li>
+      </ul>
+      <button type="button" id="goToPayPal" class="btn btn-cta btn-glow" disabled style="margin-top:2rem;font-size:1.2rem;">Payer avec PayPal <i class="fab fa-cc-paypal"></i></button>
+      <div class="checklist-arrow"><i class="fas fa-arrow-down"></i></div>
+      <div class="checklist-msg">Après paiement, vous pourrez saisir vos infos Spotify pour activer votre abonnement.</div>
     </form>
   </section>
   <!-- PayPal + Formulaire -->
