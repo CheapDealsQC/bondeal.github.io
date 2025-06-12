@@ -14,6 +14,17 @@
   <link rel="icon" type="image/png" href="favicon/favicon-32x32.png">
   <style>
     #paypal-button-container { display: none !important; }
+    
+    /* Fix pour assurer la visibilité */
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    
+    /* S'assurer que le loader n'interfère pas */
+    #loader-overlay.hidden {
+      display: none !important;
+    }
   </style>
 </head>
 <body>
@@ -408,7 +419,22 @@
     </form>
   </div>
   <script src="https://www.paypal.com/sdk/js?client-id=AW-bLBrtEPaB0FTD-Oa4rQ1gbQBNLkkqSsAtGh968nfbb-HA_iZh-Cptg_1UzbE9GYagkCPtHFEUosfm&currency=CAD"></script>
-  <script src="js/landing-wow.js"></script>
+  <script>
+    // S'assurer que la page est visible avant de charger les scripts
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('DOM chargé');
+      
+      // Enlever le loader s'il est présent
+      const loader = document.getElementById('loader-overlay');
+      if (loader) {
+        loader.classList.add('hidden');
+      }
+      
+      // S'assurer que le body est visible
+      document.body.style.opacity = '1';
+    });
+  </script>
+  <script src="js/landing-wow-fixed.js"></script>
   <script src="js/faq-accordion.js"></script>
 </body>
 </html>
