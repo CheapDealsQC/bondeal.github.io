@@ -227,20 +227,40 @@ body {
 }
 .steps-section {
   max-width: 1200px;
-  margin: 4rem auto;
-  text-align: center;
-  position: relative;
-  padding: 2rem;
+  margin: 4rem auto 3rem auto;
+  padding: 3rem 2rem 2.5rem 2rem;
+  background: linear-gradient(120deg, #232a34 0%, #181c20 100%);
+  border-radius: 2rem;
+  box-shadow: 0 8px 48px #1db95422, 0 2px 12px #24e38c11;
 }
 .steps-section h2 {
-  font-size: 2.8rem;
+  font-size: 2.2rem;
   font-weight: 800;
-  margin-bottom: 3rem;
-  background: linear-gradient(120deg, #1db954 0%, #24e38c 100%);
+  color: #fff;
+  margin-bottom: 2.2rem;
+  background: linear-gradient(90deg, #fff 60%, #24e38c 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  position: relative;
-  display: inline-block;
+  background-clip: text;
+}
+.steps-grid {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 2.2rem;
+}
+.step-card {
+  background: rgba(255,255,255,0.10);
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 24px #1db95422, 0 1.5px 8px #24e38c11;
+  padding: 2.2rem 1.5rem 1.5rem 1.5rem;
+  min-width: 220px;
+  max-width: 320px;
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
 }
 .steps-section h2::after {
   content: '';

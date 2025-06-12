@@ -13,7 +13,10 @@
           <div class="price-card-badge">Prix standard</div>
           <div class="price-card-header">
             <h3>Prix officiel</h3>
-            <div class="price-value">175,12$<span class="price-period">/ 12 mois</span></div>
+            <div class="price-value">
+              <span class="price-amount">175,12$</span>
+              <span class="price-period">/ 12 mois</span>
+            </div>
           </div>
           <div class="price-card-body">
             <ul class="price-features">
@@ -27,15 +30,25 @@
               <span class="btn btn-outline disabled">Prix régulier</span>
             </div>
           </div>
+          <div class="price-card-glow"></div>
         </div>
         
         <!-- Carte prix SpotiDeals -->
         <div class="price-card price-card-premium animate-on-scroll slide-up" data-delay="0.2s">
-          <div class="price-card-badge highlight-badge">Prix SpotiDeals</div>
+          <div class="price-card-badge highlight-badge">
+            <i class="fas fa-star"></i>
+            Prix SpotiDeals
+          </div>
           <div class="price-card-header">
             <h3>Prix réduit</h3>
-            <div class="price-value highlight">82,62$<span class="price-period">/ 12 mois</span></div>
-            <div class="price-saving">Économisez 92,50$ (53%)</div>
+            <div class="price-value highlight">
+              <span class="price-amount">82,62$</span>
+              <span class="price-period">/ 12 mois</span>
+            </div>
+            <div class="price-saving">
+              <i class="fas fa-piggy-bank"></i>
+              Économisez 92,50$ (53%)
+            </div>
           </div>
           <div class="price-card-body">
             <ul class="price-features">
@@ -48,20 +61,33 @@
               <li><i class="fas fa-check highlight"></i> <strong>Support client dédié</strong></li>
             </ul>
             <div class="price-action">
-              <a href="#commander" class="btn btn-cta btn-wave">Commander maintenant</a>
+              <a href="#commander" class="btn btn-cta btn-wave">
+                <span>Commander maintenant</span>
+                <i class="fas fa-arrow-right"></i>
+              </a>
             </div>
           </div>
+          <div class="price-card-glow"></div>
         </div>
       </div>
       
       <!-- Bandeau paiements acceptés -->
       <div class="payment-methods-container animate-on-scroll fade-in" data-delay="0.4s">
         <p class="text-center">Paiements sécurisés acceptés :</p>
-        <picture>
-          <source type="image/webp"
-            srcset="images/webp/payment-methods.webp 1x, images/webp/payment-methods.webp 2x">
-          <img src="images/payment-methods.svg" alt="Méthodes de paiement acceptées" class="payment-methods-img" loading="lazy" decoding="async">
-        </picture>
+        <div class="payment-methods">
+          <div class="payment-method glass-card">
+            <i class="fab fa-paypal"></i>
+            <span>PayPal</span>
+          </div>
+          <div class="payment-method glass-card">
+            <i class="fab fa-cc-visa"></i>
+            <span>Visa</span>
+          </div>
+          <div class="payment-method glass-card">
+            <i class="fab fa-cc-mastercard"></i>
+            <span>Mastercard</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>

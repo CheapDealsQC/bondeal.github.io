@@ -3,7 +3,7 @@
 .process-steps-container {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 2.5rem;
   position: relative;
   max-width: 800px;
   margin: 3rem auto;
@@ -16,13 +16,14 @@
   left: 2rem;
   top: 3rem;
   bottom: 3rem;
-  width: 4px;
+  width: 3px;
   background: var(--gradient-secondary);
-  border-radius: 2px;
+  border-radius: 3px;
   z-index: 1;
   transform-origin: top center;
   animation: grow-line 1.5s ease-out forwards;
   opacity: 0.5;
+  box-shadow: 0 0 20px rgba(29, 185, 84, 0.2);
 }
 
 @keyframes grow-line {
@@ -64,17 +65,33 @@
   box-shadow: var(--shadow);
   z-index: 2;
   transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.step-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.2) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.process-step:hover .step-glow {
+  opacity: 1;
 }
 
 .process-step:hover .process-step-number {
   transform: scale(1.1);
-  box-shadow: var(--shadow-hover);
+  box-shadow: 0 0 30px rgba(29, 185, 84, 0.3);
 }
 
 .process-step-content {
-  background: var(--white);
-  padding: 1.5rem;
-  border-radius: var(--border-radius);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow);
   flex: 1;
   position: relative;
@@ -82,6 +99,16 @@
   z-index: 2;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+}
+
+.process-step-content::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(29, 185, 84, 0.1), rgba(36, 227, 140, 0.1));
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .process-step:hover .process-step-content {
@@ -89,16 +116,26 @@
   box-shadow: var(--shadow-lg);
 }
 
+.process-step:hover .process-step-content::before {
+  opacity: 1;
+}
+
 .process-step h3 {
   color: var(--primary);
   margin-top: 0;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
   font-weight: 600;
+  font-size: 1.25rem;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .process-step p {
   color: var(--text);
   margin-bottom: 0;
+  line-height: 1.6;
 }
 
 .process-icon {
@@ -117,6 +154,20 @@
   color: var(--primary);
 }
 
+.step-badge {
+  position: absolute;
+  bottom: 1rem;
+  right: 1.5rem;
+  background: rgba(29, 185, 84, 0.1);
+  color: var(--primary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.4rem 0.8rem;
+  border-radius: 2rem;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(29, 185, 84, 0.2);
+}
+
 /* Add pulse animation to steps on visibility */
 .process-step.is-visible:nth-child(even) .process-step-number {
   animation: pulse-glow 2s infinite alternate;
@@ -129,6 +180,40 @@
   100% {
     box-shadow: 0 0 20px rgba(29, 185, 84, 0.8);
   }
+}
+
+/* Process CTA */
+.process-cta {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.process-cta .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background: var(--gradient-primary);
+  border: none;
+  border-radius: var(--border-radius-lg);
+  color: var(--white);
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+
+.process-cta .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.process-cta .btn i {
+  transition: transform 0.3s ease;
+}
+
+.process-cta .btn:hover i {
+  transform: translateX(4px);
 }
 
 /* Mobile responsiveness */
@@ -154,7 +239,7 @@
   }
   
   .process-step-content {
-    padding: 1rem;
+    padding: 1.5rem;
   }
   
   .process-step h3 {
@@ -170,6 +255,12 @@
     font-size: 1.2rem;
     top: 1rem;
     right: 1rem;
+  }
+
+  .step-badge {
+    position: static;
+    display: inline-block;
+    margin-top: 1rem;
   }
 }
 
@@ -189,6 +280,10 @@
     font-size: 1rem;
   }
   
+  .process-step-content {
+    padding: 1.25rem;
+  }
+  
   /* Reduce animations on small screens for better performance */
   .process-step:hover .process-step-content {
     transform: none;
@@ -196,10 +291,5 @@
   
   .process-step:hover .process-step-number {
     transform: none;
-  }
-  
-  /* Hide glow effects on small screens for performance */
-  .glow-effect {
-    display: none;
   }
 }
