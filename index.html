@@ -2,279 +2,152 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8">
-  <meta name="description" content="SD propose 12 mois d'abonnement Spotify Premium à 82,62 $ CAD au lieu de 175,12 $—activation garantie et service légal.">
-  <title>SpotiDeals – Abonnement Spotify 12 mois à 82,62 $</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <!-- Favicons & Preconnect -->
+  <title>SpotiDeals – Spotify Premium 47% moins cher</title>
+  <meta name="description" content="La même musique, 47% moins cher. Spotify Premium 12 mois à 82,62$ CAD. Activation garantie, paiement sécurisé, service client réactif.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap">
-  <!-- Favicons -->
-  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
-  <link rel="icon" type="image/webp" sizes="32x32" href="favicon/favicon-32x32.webp">
-  <!-- Google Font Poppins -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <!-- Bundle & minified CSS -->
-  <link rel="stylesheet" href="css/style.min.css">
-  <!-- Development / extended styles -->
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/testimonials-section.css">
-  <!-- Design+ overrides -->
-  <style>
-    :root {
-      --accent: #1db954;
-      --bg: #121212;
-      --card: #1e1e1e;
-      --text: #e0e0e0;
-      --subtext: #b3b3b3;
-      --halo-y:0px;
-      --parallax:0px;
-      --accent-secondary:#24e38c;
-    }
-    body {
-      margin: 0;
-      font-family: 'Poppins', system-ui, -apple-system, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-    }
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      background: var(--card);
-      color: var(--text);
-    }
-    header img{height:40px;margin-right:.75rem}
-    h1{font-size:1.4rem;margin:0}
-    main {
-      max-width: 840px;
-      margin: 2rem auto;
-      padding: 1.5rem;
-      background: var(--card);
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-    }
-    section{margin-bottom:2rem}
-    .alert {
-      background: #2a2a2a;
-      border-left: 4px solid var(--accent);
-      padding: 1rem 1.25rem;
-      border-radius: 8px;
-      color: var(--text);
-    }
-    .alert h2{margin:.25rem 0 .75rem;font-size:1.1rem}
-    label {
-      display: block;
-      margin: .75rem 0 .25rem;
-      font-weight: 600;
-      color: var(--text);
-    }
-    input[type=text],
-    input[type=email],
-    input[type=password] {
-      width: 100%;
-      padding: .6rem;
-      border: 1px solid #555;
-      border-radius: 6px;
-      font-size: 1rem;
-      background: #333;
-      color: var(--text);
-    }
-    .checks>label{font-weight:400;display:flex;gap:.5rem;align-items:flex-start}
-    .price-card {
-      background: var(--accent);
-      color: #fff;
-      padding: 1.25rem;
-      border-radius: 12px;
-      text-align: center;
-      font-size: 1.2rem;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-    }
-    .price-card span{font-size:2rem;font-weight:700;display:block}
-    #paypal-button-container{margin:1.5rem 0}
-    button[type=submit]{background:var(--green);color:#fff;border:none;padding:.75rem 1rem;font-size:1rem;border-radius:6px;cursor:pointer}
-    footer{text-align:center;font-size:.9rem;color:#555;margin:2rem 0}
-    /* style for info-card */
-    .info-card {
-      background: var(--card);
-      padding: 1rem 1.25rem;
-      border-radius: 8px;
-      margin: 1.5rem 0;
-      color: var(--text);
-    }
-    @media (max-width:600px){
-      header{flex-direction:column;align-items:flex-start;padding:1rem}
-      main{padding:.7rem}
-    }
-    /* Comparison section */
-    .comparison-section {
-      background: var(--card);
-      padding: 1.5rem;
-      border-radius: 12px;
-      margin-bottom: 2rem;
-    }
-    .comparison-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
-    }
-    .comparison-item {
-      padding: 1rem;
-      border-radius: 8px;
-      text-align: center;
-      background: #2a2a2a;
-    }
-    .comparison-item.highlight {
-      border: 2px solid var(--accent);
-    }
-    .comparison-item .old-price {
-      text-decoration: line-through;
-      color: var(--subtext);
-    }
-    .comparison-item .new-price {
-      font-size: 2rem;
-      color: var(--accent);
-    }
-    @media (max-width:600px) {
-      .comparison-grid { grid-template-columns: 1fr; }
-    }
-    /* animations */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .fade-in {
-      opacity: 0;
-      animation: fadeIn 0.6s ease-out forwards;
-      animation-delay: 0.2s;
-    }
-    /* reveal on scroll */
-    .reveal {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    }
-    .reveal.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    /* logo animation */
-    .logo {
-      animation: bounce 2s ease infinite;
-    }
-    @keyframes bounce {
-      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-      40% { transform: translateY(-10px); }
-      60% { transform: translateY(-5px); }
-    }
-    /* navigation links */
-    nav a {
-      margin-left: 1rem;
-      color: var(--text);
-      text-decoration: none;
-      font-weight: 500;
-    }
-    nav a:hover {
-      color: var(--accent);
-    }
-    /* Hero halo parallax */
-    .hero::after{transform:translate(-50%,calc(-30% + var(--halo-y))) scale(1.15);transition:transform .1s linear;}
-    /* Steps section glow */
-    .steps-section{position:relative;z-index:1}
-    .steps-section::before{content:'';position:absolute;top:-200px;left:50%;width:600px;height:600px;transform:translateX(-50%);background:radial-gradient(circle,var(--accent) 0%,transparent 70%);filter:blur(120px);mix-blend-mode:screen;pointer-events:none;z-index:0}
-    /* Icon parallax */
-    .step-item span{display:inline-block;transform:translateY(calc(var(--parallax)*-1px));transition:transform .1s linear}
-    /* Accent hover */
-    .accent{color:var(--accent);padding:0 2px;transition:color .3s}
-    .accent:hover{color:var(--accent-secondary)}
-    .btn:hover{background:var(--accent-secondary)}
-  </style>
-  <!-- OpenGraph -->
-  <meta property="og:title" content="Spotify Premium 12 mois à 82,62 $ CAD – Spotideals">
-  <meta property="og:description" content="Payez une seule fois, économisez 47 % et profitez de Spotify Premium pendant un an.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://spotideals.github.io/">
-  <meta property="og:image" content="https://spotideals.github.io/images/webp/logo.webp">
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Spotify Premium 12 mois à 82,62 $ CAD – Spotideals">
-  <meta name="twitter:description" content="Économisez 47 % sur votre abonnement Spotify Premium annuel.">
-  <meta name="twitter:image" content="https://spotideals.github.io/images/webp/logo.webp">
+  <link rel="stylesheet" href="css/landing-wow.css">
+  <script src="https://kit.fontawesome.com/2b2e7e5e2a.js" crossorigin="anonymous"></script>
 </head>
 <body>
-  <header class="main-header">
-    <div class="logo-container">
-      <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="logo-svg"><circle cx="24" cy="24" r="24" fill="#1db954"/><text x="50%" y="56%" text-anchor="middle" fill="#fff" font-size="20" font-family="Poppins,Arial,sans-serif" font-weight="bold" dy=".3em">SD</text></svg>
-      <span class="brand-title">SpotiDeals</span>
-    </div>
-    <nav>
-      <a href="#commande">Commander</a>
+  <!-- Sticky Header -->
+  <header class="main-header sticky">
+    <a href="#" class="logo-link"><img src="images/logo.svg" alt="SpotiDeals Logo" class="logo-svg"></a>
+    <nav class="main-nav">
+      <a href="#hero">Accueil</a>
+      <a href="#etapes">Étapes</a>
+      <a href="#securite">Sécurité</a>
+      <a href="#prix">Prix</a>
       <a href="#temoignages">Avis</a>
       <a href="#faq">FAQ</a>
+      <a href="#commande" class="btn-nav">Commander</a>
     </nav>
   </header>
-  <main>
-    <section class="hero-section aos-fade-up">
-      <div class="hero-content">
-        <h1 class="hero-title">La même musique, <span class="accent">plus de 50&nbsp;% moins cher</span> !</h1>
-        <p class="hero-subtitle">Spotify Premium 12 mois à <b>82,62&nbsp;$ CAD</b> au lieu de 175,12&nbsp;$&nbsp;: <span class="highlight">économisez 92,50&nbsp;$</span> sans compromis.</p>
-        <a href="#commande" class="btn btn-cta btn-glow">Commander maintenant</a>
+  <!-- Hero Section -->
+  <section id="hero" class="hero-section">
+    <div class="hero-bg-anim"></div>
+    <div class="hero-content">
+      <h1>La même musique, <span class="accent">47 % moins cher</span></h1>
+      <p class="hero-sub">Spotify Premium 12 mois à <b>82,62&nbsp;$ CAD</b> au lieu de 175,12&nbsp;$.</p>
+      <a href="#commande" class="btn btn-cta btn-glow">Commander maintenant</a>
+    </div>
+    <div class="hero-visual">
+      <img src="images/hero-phone.webp" alt="Mockup Spotify" class="hero-img-3d" loading="eager" fetchpriority="high">
+    </div>
+  </section>
+  <!-- Étapes -->
+  <section id="etapes" class="steps-section">
+    <h2>Comment ça marche</h2>
+    <div class="steps-grid">
+      <div class="step-card"><i class="fas fa-shopping-cart"></i><h3>Commander</h3><p>Payez en toute sécurité via PayPal.</p></div>
+      <div class="step-card"><i class="fas fa-bolt"></i><h3>Activation (48-72h)</h3><p>On active votre abonnement sous 3 jours ouvrés.</p></div>
+      <div class="step-card"><i class="fas fa-headphones"></i><h3>Profiter</h3><p>Changez votre mot de passe et profitez de Spotify Premium.</p></div>
+    </div>
+  </section>
+  <!-- Sécurité -->
+  <section id="securite" class="security-section">
+    <div class="security-card">
+      <h2><i class="fas fa-shield-alt"></i> Sécurité & Confidentialité</h2>
+      <ul>
+        <li>Vos infos supprimées après activation</li>
+        <li>Paiement 100% sécurisé (PayPal)</li>
+        <li>Support client réactif</li>
+      </ul>
+    </div>
+  </section>
+  <!-- Pricing -->
+  <section id="prix" class="pricing-section">
+    <div class="pricing-card">
+      <div class="price-public"><span class="old-price">175,12&nbsp;$</span> <span class="label">Prix public</span></div>
+      <div class="price-offer"><span class="new-price">82,62&nbsp;$</span> <span class="label">Notre offre</span></div>
+      <div class="price-badge">-47&nbsp;%</div>
+      <button class="btn btn-cta btn-glow" onclick="document.getElementById('commande').scrollIntoView({behavior:'smooth'})">Payer avec PayPal</button>
+    </div>
+  </section>
+  <!-- Conditions & Garanties -->
+  <section class="conditions-section">
+    <ul>
+      <li><strong>Activation garantie</strong> sous 72h ou remboursé</li>
+      <li><strong>Remboursement intégral</strong> si non livré sous 30 jours</li>
+      <li><strong>Aucune donnée conservée</strong> après activation</li>
+    </ul>
+  </section>
+  <!-- Checklist obligatoire -->
+  <section class="checklist-section">
+    <h2>Avant de commander, confirmez :</h2>
+    <form id="checklist-form">
+      <label><input type="checkbox" class="checklist-box"> Je comprends que vous vous connecterez temporairement à mon compte pour l'activation.</label>
+      <label><input type="checkbox" class="checklist-box"> Je comprends que toutes mes informations seront supprimées après l'activation.</label>
+      <label><input type="checkbox" class="checklist-box"> Je m'engage à changer mon mot de passe après l'activation.</label>
+      <label><input type="checkbox" class="checklist-box"> Je comprends que vous n'êtes pas responsable des décisions de Spotify concernant mon compte.</label>
+      <label><input type="checkbox" class="checklist-box"> Mon abonnement ne doit pas être actif au moment de l'achat.</label>
+      <label><input type="checkbox" class="checklist-box"> Je comprends qu'il n'y aura pas de remboursement si l'activation est réalisée.</label>
+      <label><input type="checkbox" class="checklist-box"> Je comprends que je pourrai poursuivre mon abonnement sans utiliser de VPN.</label>
+    </form>
+  </section>
+  <!-- PayPal + Formulaire -->
+  <section id="commande" class="commande-section">
+    <h2>Commander</h2>
+    <div id="paypal-button-container"></div>
+    <form id="orderForm" class="order-form hidden">
+      <div class="form-group"><label for="email">Email</label><input id="email" name="email" type="email" required></div>
+      <div class="form-group"><label for="spotifyUser">Identifiant Spotify</label><input id="spotifyUser" name="spotifyUser" type="text" required></div>
+      <div class="form-group"><label for="tempPass">Mot de passe temporaire</label><input id="tempPass" name="tempPass" type="password" pattern=".{8,}" title="8 caractères minimum" required></div>
+      <button type="submit" class="btn btn-cta btn-glow">Envoyer la commande</button>
+    </form>
+    <div id="order-success" class="order-success hidden">🎉 Merci ! Votre commande a bien été reçue. ID : <span id="order-id-toast"></span></div>
+  </section>
+  <!-- Témoignages -->
+  <section id="temoignages" class="testimonials-section">
+    <h2>Ils nous font confiance</h2>
+    <div class="testimonial-slider">
+      <div class="testimonial-card is-visible">
+        <div class="testimonial-content"><p>"J'étais sceptique, mais tout a parfaitement fonctionné ! J'ai économisé plus de 90$ et mon compte fonctionne comme avant."</p></div>
+        <div class="testimonial-author"><img src="./images/avatar-1.svg" alt="Marie L." class="testimonial-avatar"><div><b>Marie L.</b><br><span class="stars">★★★★★</span></div></div>
       </div>
-      <div class="hero-visual">
-        <img src="images/hero-phone.webp" alt="Mockup Spotify" class="hero-img-3d" loading="eager" fetchpriority="high">
+      <div class="testimonial-card is-visible">
+        <div class="testimonial-content"><p>"Service client réactif, activation en 2 jours, très satisfaite de cette économie."</p></div>
+        <div class="testimonial-author"><img src="./images/avatar-3.svg" alt="Sophie M." class="testimonial-avatar"><div><b>Sophie M.</b><br><span class="stars">★★★★★</span></div></div>
       </div>
-    </section>
-    <section class="trust-badges aos-fade-up">
-      <div class="trust-card"><i class="fas fa-lock icon-xl"></i><div class="trust-card__heading">Paiement 100% sécurisé</div><div class="trust-card__text">PayPal, Stripe, protection acheteur</div></div>
-      <div class="trust-card"><i class="fas fa-undo icon-xl"></i><div class="trust-card__heading">Garantie 30 jours</div><div class="trust-card__text">Remboursement intégral si non activé</div></div>
-      <div class="trust-card"><i class="fas fa-star icon-xl"></i><div class="trust-card__heading">+1000 clients satisfaits</div><div class="trust-card__text">Avis vérifiés, service réactif</div></div>
-    </section>
-    <section id="commande" class="commande aos-fade-up">
-      <h2>Commandez votre abonnement</h2>
-      <form id="orderForm" class="order-form">
-        <div class="form-group"><label for="email">Email</label><input id="email" name="email" type="email" required></div>
-        <div class="form-group"><label for="spotifyUser">Identifiant Spotify</label><input id="spotifyUser" name="spotifyUser" type="text" required></div>
-        <div class="form-group"><label for="tempPass">Mot de passe temporaire</label><input id="tempPass" name="tempPass" type="password" required></div>
-        <button type="submit" class="btn btn-cta btn-glow">Valider et payer</button>
-      </form>
-      <div id="order-success" class="order-success hidden">🎉 Merci ! Votre commande a bien été reçue. Vous recevrez un email sous 72h.</div>
-    </section>
-    <section id="temoignages" class="aos-fade-up">
-      <h2 class="section-title">Ce que disent nos clients</h2>
-      <div class="testimonial-grid">
-        <div class="testimonial-card is-visible">
-          <div class="testimonial-content"><p>"J'étais sceptique, mais tout a parfaitement fonctionné ! J'ai économisé plus de 90$ et mon compte fonctionne comme avant."</p></div>
-          <div class="testimonial-author"><img src="./images/avatar-1.svg" alt="Marie L." class="testimonial-avatar"><div><b>Marie L.</b><br><span class="stars">★★★★★</span></div></div>
-        </div>
-        <div class="testimonial-card is-visible">
-          <div class="testimonial-content"><p>"Service client réactif, activation en 2 jours, très satisfaite de cette économie."</p></div>
-          <div class="testimonial-author"><img src="./images/avatar-3.svg" alt="Sophie M." class="testimonial-avatar"><div><b>Sophie M.</b><br><span class="stars">★★★★★</span></div></div>
-        </div>
-        <div class="testimonial-card is-visible">
-          <div class="testimonial-content"><p>"Simple, rapide, fiable. Je recommande à 100%."</p></div>
-          <div class="testimonial-author"><img src="./images/avatar-2.svg" alt="Marc L." class="testimonial-avatar"><div><b>Marc L.</b><br><span class="stars">★★★★★</span></div></div>
-        </div>
+      <div class="testimonial-card is-visible">
+        <div class="testimonial-content"><p>"Simple, rapide, fiable. Je recommande à 100%."</p></div>
+        <div class="testimonial-author"><img src="./images/avatar-2.svg" alt="Marc L." class="testimonial-avatar"><div><b>Marc L.</b><br><span class="stars">★★★★★</span></div></div>
       </div>
-    </section>
-    <section id="faq" class="faq aos-fade-up">
-      <h2>FAQ</h2>
-      <details><summary>Est-ce légal ?</summary><p>Oui, nous agissons comme intermédiaire pour acheter un abonnement officiel dans une zone à tarif réduit.</p></details>
-      <details><summary>Dois-je utiliser un VPN ?</summary><p>Non, aucun VPN requis après l'activation.</p></details>
-      <details><summary>Quel est le délai d'activation ?</summary><p>48 à 72h ouvrables.</p></details>
-      <details><summary>Garantie de remboursement ?</summary><p>Remboursement intégral si l'activation n'est pas réalisée sous 30 jours.</p></details>
-    </section>
-  </main>
-  <footer class="main-footer aos-fade-up">
+    </div>
+  </section>
+  <!-- FAQ -->
+  <section id="faq" class="faq-section">
+    <h2>FAQ</h2>
+    <details><summary>Est-ce légal ?</summary><p>Oui, nous agissons comme intermédiaire pour acheter un abonnement officiel dans une zone à tarif réduit.</p></details>
+    <details><summary>Dois-je utiliser un VPN ?</summary><p>Non, aucun VPN requis après l'activation.</p></details>
+    <details><summary>Quel est le délai d'activation ?</summary><p>48 à 72h ouvrables.</p></details>
+    <details><summary>Garantie de remboursement ?</summary><p>Remboursement intégral si l'activation n'est pas réalisée sous 30 jours.</p></details>
+  </section>
+  <!-- Footer -->
+  <footer class="main-footer">
     <div class="footer-content">
-      <div>© 2025 SpotiDeals</div>
-      <div><a href="privacy.html">Confidentialité</a> | <a href="terms.html">CGV</a></div>
-      <div>Contact : <a href="mailto:spotideals.github.io@gmail.com">spotideals.github.io@gmail.com</a></div>
+      <a href="#" class="logo-link"><img src="images/logo.svg" alt="SpotiDeals Logo" class="logo-svg"></a>
+      <nav class="footer-nav">
+        <a href="#hero">Accueil</a>
+        <a href="#etapes">Étapes</a>
+        <a href="#securite">Sécurité</a>
+        <a href="#prix">Prix</a>
+        <a href="#temoignages">Avis</a>
+        <a href="#faq">FAQ</a>
+        <a href="#commande">Commander</a>
+      </nav>
+      <div class="footer-social">
+        <a href="mailto:spotideals.github.io@gmail.com"><i class="fas fa-envelope"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-x-twitter"></i></a>
+      </div>
+      <div class="footer-copy">© 2025 SpotiDeals. Service indépendant, non affilié à Spotify AB.</div>
     </div>
   </footer>
-  <script src="https://kit.fontawesome.com/2b2e7e5e2a.js" crossorigin="anonymous"></script>
-  <script src="js/refonte.js"></script>
+  <script src="https://www.paypal.com/sdk/js?client-id=AW-bLBrtEPaB0FTD-Oa4rQ1gbQBNLkkqsAtGh968nfbb-HA_ih-Cptg_1UzbE9GYagkCPtHFEUosfm&currency=CAD"></script>
+  <script src="js/landing-wow.js"></script>
 </body>
 </html>
