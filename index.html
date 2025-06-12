@@ -44,30 +44,115 @@
   <section id="etapes" class="steps-section aos-fade-up">
     <h2>Comment ça marche</h2>
     <div class="steps-grid">
-      <div class="step-card"><i class="fas fa-shopping-cart"></i><h3>Commander</h3><p>Payez en toute sécurité via PayPal.</p></div>
-      <div class="step-card"><i class="fas fa-bolt"></i><h3>Activation (48-72h)</h3><p>On active votre abonnement sous 3 jours ouvrés.</p></div>
-      <div class="step-card"><i class="fas fa-headphones"></i><h3>Profiter</h3><p>Changez votre mot de passe et profitez de Spotify Premium.</p></div>
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <i class="fas fa-shopping-cart"></i>
+        <h3>Commander</h3>
+        <p>Payez en toute sécurité via PayPal. Votre commande est immédiatement enregistrée.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <i class="fas fa-bolt"></i>
+        <h3>Activation (48-72h)</h3>
+        <p>Notre équipe active votre abonnement sous 3 jours ouvrés maximum.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <i class="fas fa-headphones"></i>
+        <h3>Profiter</h3>
+        <p>Changez votre mot de passe et profitez de Spotify Premium pendant 12 mois.</p>
+      </div>
     </div>
   </section>
   <!-- Sécurité -->
   <section id="securite" class="security-section aos-fade-up">
-    <div class="security-card">
-      <h2><i class="fas fa-shield-alt"></i> Sécurité & Confidentialité</h2>
-      <ul>
-        <li>Vos infos supprimées après activation</li>
-        <li>Paiement 100% sécurisé (PayPal)</li>
-        <li>Support client réactif</li>
-      </ul>
+    <div class="security-grid">
+      <div class="security-card">
+        <div class="security-badge">Paiement 100% Sécurisé</div>
+        <i class="fas fa-shield-alt security-icon"></i>
+        <h3 class="security-title">Protection PayPal</h3>
+        <p class="security-text">Votre paiement est entièrement sécurisé par PayPal. Vous bénéficiez de leur protection acheteur et de leur garantie de remboursement.</p>
+        <div class="security-features">
+          <div class="security-feature">
+            <i class="fas fa-check-circle"></i>
+            <span>Protection acheteur</span>
+          </div>
+          <div class="security-feature">
+            <i class="fas fa-check-circle"></i>
+            <span>Remboursement garanti</span>
+          </div>
+          <div class="security-feature">
+            <i class="fas fa-check-circle"></i>
+            <span>Données cryptées</span>
+          </div>
+        </div>
+      </div>
+      <div class="security-card">
+        <div class="security-badge">Service Garanti</div>
+        <i class="fas fa-headset security-icon"></i>
+        <h3 class="security-title">Support Premium</h3>
+        <p class="security-text">Notre équipe est disponible pour vous accompagner à chaque étape. Nous garantissons l'activation de votre abonnement sous 72h.</p>
+        <div class="security-features">
+          <div class="security-feature">
+            <i class="fas fa-check-circle"></i>
+            <span>Support 7j/7</span>
+          </div>
+          <div class="security-feature">
+            <i class="fas fa-check-circle"></i>
+            <span>Activation garantie</span>
+          </div>
+          <div class="security-feature">
+            <i class="fas fa-check-circle"></i>
+            <span>Suivi personnalisé</span>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
   <!-- Pricing -->
-  <section id="prix" class="pricing-section aos-fade-up">
+  <section id="prix" class="pricing-section">
     <div class="pricing-card">
-      <div class="price-public"><span class="old-price">175,12&nbsp;$</span> <span class="label">Prix public</span></div>
-      <div class="price-offer"><span class="new-price">82,62&nbsp;$</span> <span class="label">Notre offre</span></div>
-      <div class="price-badge">-53&nbsp;%</div>
-      <div class="badge-paypal"><i class="fab fa-cc-paypal"></i> Paiement protégé PayPal</div>
-      <button class="btn btn-cta btn-glow">Payer avec PayPal</button>
+      <div class="pricing-header">
+        <h2 class="pricing-title">Offre Premium</h2>
+        <p class="pricing-subtitle">Profitez de Spotify Premium pendant 12 mois</p>
+        <span class="pricing-badge">Offre limitée</span>
+      </div>
+      
+      <div class="pricing-price">
+        <div class="price-amount">
+          <span class="original-price">119,88€</span>
+          55,99€
+          <span class="discount-badge">-53%</span>
+        </div>
+        <div class="price-period">pour 12 mois</div>
+      </div>
+      
+      <div class="pricing-features">
+        <div class="feature-item">
+          <i class="fas fa-check feature-icon"></i>
+          <span class="feature-text">Écoutez sans publicités</span>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-check feature-icon"></i>
+          <span class="feature-text">Téléchargez vos musiques</span>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-check feature-icon"></i>
+          <span class="feature-text">Qualité audio supérieure</span>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-check feature-icon"></i>
+          <span class="feature-text">Écoutez hors ligne</span>
+        </div>
+      </div>
+      
+      <div class="pricing-cta">
+        <a href="#commander" class="btn-cta">Commander maintenant</a>
+        <div class="pricing-guarantee">
+          <i class="fas fa-shield-alt guarantee-icon"></i>
+          <span>Garantie satisfait ou remboursé</span>
+        </div>
+      </div>
     </div>
   </section>
   <!-- Conditions & Garanties -->
@@ -111,55 +196,136 @@
     <div id="order-success" class="order-success hidden"><div class="order-success-icon">🎉</div><div class="order-success-title">Commande reçue !</div><div class="order-success-id">ID : <span id="order-id-toast"></span></div><div class="order-success-msg">Merci ! Vous recevrez un email sous 72h.</div></div>
   </section>
   <!-- Témoignages -->
-  <section id="temoignages" class="testimonials-section aos-fade-up">
-    <h2>Ils nous font confiance</h2>
-    <div class="testimonial-slider">
-      <div class="testimonial-card is-visible">
-        <div class="testimonial-content"><p>"J'étais sceptique, mais tout a parfaitement fonctionné ! J'ai économisé plus de 90$ et mon compte fonctionne comme avant."</p></div>
-        <div class="testimonial-author"><img src="./images/avatar-1.svg" alt="Marie L." class="testimonial-avatar"><div><b>Marie L.</b><br><span class="stars">★★★★★</span></div></div>
+  <section id="temoignages" class="testimonials-section">
+    <div class="testimonials-header">
+      <h2 class="testimonials-title">Ils nous font confiance</h2>
+      <span class="testimonials-badge">+1000 clients satisfaits</span>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-avatar">
+          <!-- SVG avatar 1 -->
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="#1db954"/><ellipse cx="24" cy="20" rx="10" ry="10" fill="#fff"/><ellipse cx="24" cy="38" rx="13" ry="7" fill="#fff"/></svg>
+        </div>
+        <div class="testimonial-name">Lucas M.</div>
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-text">Service rapide, fiable et super économique. J'ai reçu mon abonnement en quelques minutes !</div>
       </div>
-      <div class="testimonial-card is-visible">
-        <div class="testimonial-content"><p>"Service client réactif, activation en 2 jours, très satisfaite de cette économie."</p></div>
-        <div class="testimonial-author"><img src="./images/avatar-3.svg" alt="Sophie M." class="testimonial-avatar"><div><b>Sophie M.</b><br><span class="stars">★★★★★</span></div></div>
+      <div class="testimonial-card">
+        <div class="testimonial-avatar">
+          <!-- SVG avatar 2 -->
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="#24e38c"/><ellipse cx="24" cy="20" rx="10" ry="10" fill="#fff"/><ellipse cx="24" cy="38" rx="13" ry="7" fill="#fff"/></svg>
+        </div>
+        <div class="testimonial-name">Sophie R.</div>
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-text">J'étais sceptique, mais tout est parfait : paiement sécurisé, activation rapide, support réactif.</div>
       </div>
-      <div class="testimonial-card is-visible">
-        <div class="testimonial-content"><p>"Simple, rapide, fiable. Je recommande à 100%."</p></div>
-        <div class="testimonial-author"><img src="./images/avatar-2.svg" alt="Marc L." class="testimonial-avatar"><div><b>Marc L.</b><br><span class="stars">★★★★★</span></div></div>
+      <div class="testimonial-card">
+        <div class="testimonial-avatar">
+          <!-- SVG avatar 3 -->
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="#181c20"/><ellipse cx="24" cy="20" rx="10" ry="10" fill="#fff"/><ellipse cx="24" cy="38" rx="13" ry="7" fill="#fff"/></svg>
+        </div>
+        <div class="testimonial-name">Karim D.</div>
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-text">Le meilleur plan Spotify ! J'ai économisé plus de 50 %. Je recommande à tous mes amis.</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-avatar">
+          <!-- SVG avatar 4 -->
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="#fff"/><ellipse cx="24" cy="20" rx="10" ry="10" fill="#1db954"/><ellipse cx="24" cy="38" rx="13" ry="7" fill="#24e38c"/></svg>
+        </div>
+        <div class="testimonial-name">Julie T.</div>
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-text">Interface claire, paiement PayPal rassurant, et service client au top. Merci !</div>
       </div>
     </div>
   </section>
   <!-- FAQ -->
-  <section id="faq" class="faq-section aos-fade-up">
-    <h2>FAQ</h2>
-    <details><summary>Est-ce légal ?</summary><p>Oui, nous agissons comme intermédiaire pour acheter un abonnement officiel dans une zone à tarif réduit.</p></details>
-    <details><summary>Dois-je utiliser un VPN ?</summary><p>Non, aucun VPN requis après l'activation.</p></details>
-    <details><summary>Quel est le délai d'activation ?</summary><p>48 à 72h ouvrables.</p></details>
-    <details><summary>Garantie de remboursement ?</summary><p>Remboursement intégral si l'activation n'est pas réalisée sous 30 jours.</p></details>
+  <section id="faq" class="faq-section">
+    <div class="faq-header">
+      <h2 class="faq-title">Questions fréquentes</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span class="faq-icon"><i class="fas fa-lock"></i></span>
+          Le paiement est-il vraiment sécurisé ?
+        </button>
+        <div class="faq-answer">
+          Oui, le paiement s'effectue via PayPal, la référence mondiale de la sécurité en ligne. Vous bénéficiez de la protection acheteur PayPal.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span class="faq-icon"><i class="fas fa-clock"></i></span>
+          Combien de temps pour activer mon abonnement ?
+        </button>
+        <div class="faq-answer">
+          L'activation est généralement réalisée sous 24h (souvent en moins de 2h) après validation de votre paiement et réception de vos informations.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span class="faq-icon"><i class="fas fa-user-shield"></i></span>
+          Vais-je perdre mes playlists ou mes musiques ?
+        </button>
+        <div class="faq-answer">
+          Non, votre compte reste le même : vous conservez toutes vos playlists, musiques et recommandations.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span class="faq-icon"><i class="fas fa-sync-alt"></i></span>
+          Puis-je renouveler l'abonnement l'an prochain ?
+        </button>
+        <div class="faq-answer">
+          Oui, vous pourrez renouveler votre abonnement à prix réduit à l'issue des 12 mois, sans engagement.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span class="faq-icon"><i class="fas fa-headset"></i></span>
+          Que faire si j'ai une question ou un souci ?
+        </button>
+        <div class="faq-answer">
+          Notre support client est disponible 7j/7 par email et chat pour répondre à toutes vos questions ou résoudre le moindre problème.
+        </div>
+      </div>
+    </div>
   </section>
   <!-- Footer -->
-  <footer class="main-footer aos-fade-up">
+  <footer class="main-footer">
     <div class="footer-content">
-      <a href="#" class="logo-link"><img src="images/logo.svg" alt="SpotiDeals Logo" class="logo-svg"></a>
-      <nav class="footer-nav">
-        <a href="#hero">Accueil</a>
-        <a href="#etapes">Étapes</a>
-        <a href="#securite">Sécurité</a>
-        <a href="#prix">Prix</a>
-        <a href="#temoignages">Avis</a>
-        <a href="#faq">FAQ</a>
-        <a href="#commande">Commander</a>
-      </nav>
-      <div class="footer-social">
-        <a href="mailto:spotideals.github.io@gmail.com"><i class="fas fa-envelope"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-x-twitter"></i></a>
+      <div class="footer-brand">
+        <span class="footer-logo">Spotideal</span>
+        <span class="footer-microcopy">Site indépendant – Paiement protégé – Support 7j/7</span>
+        <div class="footer-payments">
+          <span class="footer-payment-icon"><i class="fab fa-cc-paypal"></i></span>
+          <span class="footer-payment-icon"><i class="fab fa-cc-visa"></i></span>
+          <span class="footer-payment-icon"><i class="fab fa-cc-mastercard"></i></span>
+        </div>
+        <div class="footer-badges">
+          <span class="footer-badge"><i class="fas fa-shield-alt"></i> Paiement sécurisé</span>
+          <span class="footer-badge"><i class="fas fa-thumbs-up"></i> +1000 clients satisfaits</span>
+        </div>
       </div>
-      <div class="footer-copy">© 2025 SpotiDeals. Service indépendant, non affilié à Spotify AB.</div>
+      <div class="footer-links">
+        <a href="/terms.html" class="footer-link">Conditions générales</a>
+        <a href="/privacy.html" class="footer-link">Confidentialité</a>
+        <a href="/contact" class="footer-link">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2024 Spotideal. Tous droits réservés. Spotify® est une marque déposée qui n'est pas affiliée à ce site.
     </div>
   </footer>
   <button class="share-btn-sticky" title="Partager"><i class="fas fa-share-alt"></i></button>
   <button class="mini-chat-btn" title="Contact rapide"><i class="fas fa-comment-dots"></i></button>
+  <button class="sticky-order-btn" onclick="document.getElementById('prix').scrollIntoView({behavior: 'smooth'});">
+    <i class="fas fa-shopping-cart"></i> Commander
+  </button>
   <script src="https://www.paypal.com/sdk/js?client-id=AW-bLBrtEPaB0FTD-Oa4rQ1gbQBNLkkqsAtGh968nfbb-HA_ih-Cptg_1UzbE9GYagkCPtHFEUosfm&currency=CAD"></script>
   <script src="js/landing-wow.js"></script>
+  <script src="js/faq-accordion.js"></script>
 </body>
 </html>

@@ -104,19 +104,27 @@ function initParallax() {
     
     if (!parallaxLayers.length || !heroSection) return;
     
-    // Parallax on mouse movement
-    document.addEventListener('mousemove', function(e) {
-        // Calculate mouse position relative to the center of the screen
-        const mouseX = e.clientX / window.innerWidth - 0.5;
-        const mouseY = e.clientY / window.innerHeight - 0.5;
-        
-        parallaxLayers.forEach(layer => {
-            const speedFactor = layer.dataset.speed || 0.05;
-            const xOffset = mouseX * 100 * speedFactor;
-            const yOffset = mouseY * 50 * speedFactor;
+    let ticking = false;
+    
+    document.addEventListener('mousemove', (e) => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                const mouseX = e.clientX / window.innerWidth - 0.5;
+                const mouseY = e.clientY / window.innerHeight - 0.5;
+                
+                parallaxLayers.forEach(layer => {
+                    const speedFactor = layer.dataset.speed || 0.05;
+                    const xOffset = mouseX * 100 * speedFactor;
+                    const yOffset = mouseY * 50 * speedFactor;
+                    
+                    layer.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
+                });
+                
+                ticking = false;
+            });
             
-            layer.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
-        });
+            ticking = true;
+        }
     });
     
     // Parallax on scroll
@@ -273,3 +281,17 @@ function debounce(func, wait) {
     
     document.head.appendChild(style);
 })();
+
+// Add smooth scroll behavior
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});

@@ -143,4 +143,22 @@ if(chatBtn) {
   chatBtn.addEventListener('click', () => {
     window.open('mailto:spotideals.github.io@gmail.com?subject=Question%20SpotiDeals','_blank');
   });
-} 
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  // Animation à l'apparition pour toutes les sections principales
+  const animatedSections = document.querySelectorAll('.hero-section, .steps-section, .security-section, .pricing-section, .testimonials-section, .faq-section, .main-footer');
+
+  const observer = new window.IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('fade-in');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  animatedSections.forEach(section => {
+    observer.observe(section);
+  });
+}); 
