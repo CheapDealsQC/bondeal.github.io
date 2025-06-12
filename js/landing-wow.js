@@ -1,15 +1,3 @@
-// Sticky nav smooth scroll
-        document.getElementById('orderForm').scrollIntoView({behavior:'smooth'});
-        document.getElementById('email').focus();
-      });
-    }
-  }).render('#paypal-button-container');
-
-  // Simule un clic sur le bouton PayPal caché
-    setTimeout(function() {
-        const btn = document.querySelector('#paypal-button-container iframe');
-}
-
 // Checklist gating PayPal
 const checklistBoxes = document.querySelectorAll('.checklist-box');
 const goToPayPalBtn = document.getElementById('goToPayPal');
@@ -70,4 +58,4 @@ if (goToPayPalBtn && typeof paypal !== 'undefined') {
       if (btn && btn.contentWindow) btn.contentWindow.focus();
     }, 700);
   });
-} 
+}
