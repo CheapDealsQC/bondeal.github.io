@@ -122,43 +122,122 @@ if(slider && slider.children.length > 1){
 // Bouton sticky de partage
 const shareBtn = document.querySelector('.share-btn-sticky');
 if(shareBtn) {
-  shareBtn.addEventListener('click', () => {
-    const url = window.location.href;
-    const text = encodeURIComponent("🎵 Spotify Premium 12 mois à 53% moins cher sur SpotiDeals !");
-    const shareLinks = [
-      `https://wa.me/?text=${text}%20${encodeURIComponent(url)}`,
-      `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
-      `https://twitter.com/intent/tweet?text=${text}&url=${encodeURIComponent(url)}`
-    ];
-    if(navigator.share) {
-      navigator.share({ title: "SpotiDeals", text: "Spotify Premium 12 mois à 53% moins cher !", url });
-    } else {
-      window.open(shareLinks[0], '_blank');
-    }
-  });
+  shareBtn.addEventListener('click', shareSpotideal);
 }
 // Mini-chat flottant
 const chatBtn = document.querySelector('.mini-chat-btn');
 if(chatBtn) {
-  chatBtn.addEventListener('click', () => {
-    window.open('mailto:spotideals.github.io@gmail.com?subject=Question%20SpotiDeals','_blank');
-  });
+  chatBtn.addEventListener('click', () => toggleMiniChat());
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  // Animation à l'apparition pour toutes les sections principales
-  const animatedSections = document.querySelectorAll('.hero-section, .steps-section, .security-section, .pricing-section, .testimonials-section, .faq-section, .main-footer');
-
+  // Animation personnalisée à l'apparition pour chaque section
+  const animatedSections = document.querySelectorAll('.slide-up, .slide-down, .slide-left, .slide-right, .zoom-in');
   const observer = new window.IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('fade-in');
+        entry.target.classList.add('visible');
         observer.unobserve(entry.target);
       }
     });
   }, { threshold: 0.15 });
-
   animatedSections.forEach(section => {
     observer.observe(section);
   });
-}); 
+
+  // Onboarding progress bar logic
+  const steps = [
+    { id: 'prix', step: 1 },
+    { id: 'securite', step: 2 },
+    { id: 'temoignages', step: 3 }
+  ];
+  const onboardingSteps = document.querySelectorAll('.onboarding-step');
+
+  function updateOnboardingStep() {
+    let current = 1;
+    for (let i = 0; i < steps.length; i++) {
+      const section = document.getElementById(steps[i].id);
+      if (section) {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= 120 && rect.bottom > 120) {
+          current = steps[i].step;
+          break;
+        }
+      }
+    }
+    onboardingSteps.forEach(step => {
+      step.classList.toggle('active', Number(step.dataset.step) === current);
+    });
+  }
+  window.addEventListener('scroll', updateOnboardingStep);
+  updateOnboardingStep();
+
+  // Scroll progress bar
+  const progressBar = document.getElementById('scrollProgressBar');
+  function updateScrollBar() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.body.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progressBar.style.width = progress + '%';
+  }
+  window.addEventListener('scroll', updateScrollBar);
+  updateScrollBar();
+});
+
+function shareSpotideal() {
+  const url = window.location.href;
+  const text = "🎵 Profite de Spotify Premium à -53% sur Spotideal !";
+  if (navigator.share) {
+    navigator.share({ title: 'Spotideal', text, url });
+  } else {
+    navigator.clipboard.writeText(url);
+    showToast('Lien copié !');
+  }
+}
+
+function showToast(msg) {
+  let toast = document.getElementById('spotideal-toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'spotideal-toast';
+    toast.style.position = 'fixed';
+    toast.style.bottom = '2.5rem';
+    toast.style.left = '50%';
+    toast.style.transform = 'translateX(-50%)';
+    toast.style.background = 'rgba(24,28,32,0.95)';
+    toast.style.color = '#fff';
+    toast.style.padding = '0.8rem 1.5rem';
+    toast.style.borderRadius = '1.5rem';
+    toast.style.fontSize = '1.05rem';
+    toast.style.zIndex = 3000;
+    toast.style.boxShadow = '0 4px 24px #1db95433';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = msg;
+  toast.style.opacity = 1;
+  setTimeout(() => { toast.style.opacity = 0; }, 1800);
+}
+
+function toggleMiniChat(force) {
+  const chat = document.getElementById('miniChatWindow');
+  if (typeof force === 'boolean') {
+    chat.classList.toggle('open', force);
+  } else {
+    chat.classList.toggle('open');
+  }
+  if (chat.classList.contains('open')) {
+    setTimeout(() => {
+      document.getElementById('miniChatInput').focus();
+    }, 200);
+  }
+}
+
+function sendMiniChat(e) {
+  e.preventDefault();
+  const input = document.getElementById('miniChatInput');
+  if (input.value.trim().length > 0) {
+    showToast('Merci, nous vous répondons sous peu !');
+    input.value = '';
+    toggleMiniChat(false);
+  }
+} 

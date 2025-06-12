@@ -14,6 +14,20 @@
 </head>
 <body>
   <div id="loader-overlay" class="hidden"><div class="loader-spinner"></div></div>
+  <div class="onboarding-progress">
+    <div class="onboarding-steps">
+      <div class="onboarding-step" data-step="1">
+        <span class="onboarding-step-icon"><i class="fas fa-shopping-cart"></i></span> Commander
+      </div>
+      <div class="onboarding-step" data-step="2">
+        <span class="onboarding-step-icon"><i class="fas fa-bolt"></i></span> Activation
+      </div>
+      <div class="onboarding-step" data-step="3">
+        <span class="onboarding-step-icon"><i class="fas fa-headphones"></i></span> Profiter
+      </div>
+    </div>
+  </div>
+  <div class="scroll-progress-bar" id="scrollProgressBar"></div>
   <!-- Sticky Header -->
   <header class="main-header sticky aos-fade-up">
     <a href="#" class="logo-link"><img src="images/logo.svg" alt="SpotiDeals Logo" class="logo-svg"></a>
@@ -28,20 +42,20 @@
     </nav>
   </header>
   <!-- Hero Section -->
-  <section id="hero" class="hero-section aos-fade-up">
+  <section id="hero" class="hero-section slide-down aos-fade-up">
     <div class="hero-bg-anim"></div>
     <div class="hero-content">
       <div class="badge-clients">+1000 clients satisfaits</div>
       <h1>La même musique, <span class="accent">53 % moins cher</span></h1>
       <p class="hero-sub">Spotify Premium 12 mois à <b>82,62&nbsp;$ CAD</b> au lieu de 175,12&nbsp;$.</p>
-      <a href="#commande" class="btn btn-cta btn-glow">Commander maintenant</a>
+      <a href="#commande" class="btn btn-cta btn-glow">Commander maintenant<span class="btn-shine"></span></a>
     </div>
     <div class="hero-visual">
       <img src="images/hero-phone.webp" alt="Mockup Spotify" class="hero-img-3d" loading="eager" fetchpriority="high">
     </div>
   </section>
   <!-- Étapes -->
-  <section id="etapes" class="steps-section aos-fade-up">
+  <section id="etapes" class="steps-section slide-up aos-fade-up">
     <h2>Comment ça marche</h2>
     <div class="steps-grid">
       <div class="step-card">
@@ -65,7 +79,7 @@
     </div>
   </section>
   <!-- Sécurité -->
-  <section id="securite" class="security-section aos-fade-up">
+  <section id="securite" class="security-section slide-left aos-fade-up">
     <div class="security-grid">
       <div class="security-card">
         <div class="security-badge">Paiement 100% Sécurisé</div>
@@ -110,7 +124,7 @@
     </div>
   </section>
   <!-- Pricing -->
-  <section id="prix" class="pricing-section">
+  <section id="prix" class="pricing-section zoom-in aos-fade-up">
     <div class="pricing-card">
       <div class="pricing-header">
         <h2 class="pricing-title">Offre Premium</h2>
@@ -147,7 +161,7 @@
       </div>
       
       <div class="pricing-cta">
-        <a href="#commander" class="btn-cta">Commander maintenant</a>
+        <a href="#commander" class="btn-cta">Commander maintenant<span class="btn-shine"></span></a>
         <div class="pricing-guarantee">
           <i class="fas fa-shield-alt guarantee-icon"></i>
           <span>Garantie satisfait ou remboursé</span>
@@ -196,7 +210,7 @@
     <div id="order-success" class="order-success hidden"><div class="order-success-icon">🎉</div><div class="order-success-title">Commande reçue !</div><div class="order-success-id">ID : <span id="order-id-toast"></span></div><div class="order-success-msg">Merci ! Vous recevrez un email sous 72h.</div></div>
   </section>
   <!-- Témoignages -->
-  <section id="temoignages" class="testimonials-section">
+  <section id="temoignages" class="testimonials-section slide-right aos-fade-up">
     <div class="testimonials-header">
       <h2 class="testimonials-title">Ils nous font confiance</h2>
       <span class="testimonials-badge">+1000 clients satisfaits</span>
@@ -241,7 +255,7 @@
     </div>
   </section>
   <!-- FAQ -->
-  <section id="faq" class="faq-section">
+  <section id="faq" class="faq-section slide-up aos-fade-up">
     <div class="faq-header">
       <h2 class="faq-title">Questions fréquentes</h2>
     </div>
@@ -294,7 +308,7 @@
     </div>
   </section>
   <!-- Footer -->
-  <footer class="main-footer">
+  <footer class="main-footer slide-up">
     <div class="footer-content">
       <div class="footer-brand">
         <span class="footer-logo">Spotideal</span>
@@ -319,11 +333,24 @@
       &copy; 2024 Spotideal. Tous droits réservés. Spotify® est une marque déposée qui n'est pas affiliée à ce site.
     </div>
   </footer>
-  <button class="share-btn-sticky" title="Partager"><i class="fas fa-share-alt"></i></button>
+  <button class="share-btn-sticky" title="Partager" onclick="shareSpotideal()"><i class="fas fa-share-alt"></i></button>
   <button class="mini-chat-btn" title="Contact rapide"><i class="fas fa-comment-dots"></i></button>
   <button class="sticky-order-btn" onclick="document.getElementById('prix').scrollIntoView({behavior: 'smooth'});">
-    <i class="fas fa-shopping-cart"></i> Commander
+    <i class="fas fa-shopping-cart"></i> Commander<span class="btn-shine"></span>
   </button>
+  <div class="mini-chat-window" id="miniChatWindow">
+    <div class="mini-chat-header">
+      <span>Support Spotideal</span>
+      <button class="mini-chat-close" onclick="toggleMiniChat(false)"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="mini-chat-body">
+      <div>Besoin d'aide ? Notre équipe répond en quelques minutes.<br><b>Posez votre question !</b></div>
+    </div>
+    <form class="mini-chat-input" onsubmit="sendMiniChat(event)">
+      <input type="text" id="miniChatInput" placeholder="Votre message…" autocomplete="off" />
+      <button type="submit">Envoyer</button>
+    </form>
+  </div>
   <script src="https://www.paypal.com/sdk/js?client-id=AW-bLBrtEPaB0FTD-Oa4rQ1gbQBNLkkqsAtGh968nfbb-HA_ih-Cptg_1UzbE9GYagkCPtHFEUosfm&currency=CAD"></script>
   <script src="js/landing-wow.js"></script>
   <script src="js/faq-accordion.js"></script>
