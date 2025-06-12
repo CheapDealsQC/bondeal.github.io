@@ -28,6 +28,8 @@ if(window.paypal) {
       // Générer un order ID unique
       const id = 'SD-' + Date.now().toString(36).toUpperCase();
       document.getElementById('orderForm').classList.remove('hidden');
+      document.querySelector('.step-indicator.step-2').classList.remove('hidden');
+      document.querySelector('.step-indicator.step-1').classList.add('hidden');
       document.getElementById('order-success').classList.add('hidden');
       document.getElementById('order-id-toast').textContent = id;
       // Toast
@@ -37,6 +39,7 @@ if(window.paypal) {
       }, 6000);
       // Scroll to form
       document.getElementById('orderForm').scrollIntoView({behavior:'smooth'});
+      document.getElementById('email').focus();
     })
   }).render('#paypal-button-container');
 }
@@ -46,14 +49,15 @@ if(orderForm){
   orderForm.addEventListener('submit',function(e){
     e.preventDefault();
     const email = orderForm.email.value.trim();
-    const user = orderForm.spotifyUser.value.trim();
     const pass = orderForm.tempPass.value.trim();
-    if(!email || !user || !pass || !/^.{8,}$/.test(pass)){
+    if(!email || !pass || !/^.{8,}$/.test(pass)){
       alert('Merci de remplir tous les champs (mot de passe : 8 caractères min).');
       return;
     }
     orderForm.classList.add('hidden');
     document.getElementById('order-success').classList.remove('hidden');
+    document.getElementById('order-success').scrollIntoView({behavior:'smooth'});
+    document.getElementById('order-success').focus();
   });
 }
 // Témoignages slider (scroll auto)

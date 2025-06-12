@@ -91,14 +91,18 @@
   <!-- PayPal + Formulaire -->
   <section id="commande" class="commande-section">
     <h2>Commander</h2>
+    <div class="step-indicator step-1">Étape 1/2 : Paiement</div>
     <div id="paypal-button-container"></div>
+    <div class="paypal-info">Après paiement, vous pourrez saisir votre email et mot de passe temporaire Spotify pour activer votre abonnement.</div>
+    <div class="step-indicator step-2 hidden">Étape 2/2 : Infos Spotify</div>
     <form id="orderForm" class="order-form hidden">
-      <div class="form-group"><label for="email">Email</label><input id="email" name="email" type="email" required></div>
-      <div class="form-group"><label for="spotifyUser">Identifiant Spotify</label><input id="spotifyUser" name="spotifyUser" type="text" required></div>
+      <div class="form-badge"><i class="fas fa-lock"></i> Saisie sécurisée</div>
+      <h3>Finalisez votre activation</h3>
+      <div class="form-group"><label for="email">Email Spotify</label><input id="email" name="email" type="email" required></div>
       <div class="form-group"><label for="tempPass">Mot de passe temporaire</label><input id="tempPass" name="tempPass" type="password" pattern=".{8,}" title="8 caractères minimum" required></div>
       <button type="submit" class="btn btn-cta btn-glow">Envoyer la commande</button>
     </form>
-    <div id="order-success" class="order-success hidden">🎉 Merci ! Votre commande a bien été reçue. ID : <span id="order-id-toast"></span></div>
+    <div id="order-success" class="order-success hidden"><div class="order-success-icon">🎉</div><div class="order-success-title">Commande reçue !</div><div class="order-success-id">ID : <span id="order-id-toast"></span></div><div class="order-success-msg">Merci ! Vous recevrez un email sous 72h.</div></div>
   </section>
   <!-- Témoignages -->
   <section id="temoignages" class="testimonials-section">

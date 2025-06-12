@@ -317,7 +317,50 @@ input:focus {
   border: 1.5px solid #1db954;
   box-shadow: 0 0 0 2px #24e38c55;
 }
+.step-indicator {
+  display: inline-block;
+  background: #232a34;
+  color: #24e38c;
+  font-weight: 700;
+  font-size: 1.08rem;
+  border-radius: 1.2rem;
+  padding: 0.3rem 1.1rem;
+  margin-bottom: 1.1rem;
+  box-shadow: 0 1px 4px #1db95411;
+  letter-spacing: 0.01em;
+}
+.step-indicator.hidden { display: none; }
+.paypal-info {
+  color: #b3f7d8;
+  font-size: 1.01rem;
+  margin: 0.7rem 0 1.2rem 0;
+  text-align: center;
+  opacity: 0.92;
+}
+.form-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #1db954;
+  color: #181c20;
+  font-weight: 700;
+  border-radius: 1.2rem;
+  padding: 0.3rem 1.1rem;
+  font-size: 1.01rem;
+  margin-bottom: 1.1rem;
+  box-shadow: 0 1px 4px #1db95422;
+}
+.order-form h3 {
+  margin: 0 0 1.1rem 0;
+  color: #24e38c;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
 .order-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
   text-align: center;
   color: #1db954;
   font-size: 1.2rem;
@@ -326,6 +369,34 @@ input:focus {
   border-radius: 1.2rem;
   padding: 1.2rem;
   box-shadow: 0 2px 12px #1db95411;
+  animation: popIn 0.5s cubic-bezier(.68,-0.55,.27,1.55);
+}
+.order-success-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.2rem;
+}
+.order-success-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #24e38c;
+}
+.order-success-id {
+  font-size: 1.08rem;
+  color: #fff;
+  background: #181c20;
+  border-radius: 0.8rem;
+  padding: 0.2rem 0.8rem;
+  margin: 0.3rem 0;
+  font-family: monospace;
+}
+.order-success-msg {
+  color: #b3f7d8;
+  font-size: 1.01rem;
+}
+@keyframes popIn {
+  0% { transform: scale(0.7); opacity: 0; }
+  80% { transform: scale(1.08); opacity: 1; }
+  100% { transform: scale(1); }
 }
 .hidden { display: none !important; }
 .testimonials-section {
