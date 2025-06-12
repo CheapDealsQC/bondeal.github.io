@@ -62,9 +62,15 @@ body {
   margin-left: 1rem;
 }
 .hero-section {
+  position: relative;
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  min-height: 70vh;
+  padding: 5rem 3rem 4rem 3rem;
+  background: linear-gradient(120deg, #181c20 0%, #232a34 60%, #1db95422 100%);
+  border-radius: 2.5rem;
   gap: 2.5rem;
   padding: 4rem 2.5rem 3rem 2.5rem;
   background: linear-gradient(120deg, #1db954 0%, #24e38c 100%);
