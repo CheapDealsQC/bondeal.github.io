@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SpotiDeals – Spotify Premium 53% moins cher</title>
+  <meta name="description" content="La même musique, 53% moins cher. Spotify Premium 12 mois à 82,62$ CAD. Activation garantie, paiement sécurisé, service client réactif.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/landing-wow.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="icon" type="image/png" href="favicon/favicon-32x32.png">
+  <style>
+    #paypal-button-container { display: none !important; }
+    
+    /* Fix pour assurer la visibilité */
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    
+    /* S'assurer que le loader n'interfère pas */
+    #loader-overlay.hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+  <div id="loader-overlay" class="hidden"><div class="loader-spinner"></div></div>
+  <div class="onboarding-progress">
+    <div class="onboarding-steps">
+      <div class="onboarding-step" data-step="1">
+        <span class="onboarding-step-icon"><i class="fas fa-shopping-cart"></i></span> Commander
+      </div>
+      <div class="onboarding-step" data-step="2">
+        <span class="onboarding-step-icon"><i class="fas fa-bolt"></i></span> Activation
+      </div>
+      <div class="onboarding-step" data-step="3">
+        <span class="onboarding-step-icon"><i class="fas fa-headphones"></i></span> Profiter
+      </div>
+    </div>
+  </div>
+  <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+  <!-- Sticky Header -->
+  <header class="main-header sticky aos-fade-up">
+    <a href="#" class="logo-link"><img src="images/logo.svg" alt="SpotiDeals Logo" class="logo-svg"></a>
+    <nav class="main-nav">
+      <a href="#hero">Accueil</a>
+      <a href="#etapes">Étapes</a>
+      <a href="#securite">Sécurité</a>
+      <a href="#prix">Prix</a>
+      <a href="#temoignages">Avis</a>
+      <a href="#faq">FAQ</a>
+      <a href="#commande" class="btn-nav">Commander</a>
+    </nav>
+  </header>
+  <!-- Hero Section -->
+  <section id="hero" class="hero-section slide-down aos-fade-up">
+    <div class="hero-bg-anim"></div>
+    <div class="hero-content">
+      <div class="badge-clients">+1000 clients satisfaits</div>
+      <h1>La même musique, <span class="accent">53 % moins cher</span></h1>
+      <p class="hero-sub">Spotify Premium 12 mois à <b>82,62 $ CAD</b> au lieu de 175,12 $ CAD.</p>
+      <a href="#commande" class="btn btn-cta btn-glow">Commander maintenant<span class="btn-shine"></span></a>
+    </div>
+    <div class="hero-visual">
+      <img src="images/hero-phone.webp" alt="Mockup Spotify" class="hero-img-3d" loading="eager" fetchpriority="high">
+    </div>
+    <div class="hero-mockup">
+      <picture>
+        <source srcset="images/webp/logo.webp" type="image/webp">
+        <img src="images/webp/logo.webp" alt="Mockup Spotify Premium" class="hero-img-3d" loading="lazy" decoding="async">
+      </picture>
+    </div>
+  </section>
+  <!-- Étapes -->
+  <section id="etapes" class="steps-section slide-up aos-fade-up">
+    <h2>Comment ça marche</h2>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <div class="step-illustration">
+          <!-- SVG panier -->
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="#1db95422"/><path d="M14 20h20l-2 12H16l-2-12z" fill="#fff" stroke="#1db954" stroke-width="2"/><circle cx="19" cy="36" r="2" fill="#1db954"/><circle cx="29" cy="36" r="2" fill="#1db954"/></svg>
+        </div>
+        <h3>Commander</h3>
+        <p>Payez en toute sécurité via PayPal. Votre commande est immédiatement enregistrée.</p>
+      </div>
+      <div class="step-arrow"><svg width="32" height="32" viewBox="0 0 32 32"><path d="M8 16h16m-6-6 6 6-6 6" stroke="#24e38c" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <div class="step-illustration">
+          <!-- SVG éclair -->
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="#24e38c22"/><path d="M28 12 20 26h6l-2 10 8-14h-6l2-10z" fill="#fff" stroke="#24e38c" stroke-width="2"/></svg>
+        </div>
+        <h3>Activation (48-72h)</h3>
+        <p>Notre équipe active votre abonnement sous 3 jours ouvrés maximum.</p>
+      </div>
+      <div class="step-arrow"><svg width="32" height="32" viewBox="0 0 32 32"><path d="M8 16h16m-6-6 6 6-6 6" stroke="#24e38c" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <div class="step-illustration">
+          <!-- SVG casque audio -->
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="#1db95422"/><path d="M12 28a12 12 0 0 1 24 0v4a4 4 0 0 1-4 4h-2v-8h2a2 2 0 0 1 2 2v2m-20 0v-2a2 2 0 0 1 2-2h2v8h-2a4 4 0 0 1-4-4v-4z" stroke="#1db954" stroke-width="2" fill="#fff"/></svg>
+        </div>
+        <h3>Profiter</h3>
+        <p>Changez votre mot de passe et profitez de Spotify Premium pendant 12 mois.</p>
+      </div>
+    </div>
+  </section>
+  <!-- Sécurité -->
+  <section id="securite" class="security-section slide-left aos-fade-up">
+    <div class="security-grid">
+      <div class="security-card">
+        <div class="security-badge">Paiement 100% Sécurisé</div>
+        <div class="security-illustration">
+          <!-- SVG bouclier sécurisé -->
+          <svg width="56" height="56" viewBox="0 0 56 56" fill="none"><circle cx="28" cy="28" r="28" fill="#1db95422"/><path d="M28 12l14 6v7c0 8.5-5.5 16.2-14 18-8.5-1.8-14-9.5-14-18v-7l14-6z" fill="#fff" stroke="#1db954" stroke-width="2"/><path d="M28 24v8" stroke="#1db954" stroke-width="2" stroke-linecap="round"/><circle cx="28" cy="34" r="1.5" fill="#1db954"/></svg>
+        </div>
+        <i class="fas fa-shield-alt security-icon"></i>
+        <h3 class="security-title">Protection PayPal</h3>
+        <p class="security-text">Votre paiement est entièrement sécurisé par PayPal. Vous bénéficiez de leur protection acheteur et de leur garantie de remboursement.</p>
+        <div class="security-features">
+          <div class="security-feature">
+            <i class="fas fa-check-circle"></i>
+            <span>Protection acheteur</span>
+          </div>
+          <div class="security-feature">
+            <i class="fas fa-check-circle"></i>
+            <span>Remboursement garanti</span>
+          </div>
+          <div class="security-feature">
+            <i class="fas fa-check-circle"></i>
+            <span>Données cryptées</span>
+          </div>
+        </div>
+      </div>
+      <div class="security-card">
+        <div class="security-badge">Service Garanti</div>
+        <div class="security-illustration">
+          <!-- SVG casque support -->
+          <svg width="56" height="56" viewBox="0 0 56 56" fill="none"><circle cx="28" cy="28" r="28" fill="#24e38c22"/><path d="M16 36v-4a12 12 0 0 1 24 0v4a4 4 0 0 1-4 4h-2v-8h2a2 2 0 0 1 2 2v2m-20 0v-2a2 2 0 0 1 2-2h2v8h-2a4 4 0 0 1-4-4z" stroke="#24e38c" stroke-width="2" fill="#fff"/></svg>
+        </div>
+        <i class="fas fa-headset security-icon"></i>
+        <h3 class="security-title">Support Premium</h3>
+        <p class="security-text">Notre équipe est disponible pour vous accompagner à chaque étape. Nous garantissons l'activation de votre abonnement sous 72h.</p>
+        <div class="security-features">
+          <div class="security-feature">
+            <i class="fas fa-check-circle"></i>
+            <span>Support 7j/7</span>
+          </div>
+          <div class="security-feature">
+            <i class="fas fa-check-circle"></i>
+            <span>Activation garantie</span>
+          </div>
+          <div class="security-feature">
+            <i class="fas fa-check-circle"></i>
+            <span>Suivi personnalisé</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Pricing -->
+  <section id="prix" class="pricing-section zoom-in aos-fade-up">
+    <div class="pricing-card">
+      <div class="pricing-header">
+        <h2 class="pricing-title">Offre Premium</h2>
+        <p class="pricing-subtitle">Profitez de Spotify Premium pendant 12 mois</p>
+        <span class="pricing-badge">Offre limitée</span>
+      </div>
+      
+      <div class="pricing-price">
+        <div class="pricing-illustration">
+          <!-- SVG trophée premium -->
+          <svg width="56" height="56" viewBox="0 0 56 56" fill="none"><circle cx="28" cy="28" r="28" fill="#1db95422"/><path d="M18 20h20v6a10 10 0 0 1-20 0v-6z" fill="#fff" stroke="#1db954" stroke-width="2"/><path d="M28 36v6" stroke="#1db954" stroke-width="2" stroke-linecap="round"/><rect x="24" y="42" width="8" height="4" rx="2" fill="#24e38c"/></svg>
+        </div>
+        <div class="price-amount">
+          <span class="original-price">175,12 $ CAD</span>
+          82,62 $ CAD
+          <span class="discount-badge">-53%</span>
+        </div>
+        <div class="price-period">pour 12 mois</div>
+      </div>
+      
+      <div class="pricing-features">
+        <div class="feature-item">
+          <span class="feature-svg"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="12" fill="#1db95422"/><path d="M7 12l3 3 7-7" stroke="#1db954" stroke-width="2" fill="none"/></svg></span>
+          <span class="feature-text">Écoutez sans publicités</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-svg"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="12" fill="#24e38c22"/><path d="M8 16l8-8M8 8h8v8" stroke="#24e38c" stroke-width="2" fill="none"/></svg></span>
+          <span class="feature-text">Téléchargez vos musiques</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-svg"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="12" fill="#1db95422"/><path d="M12 8v8M8 12h8" stroke="#1db954" stroke-width="2" fill="none"/></svg></span>
+          <span class="feature-text">Qualité audio supérieure</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-svg"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="12" fill="#24e38c22"/><path d="M6 12h12" stroke="#24e38c" stroke-width="2" fill="none"/></svg></span>
+          <span class="feature-text">Écoutez hors ligne</span>
+        </div>
+      </div>
+      
+      <div class="pricing-cta">
+        <a href="#commander" class="btn-cta">Commander maintenant<span class="btn-shine"></span></a>
+        <div class="pricing-guarantee">
+          <i class="fas fa-shield-alt guarantee-icon"></i>
+          <span>Garantie satisfait ou remboursé</span>
+        </div>
+      </div>
+    </div>
+    <div class="payment-methods-bar">
+      <span>Paiements acceptés :</span>
+      <span class="payment-methods-logos">
+        <svg width="40" height="24" viewBox="0 0 40 24"><rect width="40" height="24" rx="6" fill="#fff"/><text x="8" y="16" font-size="12" font-family="Poppins,Arial,sans-serif" fill="#1db954">PayPal</text></svg>
+        <svg width="40" height="24" viewBox="0 0 40 24"><rect width="40" height="24" rx="6" fill="#fff"/><text x="8" y="16" font-size="12" font-family="Poppins,Arial,sans-serif" fill="#1a1f71">VISA</text></svg>
+        <svg width="40" height="24" viewBox="0 0 40 24"><rect width="40" height="24" rx="6" fill="#fff"/><text x="8" y="16" font-size="12" font-family="Poppins,Arial,sans-serif" fill="#eb001b">MC</text></svg>
+      </span>
+    </div>
+  </section>
+  <!-- Conditions & Garanties -->
+  <section class="conditions-section aos-fade-up">
+    <ul>
+      <li><strong>Activation garantie</strong> sous 72h ou remboursé</li>
+      <li><strong>Remboursement intégral</strong> si non livré sous 30 jours</li>
+      <li><strong>Aucune donnée conservée</strong> après activation</li>
+    </ul>
+  </section>
+  <!-- Checklist obligatoire simplifiée -->
+  <section class="checklist-section aos-fade-up">
+    <h2>1. Confirmez ces points avant de payer</h2>
+    <form id="checklist-form">
+      <ul class="checklist-ul">
+        <li><label><input type="checkbox" class="checklist-box"> J'accepte qu'un membre de l'équipe active mon abonnement sur mon compte Spotify.</label></li>
+        <li><label><input type="checkbox" class="checklist-box"> Je comprends que je dois fournir un mot de passe temporaire et le changer après activation.</label></li>
+        <li><label><input type="checkbox" class="checklist-box"> Je n'ai pas d'abonnement actif actuellement.</label></li>
+        <li><label><input type="checkbox" class="checklist-box"> J'ai lu et j'accepte les conditions de vente.</label></li>
+      </ul>
+      <button type="button" id="goToPayPal" class="btn btn-cta btn-glow" disabled style="margin-top:2rem;font-size:1.2rem;">Payer avec PayPal <i class="fab fa-cc-paypal"></i></button>
+      <div class="checklist-arrow"><i class="fas fa-arrow-down"></i></div>
+      <div class="checklist-msg">Après paiement, vous pourrez saisir vos infos Spotify pour activer votre abonnement.</div>
+    </form>
+  </section>
+  <!-- PayPal + Formulaire -->
+  <section id="commande" class="commande-section aos-fade-up">
+    <div class="steps-bar"><div class="step step-1 active">1. Paiement</div><div class="step step-2">2. Infos Spotify</div><div class="step step-3">3. Confirmation</div></div>
+    <h2>Commander</h2>
+    <div class="step-indicator step-1">Étape 1/2 : Paiement</div>
+    <div class="paypal-security-badge"><i class="fas fa-lock"></i> Paiement 100% sécurisé via PayPal</div>
+    <div id="paypal-button-container" class="paypal-btn-center"></div>
+    <div id="paypal-error" class="paypal-error hidden">❌ Le bouton PayPal n'a pas pu se charger. Veuillez réessayer ou contacter le support.</div>
+    <div class="paypal-info">Après paiement, vous pourrez saisir votre email et mot de passe temporaire Spotify pour activer votre abonnement.</div>
+    <div class="step-indicator step-2 hidden">Étape 2/2 : Infos Spotify</div>
+    <form id="orderForm" class="order-form hidden">
+      <div class="form-badge"><i class="fas fa-lock"></i> Saisie sécurisée</div>
+      <h3>Finalisez votre activation</h3>
+      <div class="form-group"><label for="email">Email Spotify</label><input id="email" name="email" type="email" required></div>
+      <div class="form-group"><label for="tempPass">Mot de passe temporaire</label><input id="tempPass" name="tempPass" type="password" pattern=".{8,}" title="8 caractères minimum" required></div>
+      <button type="submit" class="btn btn-cta btn-glow">Envoyer la commande</button>
+    </form>
+    <div id="order-success" class="order-success hidden"><div class="order-success-icon">🎉</div><div class="order-success-title">Commande reçue !</div><div class="order-success-id">ID : <span id="order-id-toast"></span></div><div class="order-success-msg">Merci ! Vous recevrez un email sous 72h.</div></div>
+  </section>
+  <!-- Témoignages -->
+  <section id="temoignages" class="testimonials-section slide-right aos-fade-up">
+    <div class="testimonials-header">
+      <h2 class="testimonials-title">Ils nous font confiance</h2>
+      <span class="testimonials-badge">+1000 clients satisfaits</span>
+    </div>
+    <div class="testimonials-bg"></div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-avatar">
+          <!-- SVG avatar 1 -->
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="#1db954"/><ellipse cx="24" cy="20" rx="10" ry="10" fill="#fff"/><ellipse cx="24" cy="38" rx="13" ry="7" fill="#fff"/><ellipse cx="18" cy="18" rx="2" ry="2.5" fill="#1db954"/><ellipse cx="30" cy="18" rx="2" ry="2.5" fill="#1db954"/></svg>
+        </div>
+        <div class="testimonial-badge-verified"><svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="9" fill="#24e38c"/><path d="M5 9l2.5 2.5L13 6" stroke="#fff" stroke-width="2" fill="none"/></svg> Vérifié</div>
+        <div class="testimonial-name">Lucas M.</div>
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-text">Service rapide, fiable et super économique. J'ai reçu mon abonnement en quelques minutes !</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-avatar">
+          <!-- SVG avatar 2 -->
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="#24e38c"/><ellipse cx="24" cy="20" rx="10" ry="10" fill="#fff"/><ellipse cx="24" cy="38" rx="13" ry="7" fill="#fff"/><ellipse cx="18" cy="18" rx="2" ry="2.5" fill="#24e38c"/><ellipse cx="30" cy="18" rx="2" ry="2.5" fill="#24e38c"/></svg>
+        </div>
+        <div class="testimonial-badge-verified"><svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="9" fill="#24e38c"/><path d="M5 9l2.5 2.5L13 6" stroke="#fff" stroke-width="2" fill="none"/></svg> Vérifié</div>
+        <div class="testimonial-name">Sophie R.</div>
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-text">J'étais sceptique, mais tout est parfait : paiement sécurisé, activation rapide, support réactif.</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-avatar">
+          <!-- SVG avatar 3 -->
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="#181c20"/><ellipse cx="24" cy="20" rx="10" ry="10" fill="#fff"/><ellipse cx="24" cy="38" rx="13" ry="7" fill="#fff"/><ellipse cx="18" cy="18" rx="2" ry="2.5" fill="#181c20"/><ellipse cx="30" cy="18" rx="2" ry="2.5" fill="#181c20"/></svg>
+        </div>
+        <div class="testimonial-badge-verified"><svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="9" fill="#24e38c"/><path d="M5 9l2.5 2.5L13 6" stroke="#fff" stroke-width="2" fill="none"/></svg> Vérifié</div>
+        <div class="testimonial-name">Karim D.</div>
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-text">Le meilleur plan Spotify ! J'ai économisé plus de 50 %. Je recommande à tous mes amis.</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-avatar">
+          <!-- SVG avatar 4 -->
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="#fff"/><ellipse cx="24" cy="20" rx="10" ry="10" fill="#1db954"/><ellipse cx="24" cy="38" rx="13" ry="7" fill="#24e38c"/><ellipse cx="18" cy="18" rx="2" ry="2.5" fill="#1db954"/><ellipse cx="30" cy="18" rx="2" ry="2.5" fill="#1db954"/></svg>
+        </div>
+        <div class="testimonial-badge-verified"><svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="9" fill="#24e38c"/><path d="M5 9l2.5 2.5L13 6" stroke="#fff" stroke-width="2" fill="none"/></svg> Vérifié</div>
+        <div class="testimonial-name">Julie T.</div>
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-text">Interface claire, paiement PayPal rassurant, et service client au top. Merci !</div>
+      </div>
+    </div>
+  </section>
+  <!-- FAQ -->
+  <section id="faq" class="faq-section slide-up aos-fade-up">
+    <div class="faq-header">
+      <h2 class="faq-title">Questions fréquentes</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span class="faq-icon"><i class="fas fa-lock"></i></span>
+          Le paiement est-il vraiment sécurisé ?
+        </button>
+        <div class="faq-answer">
+          Oui, le paiement s'effectue via PayPal, la référence mondiale de la sécurité en ligne. Vous bénéficiez de la protection acheteur PayPal.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span class="faq-icon"><i class="fas fa-clock"></i></span>
+          Combien de temps pour activer mon abonnement ?
+        </button>
+        <div class="faq-answer">
+          L'activation est généralement réalisée sous 24h (souvent en moins de 2h) après validation de votre paiement et réception de vos informations.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span class="faq-icon"><i class="fas fa-user-shield"></i></span>
+          Vais-je perdre mes playlists ou mes musiques ?
+        </button>
+        <div class="faq-answer">
+          Non, votre compte reste le même : vous conservez toutes vos playlists, musiques et recommandations.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span class="faq-icon"><i class="fas fa-sync-alt"></i></span>
+          Puis-je renouveler l'abonnement l'an prochain ?
+        </button>
+        <div class="faq-answer">
+          Oui, vous pourrez renouveler votre abonnement à prix réduit à l'issue des 12 mois, sans engagement.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span class="faq-icon"><i class="fas fa-headset"></i></span>
+          Que faire si j'ai une question ou un souci ?
+        </button>
+        <div class="faq-answer">
+          Notre support client est disponible 7j/7 par email et chat pour répondre à toutes vos questions ou résoudre le moindre problème.
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Footer -->
+  <footer class="main-footer slide-up">
+    <div class="footer-bg"></div>
+    <div class="footer-content">
+      <div class="footer-brand">
+        <span class="footer-logo">Spotideal</span>
+        <span class="footer-microcopy">Site indépendant – Paiement protégé – Support 7j/7</span>
+        <div class="footer-payments">
+          <span class="footer-payment-icon"><i class="fab fa-cc-paypal"></i></span>
+          <span class="footer-payment-icon"><i class="fab fa-cc-visa"></i></span>
+          <span class="footer-payment-icon"><i class="fab fa-cc-mastercard"></i></span>
+        </div>
+        <div class="footer-badges">
+          <span class="footer-badge"><svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="9" fill="#24e38c"/><path d="M5 9l2.5 2.5L13 6" stroke="#fff" stroke-width="2" fill="none"/></svg> Paiement sécurisé</span>
+          <span class="footer-badge"><i class="fas fa-thumbs-up"></i> +1000 clients satisfaits</span>
+        </div>
+        <div class="footer-social">
+          <a href="mailto:spotideals.github.io@gmail.com" title="Email" class="footer-social-link">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="11" fill="#1db95422"/><path d="M4 7l7 5 7-5" stroke="#1db954" stroke-width="2" fill="none"/><rect x="4" y="7" width="14" height="8" rx="2" stroke="#1db954" stroke-width="2" fill="#fff"/></svg>
+          </a>
+          <a href="#" title="Instagram" class="footer-social-link">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="11" fill="#24e38c22"/><rect x="6" y="6" width="10" height="10" rx="3" stroke="#24e38c" stroke-width="2" fill="#fff"/><circle cx="16" cy="6" r="1" fill="#24e38c"/></svg>
+          </a>
+          <a href="#" title="X / Twitter" class="footer-social-link">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="11" fill="#1db95422"/><path d="M7 7l8 8M15 7l-8 8" stroke="#1db954" stroke-width="2" fill="none"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="/terms.html" class="footer-link">Conditions générales</a>
+        <a href="/privacy.html" class="footer-link">Confidentialité</a>
+        <a href="/contact" class="footer-link">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2024 Spotideal. Tous droits réservés. Spotify® est une marque déposée qui n'est pas affiliée à ce site.
+    </div>
+  </footer>
+  <button class="mini-chat-btn" title="Contact rapide"><i class="fas fa-comment-dots"></i></button>
+  <div class="mini-chat-window" id="miniChatWindow">
+    <div class="mini-chat-header">
+      <span>Support Spotideal</span>
+      <button class="mini-chat-close" onclick="toggleMiniChat(false)"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="mini-chat-body">
+      <div>Besoin d'aide ? Notre équipe répond en quelques minutes.<br><b>Posez votre question !</b></div>
+    </div>
+    <form class="mini-chat-input" onsubmit="sendMiniChat(event)">
+      <input type="text" id="miniChatInput" placeholder="Votre message…" autocomplete="off" />
+      <button type="submit">Envoyer</button>
+    </form>
+  </div>
+  <script src="https://www.paypal.com/sdk/js?client-id=AW-bLBrtEPaB0FTD-Oa4rQ1gbQBNLkkqSsAtGh968nfbb-HA_iZh-Cptg_1UzbE9GYagkCPtHFEUosfm&currency=CAD"></script>
+  <script>
+    // S'assurer que la page est visible avant de charger les scripts
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('DOM chargé');
+      
+      // Enlever le loader s'il est présent
+      const loader = document.getElementById('loader-overlay');
+      if (loader) {
+        loader.classList.add('hidden');
+      }
+      
+      // S'assurer que le body est visible
+      document.body.style.opacity = '1';
+    });
+  </script>
+  <script src="js/landing-wow-fixed.js"></script>
+  <script src="js/faq-accordion.js"></script>
+</body>
+</html>
