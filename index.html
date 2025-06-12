@@ -13,8 +13,9 @@
   <script src="https://kit.fontawesome.com/2b2e7e5e2a.js" crossorigin="anonymous"></script>
 </head>
 <body>
+  <div id="loader-overlay" class="hidden"><div class="loader-spinner"></div></div>
   <!-- Sticky Header -->
-  <header class="main-header sticky">
+  <header class="main-header sticky aos-fade-up">
     <a href="#" class="logo-link"><img src="images/logo.svg" alt="SpotiDeals Logo" class="logo-svg"></a>
     <nav class="main-nav">
       <a href="#hero">Accueil</a>
@@ -27,9 +28,10 @@
     </nav>
   </header>
   <!-- Hero Section -->
-  <section id="hero" class="hero-section">
+  <section id="hero" class="hero-section aos-fade-up">
     <div class="hero-bg-anim"></div>
     <div class="hero-content">
+      <div class="badge-clients">+1000 clients satisfaits</div>
       <h1>La même musique, <span class="accent">53 % moins cher</span></h1>
       <p class="hero-sub">Spotify Premium 12 mois à <b>82,62&nbsp;$ CAD</b> au lieu de 175,12&nbsp;$.</p>
       <a href="#commande" class="btn btn-cta btn-glow">Commander maintenant</a>
@@ -39,7 +41,7 @@
     </div>
   </section>
   <!-- Étapes -->
-  <section id="etapes" class="steps-section">
+  <section id="etapes" class="steps-section aos-fade-up">
     <h2>Comment ça marche</h2>
     <div class="steps-grid">
       <div class="step-card"><i class="fas fa-shopping-cart"></i><h3>Commander</h3><p>Payez en toute sécurité via PayPal.</p></div>
@@ -48,7 +50,7 @@
     </div>
   </section>
   <!-- Sécurité -->
-  <section id="securite" class="security-section">
+  <section id="securite" class="security-section aos-fade-up">
     <div class="security-card">
       <h2><i class="fas fa-shield-alt"></i> Sécurité & Confidentialité</h2>
       <ul>
@@ -59,16 +61,17 @@
     </div>
   </section>
   <!-- Pricing -->
-  <section id="prix" class="pricing-section">
+  <section id="prix" class="pricing-section aos-fade-up">
     <div class="pricing-card">
       <div class="price-public"><span class="old-price">175,12&nbsp;$</span> <span class="label">Prix public</span></div>
       <div class="price-offer"><span class="new-price">82,62&nbsp;$</span> <span class="label">Notre offre</span></div>
       <div class="price-badge">-53&nbsp;%</div>
-      <button class="btn btn-cta btn-glow" onclick="document.getElementById('commande').scrollIntoView({behavior:'smooth'})">Payer avec PayPal</button>
+      <div class="badge-paypal"><i class="fab fa-cc-paypal"></i> Paiement protégé PayPal</div>
+      <button class="btn btn-cta btn-glow">Payer avec PayPal</button>
     </div>
   </section>
   <!-- Conditions & Garanties -->
-  <section class="conditions-section">
+  <section class="conditions-section aos-fade-up">
     <ul>
       <li><strong>Activation garantie</strong> sous 72h ou remboursé</li>
       <li><strong>Remboursement intégral</strong> si non livré sous 30 jours</li>
@@ -76,7 +79,7 @@
     </ul>
   </section>
   <!-- Checklist obligatoire -->
-  <section class="checklist-section">
+  <section class="checklist-section aos-fade-up">
     <h2>Avant de commander, confirmez :</h2>
     <form id="checklist-form">
       <label><input type="checkbox" class="checklist-box"> Je comprends que vous vous connecterez temporairement à mon compte pour l'activation.</label>
@@ -89,10 +92,13 @@
     </form>
   </section>
   <!-- PayPal + Formulaire -->
-  <section id="commande" class="commande-section">
+  <section id="commande" class="commande-section aos-fade-up">
+    <div class="steps-bar"><div class="step step-1 active">1. Paiement</div><div class="step step-2">2. Infos Spotify</div><div class="step step-3">3. Confirmation</div></div>
     <h2>Commander</h2>
     <div class="step-indicator step-1">Étape 1/2 : Paiement</div>
-    <div id="paypal-button-container"></div>
+    <div class="paypal-security-badge"><i class="fas fa-lock"></i> Paiement 100% sécurisé via PayPal</div>
+    <div id="paypal-button-container" class="paypal-btn-center"></div>
+    <div id="paypal-error" class="paypal-error hidden">❌ Le bouton PayPal n'a pas pu se charger. Veuillez réessayer ou contacter le support.</div>
     <div class="paypal-info">Après paiement, vous pourrez saisir votre email et mot de passe temporaire Spotify pour activer votre abonnement.</div>
     <div class="step-indicator step-2 hidden">Étape 2/2 : Infos Spotify</div>
     <form id="orderForm" class="order-form hidden">
@@ -105,7 +111,7 @@
     <div id="order-success" class="order-success hidden"><div class="order-success-icon">🎉</div><div class="order-success-title">Commande reçue !</div><div class="order-success-id">ID : <span id="order-id-toast"></span></div><div class="order-success-msg">Merci ! Vous recevrez un email sous 72h.</div></div>
   </section>
   <!-- Témoignages -->
-  <section id="temoignages" class="testimonials-section">
+  <section id="temoignages" class="testimonials-section aos-fade-up">
     <h2>Ils nous font confiance</h2>
     <div class="testimonial-slider">
       <div class="testimonial-card is-visible">
@@ -123,7 +129,7 @@
     </div>
   </section>
   <!-- FAQ -->
-  <section id="faq" class="faq-section">
+  <section id="faq" class="faq-section aos-fade-up">
     <h2>FAQ</h2>
     <details><summary>Est-ce légal ?</summary><p>Oui, nous agissons comme intermédiaire pour acheter un abonnement officiel dans une zone à tarif réduit.</p></details>
     <details><summary>Dois-je utiliser un VPN ?</summary><p>Non, aucun VPN requis après l'activation.</p></details>
@@ -131,7 +137,7 @@
     <details><summary>Garantie de remboursement ?</summary><p>Remboursement intégral si l'activation n'est pas réalisée sous 30 jours.</p></details>
   </section>
   <!-- Footer -->
-  <footer class="main-footer">
+  <footer class="main-footer aos-fade-up">
     <div class="footer-content">
       <a href="#" class="logo-link"><img src="images/logo.svg" alt="SpotiDeals Logo" class="logo-svg"></a>
       <nav class="footer-nav">
@@ -151,6 +157,8 @@
       <div class="footer-copy">© 2025 SpotiDeals. Service indépendant, non affilié à Spotify AB.</div>
     </div>
   </footer>
+  <button class="share-btn-sticky" title="Partager"><i class="fas fa-share-alt"></i></button>
+  <button class="mini-chat-btn" title="Contact rapide"><i class="fas fa-comment-dots"></i></button>
   <script src="https://www.paypal.com/sdk/js?client-id=AW-bLBrtEPaB0FTD-Oa4rQ1gbQBNLkkqsAtGh968nfbb-HA_ih-Cptg_1UzbE9GYagkCPtHFEUosfm&currency=CAD"></script>
   <script src="js/landing-wow.js"></script>
 </body>

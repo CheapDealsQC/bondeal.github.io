@@ -38,8 +38,9 @@ function showLoader(show) {
   if (show) overlay.classList.remove('hidden');
   else overlay.classList.add('hidden');
 }
-// PayPal Smart Buttons avec loader
+// PayPal Smart Buttons avec gestion d'erreur
 if(window.paypal) {
+  let paypalLoaded = false;
   paypal.Buttons({
     style: { layout: 'vertical', color: 'gold', shape: 'rect', label: 'paypal' },
     onInit: function() { showLoader(false); },
@@ -47,6 +48,8 @@ if(window.paypal) {
     createOrder: (data, actions) => actions.order.create({ purchase_units: [{ amount: { value: '82.62', currency_code:'CAD' } }] }),
     onApprove: (data, actions) => actions.order.capture().then(function() {
       showLoader(false);
+      paypalLoaded = true;
+      document.getElementById('paypal-error').classList.add('hidden');
       // Générer un order ID unique
       const id = 'SD-' + Date.now().toString(36).toUpperCase();
       document.getElementById('orderForm').classList.remove('hidden');
@@ -66,8 +69,15 @@ if(window.paypal) {
       document.getElementById('orderForm').scrollIntoView({behavior:'smooth'});
       document.getElementById('email').focus();
     }),
-    onError: function() { showLoader(false); }
+    onError: function() {
+      showLoader(false);
+      document.getElementById('paypal-error').classList.remove('hidden');
+    }
   }).render('#paypal-button-container');
+  // Timeout si PayPal ne charge pas
+  setTimeout(() => {
+    if(!paypalLoaded) document.getElementById('paypal-error').classList.remove('hidden');
+  }, 8000);
 }
 // Formulaire validation + steps bar progression
 const orderForm = document.getElementById('orderForm');

@@ -639,4 +639,38 @@ input:focus {
   .badge-clients, .badge-paypal { font-size: 0.93rem; padding: 0.2rem 0.7rem; }
   .main-nav, .footer-nav { gap: 0.7rem; font-size: 0.98rem; }
   .share-btn-sticky, .mini-chat-btn { bottom: 16px; right: 8px; width: 42px; height: 42px; font-size: 1rem; }
+}
+.paypal-security-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: #1db954;
+  color: #181c20;
+  font-weight: 700;
+  border-radius: 1.2rem;
+  padding: 0.4rem 1.2rem;
+  font-size: 1.08rem;
+  margin: 1.1rem auto 1.1rem auto;
+  box-shadow: 0 1px 4px #1db95422;
+  max-width: 340px;
+}
+.paypal-btn-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1.2rem auto 0.7rem auto;
+  min-height: 60px;
+}
+.paypal-error {
+  color: #ff4d4f;
+  background: #232a34;
+  border-radius: 1.2rem;
+  padding: 0.7rem 1.2rem;
+  text-align: center;
+  font-weight: 600;
+  margin: 1rem auto 0.5rem auto;
+  max-width: 420px;
+  font-size: 1.08rem;
+  box-shadow: 0 1px 4px #ff4d4f22;
 } 
