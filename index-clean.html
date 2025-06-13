@@ -270,10 +270,10 @@
     <a href="#" class="logo-link">
       <img src="images/logo.svg" alt="SpotiDeals Logo" class="logo-svg">
     </a>
-    <nav class="main-nav">
-      <a href="#hero">Accueil</a>
+    <nav class="main-nav">      <a href="#hero">Accueil</a>
       <a href="#etapes">Étapes</a>
-      <a href="#prix">Prix</a>
+      <a href="#faq">FAQ</a>
+      <a href="#temoignages">Avis</a>
       <a href="#commande" class="btn-nav">Commander</a>
     </nav>
   </header>
@@ -329,20 +329,157 @@
           <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Spotify Premium 12 mois</h3>
           <div style="font-size: 2.5rem; font-weight: 700;">82,62 $ CAD</div>
           <div style="opacity: 0.9;">au lieu de 175,12 $ CAD</div>
-        </div>
-        <p style="margin-bottom: 2rem;">✓ Activation sous 48-72h<br>✓ Garantie 12 mois<br>✓ Support client réactif</p>
-        <button class="btn-cta" style="width: 100%;">Payer avec PayPal</button>
+        </div>        <p style="margin-bottom: 2rem;">✓ Activation sous 48-72h<br>✓ Garantie 12 mois<br>✓ Support client réactif</p>
+        <div id="paypal-button-container" style="margin-bottom: 1rem;"></div>
+        <button id="paypal-fallback" class="btn-cta" style="width: 100%; display: none;">Payer avec PayPal</button>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="footer">
+  <!-- FAQ Section -->
+  <section id="faq" style="padding: 80px 0;">
     <div class="container">
-      <p>&copy; 2024 Spotideal. Tous droits réservés. Spotify® est une marque déposée qui n'est pas affiliée à ce site.</p>
+      <h2 style="text-align: center; color: #1db954; margin-bottom: 3rem; font-size: 2.5rem;">Questions fréquentes</h2>
+      <div style="max-width: 800px; margin: 0 auto;">
+        <div class="faq-item" style="margin-bottom: 1rem; background: rgba(255,255,255,0.05); border-radius: 1rem; overflow: hidden; border: 1px solid rgba(255,255,255,0.1);">
+          <div class="faq-question" onclick="toggleFaq(this)" style="padding: 1.5rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; color: #1db954;">
+            <span>Comment fonctionne l'activation ?</span>
+            <i class="fas fa-chevron-down" style="transition: transform 0.3s;"></i>
+          </div>
+          <div class="faq-answer" style="padding: 0 1.5rem 1.5rem; display: none;">
+            <p>Après votre paiement, nous recevons automatiquement votre commande. Notre équipe procède à l'activation sous 48-72h ouvrés maximum. Vous recevrez un email avec vos identifiants de connexion.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item" style="margin-bottom: 1rem; background: rgba(255,255,255,0.05); border-radius: 1rem; overflow: hidden; border: 1px solid rgba(255,255,255,0.1);">
+          <div class="faq-question" onclick="toggleFaq(this)" style="padding: 1.5rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; color: #1db954;">
+            <span>Est-ce légal et sécurisé ?</span>
+            <i class="fas fa-chevron-down" style="transition: transform 0.3s;"></i>
+          </div>
+          <div class="faq-answer" style="padding: 0 1.5rem 1.5rem; display: none;">
+            <p>Oui, nous utilisons des abonnements Spotify légitimes avec des tarifs régionaux. Tous les paiements sont sécurisés via PayPal. Nous garantissons 12 mois d'accès complet.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item" style="margin-bottom: 1rem; background: rgba(255,255,255,0.05); border-radius: 1rem; overflow: hidden; border: 1px solid rgba(255,255,255,0.1);">
+          <div class="faq-question" onclick="toggleFaq(this)" style="padding: 1.5rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; color: #1db954;">
+            <span>Que se passe-t-il si le compte ne fonctionne plus ?</span>
+            <i class="fas fa-chevron-down" style="transition: transform 0.3s;"></i>
+          </div>
+          <div class="faq-answer" style="padding: 0 1.5rem 1.5rem; display: none;">
+            <p>Nous offrons une garantie de remplacement pendant toute la durée de votre abonnement. Si un problème survient, contactez-nous et nous vous fournirons un nouveau compte sous 24h.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item" style="margin-bottom: 1rem; background: rgba(255,255,255,0.05); border-radius: 1rem; overflow: hidden; border: 1px solid rgba(255,255,255,0.1);">
+          <div class="faq-question" onclick="toggleFaq(this)" style="padding: 1.5rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; color: #1db954;">
+            <span>Puis-je utiliser mon compte existant ?</span>
+            <i class="fas fa-chevron-down" style="transition: transform 0.3s;"></i>
+          </div>
+          <div class="faq-answer" style="padding: 0 1.5rem 1.5rem; display: none;">
+            <p>Non, vous devrez utiliser les identifiants que nous vous fournirons. Cependant, vous pourrez transférer vos playlists et votre musique via les outils d'exportation de Spotify.</p>
+          </div>
+        </div>
+      </div>
     </div>
-  </footer>
+  </section>
 
+  <!-- Testimonials Section -->
+  <section id="temoignages" style="padding: 80px 0; background: rgba(255,255,255,0.02);">
+    <div class="container">
+      <h2 style="text-align: center; color: #1db954; margin-bottom: 3rem; font-size: 2.5rem;">Ce que disent nos clients</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 1000px; margin: 0 auto;">
+        <div style="background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 1rem; border: 1px solid rgba(255,255,255,0.1);">
+          <div style="display: flex; margin-bottom: 1rem;">
+            <i class="fas fa-star" style="color: #1db954;"></i>
+            <i class="fas fa-star" style="color: #1db954;"></i>
+            <i class="fas fa-star" style="color: #1db954;"></i>
+            <i class="fas fa-star" style="color: #1db954;"></i>
+            <i class="fas fa-star" style="color: #1db954;"></i>
+          </div>
+          <p style="margin-bottom: 1rem; font-style: italic;">"Service impeccable ! J'ai reçu mon compte en 2 jours et ça fonctionne parfaitement depuis 8 mois. Énorme économie !"</p>
+          <div style="display: flex; align-items: center; gap: 1rem;">
+            <div style="width: 40px; height: 40px; background: #1db954; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">M</div>
+            <div>
+              <div style="font-weight: 600;">Marie L.</div>
+              <div style="opacity: 0.7; font-size: 0.9rem;">Cliente depuis 8 mois</div>
+            </div>
+          </div>
+        </div>
+        
+        <div style="background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 1rem; border: 1px solid rgba(255,255,255,0.1);">
+          <div style="display: flex; margin-bottom: 1rem;">
+            <i class="fas fa-star" style="color: #1db954;"></i>
+            <i class="fas fa-star" style="color: #1db954;"></i>
+            <i class="fas fa-star" style="color: #1db954;"></i>
+            <i class="fas fa-star" style="color: #1db954;"></i>
+            <i class="fas fa-star" style="color: #1db954;"></i>
+          </div>
+          <p style="margin-bottom: 1rem; font-style: italic;">"Sceptique au début, mais ça marche vraiment ! Support client réactif et prix imbattable. Je recommande !"</p>
+          <div style="display: flex; align-items: center; gap: 1rem;">
+            <div style="width: 40px; height: 40px; background: #1db954; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">A</div>
+            <div>
+              <div style="font-weight: 600;">Alex D.</div>
+              <div style="opacity: 0.7; font-size: 0.9rem;">Client depuis 5 mois</div>
+            </div>
+          </div>
+        </div>
+        
+        <div style="background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 1rem; border: 1px solid rgba(255,255,255,0.1);">
+          <div style="display: flex; margin-bottom: 1rem;">
+            <i class="fas fa-star" style="color: #1db954;"></i>
+            <i class="fas fa-star" style="color: #1db954;"></i>
+            <i class="fas fa-star" style="color: #1db954;"></i>
+            <i class="fas fa-star" style="color: #1db954;"></i>
+            <i class="fas fa-star" style="color: #1db954;"></i>
+          </div>
+          <p style="margin-bottom: 1rem; font-style: italic;">"Activation rapide, compte stable, prix défiant toute concurrence. Que demander de plus ? Merci SpotiDeals !"</p>
+          <div style="display: flex; align-items: center; gap: 1rem;">
+            <div style="width: 40px; height: 40px; background: #1db954; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">S</div>
+            <div>
+              <div style="font-weight: 600;">Sophie M.</div>
+              <div style="opacity: 0.7; font-size: 0.9rem;">Cliente depuis 1 an</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Garanties Section -->
+  <section style="padding: 80px 0;">
+    <div class="container">
+      <h2 style="text-align: center; color: #1db954; margin-bottom: 3rem; font-size: 2.5rem;">Nos garanties</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; max-width: 800px; margin: 0 auto;">
+        <div style="text-align: center; padding: 2rem;">
+          <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #1db954, #24e38c); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">
+            <i class="fas fa-shield-alt" style="font-size: 2rem; color: white;"></i>
+          </div>
+          <h3 style="color: #1db954; margin-bottom: 1rem;">Activation garantie</h3>
+          <p>Votre compte sera activé sous 72h maximum ou remboursement intégral.</p>
+        </div>
+        
+        <div style="text-align: center; padding: 2rem;">
+          <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #1db954, #24e38c); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">
+            <i class="fas fa-headphones" style="font-size: 2rem; color: white;"></i>
+          </div>
+          <h3 style="color: #1db954; margin-bottom: 1rem;">Support 7j/7</h3>
+          <p>Notre équipe est disponible tous les jours pour vous accompagner.</p>
+        </div>
+        
+        <div style="text-align: center; padding: 2rem;">
+          <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #1db954, #24e38c); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">
+            <i class="fas fa-sync-alt" style="font-size: 2rem; color: white;"></i>
+          </div>
+          <h3 style="color: #1db954; margin-bottom: 1rem;">Remplacement gratuit</h3>
+          <p>Si votre compte a un problème, nous le remplaçons gratuitement.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Script PayPal -->
+  <script src="https://www.paypal.com/sdk/js?client-id=AW-bLBrtEPaB0FTD-Oa4rQ1gbQBNLkkqSsAtGh968nfbb-HA_iZh-Cptg_1UzbE9GYagkCPtHFEUosfm&currency=CAD"></script>
+  
   <!-- Script simple et sûr -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -361,8 +498,7 @@
           }
         });
       });
-      
-      // Animation au survol des cartes
+        // Animation au survol des cartes
       document.querySelectorAll('.step-card').forEach(card => {
         card.addEventListener('mouseenter', function() {
           this.style.transform = 'translateY(-10px) scale(1.02)';
@@ -381,7 +517,58 @@
           hero.style.transform = `translateY(${scrolled * 0.1}px)`;
         }
       });
+      
+      // Initialiser PayPal
+      if (typeof paypal !== 'undefined') {
+        paypal.Buttons({
+          style: {
+            layout: 'vertical',
+            color: 'gold',
+            shape: 'rect',
+            label: 'paypal'
+          },
+          createOrder: function(data, actions) {
+            return actions.order.create({
+              purchase_units: [{
+                amount: {
+                  value: '82.62',
+                  currency_code: 'CAD'
+                },
+                description: 'Spotify Premium 12 mois - SpotiDeals'
+              }]
+            });
+          },
+          onApprove: function(data, actions) {
+            return actions.order.capture().then(function(details) {
+              alert('Paiement réussi ! Vous recevrez vos identifiants par email sous 48-72h.');
+              console.log('Transaction completed by ' + details.payer.name.given_name);
+            });
+          },
+          onError: function(err) {
+            console.error('Erreur PayPal:', err);
+            document.getElementById('paypal-fallback').style.display = 'block';
+          }
+        }).render('#paypal-button-container');
+      } else {
+        setTimeout(() => {
+          if (!document.querySelector('#paypal-button-container iframe')) {
+            document.getElementById('paypal-fallback').style.display = 'block';
+          }
+        }, 3000);
+      }
     });
+    
+    function toggleFaq(element) {
+      const answer = element.nextElementSibling;
+      const icon = element.querySelector('i');
+      if (answer.style.display === 'block') {
+        answer.style.display = 'none';
+        icon.style.transform = 'rotate(0deg)';
+      } else {
+        answer.style.display = 'block';
+        icon.style.transform = 'rotate(180deg)';
+      }
+    }
   </script>
 </body>
 </html>
