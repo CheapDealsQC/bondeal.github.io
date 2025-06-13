@@ -273,16 +273,13 @@
     <nav class="main-nav">      <a href="#hero">Accueil</a>
       <a href="#etapes">Étapes</a>
       <a href="#faq">FAQ</a>
-      <a href="#temoignages">Avis</a>
       <a href="#commande" class="btn-nav">Commander</a>
     </nav>
   </header>
 
   <!-- Hero Section -->
   <section id="hero" class="hero-section">
-    <div class="container">
-      <div class="hero-content">
-        <div class="badge-clients">+1000 clients satisfaits</div>
+    <div class="container">      <div class="hero-content">
         <h1>La même musique, <span class="accent">53 % moins cher</span></h1>
         <p class="hero-sub">Spotify Premium 12 mois à <b>82,62 $ CAD</b> au lieu de 175,12 $ CAD.</p>
         <a href="#commande" class="btn-cta">Commander maintenant</a>
@@ -329,9 +326,45 @@
           <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Spotify Premium 12 mois</h3>
           <div style="font-size: 2.5rem; font-weight: 700;">82,62 $ CAD</div>
           <div style="opacity: 0.9;">au lieu de 175,12 $ CAD</div>
-        </div>        <p style="margin-bottom: 2rem;">✓ Activation sous 48-72h<br>✓ Garantie 12 mois<br>✓ Support client réactif</p>
-        <div id="paypal-button-container" style="margin-bottom: 1rem;"></div>
-        <button id="paypal-fallback" class="btn-cta" style="width: 100%; display: none;">Payer avec PayPal</button>
+        </div>        
+        
+        <!-- Conditions importantes -->
+        <div style="background: rgba(220, 53, 69, 0.1); border: 1px solid #dc3545; border-radius: 0.5rem; padding: 1.5rem; margin-bottom: 2rem; text-align: left;">
+          <h4 style="color: #dc3545; margin-bottom: 1rem;"><i class="fas fa-exclamation-triangle"></i> Conditions obligatoires</h4>
+          <div style="margin-bottom: 1rem;">
+            <label style="display: flex; align-items: flex-start; gap: 0.5rem; cursor: pointer;">
+              <input type="checkbox" id="no-premium" style="margin-top: 0.2rem;" required>
+              <span>Je confirme que mon compte Spotify n'a PAS d'abonnement Premium actif</span>
+            </label>
+          </div>
+          <div style="margin-bottom: 1rem;">
+            <label style="display: flex; align-items: flex-start; gap: 0.5rem; cursor: pointer;">
+              <input type="checkbox" id="accept-method" style="margin-top: 0.2rem;" required>
+              <span>J'accepte que vous vous connectiez temporairement à mon compte pour activer Premium via tarification régionale</span>
+            </label>
+          </div>
+          <div style="margin-bottom: 1rem;">
+            <label style="display: flex; align-items: flex-start; gap: 0.5rem; cursor: pointer;">
+              <input type="checkbox" id="understand-risk" style="margin-top: 0.2rem;" required>
+              <span>Je comprends que cette méthode utilise les différences de prix régionaux et qu'il existe un risque théorique de détection</span>
+            </label>
+          </div>
+          <div>
+            <label style="display: flex; align-items: flex-start; gap: 0.5rem; cursor: pointer;">
+              <input type="checkbox" id="accept-terms" style="margin-top: 0.2rem;" required>
+              <span>J'accepte les <a href="#" style="color: #1db954;" onclick="showTerms()">termes et conditions</a> du service</span>
+            </label>
+          </div>
+        </div>
+        
+        <p style="margin-bottom: 2rem;">✓ Activation sous 48-72h<br>✓ Garantie 12 mois<br>✓ Support client réactif</p>        <div id="payment-section" style="opacity: 0.5; pointer-events: none;">
+          <div id="paypal-button-container" style="margin-bottom: 1rem;"></div>
+          <button id="paypal-fallback" class="btn-cta" style="width: 100%; display: none;">Payer avec PayPal</button>
+        </div>
+        
+        <p style="font-size: 0.9rem; opacity: 0.7; margin-top: 1rem;">
+          Après paiement, vous recevrez un email avec les instructions pour nous envoyer vos identifiants Spotify de manière sécurisée.
+        </p>
       </div>
     </div>
   </section>
@@ -340,107 +373,67 @@
   <section id="faq" style="padding: 80px 0;">
     <div class="container">
       <h2 style="text-align: center; color: #1db954; margin-bottom: 3rem; font-size: 2.5rem;">Questions fréquentes</h2>
-      <div style="max-width: 800px; margin: 0 auto;">
-        <div class="faq-item" style="margin-bottom: 1rem; background: rgba(255,255,255,0.05); border-radius: 1rem; overflow: hidden; border: 1px solid rgba(255,255,255,0.1);">
+      <div style="max-width: 800px; margin: 0 auto;">        <div class="faq-item" style="margin-bottom: 1rem; background: rgba(255,255,255,0.05); border-radius: 1rem; overflow: hidden; border: 1px solid rgba(255,255,255,0.1);">
           <div class="faq-question" onclick="toggleFaq(this)" style="padding: 1.5rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; color: #1db954;">
-            <span>Comment fonctionne l'activation ?</span>
+            <span>Comment fonctionne exactement votre service ?</span>
             <i class="fas fa-chevron-down" style="transition: transform 0.3s;"></i>
           </div>
           <div class="faq-answer" style="padding: 0 1.5rem 1.5rem; display: none;">
-            <p>Après votre paiement, nous recevons automatiquement votre commande. Notre équipe procède à l'activation sous 48-72h ouvrés maximum. Vous recevrez un email avec vos identifiants de connexion.</p>
+            <p><strong>Transparence totale :</strong> Nous créons un compte Spotify Premium dans un pays où les prix sont plus avantageux (légalement). Vous nous fournissez vos identifiants personnels, nous nous connectons à votre compte existant et activons Premium via notre méthode. C'est 100% légal mais utilise les différences de prix régionaux.</p>
           </div>
         </div>
         
         <div class="faq-item" style="margin-bottom: 1rem; background: rgba(255,255,255,0.05); border-radius: 1rem; overflow: hidden; border: 1px solid rgba(255,255,255,0.1);">
           <div class="faq-question" onclick="toggleFaq(this)" style="padding: 1.5rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; color: #1db954;">
-            <span>Est-ce légal et sécurisé ?</span>
+            <span>Dois-je avoir un abonnement Spotify actif ?</span>
             <i class="fas fa-chevron-down" style="transition: transform 0.3s;"></i>
           </div>
           <div class="faq-answer" style="padding: 0 1.5rem 1.5rem; display: none;">
-            <p>Oui, nous utilisons des abonnements Spotify légitimes avec des tarifs régionaux. Tous les paiements sont sécurisés via PayPal. Nous garantissons 12 mois d'accès complet.</p>
+            <p><strong>Important :</strong> Non, votre compte Spotify ne doit PAS avoir d'abonnement Premium actif. Si vous avez déjà Premium, vous devez l'annuler et attendre qu'il expire avant de commander notre service.</p>
           </div>
         </div>
         
         <div class="faq-item" style="margin-bottom: 1rem; background: rgba(255,255,255,0.05); border-radius: 1rem; overflow: hidden; border: 1px solid rgba(255,255,255,0.1);">
           <div class="faq-question" onclick="toggleFaq(this)" style="padding: 1.5rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; color: #1db954;">
-            <span>Que se passe-t-il si le compte ne fonctionne plus ?</span>
+            <span>Quelles informations devrai-je vous donner ?</span>
             <i class="fas fa-chevron-down" style="transition: transform 0.3s;"></i>
           </div>
           <div class="faq-answer" style="padding: 0 1.5rem 1.5rem; display: none;">
-            <p>Nous offrons une garantie de remplacement pendant toute la durée de votre abonnement. Si un problème survient, contactez-nous et nous vous fournirons un nouveau compte sous 24h.</p>
-          </div>
-        </div>
-        
-        <div class="faq-item" style="margin-bottom: 1rem; background: rgba(255,255,255,0.05); border-radius: 1rem; overflow: hidden; border: 1px solid rgba(255,255,255,0.1);">
-          <div class="faq-question" onclick="toggleFaq(this)" style="padding: 1.5rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; color: #1db954;">
-            <span>Puis-je utiliser mon compte existant ?</span>
-            <i class="fas fa-chevron-down" style="transition: transform 0.3s;"></i>
-          </div>
-          <div class="faq-answer" style="padding: 0 1.5rem 1.5rem; display: none;">
-            <p>Non, vous devrez utiliser les identifiants que nous vous fournirons. Cependant, vous pourrez transférer vos playlists et votre musique via les outils d'exportation de Spotify.</p>
+            <p>Vous devrez nous fournir vos identifiants Spotify (email + mot de passe) pour que nous puissions nous connecter et activer Premium. Nous recommandons de changer votre mot de passe après l'activation par sécurité.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
-
-  <!-- Testimonials Section -->
-  <section id="temoignages" style="padding: 80px 0; background: rgba(255,255,255,0.02);">
+  <!-- Comment ça marche - Section transparente -->
+  <section style="padding: 80px 0;">
     <div class="container">
-      <h2 style="text-align: center; color: #1db954; margin-bottom: 3rem; font-size: 2.5rem;">Ce que disent nos clients</h2>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 1000px; margin: 0 auto;">
-        <div style="background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 1rem; border: 1px solid rgba(255,255,255,0.1);">
-          <div style="display: flex; margin-bottom: 1rem;">
-            <i class="fas fa-star" style="color: #1db954;"></i>
-            <i class="fas fa-star" style="color: #1db954;"></i>
-            <i class="fas fa-star" style="color: #1db954;"></i>
-            <i class="fas fa-star" style="color: #1db954;"></i>
-            <i class="fas fa-star" style="color: #1db954;"></i>
-          </div>
-          <p style="margin-bottom: 1rem; font-style: italic;">"Service impeccable ! J'ai reçu mon compte en 2 jours et ça fonctionne parfaitement depuis 8 mois. Énorme économie !"</p>
-          <div style="display: flex; align-items: center; gap: 1rem;">
-            <div style="width: 40px; height: 40px; background: #1db954; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">M</div>
-            <div>
-              <div style="font-weight: 600;">Marie L.</div>
-              <div style="opacity: 0.7; font-size: 0.9rem;">Cliente depuis 8 mois</div>
-            </div>
-          </div>
+      <h2 style="text-align: center; color: #1db954; margin-bottom: 3rem; font-size: 2.5rem;">Comment ça marche réellement</h2>
+      <div style="max-width: 800px; margin: 0 auto; background: rgba(255,255,255,0.05); padding: 3rem; border-radius: 1rem; border: 1px solid rgba(255,255,255,0.1);">
+        <div style="background: rgba(255, 193, 7, 0.1); border-left: 4px solid #ffc107; padding: 2rem; border-radius: 0.5rem; margin-bottom: 2rem;">
+          <h3 style="color: #ffc107; margin-bottom: 1rem;"><i class="fas fa-exclamation-triangle"></i> Transparence totale</h3>
+          <p style="margin-bottom: 1rem;"><strong>Nous utilisons les différences de prix régionaux de Spotify.</strong></p>
+          <p>Spotify propose des tarifs différents selon les pays. Nous achetons légalement Premium dans des pays où c'est moins cher, puis l'activons sur votre compte personnel existant.</p>
         </div>
         
-        <div style="background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 1rem; border: 1px solid rgba(255,255,255,0.1);">
-          <div style="display: flex; margin-bottom: 1rem;">
-            <i class="fas fa-star" style="color: #1db954;"></i>
-            <i class="fas fa-star" style="color: #1db954;"></i>
-            <i class="fas fa-star" style="color: #1db954;"></i>
-            <i class="fas fa-star" style="color: #1db954;"></i>
-            <i class="fas fa-star" style="color: #1db954;"></i>
-          </div>
-          <p style="margin-bottom: 1rem; font-style: italic;">"Sceptique au début, mais ça marche vraiment ! Support client réactif et prix imbattable. Je recommande !"</p>
-          <div style="display: flex; align-items: center; gap: 1rem;">
-            <div style="width: 40px; height: 40px; background: #1db954; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">A</div>
-            <div>
-              <div style="font-weight: 600;">Alex D.</div>
-              <div style="opacity: 0.7; font-size: 0.9rem;">Client depuis 5 mois</div>
-            </div>
-          </div>
+        <div style="margin-bottom: 2rem;">
+          <h4 style="color: #1db954; margin-bottom: 1rem;">Étapes du processus :</h4>
+          <ol style="padding-left: 1.5rem;">
+            <li style="margin-bottom: 1rem;"><strong>Vous payez</strong> - Paiement sécurisé via PayPal</li>
+            <li style="margin-bottom: 1rem;"><strong>Vous nous envoyez vos identifiants</strong> - Email + mot de passe Spotify</li>
+            <li style="margin-bottom: 1rem;"><strong>Nous nous connectons</strong> - À votre compte Spotify existant</li>
+            <li style="margin-bottom: 1rem;"><strong>Nous activons Premium</strong> - Via notre méthode légale dans un autre pays</li>
+            <li><strong>Vous profitez</strong> - De 12 mois de Spotify Premium</li>
+          </ol>
         </div>
         
-        <div style="background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 1rem; border: 1px solid rgba(255,255,255,0.1);">
-          <div style="display: flex; margin-bottom: 1rem;">
-            <i class="fas fa-star" style="color: #1db954;"></i>
-            <i class="fas fa-star" style="color: #1db954;"></i>
-            <i class="fas fa-star" style="color: #1db954;"></i>
-            <i class="fas fa-star" style="color: #1db954;"></i>
-            <i class="fas fa-star" style="color: #1db954;"></i>
-          </div>
-          <p style="margin-bottom: 1rem; font-style: italic;">"Activation rapide, compte stable, prix défiant toute concurrence. Que demander de plus ? Merci SpotiDeals !"</p>
-          <div style="display: flex; align-items: center; gap: 1rem;">
-            <div style="width: 40px; height: 40px; background: #1db954; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">S</div>
-            <div>
-              <div style="font-weight: 600;">Sophie M.</div>
-              <div style="opacity: 0.7; font-size: 0.9rem;">Cliente depuis 1 an</div>
-            </div>
-          </div>
+        <div style="background: rgba(220, 53, 69, 0.1); border-left: 4px solid #dc3545; padding: 1.5rem; border-radius: 0.5rem;">
+          <h4 style="color: #dc3545; margin-bottom: 1rem;"><i class="fas fa-times-circle"></i> Conditions importantes</h4>
+          <ul style="padding-left: 1.5rem;">
+            <li>Votre compte ne doit PAS avoir d'abonnement Premium actif</li>
+            <li>Vous devez nous faire confiance avec vos identifiants temporairement</li>
+            <li>Le service peut théoriquement être détecté par Spotify (rare mais possible)</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -518,7 +511,56 @@
         }
       });
       
-      // Initialiser PayPal
+      // Gestion des conditions pour activer le paiement
+      function checkConditions() {
+        const noPremium = document.getElementById('no-premium').checked;
+        const acceptMethod = document.getElementById('accept-method').checked;
+        const understandRisk = document.getElementById('understand-risk').checked;
+        const acceptTerms = document.getElementById('accept-terms').checked;
+        
+        const paymentSection = document.getElementById('payment-section');
+        if (noPremium && acceptMethod && understandRisk && acceptTerms) {
+          paymentSection.style.opacity = '1';
+          paymentSection.style.pointerEvents = 'auto';
+        } else {
+          paymentSection.style.opacity = '0.5';
+          paymentSection.style.pointerEvents = 'none';
+        }
+      }
+      
+      // Ajouter les event listeners aux checkboxes
+      document.getElementById('no-premium').addEventListener('change', checkConditions);
+      document.getElementById('accept-method').addEventListener('change', checkConditions);
+      document.getElementById('understand-risk').addEventListener('change', checkConditions);
+      document.getElementById('accept-terms').addEventListener('change', checkConditions);
+      
+      // Fonction pour afficher les termes et conditions
+      window.showTerms = function() {
+        alert(`TERMES ET CONDITIONS - SpotiDeals
+
+1. NATURE DU SERVICE
+Notre service utilise les différences de tarification régionale de Spotify pour vous offrir Premium à prix réduit.
+
+2. PRÉREQUIS OBLIGATOIRES
+- Votre compte Spotify ne doit PAS avoir d'abonnement Premium actif
+- Vous devez nous fournir vos identifiants de connexion temporairement
+
+3. PROCESSUS
+- Nous nous connectons à votre compte Spotify existant
+- Nous activons Premium via notre méthode légale dans un autre pays
+- Vous gardez vos playlists et données existantes
+
+4. RISQUES
+- Spotify pourrait théoriquement détecter cette méthode (rare)
+- En cas de problème, nous offrons un remplacement gratuit
+
+5. GARANTIES
+- Activation sous 72h maximum
+- Service garanti 12 mois
+- Support client 7j/7
+
+En acceptant, vous confirmez comprendre et accepter ces conditions.`);
+      };
       if (typeof paypal !== 'undefined') {
         paypal.Buttons({
           style: {
