@@ -279,10 +279,8 @@
   </header>
 
   <!-- Hero Section -->
-  <section id="hero" class="hero-section">
-    <div class="container">
+  <section id="hero" class="hero-section">    <div class="container">
       <div class="hero-content">
-        <div class="badge-clients">+1000 clients satisfaits</div>
         <h1>La même musique, <span class="accent">53 % moins cher</span></h1>
         <p class="hero-sub">Spotify Premium 12 mois à <b>82,62 $ CAD</b> au lieu de 175,12 $ CAD.</p>
         <a href="#commande" class="btn-cta">Commander maintenant</a>
@@ -329,9 +327,43 @@
           <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Spotify Premium 12 mois</h3>
           <div style="font-size: 2.5rem; font-weight: 700;">82,62 $ CAD</div>
           <div style="opacity: 0.9;">au lieu de 175,12 $ CAD</div>
+        </div>        <p style="margin-bottom: 2rem;">✓ Activation sous 48-72h<br>✓ Garantie 12 mois<br>✓ Support client réactif</p>
+        
+        <!-- Conditions obligatoires -->
+        <div style="text-align: left; margin-bottom: 2rem; background: rgba(255,193,7,0.1); padding: 1.5rem; border-radius: 0.5rem; border: 1px solid rgba(255,193,7,0.3);">
+          <h4 style="color: #ffc107; margin-bottom: 1rem; text-align: center;"><i class="fas fa-exclamation-triangle"></i> Conditions importantes</h4>
+          
+          <div style="margin-bottom: 1rem;">
+            <label style="display: flex; align-items: flex-start; gap: 0.5rem; cursor: pointer; font-size: 0.9rem;">
+              <input type="checkbox" id="condition1" class="condition-checkbox" style="margin-top: 0.2rem;">
+              <span><strong>Je confirme que je n'ai PAS d'abonnement Spotify Premium actif</strong> (obligatoire pour l'activation)</span>
+            </label>
+          </div>
+          
+          <div style="margin-bottom: 1rem;">
+            <label style="display: flex; align-items: flex-start; gap: 0.5rem; cursor: pointer; font-size: 0.9rem;">
+              <input type="checkbox" id="condition2" class="condition-checkbox" style="margin-top: 0.2rem;">
+              <span><strong>J'accepte que SpotiDeals accède temporairement à mon compte Spotify</strong> pour l'activation de l'abonnement Premium dans une région aux tarifs avantageux (100% légal)</span>
+            </label>
+          </div>
+          
+          <div style="margin-bottom: 1rem;">
+            <label style="display: flex; align-items: flex-start; gap: 0.5rem; cursor: pointer; font-size: 0.9rem;">
+              <input type="checkbox" id="condition3" class="condition-checkbox" style="margin-top: 0.2rem;">
+              <span><strong>Je comprends les risques</strong> : Cette méthode utilise des tarifs régionaux légitimes mais peut être contre les conditions d'utilisation de Spotify</span>
+            </label>
+          </div>
+          
+          <div style="margin-bottom: 1rem;">
+            <label style="display: flex; align-items: flex-start; gap: 0.5rem; cursor: pointer; font-size: 0.9rem;">
+              <input type="checkbox" id="condition4" class="condition-checkbox" style="margin-top: 0.2rem;">
+              <span>J'ai lu et j'accepte les <a href="#" onclick="showTerms()" style="color: #1db954; text-decoration: underline;">termes et conditions complètes</a></span>
+            </label>
+          </div>
         </div>
-        <p style="margin-bottom: 2rem;">✓ Activation sous 48-72h<br>✓ Garantie 12 mois<br>✓ Support client réactif</p>
-        <button class="btn-cta" style="width: 100%;">Payer avec PayPal</button>
+        
+        <div id="paypal-button-container" style="margin-bottom: 1rem; opacity: 0.5; pointer-events: none;"></div>
+        <button id="paypal-fallback" class="btn-cta" style="width: 100%; display: none; opacity: 0.5; pointer-events: none;">Acceptez toutes les conditions pour continuer</button>
       </div>
     </div>
   </section>
@@ -342,11 +374,180 @@
       <p>&copy; 2024 Spotideal. Tous droits réservés. Spotify® est une marque déposée qui n'est pas affiliée à ce site.</p>
     </div>
   </footer>
-
+  <!-- Script PayPal -->
+  <script src="https://www.paypal.com/sdk/js?client-id=AW-bLBrtEPaB0FTD-Oa4rQ1gbQBNLkkqSsAtGh968nfbb-HA_iZh-Cptg_1UzbE9GYagkCPtHFEUosfm&currency=CAD&components=buttons"></script>
+  
   <!-- Script simple et sûr -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       console.log('Site chargé avec succès !');
+      
+      // Gestion des conditions
+      const conditionCheckboxes = document.querySelectorAll('.condition-checkbox');
+      const paypalContainer = document.getElementById('paypal-button-container');
+      const fallbackButton = document.getElementById('paypal-fallback');
+      
+      function checkConditions() {
+        const allChecked = Array.from(conditionCheckboxes).every(checkbox => checkbox.checked);
+        
+        if (allChecked) {
+          paypalContainer.style.opacity = '1';
+          paypalContainer.style.pointerEvents = 'auto';
+          fallbackButton.textContent = 'Payer avec PayPal';
+          fallbackButton.style.opacity = '1';
+          fallbackButton.style.pointerEvents = 'auto';
+          
+          // Initialiser PayPal si toutes les conditions sont acceptées
+          initPayPal();
+        } else {
+          paypalContainer.style.opacity = '0.5';
+          paypalContainer.style.pointerEvents = 'none';
+          fallbackButton.textContent = 'Acceptez toutes les conditions pour continuer';
+          fallbackButton.style.opacity = '0.5';
+          fallbackButton.style.pointerEvents = 'none';
+        }
+      }
+      
+      // Écouter les changements des checkboxes
+      conditionCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', checkConditions);
+      });
+      
+      // Fonction pour afficher les termes
+      window.showTerms = function() {
+        const modal = document.createElement('div');
+        modal.style.cssText = `
+          position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+          background: rgba(0,0,0,0.8); z-index: 10000; display: flex; 
+          align-items: center; justify-content: center; padding: 2rem;
+        `;
+        
+        modal.innerHTML = `
+          <div style="background: #232a34; padding: 2rem; border-radius: 1rem; max-width: 600px; max-height: 80vh; overflow-y: auto; color: #f3f3f3;">
+            <h3 style="color: #1db954; margin-bottom: 1rem;">Termes et Conditions - SpotiDeals</h3>
+            <div style="line-height: 1.6; font-size: 0.9rem;">
+              <h4 style="color: #1db954; margin: 1rem 0 0.5rem;">1. Nature du service</h4>
+              <p>SpotiDeals active des abonnements Spotify Premium en utilisant des tarifs régionaux légitimes disponibles dans certains pays. Cette méthode est 100% légale mais peut être contraire aux conditions d'utilisation de Spotify.</p>
+              
+              <h4 style="color: #1db954; margin: 1rem 0 0.5rem;">2. Processus d'activation</h4>
+              <p>• Nous accédons temporairement à votre compte Spotify<br>
+              • L'activation se fait depuis un pays aux tarifs avantageux<br>
+              • Durée : 48-72h maximum<br>
+              • Vous recevrez les identifiants par email</p>
+              
+              <h4 style="color: #1db954; margin: 1rem 0 0.5rem;">3. Prérequis obligatoires</h4>
+              <p>• Aucun abonnement Premium actif<br>
+              • Compte Spotify existant requis<br>
+              • Accepter l'accès temporaire à votre compte</p>
+              
+              <h4 style="color: #1db954; margin: 1rem 0 0.5rem;">4. Garanties</h4>
+              <p>• Activation sous 72h ou remboursement<br>
+              • Remplacement gratuit en cas de problème<br>
+              • Support client 7j/7</p>
+              
+              <h4 style="color: #1db954; margin: 1rem 0 0.5rem;">5. Risques et responsabilités</h4>
+              <p>• Spotify pourrait suspendre le compte (rare)<br>
+              • Méthode légale mais contraire aux CGU Spotify<br>
+              • Utilisez ce service en toute connaissance de cause</p>
+            </div>
+            <button onclick="this.parentElement.parentElement.remove()" style="background: #1db954; color: white; border: none; padding: 0.8rem 2rem; border-radius: 0.5rem; margin-top: 1rem; cursor: pointer; width: 100%;">
+              J'ai lu et compris
+            </button>
+          </div>
+        `;
+        
+        document.body.appendChild(modal);
+        
+        modal.addEventListener('click', function(e) {
+          if (e.target === modal) {
+            modal.remove();
+          }
+        });
+      };
+      
+      // Fonction pour initialiser PayPal (seulement si conditions acceptées)
+      function initPayPal() {
+        if (typeof paypal !== 'undefined' && !document.querySelector('#paypal-button-container .paypal-buttons')) {
+          paypal.Buttons({
+            style: {
+              layout: 'vertical',
+              color: 'gold',
+              shape: 'rect',
+              label: 'paypal'
+            },
+            createOrder: function(data, actions) {
+              return actions.order.create({
+                purchase_units: [{
+                  amount: {
+                    value: '82.62',
+                    currency_code: 'CAD'
+                  },
+                  description: 'Spotify Premium 12 mois - SpotiDeals'
+                }]
+              });
+            },
+            onApprove: function(data, actions) {
+              return actions.order.capture().then(function(details) {
+                // Afficher un message de succès plus élégant
+                const successModal = document.createElement('div');
+                successModal.style.cssText = `
+                  position: fixed;
+                  top: 50%;
+                  left: 50%;
+                  transform: translate(-50%, -50%);
+                  background: #232a34;
+                  padding: 2rem;
+                  border-radius: 1rem;
+                  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+                  z-index: 10000;
+                  text-align: center;
+                  max-width: 90%;
+                  width: 400px;
+                `;
+                successModal.innerHTML = `
+                  <div style="color: #1db954; font-size: 3rem; margin-bottom: 1rem;">✓</div>
+                  <h3 style="color: #1db954; margin-bottom: 1rem;">Paiement réussi !</h3>
+                  <p style="margin-bottom: 1rem;">Vous recevrez vos identifiants par email sous 48-72h maximum.</p>
+                  <button onclick="this.parentElement.remove()" style="background: #1db954; color: white; border: none; padding: 0.8rem 2rem; border-radius: 0.5rem; cursor: pointer;">
+                    Parfait !
+                  </button>
+                `;
+                document.body.appendChild(successModal);
+                console.log('Transaction completed by ' + details.payer.name.given_name);
+              });
+            },
+            onError: function(err) {
+              console.error('Erreur PayPal:', err);
+              // Afficher un message d'erreur plus élégant
+              const errorModal = document.createElement('div');
+              errorModal.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: #232a34;
+                padding: 2rem;
+                border-radius: 1rem;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+                z-index: 10000;
+                text-align: center;
+                max-width: 90%;
+                width: 400px;
+              `;
+              errorModal.innerHTML = `
+                <div style="color: #ff4444; font-size: 3rem; margin-bottom: 1rem;">⚠️</div>
+                <h3 style="color: #ff4444; margin-bottom: 1rem;">Erreur de paiement</h3>
+                <p style="margin-bottom: 1rem;">Une erreur est survenue lors du paiement. Veuillez réessayer ou contacter le support.</p>
+                <button onclick="this.parentElement.remove()" style="background: #ff4444; color: white; border: none; padding: 0.8rem 2rem; border-radius: 0.5rem; cursor: pointer;">
+                  Fermer
+                </button>
+              `;
+              document.body.appendChild(errorModal);
+              fallbackButton.style.display = 'block';
+            }
+          }).render('#paypal-button-container');
+        }
+      }
       
       // Scroll smooth pour les liens d'ancrage
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
