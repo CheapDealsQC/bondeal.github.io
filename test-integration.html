@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpotiDeals - Test Integration</title>
+    <style>
+        body { 
+            font-family: 'Montserrat', Arial, sans-serif; 
+            background: #1a1a1a; 
+            color: #f3f3f3; 
+            padding: 2rem; 
+            max-width: 800px; 
+            margin: 0 auto; 
+        }
+        .test-section { 
+            background: rgba(255,255,255,0.05); 
+            padding: 1.5rem; 
+            border-radius: 10px; 
+            margin: 1rem 0; 
+            border: 1px solid rgba(255,255,255,0.1); 
+        }
+        .test-button { 
+            background: #1db954; 
+            color: white; 
+            border: none; 
+            padding: 10px 20px; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            margin: 5px; 
+        }
+        .test-button:hover { background: #24e38c; }
+        .result { 
+            background: #232a34; 
+            padding: 1rem; 
+            border-radius: 5px; 
+            margin: 10px 0; 
+            font-family: monospace; 
+            white-space: pre-wrap; 
+            max-height: 200px; 
+            overflow-y: auto; 
+        }
+        h1 { color: #1db954; text-align: center; }
+        h2 { color: #24e38c; }
+    </style>
+</head>
+<body>
+    <h1>🔧 SpotiDeals - Test d'Intégration</h1>
+    
+    <div class="test-section">
+        <h2>📋 Tests de Configuration</h2>
+        <button class="test-button" onclick="testConfig()">Tester Config</button>
+        <button class="test-button" onclick="testOrderId()">Générer ID</button>
+        <button class="test-button" onclick="testDateFormat()">Test Date</button>
+        <div id="config-result" class="result" style="display: none;"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>📧 Test EmailJS</h2>
+        <p>Avant de tester, assurez-vous d'avoir :</p>
+        <ul>
+            <li>✅ Créé un compte EmailJS</li>
+            <li>✅ Configuré un service email</li>
+            <li>✅ Créé un template avec l'ID : <code>commande_status</code></li>
+            <li>✅ Mis à jour la clé publique dans le code</li>
+        </ul>
+        <button class="test-button" onclick="testEmailJS()">Test Email</button>
+        <div id="email-result" class="result" style="display: none;"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>💾 Test Airtable</h2>
+        <p>Requis :</p>
+        <ul>
+            <li>✅ Base Airtable configurée</li>
+            <li>✅ Cloudflare Worker ou proxy configuré</li>
+            <li>✅ URL proxy : <code>/airtable</code></li>
+        </ul>
+        <button class="test-button" onclick="testAirtable()">Test Airtable</button>
+        <div id="airtable-result" class="result" style="display: none;"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>🎯 Test Commande Complète</h2>
+        <p>Test de bout en bout :</p>
+        <button class="test-button" onclick="testFullOrder()">Test Commande</button>
+        <div id="order-result" class="result" style="display: none;"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>📊 Historique & Debug</h2>
+        <button class="test-button" onclick="showHistory()">Voir Historique</button>
+        <button class="test-button" onclick="showFailedEmails()">Emails Échoués</button>
+        <button class="test-button" onclick="cleanup()">Nettoyer</button>
+        <div id="history-result" class="result" style="display: none;"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>🔗 Liens Rapides</h2>
+        <a href="index.html" style="color: #1db954;">← Retour au site principal</a><br>
+        <a href="suivi-commande.html" style="color: #1db954;">Page de suivi</a><br>
+        <a href="emailjs-template-setup.md" style="color: #1db954;">Guide de configuration EmailJS</a>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        // Configuration (copie depuis index.html)
+        const CONFIG = {
+            emailjs: {
+                serviceId: 'service_ajkhda1',
+                templateId: 'commande_status',
+                publicKey: 'jQBmJJM9MbN5JZdlc'
+            },
+            airtable: {
+                apiUrl: '/airtable',
+                fallbackStorage: true
+            },
+            support: {
+                email: 'support@spotideals.com',
+                phone: '+1-555-SPOTIFY'
+            }
+        };
+
+        // Fonctions utilitaires
+        function generateOrderId() {
+            const timestamp = Date.now().toString(36);
+            const random = Math.random().toString(36).substr(2, 5);
+            return `SD-${timestamp}-${random}`.toUpperCase();
+        }
+
+        function formatDate(date) {
+            return new Intl.DateTimeFormat('fr-CA', {
+                year: 'numeric', month: '2-digit', day: '2-digit',
+                hour: '2-digit', minute: '2-digit'
+            }).format(date);
+        }
+
+        function showResult(elementId, content) {
+            const element = document.getElementById(elementId);
+            element.style.display = 'block';
+            element.textContent = typeof content === 'string' ? content : JSON.stringify(content, null, 2);
+        }
+
+        // Tests
+        function testConfig() {
+            const result = {
+                config: CONFIG,
+                emailjsLoaded: typeof emailjs !== 'undefined',
+                localStorage: typeof localStorage !== 'undefined',
+                timestamp: new Date().toISOString()
+            };
+            showResult('config-result', result);
+        }
+
+        function testOrderId() {
+            const ids = Array.from({length: 3}, () => generateOrderId());
+            showResult('config-result', `IDs générés:\n${ids.join('\n')}`);
+        }
+
+        function testDateFormat() {
+            const dates = {
+                now: formatDate(new Date()),
+                future: formatDate(new Date(Date.now() + 72 * 60 * 60 * 1000)),
+                past: formatDate(new Date(Date.now() - 24 * 60 * 60 * 1000))
+            };
+            showResult('config-result', dates);
+        }
+
+        async function testEmailJS() {
+            try {
+                if (typeof emailjs === 'undefined') {
+                    throw new Error('EmailJS non chargé');
+                }
+
+                emailjs.init(CONFIG.emailjs.publicKey);
+
+                const testParams = {
+                    to_email: 'test@example.com',
+                    customer_name: 'Test User',
+                    order_id: 'TEST-' + Date.now(),
+                    spotify_email: 'test.spotify@example.com',
+                    amount: '82.62',
+                    currency: 'CAD',
+                    order_date: formatDate(new Date()),
+                    expected_activation: formatDate(new Date(Date.now() + 72 * 60 * 60 * 1000)),
+                    paypal_transaction: 'TEST_PAYPAL_' + Date.now(),
+                    support_email: CONFIG.support.email
+                };
+
+                const response = await emailjs.send(
+                    CONFIG.emailjs.serviceId,
+                    CONFIG.emailjs.templateId,
+                    testParams
+                );
+
+                showResult('email-result', {
+                    success: true,
+                    response,
+                    testParams
+                });
+            } catch (error) {
+                showResult('email-result', {
+                    success: false,
+                    error: error.message,
+                    config: CONFIG.emailjs
+                });
+            }
+        }
+
+        async function testAirtable() {
+            try {
+                const testData = {
+                    records: [{
+                        fields: {
+                            'Order ID': 'TEST-' + Date.now(),
+                            'Email Spotify': 'test.spotify@example.com',
+                            'Mot de passe': 'test_password',
+                            'Email Client': 'test@example.com',
+                            'Nom Client': 'Test User',
+                            'PayPal Transaction': 'TEST_PAYPAL_' + Date.now(),
+                            'Montant': 82.62,
+                            'Devise': 'CAD',
+                            'Statut': 'Test',
+                            'Date Commande': new Date().toISOString(),
+                            'Date Activation Prevue': new Date(Date.now() + 72 * 60 * 60 * 1000).toISOString()
+                        }
+                    }]
+                };
+
+                const response = await fetch(CONFIG.airtable.apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(testData)
+                });
+
+                const result = await response.json();
+                
+                showResult('airtable-result', {
+                    success: response.ok,
+                    status: response.status,
+                    data: result,
+                    testData
+                });
+            } catch (error) {
+                showResult('airtable-result', {
+                    success: false,
+                    error: error.message,
+                    url: CONFIG.airtable.apiUrl
+                });
+            }
+        }
+
+        async function testFullOrder() {
+            try {
+                // Simuler une commande complète
+                const orderId = generateOrderId();
+                showResult('order-result', `Démarrage test commande: ${orderId}...`);
+
+                // Test Airtable
+                await testAirtable();
+                
+                // Test EmailJS
+                await testEmailJS();
+
+                showResult('order-result', {
+                    success: true,
+                    message: 'Test commande terminé - voir résultats ci-dessus',
+                    orderId,
+                    timestamp: new Date().toISOString()
+                });
+            } catch (error) {
+                showResult('order-result', {
+                    success: false,
+                    error: error.message
+                });
+            }
+        }
+
+        function showHistory() {
+            const history = JSON.parse(localStorage.getItem('spotideals_process_history') || '[]');
+            showResult('history-result', {
+                count: history.length,
+                history: history.slice(-5) // 5 dernières
+            });
+        }
+
+        function showFailedEmails() {
+            const failed = JSON.parse(localStorage.getItem('spotideals_failed_emails') || '[]');
+            showResult('history-result', {
+                count: failed.length,
+                failed
+            });
+        }
+
+        function cleanup() {
+            const keys = [
+                'spotideals_orders',
+                'spotideals_process_history', 
+                'spotideals_failed_emails',
+                'spotideals_pending_sync'
+            ];
+            
+            let cleaned = 0;
+            keys.forEach(key => {
+                if (localStorage.getItem(key)) {
+                    localStorage.removeItem(key);
+                    cleaned++;
+                }
+            });
+
+            // Nettoyer commandes individuelles
+            Object.keys(localStorage).forEach(key => {
+                if (key.startsWith('order_')) {
+                    localStorage.removeItem(key);
+                    cleaned++;
+                }
+            });
+
+            showResult('history-result', {
+                message: 'Nettoyage terminé',
+                itemsCleaned: cleaned,
+                timestamp: new Date().toISOString()
+            });
+        }
+    </script>
+</body>
+</html>

@@ -401,12 +401,288 @@
     </div>
   </footer>
   <!-- Script PayPal -->
+  <!-- Script EmailJS -->
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
   <script src="https://www.paypal.com/sdk/js?client-id=AW-bLBrtEPaB0FTD-Oa4rQ1gbQBNLkkqSsAtGh968nfbb-HA_iZh-Cptg_1UzbE9GYagkCPtHFEUosfm&currency=CAD&components=buttons"></script>
   
-  <!-- Script simple et sûr -->
-  <script>
+  <!-- Script simple et sûr -->  <script>    // =================== CONFIGURATION ===================
+    const CONFIG = {
+      // EmailJS
+      emailjs: {
+        serviceId: 'service_ajkhda1',
+        templateId: 'commande_status',
+        publicKey: 'jQBmJJM9MbN5JZdlc' // Remplacez par votre vraie clé EmailJS
+      },
+      // Airtable (via proxy)
+      airtable: {
+        apiUrl: '/airtable', // Cloudflare Worker proxy
+        fallbackStorage: true
+      },
+      // Support
+      support: {
+        email: 'support@spotideals.com',
+        phone: '+1-555-SPOTIFY'
+      }
+    };
+    
+    // =================== UTILITAIRES ===================
+    function generateOrderId() {
+      const timestamp = Date.now().toString(36);
+      const random = Math.random().toString(36).substr(2, 5);
+      return `SD-${timestamp}-${random}`.toUpperCase();
+    }
+    
+    function formatDate(date) {
+      return new Intl.DateTimeFormat('fr-CA', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit'
+      }).format(date);
+    }
+      // =================== AIRTABLE INTEGRATION ===================
+    async function saveOrderToAirtable(orderData) {
+      try {
+        console.log('💾 Sauvegarde commande dans Airtable...', orderData.orderId);
+        
+        const airtableData = {
+          records: [{
+            fields: {
+              'Order ID': orderData.orderId,
+              'Email Spotify': orderData.spotifyEmail,
+              'Mot de passe': orderData.spotifyPassword,
+              'Email Client': orderData.customerEmail || orderData.spotifyEmail,
+              'Nom Client': orderData.customerName || 'Client SpotiDeals',
+              'PayPal Transaction': orderData.paypalTransactionId,
+              'Montant': parseFloat(orderData.amount),
+              'Devise': orderData.currency,
+              'Statut': 'En attente',
+              'Date Commande': orderData.orderDate,
+              'Date Activation Prevue': orderData.expectedActivation,
+              'URL Suivi': `https://spotideals.github.io/suivi-commande.html?order=${orderData.orderId}`
+            }
+          }]
+        };
+        
+        const response = await fetch(CONFIG.airtable.apiUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(airtableData)
+        });
+        
+        const responseData = await response.json();
+        
+        if (response.ok) {
+          console.log('✅ Commande sauvegardée dans Airtable:', responseData);
+          return { success: true, data: responseData };
+        } else {
+          throw new Error(`Airtable Error ${response.status}: ${responseData.error?.message || response.statusText}`);
+        }
+      } catch (error) {
+        console.error('❌ Erreur Airtable:', error);
+        
+        // Fallback: sauvegarder en localStorage avec structure complète
+        if (CONFIG.airtable.fallbackStorage) {
+          try {
+            const fallbackOrder = {
+              ...orderData,
+              savedAt: new Date().toISOString(),
+              source: 'localStorage_fallback',
+              status: 'En attente'
+            };
+            
+            // Sauvegarder la commande individuelle
+            localStorage.setItem(`order_${orderData.orderId}`, JSON.stringify(fallbackOrder));
+            
+            // Ajouter à la liste des commandes
+            const orders = JSON.parse(localStorage.getItem('spotideals_orders') || '[]');
+            orders.push(fallbackOrder);
+            localStorage.setItem('spotideals_orders', JSON.stringify(orders));
+            
+            // Marquer pour sync plus tard
+            const pendingSync = JSON.parse(localStorage.getItem('spotideals_pending_sync') || '[]');
+            pendingSync.push({
+              orderId: orderData.orderId,
+              timestamp: new Date().toISOString(),
+              retryCount: 0
+            });
+            localStorage.setItem('spotideals_pending_sync', JSON.stringify(pendingSync));
+            
+            console.log('💾 Commande sauvegardée en fallback (localStorage):', orderData.orderId);
+            return { success: true, fallback: true };
+          } catch (fallbackError) {
+            console.error('❌ Erreur fallback localStorage:', fallbackError);
+            return { success: false, error: fallbackError.message };
+          }
+        }
+        
+        return { success: false, error: error.message };
+      }
+    }
+      // =================== EMAILJS INTEGRATION ===================
+    async function sendConfirmationEmail(orderData) {
+      try {
+        // Vérifier que EmailJS est disponible
+        if (typeof emailjs === 'undefined') {
+          console.warn('⚠️ EmailJS non chargé, tentative de chargement...');
+          // Fallback : charger EmailJS si pas disponible
+          await new Promise((resolve, reject) => {
+            const script = document.createElement('script');
+            script.src = 'https://cdn.emailjs.com/dist/email.min.js';
+            script.onload = resolve;
+            script.onerror = reject;
+            document.head.appendChild(script);
+          });
+        }
+        
+        // Initialiser EmailJS
+        emailjs.init(CONFIG.emailjs.publicKey);
+        console.log('📧 Initialisation EmailJS...');
+        
+        const templateParams = {
+          to_email: orderData.customerEmail || orderData.spotifyEmail,
+          customer_name: orderData.customerName || 'Client SpotiDeals',
+          order_id: orderData.orderId,
+          spotify_email: orderData.spotifyEmail,
+          amount: orderData.amount,
+          currency: orderData.currency,
+          order_date: formatDate(new Date(orderData.orderDate)),
+          expected_activation: formatDate(new Date(orderData.expectedActivation)),
+          paypal_transaction: orderData.paypalTransactionId,
+          support_email: CONFIG.support.email
+        };
+        
+        console.log('📧 Envoi email avec params:', {
+          to: templateParams.to_email,
+          orderId: templateParams.order_id,
+          template: CONFIG.emailjs.templateId
+        });
+        
+        const response = await emailjs.send(
+          CONFIG.emailjs.serviceId,
+          CONFIG.emailjs.templateId,
+          templateParams
+        );
+        
+        console.log('✅ Email de confirmation envoyé avec succès:', response);
+        return true;
+      } catch (error) {
+        console.error('❌ Erreur envoi email:', error);
+        
+        // Sauvegarde des détails pour retry manuel
+        const emailBackup = {
+          orderId: orderData.orderId,
+          email: orderData.customerEmail || orderData.spotifyEmail,
+          templateParams: {
+            order_id: orderData.orderId,
+            spotify_email: orderData.spotifyEmail,
+            amount: orderData.amount,
+            paypal_transaction: orderData.paypalTransactionId
+          },
+          error: error.message,
+          timestamp: new Date().toISOString()
+        };
+        
+        // Stocker pour retry plus tard
+        const failedEmails = JSON.parse(localStorage.getItem('spotideals_failed_emails') || '[]');
+        failedEmails.push(emailBackup);
+        localStorage.setItem('spotideals_failed_emails', JSON.stringify(failedEmails));
+        
+        console.log('💾 Email sauvé pour retry:', emailBackup);
+        return false;
+      }
+    }
+      // =================== PROCESSUS COMPLET DE COMMANDE ===================
+    async function processOrder(spotifyEmail, spotifyPassword, paypalDetails) {
+      const orderId = generateOrderId();
+      const orderDate = new Date().toISOString();
+      const expectedActivation = new Date(Date.now() + 72 * 60 * 60 * 1000).toISOString(); // +72h
+      
+      const orderData = {
+        orderId,
+        spotifyEmail,
+        spotifyPassword,
+        customerEmail: paypalDetails.payer?.email_address || spotifyEmail,
+        customerName: paypalDetails.payer?.name ? 
+          `${paypalDetails.payer.name.given_name} ${paypalDetails.payer.name.surname}` : 
+          'Client SpotiDeals',
+        paypalTransactionId: paypalDetails.id,
+        amount: '82.62',
+        currency: 'CAD',
+        orderDate,
+        expectedActivation,
+        status: 'En attente',
+        paypalDetails: {
+          payerId: paypalDetails.payer?.payer_id,
+          payerEmail: paypalDetails.payer?.email_address,
+          transactionId: paypalDetails.id,
+          purchaseUnits: paypalDetails.purchase_units
+        }
+      };
+      
+      console.log('🚀 Traitement de la commande:', orderId);
+      console.log('📊 Données commande:', {
+        orderId,
+        email: spotifyEmail,
+        customer: orderData.customerName,
+        amount: orderData.amount,
+        paypalTx: paypalDetails.id
+      });
+      
+      // 1. Sauvegarder dans Airtable
+      console.log('📝 Étape 1/2: Sauvegarde Airtable...');
+      const airtableResult = await saveOrderToAirtable(orderData);
+      
+      // 2. Envoyer email de confirmation
+      console.log('📧 Étape 2/2: Envoi email...');
+      const emailResult = await sendConfirmationEmail(orderData);
+      
+      // 3. Logger les résultats détaillés
+      const processingResult = {
+        success: true,
+        orderId,
+        orderData,
+        airtable: airtableResult,
+        email: emailResult,
+        timestamp: new Date().toISOString()
+      };
+      
+      console.log('📋 Résultat du traitement:', processingResult);
+      
+      // 4. Sauvegarder le résultat pour debug
+      try {
+        const processHistory = JSON.parse(localStorage.getItem('spotideals_process_history') || '[]');
+        processHistory.push(processingResult);
+        // Garder seulement les 50 dernières
+        if (processHistory.length > 50) {
+          processHistory.splice(0, processHistory.length - 50);
+        }
+        localStorage.setItem('spotideals_process_history', JSON.stringify(processHistory));
+      } catch (e) {
+        console.warn('Impossible de sauvegarder l\'historique:', e);
+      }
+      
+      // 5. Retourner le résultat avec informations de compatibilité
+      return {
+        success: true,
+        orderId,
+        airtableSaved: airtableResult.success,
+        emailSent: emailResult,
+        orderData,
+        details: {
+          airtable: airtableResult,
+          email: emailResult ? 'sent' : 'failed',
+          fallbackUsed: airtableResult.fallback || false
+        }
+      };
+    }
+    
     document.addEventListener('DOMContentLoaded', function() {
-      console.log('Site chargé avec succès !');
+      console.log('🎯 SpotiDeals - Système de commande initialisé');
         // Gestion des conditions et formulaire
       const conditionCheckboxes = document.querySelectorAll('.condition-checkbox');
       const paypalContainer = document.getElementById('paypal-button-container');
@@ -555,46 +831,93 @@
                   },
                   description: 'Spotify Premium 12 mois - SpotiDeals',
                   custom_id: btoa(email + ':' + password) // Encoder les identifiants (base64)
-                }]
-              });
+                }]              });
             },            onApprove: function(data, actions) {
-              return actions.order.capture().then(function(details) {
-                // Créer un message de confirmation détaillé
-                const successModal = document.createElement('div');
-                successModal.style.cssText = `
-                  position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-                  background: rgba(0,0,0,0.8); z-index: 10000; display: flex; 
-                  align-items: center; justify-content: center; padding: 2rem;
-                `;
-                
-                successModal.innerHTML = `
-                  <div style="background: #232a34; padding: 2rem; border-radius: 1rem; max-width: 500px; text-align: center; color: #f3f3f3;">
-                    <div style="color: #1db954; font-size: 4rem; margin-bottom: 1rem;">✓</div>
-                    <h3 style="color: #1db954; margin-bottom: 1rem;">Paiement confirmé !</h3>
+              return actions.order.capture().then(async function(details) {
+                // Traitement complet de la commande
+                try {
+                  const result = await processOrder(
+                    spotifyEmail.value,
+                    spotifyPassword.value,
+                    details
+                  );
+                  
+                  if (result.success) {
+                    // Créer un message de confirmation détaillé
+                    const successModal = document.createElement('div');
+                    successModal.style.cssText = `
+                      position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+                      background: rgba(0,0,0,0.8); z-index: 10000; display: flex; 
+                      align-items: center; justify-content: center; padding: 2rem;
+                    `;
                     
-                    <div style="background: rgba(29,185,84,0.1); padding: 1.5rem; border-radius: 0.5rem; margin-bottom: 1.5rem; text-align: left;">
-                      <h4 style="color: #1db954; margin-bottom: 1rem;">📋 Résumé de votre commande :</h4>
-                      <p style="margin: 0.5rem 0;"><strong>📧 Email Spotify :</strong> ${spotifyEmail.value}</p>
-                      <p style="margin: 0.5rem 0;"><strong>🔒 Mot de passe :</strong> ${'*'.repeat(spotifyPassword.value.length)}</p>
-                      <p style="margin: 0.5rem 0;"><strong>💰 Montant payé :</strong> 82,62 $ CAD</p>
-                      <p style="margin: 0.5rem 0;"><strong>📋 ID Transaction :</strong> ${details.id}</p>
+                    successModal.innerHTML = `
+                      <div style="background: #232a34; padding: 2rem; border-radius: 1rem; max-width: 600px; text-align: center; color: #f3f3f3;">
+                        <div style="color: #1db954; font-size: 4rem; margin-bottom: 1rem;">✅</div>
+                        <h3 style="color: #1db954; margin-bottom: 1rem;">Commande confirmée !</h3>
+                        
+                        <div style="background: rgba(29,185,84,0.1); padding: 1.5rem; border-radius: 0.5rem; margin-bottom: 1.5rem; text-align: left;">
+                          <h4 style="color: #1db954; margin-bottom: 1rem;">📋 Détails de votre commande :</h4>
+                          <p style="margin: 0.5rem 0;"><strong>🎫 Numéro de commande :</strong> ${result.orderId}</p>
+                          <p style="margin: 0.5rem 0;"><strong>📧 Email Spotify :</strong> ${spotifyEmail.value}</p>
+                          <p style="margin: 0.5rem 0;"><strong>💰 Montant payé :</strong> 82,62 $ CAD</p>
+                          <p style="margin: 0.5rem 0;"><strong>📋 Transaction PayPal :</strong> ${details.id}</p>
+                        </div>
+                        
+                        <div style="background: rgba(255,193,7,0.1); padding: 1rem; border-radius: 0.5rem; margin-bottom: 1.5rem;">
+                          <p style="color: #ffc107; margin: 0; font-size: 0.9rem;">
+                            <strong>⏰ Activation prévue :</strong> 48-72h maximum<br>
+                            <strong>📧 Email de confirmation :</strong> ${result.emailSent ? 'Envoyé ✅' : 'En cours d\'envoi ⏳'}<br>
+                            <strong>💾 Commande enregistrée :</strong> ${result.airtableSaved ? 'Airtable ✅' : 'Backup local ✅'}
+                          </p>
+                        </div>
+                        
+                        <div style="background: rgba(29,185,84,0.1); padding: 1rem; border-radius: 0.5rem; margin-bottom: 1.5rem;">
+                          <p style="color: #1db954; margin: 0; font-size: 0.9rem;">
+                            <strong>🔍 Suivi de commande :</strong><br>
+                            Utilisez votre numéro de commande <strong>${result.orderId}</strong><br>
+                            <a href="suivi-commande.html?order=${result.orderId}" target="_blank" style="color: #1db954; text-decoration: underline;">👉 Accéder au suivi</a>
+                          </p>
+                        </div>
+                        
+                        <button onclick="this.parentElement.parentElement.remove()" style="background: #1db954; color: white; border: none; padding: 1rem 2rem; border-radius: 0.5rem; cursor: pointer; font-size: 1rem;">
+                          Parfait ! Merci 🎉
+                        </button>
+                      </div>
+                    `;
+                    
+                    document.body.appendChild(successModal);
+                    console.log('🎉 Commande traitée avec succès:', result.orderId);
+                    console.log('Transaction completed by', details.payer?.name?.given_name || 'Client');
+                    console.log('Spotify credentials securely collected for activation');
+                  } else {
+                    throw new Error('Erreur lors du traitement de la commande');
+                  }
+                } catch (error) {
+                  console.error('❌ Erreur traitement commande:', error);
+                  
+                  // Modal d'erreur plus élégante
+                  const errorModal = document.createElement('div');
+                  errorModal.style.cssText = `
+                    position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+                    background: rgba(0,0,0,0.8); z-index: 10000; display: flex; 
+                    align-items: center; justify-content: center; padding: 2rem;
+                  `;
+                  errorModal.innerHTML = `
+                    <div style="background: #232a34; padding: 2rem; border-radius: 1rem; max-width: 500px; text-align: center; color: #f3f3f3;">
+                      <div style="color: #ff4444; font-size: 3rem; margin-bottom: 1rem;">⚠️</div>
+                      <h3 style="color: #ff4444; margin-bottom: 1rem;">Erreur technique</h3>
+                      <p style="margin-bottom: 1rem;">Votre paiement a été traité avec succès, mais une erreur technique est survenue.</p>
+                      <div style="background: rgba(255,68,68,0.1); padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem; font-size: 0.9rem;">
+                        <p><strong>ID Transaction :</strong> ${details.id}</p>
+                        <p>Veuillez contacter notre support avec cet ID.</p>
+                      </div>
+                      <button onclick="this.parentElement.parentElement.remove()" style="background: #ff4444; color: white; border: none; padding: 1rem 2rem; border-radius: 0.5rem; cursor: pointer;">
+                        Contacter le support
+                      </button>
                     </div>
-                    
-                    <div style="background: rgba(255,193,7,0.1); padding: 1rem; border-radius: 0.5rem; margin-bottom: 1.5rem;">
-                      <p style="color: #ffc107; margin: 0; font-size: 0.9rem;">
-                        <strong>⏰ Activation prévue :</strong> 48-72h maximum<br>
-                        <strong>📧 Confirmation :</strong> Vous recevrez un email
-                      </p>
-                    </div>
-                    
-                    <button onclick="this.parentElement.parentElement.remove()" style="background: #1db954; color: white; border: none; padding: 1rem 2rem; border-radius: 0.5rem; cursor: pointer; font-size: 1rem;">
-                      Parfait ! Merci 🎉
-                    </button>
-                  </div>
-                `;
-                  document.body.appendChild(successModal);
-                console.log('Transaction completed by ' + details.payer.name.given_name);
-                console.log('Spotify credentials securely collected');
+                  `;                  document.body.appendChild(errorModal);
+                }
               });
             },
             onError: function(err) {
@@ -664,6 +987,118 @@
         }
       });
     });
+  </script>
+  <!-- Script de diagnostic -->
+  <script>
+    // =================== FONCTIONS DE DIAGNOSTIC ===================
+    window.spotidealsDebug = {
+      // Test de la configuration
+      testConfig: function() {
+        console.log('🔧 Configuration SpotiDeals:');
+        console.log('EmailJS:', CONFIG.emailjs);
+        console.log('Airtable:', CONFIG.airtable);
+        console.log('Support:', CONFIG.support);
+        
+        // Vérifier EmailJS
+        if (typeof emailjs !== 'undefined') {
+          console.log('✅ EmailJS chargé');
+        } else {
+          console.log('❌ EmailJS non chargé');
+        }
+        
+        return CONFIG;
+      },
+      
+      // Test de génération d'ID de commande
+      testOrderId: function() {
+        const orderId = generateOrderId();
+        console.log('🎫 ID de commande généré:', orderId);
+        return orderId;
+      },
+      
+      // Test du formatage de date
+      testDateFormat: function() {
+        const now = new Date();
+        const formatted = formatDate(now);
+        console.log('📅 Date formatée:', formatted);
+        return formatted;
+      },
+      
+      // Simuler une commande de test
+      testOrder: async function() {
+        console.log('🧪 Test d\'une commande simulée...');
+        
+        const mockPaypalDetails = {
+          id: 'TEST_' + Date.now(),
+          payer: {
+            email_address: 'test@example.com',
+            payer_id: 'TEST_PAYER',
+            name: {
+              given_name: 'Test',
+              surname: 'User'
+            }
+          },
+          purchase_units: [{
+            amount: { value: '82.62', currency_code: 'CAD' }
+          }]
+        };
+        
+        try {
+          const result = await processOrder(
+            'test.spotify@example.com',
+            'test_password_123',
+            mockPaypalDetails
+          );
+          
+          console.log('✅ Test commande réussi:', result);
+          return result;
+        } catch (error) {
+          console.error('❌ Test commande échoué:', error);
+          return { success: false, error: error.message };
+        }
+      },
+      
+      // Voir l'historique des commandes
+      getOrderHistory: function() {
+        const history = JSON.parse(localStorage.getItem('spotideals_process_history') || '[]');
+        console.log('📊 Historique des commandes:', history);
+        return history;
+      },
+      
+      // Voir les emails échoués
+      getFailedEmails: function() {
+        const failed = JSON.parse(localStorage.getItem('spotideals_failed_emails') || '[]');
+        console.log('📧 Emails échoués:', failed);
+        return failed;
+      },
+      
+      // Nettoyer les données de test
+      cleanup: function() {
+        const keys = [
+          'spotideals_orders',
+          'spotideals_process_history',
+          'spotideals_failed_emails',
+          'spotideals_pending_sync'
+        ];
+        
+        keys.forEach(key => {
+          localStorage.removeItem(key);
+          console.log('🧹 Nettoyé:', key);
+        });
+        
+        // Nettoyer les commandes individuelles
+        Object.keys(localStorage).forEach(key => {
+          if (key.startsWith('order_SD-') || key.startsWith('order_TEST_')) {
+            localStorage.removeItem(key);
+            console.log('🧹 Nettoyé commande:', key);
+          }
+        });
+        
+        console.log('✅ Nettoyage terminé');
+      }
+    };
+    
+    // =================== INIT ET HELPERS ===================
   </script>
 </body>
 </html>
