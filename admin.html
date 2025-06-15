@@ -70,5 +70,91 @@
   <!-- EmailJS SDK -->
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <script>emailjs.init('NYLWAuzObYpYPa5H_');</script>
+  <script>
+    // Configuration Airtable et EmailJS
+    const ADMIN_CONFIG = {
+      airtable: {
+        baseId: 'appqm0hQ9yJnVaOWH',
+        tableId: 'tblfkSgj27szvOQOk',
+        viewId: 'viwCnxJa7Pj5pM7lP',
+        pat: 'pat3zd6B3tIQdc40Y'
+      },
+      emailjs: {
+        serviceId: 'service_ajkhda1',
+        templateId: 'template_d3ybuxj',
+        publicKey: 'NYLWAuzObYpYPa5H_'
+      }
+    };
+
+    // Fonction pour récupérer les commandes depuis Airtable
+    async function fetchOrdersFromAirtable() {
+      try {
+        const response = await fetch(`https://api.airtable.com/v0/${ADMIN_CONFIG.airtable.baseId}/${ADMIN_CONFIG.airtable.tableId}?view=${ADMIN_CONFIG.airtable.viewId}`, {
+          headers: {
+            Authorization: `Bearer ${ADMIN_CONFIG.airtable.pat}`,
+            'Content-Type': 'application/json'
+          }
+        });
+
+        if (!response.ok) throw new Error('Erreur réseau');
+
+        const data = await response.json();
+        return data.records.map(record => ({
+          id: record.id,
+          ...record.fields
+        }));
+      } catch (error) {
+        console.error('Erreur fetchOrdersFromAirtable:', error);
+        return [];
+      }
+    }
+
+    // Fonction pour afficher les commandes dans le tableau
+    function displayOrders(orders) {
+      const tableBody = document.querySelector('#orders-table tbody');
+      tableBody.innerHTML = '';
+
+      orders.forEach(order => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${order.id}</td>
+          <td>${order.nom || ''}</td>
+          <td>${order.email || ''}</td>
+          <td><span class="status-badge ${order.etat}">${order.etat || ''}</span></td>
+          <td>${new Date(order.date).toLocaleString('fr-FR') || ''}</td>
+          <td class="actions">
+            <button class="details-btn" data-id="${order.id}">Détails</button>
+          </td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+
+    // Fonction pour gérer la connexion
+    async function handleLogin(event) {
+      event.preventDefault();
+
+      const user = document.getElementById('user').value.trim();
+      const pass = document.getElementById('pass').value.trim();
+
+      if (user === '' || pass === '') {
+        document.getElementById('login-error').style.display = 'block';
+        return;
+      }
+
+      // Remplacer par votre logique d'authentification
+      if (user === 'admin' && pass === 'password') {
+        document.getElementById('login-card').style.display = 'none';
+        document.getElementById('dashboard').style.display = 'block';
+
+        const orders = await fetchOrdersFromAirtable();
+        displayOrders(orders);
+      } else {
+        document.getElementById('login-error').style.display = 'block';
+      }
+    }
+
+    document.getElementById('login-btn').addEventListener('click', handleLogin);
+  </script>
 </body>
 </html>

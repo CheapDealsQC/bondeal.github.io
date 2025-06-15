@@ -406,278 +406,150 @@
   
   <!-- Script simple et sûr -->  <script>    // =================== CONFIGURATION ===================
     const CONFIG = {
-      // EmailJS
       emailjs: {
         serviceId: 'service_ajkhda1',
-        templateId: 'commande_status',
-        publicKey: 'jQBmJJM9MbN5JZdlc' // Remplacez par votre vraie clé EmailJS
+        templateId: 'template_d3ybuxj',
+        publicKey: 'NYLWAuzObYpYPa5H_'
       },
-      // Airtable (via proxy)
       airtable: {
-        apiUrl: '/airtable', // Cloudflare Worker proxy
-        fallbackStorage: true
+        baseId: 'appqm0hQ9yJnVaOWH',
+        tableId: 'tblfkSgj27szvOQOk',
+        viewId: 'viwCnxJa7Pj5pM7lP',
+        pat: 'pat3zd6B3tIQdc40Y'
       },
-      // Support
       support: {
-        email: 'support@spotideals.com',
-        phone: '+1-555-SPOTIFY'
+        email: 'support@spotideals.com'
       }
     };
-    
-    // =================== UTILITAIRES ===================
-    function generateOrderId() {
-      const timestamp = Date.now().toString(36);
-      const random = Math.random().toString(36).substr(2, 5);
-      return `SD-${timestamp}-${random}`.toUpperCase();
-    }
-    
-    function formatDate(date) {
-      return new Intl.DateTimeFormat('fr-CA', {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-        hour: '2-digit',
-        minute: '2-digit'
-      }).format(date);
-    }
-      // =================== AIRTABLE INTEGRATION ===================
-    async function saveOrderToAirtable(orderData) {
+
+    // Initialisation EmailJS
+    (function() {
+        emailjs.init(CONFIG.emailjs.publicKey);
+    })();
+
+    // =================== FONCTION AIRTABLE ===================
+    async function saveToAirtable(orderData) {
       try {
-        console.log('💾 Sauvegarde commande dans Airtable...', orderData.orderId);
-        
         const airtableData = {
           records: [{
             fields: {
-              'Order ID': orderData.orderId,
-              'Email Spotify': orderData.spotifyEmail,
-              'Mot de passe': orderData.spotifyPassword,
-              'Email Client': orderData.customerEmail || orderData.spotifyEmail,
-              'Nom Client': orderData.customerName || 'Client SpotiDeals',
-              'PayPal Transaction': orderData.paypalTransactionId,
-              'Montant': parseFloat(orderData.amount),
-              'Devise': orderData.currency,
-              'Statut': 'En attente',
-              'Date Commande': orderData.orderDate,
-              'Date Activation Prevue': orderData.expectedActivation,
-              'URL Suivi': `https://spotideals.github.io/suivi-commande.html?order=${orderData.orderId}`
+              "Order ID": orderData.orderId,
+              "Customer Email": orderData.customerEmail,
+              "Spotify Email": orderData.spotifyEmail,
+              "Spotify Password": orderData.spotifyPassword,
+              "Amount": parseFloat(orderData.amount),
+              "Currency": orderData.currency,
+              "PayPal Transaction": orderData.paypalTransaction,
+              "Order Date": orderData.orderDate,
+              "Expected Activation": orderData.expectedActivation,
+              "Status": "Paid - Pending Activation",
+              "Customer Name": orderData.customerName || "Non fourni"
             }
           }]
         };
-        
-        const response = await fetch(CONFIG.airtable.apiUrl, {
+
+        const response = await fetch(`https://api.airtable.com/v0/${CONFIG.airtable.baseId}/${CONFIG.airtable.tableId}`, {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
+            'Authorization': `Bearer ${CONFIG.airtable.pat}`,
+            'Content-Type': 'application/json'
           },
           body: JSON.stringify(airtableData)
         });
-        
-        const responseData = await response.json();
-        
-        if (response.ok) {
-          console.log('✅ Commande sauvegardée dans Airtable:', responseData);
-          return { success: true, data: responseData };
-        } else {
-          throw new Error(`Airtable Error ${response.status}: ${responseData.error?.message || response.statusText}`);
+
+        if (!response.ok) {
+          throw new Error(`Airtable API error: ${response.status}`);
         }
+
+        const result = await response.json();
+        console.log('✅ Données sauvegardées dans Airtable:', result);
+        return { success: true, data: result };
+
       } catch (error) {
         console.error('❌ Erreur Airtable:', error);
         
-        // Fallback: sauvegarder en localStorage avec structure complète
-        if (CONFIG.airtable.fallbackStorage) {
-          try {
-            const fallbackOrder = {
-              ...orderData,
-              savedAt: new Date().toISOString(),
-              source: 'localStorage_fallback',
-              status: 'En attente'
-            };
-            
-            // Sauvegarder la commande individuelle
-            localStorage.setItem(`order_${orderData.orderId}`, JSON.stringify(fallbackOrder));
-            
-            // Ajouter à la liste des commandes
-            const orders = JSON.parse(localStorage.getItem('spotideals_orders') || '[]');
-            orders.push(fallbackOrder);
-            localStorage.setItem('spotideals_orders', JSON.stringify(orders));
-            
-            // Marquer pour sync plus tard
-            const pendingSync = JSON.parse(localStorage.getItem('spotideals_pending_sync') || '[]');
-            pendingSync.push({
-              orderId: orderData.orderId,
-              timestamp: new Date().toISOString(),
-              retryCount: 0
-            });
-            localStorage.setItem('spotideals_pending_sync', JSON.stringify(pendingSync));
-            
-            console.log('💾 Commande sauvegardée en fallback (localStorage):', orderData.orderId);
-            return { success: true, fallback: true };
-          } catch (fallbackError) {
-            console.error('❌ Erreur fallback localStorage:', fallbackError);
-            return { success: false, error: fallbackError.message };
-          }
-        }
+        // Sauvegarde de secours en localStorage
+        const backupData = JSON.parse(localStorage.getItem('spotideals_backup_orders') || '[]');
+        backupData.push({
+          ...orderData,
+          timestamp: new Date().toISOString(),
+          error: error.message
+        });
+        localStorage.setItem('spotideals_backup_orders', JSON.stringify(backupData));
         
         return { success: false, error: error.message };
       }
     }
-      // =================== EMAILJS INTEGRATION ===================
+
+    // =================== FONCTION EMAIL ===================
     async function sendConfirmationEmail(orderData) {
       try {
-        // Vérifier que EmailJS est disponible
-        if (typeof emailjs === 'undefined') {
-          console.warn('⚠️ EmailJS non chargé, tentative de chargement...');
-          // Fallback : charger EmailJS si pas disponible
-          await new Promise((resolve, reject) => {
-            const script = document.createElement('script');
-            script.src = 'https://cdn.emailjs.com/dist/email.min.js';
-            script.onload = resolve;
-            script.onerror = reject;
-            document.head.appendChild(script);
-          });
-        }
-        
-        // Initialiser EmailJS
-        emailjs.init(CONFIG.emailjs.publicKey);
-        console.log('📧 Initialisation EmailJS...');
-        
-        const templateParams = {
-          to_email: orderData.customerEmail || orderData.spotifyEmail,
-          customer_name: orderData.customerName || 'Client SpotiDeals',
+        const emailParams = {
+          to_email: orderData.customerEmail,
+          customer_name: orderData.customerName || 'Client',
           order_id: orderData.orderId,
           spotify_email: orderData.spotifyEmail,
           amount: orderData.amount,
           currency: orderData.currency,
-          order_date: formatDate(new Date(orderData.orderDate)),
-          expected_activation: formatDate(new Date(orderData.expectedActivation)),
-          paypal_transaction: orderData.paypalTransactionId,
+          order_date: orderData.orderDate,
+          expected_activation: orderData.expectedActivation,
+          paypal_transaction: orderData.paypalTransaction,
           support_email: CONFIG.support.email
         };
-        
-        console.log('📧 Envoi email avec params:', {
-          to: templateParams.to_email,
-          orderId: templateParams.order_id,
-          template: CONFIG.emailjs.templateId
-        });
-        
+
         const response = await emailjs.send(
           CONFIG.emailjs.serviceId,
           CONFIG.emailjs.templateId,
-          templateParams
+          emailParams
         );
-        
-        console.log('✅ Email de confirmation envoyé avec succès:', response);
-        return true;
+
+        console.log('✅ Email envoyé avec succès:', response);
+        return { success: true, data: response };
+
       } catch (error) {
         console.error('❌ Erreur envoi email:', error);
         
-        // Sauvegarde des détails pour retry manuel
-        const emailBackup = {
-          orderId: orderData.orderId,
-          email: orderData.customerEmail || orderData.spotifyEmail,
-          templateParams: {
-            order_id: orderData.orderId,
-            spotify_email: orderData.spotifyEmail,
-            amount: orderData.amount,
-            paypal_transaction: orderData.paypalTransactionId
-          },
-          error: error.message,
-          timestamp: new Date().toISOString()
-        };
-        
-        // Stocker pour retry plus tard
+        // Sauvegarde des emails échoués
         const failedEmails = JSON.parse(localStorage.getItem('spotideals_failed_emails') || '[]');
-        failedEmails.push(emailBackup);
+        failedEmails.push({
+          orderData,
+          timestamp: new Date().toISOString(),
+          error: error.message
+        });
         localStorage.setItem('spotideals_failed_emails', JSON.stringify(failedEmails));
         
-        console.log('💾 Email sauvé pour retry:', emailBackup);
-        return false;
+        return { success: false, error: error.message };
       }
     }
-      // =================== PROCESSUS COMPLET DE COMMANDE ===================
-    async function processOrder(spotifyEmail, spotifyPassword, paypalDetails) {
+
+    // =================== PROCESSUS COMPLET ===================
+    async function processOrder(paymentData) {
       const orderId = generateOrderId();
-      const orderDate = new Date().toISOString();
-      const expectedActivation = new Date(Date.now() + 72 * 60 * 60 * 1000).toISOString(); // +72h
+      const now = new Date();
+      const expectedActivation = new Date(now.getTime() + (72 * 60 * 60 * 1000)); // +72 heures
       
       const orderData = {
-        orderId,
-        spotifyEmail,
-        spotifyPassword,
-        customerEmail: paypalDetails.payer?.email_address || spotifyEmail,
-        customerName: paypalDetails.payer?.name ? 
-          `${paypalDetails.payer.name.given_name} ${paypalDetails.payer.name.surname}` : 
-          'Client SpotiDeals',
-        paypalTransactionId: paypalDetails.id,
-        amount: '82.62',
-        currency: 'CAD',
-        orderDate,
-        expectedActivation,
-        status: 'En attente',
-        paypalDetails: {
-          payerId: paypalDetails.payer?.payer_id,
-          payerEmail: paypalDetails.payer?.email_address,
-          transactionId: paypalDetails.id,
-          purchaseUnits: paypalDetails.purchase_units
-        }
+        orderId: orderId,
+        customerEmail: document.getElementById('customerEmail')?.value || paymentData.payer?.email_address || 'non-fourni@email.com',
+        customerName: paymentData.payer?.name?.given_name || 'Client',
+        spotifyEmail: document.getElementById('spotify-email').value,
+        spotifyPassword: document.getElementById('spotify-password').value,
+        amount: paymentData.purchase_units[0].amount.value,
+        currency: paymentData.purchase_units[0].amount.currency_code,
+        paypalTransaction: paymentData.id,
+        orderDate: now.toLocaleDateString('fr-CA'),
+        expectedActivation: expectedActivation.toLocaleDateString('fr-CA') + ' ' + expectedActivation.toLocaleTimeString('fr-CA', {hour: '2-digit', minute: '2-digit'})
       };
+
+      console.log('🔄 Traitement de la commande:', orderData);
+
+      // Sauvegarde dans Airtable
+      const airtableResult = await saveToAirtable(orderData);
       
-      console.log('🚀 Traitement de la commande:', orderId);
-      console.log('📊 Données commande:', {
-        orderId,
-        email: spotifyEmail,
-        customer: orderData.customerName,
-        amount: orderData.amount,
-        paypalTx: paypalDetails.id
-      });
-      
-      // 1. Sauvegarder dans Airtable
-      console.log('📝 Étape 1/2: Sauvegarde Airtable...');
-      const airtableResult = await saveOrderToAirtable(orderData);
-      
-      // 2. Envoyer email de confirmation
-      console.log('📧 Étape 2/2: Envoi email...');
+      // Envoi de l'email de confirmation
       const emailResult = await sendConfirmationEmail(orderData);
-      
-      // 3. Logger les résultats détaillés
-      const processingResult = {
-        success: true,
-        orderId,
-        orderData,
-        airtable: airtableResult,
-        email: emailResult,
-        timestamp: new Date().toISOString()
-      };
-      
-      console.log('📋 Résultat du traitement:', processingResult);
-      
-      // 4. Sauvegarder le résultat pour debug
-      try {
-        const processHistory = JSON.parse(localStorage.getItem('spotideals_process_history') || '[]');
-        processHistory.push(processingResult);
-        // Garder seulement les 50 dernières
-        if (processHistory.length > 50) {
-          processHistory.splice(0, processHistory.length - 50);
-        }
-        localStorage.setItem('spotideals_process_history', JSON.stringify(processHistory));
-      } catch (e) {
-        console.warn('Impossible de sauvegarder l\'historique:', e);
-      }
-      
-      // 5. Retourner le résultat avec informations de compatibilité
-      return {
-        success: true,
-        orderId,
-        airtableSaved: airtableResult.success,
-        emailSent: emailResult,
-        orderData,
-        details: {
-          airtable: airtableResult,
-          email: emailResult ? 'sent' : 'failed',
-          fallbackUsed: airtableResult.fallback || false
-        }
-      };
+
+      return { orderId, airtableResult, emailResult };
     }
     
     document.addEventListener('DOMContentLoaded', function() {
